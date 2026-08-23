@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Duqque Sports Gestion de carrière et d'image des athlètes</title>
 <meta name="description" content="Duqque Sports accompagne les jeunes athlètes : gestion de carrière, image, communication et partenariats. Carrière, sponsoring, médias, reconversion." />
-<link rel="stylesheet" href="css/style.css?v=20260902" />
+<link rel="stylesheet" href="css/style.css?v=20260904" />
 <style>
  /* Section Chiffres clés autonome */
  .stats-section { background: var(--bg-soft); }
@@ -689,6 +689,9 @@
  .mfx-stage {
   position: sticky; top: 0; height: 100svh; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
+  /* En fin de piste la scene descend et recouvre le haut de la section suivante.
+     Rien ici n'est cliquable : on laisse passer le pointeur. */
+  pointer-events: none;
  }
 
  /* Bloc central ancre sur le milieu exact de la scene : il est en absolu, donc le texte
@@ -748,11 +751,11 @@
  }
  /* Deux formats seulement, tires des photos elles-memes. Le z-index est pose en JS
     (ordre d'arrivee dans le paquet), il n'a plus a etre declare ici. */
- .mfx-photo.pay { width: clamp(158px, 17.5vw, 254px); aspect-ratio: 4 / 3; }
- .mfx-photo.por { width: clamp(124px, 13.5vw, 196px); aspect-ratio: 3 / 4; }
+ .mfx-photo.pay { width: clamp(190px, 23vw, 348px); aspect-ratio: 4 / 3; }
+ .mfx-photo.por { width: clamp(150px, 17.5vw, 262px); aspect-ratio: 3 / 4; }
 
  .mfx-card {
-  width: clamp(158px, 15.5vw, 214px);
+  width: clamp(170px, 17vw, 246px);
   background: var(--c); color: var(--i);
   border-radius: 12px; padding: 15px 16px 17px;
   box-shadow: 0 22px 56px rgba(10,10,14,0.2);
@@ -778,7 +781,7 @@
     Volontairement differentes des cartes d'offre pour qu'on distingue au premier coup
     d'oeil ce qui raconte une histoire de ce qui propose un service. */
  .mfx-note {
-  width: clamp(168px, 17.5vw, 246px);
+  width: clamp(182px, 19vw, 276px);
   background: #fff; color: var(--ink);
   border: 1px solid rgba(26,20,16,0.10);
   border-radius: 12px; padding: 14px 16px 16px;
@@ -1431,7 +1434,7 @@
 <footer class="footer"></footer>
 
 
-<script src="js/main.js?v=20260902"></script>
+<script src="js/main.js?v=20260904"></script>
 <script>
 (function(){
  const runway = document.getElementById('mfxRunway');
@@ -1527,9 +1530,13 @@
   // par le haut au moment exact ou la piste se termine, sans vide derriere lui.
   const sortie = Math.max(0, (brut - 0.90) / 0.10);
   if (sortie > 0 && !paquetH) paquetH = mesurePaquet();
-  const glisse = sortie * Math.max(0, (stage.offsetHeight - paquetH) / 2);
-  const noyau = runway.querySelector('.mfx-core');
-  if (noyau) noyau.style.transform = 'translate(-50%, -50%) translateY(' + glisse.toFixed(1) + 'px)';
+  // 26px de garde : le paquet incline est un peu plus haut que la vignette la plus haute,
+  // et il ne doit pas venir lecher le bord bas de l'ecran.
+  const glisse = sortie * Math.max(0, (stage.offsetHeight - paquetH) / 2 - 26);
+  // C'est la scene entiere qui descend, pas son contenu : la scene est en overflow:hidden
+  // pour masquer les vignettes qui arrivent de l'exterieur, et decaler le contenu seul
+  // revenait a le faire trancher net par ce bord. En deplacant la boite, le cadrage suit.
+  stage.style.transform = glisse ? 'translateY(' + glisse.toFixed(1) + 'px)' : '';
 
   // La derniere carte doit avoir fini de se poser exactement a la fin de la piste : on
   // calcule donc le pas a partir de la duree d'une pose, et non l'inverse. Avec PAS = 1/N
@@ -1546,8 +1553,7 @@
     ' translate(' + (o.dx * reste).toFixed(2) + 'vw, ' + (o.dy * reste).toFixed(2) + 'vh)' +
     ' translate(' + (o.dx * 0.62 * pose).toFixed(1) + 'px, ' + (o.dy * 0.55 * pose).toFixed(1) + 'px)' +
     ' rotate(' + (o.r * reste + o.r * 0.42 * pose).toFixed(2) + 'deg)' +
-    ' scale(' + (1 + (o.s - 1) * reste).toFixed(3) + ')' +
-    ' translateY(' + glisse.toFixed(1) + 'px)';
+    ' scale(' + (1 + (o.s - 1) * reste).toFixed(3) + ')';
    o.el.style.opacity = Math.min(1, pose * 2.4).toFixed(3);
    // La derniere arrivee est sur le dessus du paquet.
    o.el.style.zIndex = 20 + i;
