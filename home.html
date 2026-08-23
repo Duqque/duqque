@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Duqque Sports Gestion de carrière et d'image des athlètes</title>
 <meta name="description" content="Duqque Sports accompagne les jeunes athlètes : gestion de carrière, image, communication et partenariats. Carrière, sponsoring, médias, reconversion." />
-<link rel="stylesheet" href="css/style.css?v=20260894" />
+<link rel="stylesheet" href="css/style.css?v=20260897" />
 <style>
  /* Section Chiffres clés autonome */
  .stats-section { background: var(--bg-soft); }
@@ -678,7 +678,7 @@
  }
  /* =====================================================================
     MANIFESTE IMMERSIF
-    Piste de defilement de 150vh, scene epinglee sur toute la hauteur d'ecran.
+    Piste de defilement de 260vh, scene epinglee sur toute la hauteur d'ecran.
     Au depart les photos et les cartes sont dispersees loin du centre, inclinees et
     agrandies ; le defilement les fait converger vers le manifeste. Chaque element a
     son propre retard et sa propre trajectoire, sinon le mouvement parait mecanique.
@@ -699,9 +699,14 @@
   width: min(760px, calc(100% - 2 * var(--pad)));
   pointer-events: none;
  }
+ /* max-width: none annule le `p { max-width: 62ch }` global, qui bornait le bloc a 430px :
+    centre dans sa propre boite, le mot tombait a gauche du bloc de texte. Le text-indent
+    compense l'espace que l'interlettrage ajoute apres le dernier caractere, sinon le mot
+    reste optiquement decale de la moitie de cet espace. */
  .mfx-kicker {
   font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase; font-weight: 700;
-  color: var(--ink-muted); margin-bottom: 26px;
+  color: var(--ink-muted); margin: 0 auto 26px; max-width: none;
+  text-indent: 0.42em;
  }
  /* Machine a ecrire : LT Museum Medium, en gris. Le texte s'ecrit au defilement,
     caractere par caractere, avec un curseur qui suit la frappe. */
@@ -738,12 +743,15 @@
   box-shadow: 0 26px 70px rgba(10,10,14,0.22);
  }
  /* Formats varies : portrait, carre, panoramique */
- .ph-1 { left: 34%; top: 40%; width: clamp(120px, 13vw, 196px); aspect-ratio: 3 / 4;  z-index: 6; }
- .ph-2 { left: 66%; top: 37%; width: clamp(112px, 12vw, 178px); aspect-ratio: 1 / 1;  z-index: 7; }
- .ph-3 { left: 38%; top: 63%; width: clamp(140px, 16vw, 240px); aspect-ratio: 16 / 9; z-index: 8; }
- .ph-4 { left: 63%; top: 62%; width: clamp(118px, 12.5vw, 186px); aspect-ratio: 3 / 4; z-index: 9; }
- .ph-5 { left: 50%; top: 30%; width: clamp(150px, 17vw, 262px); aspect-ratio: 21 / 9; z-index: 10; }
- .ph-6 { left: 50%; top: 72%; width: clamp(120px, 13vw, 190px); aspect-ratio: 1 / 1;  z-index: 11; }
+ /* Toutes les vignettes sont ancrees au meme point : elles arrivent de leur cote et
+    viennent se poser au centre, les unes sur les autres, comme un paquet de cartes.
+    Le decalage final de chacune est calcule en JS a partir de ses data-dx / dy / r. */
+ .ph-1 { left: 50%; top: 50%; width: clamp(120px, 13vw, 196px); aspect-ratio: 3 / 4;  z-index: 6; }
+ .ph-2 { left: 50%; top: 50%; width: clamp(112px, 12vw, 178px); aspect-ratio: 1 / 1;  z-index: 7; }
+ .ph-3 { left: 50%; top: 50%; width: clamp(140px, 16vw, 240px); aspect-ratio: 16 / 9; z-index: 8; }
+ .ph-4 { left: 50%; top: 50%; width: clamp(118px, 12.5vw, 186px); aspect-ratio: 3 / 4; z-index: 9; }
+ .ph-5 { left: 50%; top: 50%; width: clamp(150px, 17vw, 262px); aspect-ratio: 21 / 9; z-index: 10; }
+ .ph-6 { left: 50%; top: 50%; width: clamp(120px, 13vw, 190px); aspect-ratio: 1 / 1;  z-index: 11; }
 
  .mfx-card {
   width: clamp(150px, 15vw, 208px);
@@ -761,38 +769,34 @@
  .mfx-card b { display: block; font-family: var(--display); font-weight: 900; font-size: 13.5px; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 6px; }
  .mfx-card small { display: block; font-size: 11px; line-height: 1.45; opacity: 0.8; }
 
- .cd-1 { left: 27%; top: 52%; z-index: 12; }
- .cd-2 { left: 73%; top: 50%; z-index: 13; }
- .cd-3 { left: 41%; top: 26%; z-index: 14; }
- .cd-4 { left: 58%; top: 76%; z-index: 15; }
- .cd-5 { left: 50%; top: 50%; z-index: 16; }
+ .cd-1, .cd-2, .cd-3, .cd-4, .cd-5 { left: 50%; top: 50%; }
 
- /* Mouvement reduit ou petits ecrans : composition finale, sans animation */
+ /* Mouvement reduit : pas d'animation. Les vignettes etant toutes ancrees au meme point,
+    il faut les remettre dans le flux, sinon elles se masquent entre elles. */
  @media (prefers-reduced-motion: reduce) {
   .mfx-runway { height: auto; }
-  .mfx-stage { position: static; height: auto; padding: clamp(80px, 12vw, 160px) 0; }
- }
- /* Version empilee (<= 900px) : colonne unique, un palier par element. Chacun traverse
-    l'ecran seul, l'opacite etant pilotee en JS par la distance au centre de la fenetre.
-    La grille a deux colonnes montrait toute la composition d'un bloc, ce qui tuait l'effet. */
- @media (max-width: 900px) {
-  .mfx-runway { height: auto; }
-  .mfx-stage { position: static; height: auto; display: block; padding: clamp(70px, 12vw, 110px) var(--pad) 40vh; }
-  .mfx-core { position: static; transform: none; width: auto; margin-bottom: 32vh; }
-  .mfx-el {
-   position: static; width: min(100%, 460px);
-   margin: 0 auto 30vh; opacity: 0;
-   transform: none;
-   will-change: transform, opacity;
-  }
-  .mfx-el:last-child { margin-bottom: 0; }
+  .mfx-stage { position: static; height: auto; display: block; padding: clamp(80px, 12vw, 160px) var(--pad); }
+  .mfx-core { position: static; transform: none; width: auto; margin: 0 auto 40px; }
+  .mfx-el { position: static; transform: none !important; opacity: 1 !important; width: min(100%, 420px); margin: 0 auto 16px; }
   .mfx-photo { aspect-ratio: 16 / 10; }
+ }
+
+ /* Petits ecrans : exactement la meme mecanique que le desktop — scene epinglee, texte qui
+    s'ecrit au defilement, puis les cartes qui viennent s'empiler dessus l'une apres l'autre.
+    Seules les dimensions changent. */
+ @media (max-width: 900px) {
+  .mfx-runway { height: 420vh; }
+  .mfx-stage { padding: 0 var(--pad); }
+  .mfx-core { width: calc(100% - 2 * var(--pad)); }
+  .mfx-type { font-size: clamp(19px, 5.4vw, 30px); max-width: 20ch; }
+  .mfx-el { width: min(72vw, 300px) !important; }
+  .mfx-photo { aspect-ratio: 4 / 3 !important; }
   .ph-5, .ph-6 { display: none; }
-  .mfx-card { width: min(100%, 460px); padding: 22px 24px 24px; border-radius: 14px; }
-  .mfx-ico { width: 40px; height: 40px; border-radius: 11px; margin-bottom: 16px; }
-  .mfx-ico svg { width: 21px; height: 21px; }
-  .mfx-card b { font-size: 20px; margin-bottom: 8px; }
-  .mfx-card small { font-size: 14px; }
+  .mfx-card { padding: 18px 20px 20px; border-radius: 14px; }
+  .mfx-ico { width: 34px; height: 34px; border-radius: 10px; margin-bottom: 12px; }
+  .mfx-ico svg { width: 18px; height: 18px; }
+  .mfx-card b { font-size: 16px; }
+  .mfx-card small { font-size: 12.5px; }
  }
 
  /* Bloc conviction centre sur la page, texte centre lui aussi */
@@ -1363,7 +1367,7 @@
 <footer class="footer"></footer>
 
 
-<script src="js/main.js?v=20260894"></script>
+<script src="js/main.js?v=20260897"></script>
 <script>
 (function(){
  const runway = document.getElementById('mfxRunway');
@@ -1400,11 +1404,9 @@
   dx: parseFloat(el.dataset.dx) || 0,
   dy: parseFloat(el.dataset.dy) || 0,
   r:  parseFloat(el.dataset.r)  || 0,
-  s:  parseFloat(el.dataset.s)  || 1,
-  lag: parseFloat(el.dataset.lag) || 0
+  s:  parseFloat(el.dataset.s)  || 1
  }));
  const reduit = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
- const epingle = () => getComputedStyle(stage).position === 'sticky';
  const adouci = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
  let derniereTete = -1;
@@ -1419,53 +1421,46 @@
   cible.classList.toggle('fini', n >= lettres.length);
  };
 
- /* Version empilee : chaque element apparait seul. Son opacite depend de la distance
-    entre son centre et le centre de la fenetre — nulle a plus d'un demi-ecran, maximale
-    au centre. Comme deux elements consecutifs sont espaces de plus d'un demi-ecran, on
-    n'en voit jamais deux pleinement en meme temps : ils se relaient. */
- const PORTEE = 0.47;
- const placeEmpile = () => {
-  ecrire(1);
-  const mi = window.innerHeight / 2;
-  els.forEach(o => {
-   const r = o.el.getBoundingClientRect();
-   const centre = r.top + r.height / 2;
-   const d = Math.abs(centre - mi) / (window.innerHeight * PORTEE);
-   const v = Math.max(0, 1 - d);
-   const doux = v * v * (3 - 2 * v);
-   o.el.style.opacity = doux.toFixed(3);
-   o.el.style.transform =
-    'translateY(' + (((centre - mi) / mi) * 18).toFixed(1) + 'px)' +
-    ' scale(' + (0.93 + 0.07 * doux).toFixed(3) + ')';
-  });
- };
-
  const place = () => {
   if (reduit()) {
    ecrire(1);
    els.forEach(o => { o.el.style.transform = ''; o.el.style.opacity = ''; });
    return;
   }
-  if (!epingle()) { placeEmpile(); return; }
+
   const course = runway.offsetHeight - stage.offsetHeight;
   if (course <= 0) return;
   const brut = Math.min(1, Math.max(0, -runway.getBoundingClientRect().top / course));
 
-  // Premier temps : le manifeste s'ecrit. Second temps : les cartes viennent s'y poser,
-  // l'une apres l'autre. Le dernier dixieme maintient la composition finale.
-  ecrire(Math.min(1, brut / 0.34));
-  const p = Math.min(1, Math.max(0, (brut - 0.3) / 0.6));
+  // Premier temps : le manifeste s'ecrit. Second temps : les vignettes arrivent l'une
+  // apres l'autre et viennent se poser au centre, sur le texte, en paquet de cartes.
+  //
+  // Chacune a son creneau de defilement — creneaux qui se chevauchent d'un tiers, le temps
+  // qu'une carte finisse de se poser pendant que la suivante entre. Une fois posee, elle
+  // reste : a la fin, les onze forment un paquet, legerement decale et incline carte par
+  // carte, l'ordre d'empilement suivant l'ordre d'arrivee.
+  ecrire(Math.min(1, brut / 0.24));
+  const p = Math.min(1, Math.max(0, (brut - 0.22) / 0.76));
 
-  els.forEach(o => {
-   const local = adouci(Math.min(1, Math.max(0, (p - o.lag) / (1 - o.lag))));
-   const reste = 1 - local;
+  // La derniere carte doit avoir fini de se poser exactement a la fin de la piste : on
+  // calcule donc le pas a partir de la duree d'une pose, et non l'inverse. Avec PAS = 1/N
+  // la derniere debutait trop tard et restait a mi-chemin, decalee du reste du paquet.
+  const DUREE = 0.16;
+  const PAS = (1 - DUREE) / Math.max(1, els.length - 1);
+  els.forEach((o, i) => {
+   const pose = adouci(Math.min(1, Math.max(0, (p - i * PAS) / DUREE)));
+   const reste = 1 - pose;
+   // Place finale dans le paquet : quelques pixels et quelques degres, tires du meme jeu
+   // de donnees que la trajectoire d'entree pour que chaque carte garde son caractere.
    o.el.style.transform =
     'translate(-50%, -50%)' +
     ' translate(' + (o.dx * reste).toFixed(2) + 'vw, ' + (o.dy * reste).toFixed(2) + 'vh)' +
-    ' rotate(' + (o.r * reste).toFixed(2) + 'deg)' +
+    ' translate(' + (o.dx * 0.62 * pose).toFixed(1) + 'px, ' + (o.dy * 0.55 * pose).toFixed(1) + 'px)' +
+    ' rotate(' + (o.r * reste + o.r * 0.42 * pose).toFixed(2) + 'deg)' +
     ' scale(' + (1 + (o.s - 1) * reste).toFixed(3) + ')';
-   // Opacite pilotee par l'avance propre a l'element : rien n'est visible avant son entree.
-   o.el.style.opacity = Math.min(1, local * 1.6).toFixed(3);
+   o.el.style.opacity = Math.min(1, pose * 2.4).toFixed(3);
+   // La derniere arrivee est sur le dessus du paquet.
+   o.el.style.zIndex = 20 + i;
   });
  };
 
