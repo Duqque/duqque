@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Duqque Sports Gestion de carrière et d'image des athlètes</title>
 <meta name="description" content="Duqque Sports accompagne les jeunes athlètes : gestion de carrière, image, communication et partenariats. Carrière, sponsoring, médias, reconversion." />
-<link rel="stylesheet" href="css/style.css?v=20260893" />
+<link rel="stylesheet" href="css/style.css?v=20260894" />
 <style>
  /* Section Chiffres clés autonome */
  .stats-section { background: var(--bg-soft); }
@@ -685,7 +685,7 @@
     Fond identique au reste de la page : la scene ne doit pas casser le minimalisme.
     ===================================================================== */
  .mfx { background: var(--bg); }
- .mfx-runway { height: 480vh; position: relative; }
+ .mfx-runway { height: 260vh; position: relative; }
  .mfx-stage {
   position: sticky; top: 0; height: 100svh; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
@@ -1363,7 +1363,7 @@
 <footer class="footer"></footer>
 
 
-<script src="js/main.js?v=20260893"></script>
+<script src="js/main.js?v=20260894"></script>
 <script>
 (function(){
  const runway = document.getElementById('mfxRunway');
@@ -1405,6 +1405,7 @@
  }));
  const reduit = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
  const epingle = () => getComputedStyle(stage).position === 'sticky';
+ const adouci = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
  let derniereTete = -1;
  const ecrire = (avance) => {
@@ -1450,30 +1451,21 @@
   if (course <= 0) return;
   const brut = Math.min(1, Math.max(0, -runway.getBoundingClientRect().top / course));
 
-  // Premier temps : le manifeste s'ecrit. Second temps : les elements defilent UN PAR UN.
-  //
-  // Chacun possede son creneau de defilement. Il arrive depuis son decalage (dx, dy,
-  // rotation, echelle), se pose au centre de son creneau, puis repart de l'autre cote
-  // pendant que le suivant entre : c'est un passage, pas un empilement. Les creneaux ne
-  // se chevauchent que sur leurs bords, le temps du fondu enchaine, si bien qu'on ne voit
-  // jamais la composition complete. Auparavant chaque element restait a l'ecran une fois
-  // arrive et les onze finissaient affiches ensemble.
-  ecrire(Math.min(1, brut / 0.18));
-  const p = Math.min(1, Math.max(0, (brut - 0.16) / 0.84));
+  // Premier temps : le manifeste s'ecrit. Second temps : les cartes viennent s'y poser,
+  // l'une apres l'autre. Le dernier dixieme maintient la composition finale.
+  ecrire(Math.min(1, brut / 0.34));
+  const p = Math.min(1, Math.max(0, (brut - 0.3) / 0.6));
 
-  const PAS = 1 / els.length;
-  const DEMI = PAS * 0.95;
-  els.forEach((o, i) => {
-   const centre = (i + 0.5) * PAS;
-   const t = Math.max(-1, Math.min(1, (p - centre) / DEMI));
-   const v = 1 - Math.abs(t);
+  els.forEach(o => {
+   const local = adouci(Math.min(1, Math.max(0, (p - o.lag) / (1 - o.lag))));
+   const reste = 1 - local;
    o.el.style.transform =
     'translate(-50%, -50%)' +
-    ' translate(' + (o.dx * -t).toFixed(2) + 'vw, ' + (o.dy * -t).toFixed(2) + 'vh)' +
-    ' rotate(' + (o.r * -t).toFixed(2) + 'deg)' +
-    ' scale(' + (1 + (o.s - 1) * Math.abs(t)).toFixed(3) + ')';
-   // Cloche adoucie : invisible aux deux bords du creneau, pleine au centre.
-   o.el.style.opacity = (v * v * (3 - 2 * v)).toFixed(3);
+    ' translate(' + (o.dx * reste).toFixed(2) + 'vw, ' + (o.dy * reste).toFixed(2) + 'vh)' +
+    ' rotate(' + (o.r * reste).toFixed(2) + 'deg)' +
+    ' scale(' + (1 + (o.s - 1) * reste).toFixed(3) + ')';
+   // Opacite pilotee par l'avance propre a l'element : rien n'est visible avant son entree.
+   o.el.style.opacity = Math.min(1, local * 1.6).toFixed(3);
   });
  };
 
