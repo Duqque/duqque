@@ -19,3 +19,6 @@ _archive-optimental/
 # Journaux et temporaires
 *.log
 .cache/
+
+# Raccourci local, propre a cette machine
+OUVRIR-LE-SITE.command
