@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /acces.html
+Disallow: /acces-cle.js

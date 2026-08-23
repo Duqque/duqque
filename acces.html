@@ -65,6 +65,7 @@ button {
 }
 button:hover { background: var(--lime); color: #0b0b0b; transform: translateY(-2px); }
 button:focus-visible { outline: 3px solid var(--violet-clair); outline-offset: 3px; }
+.piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .message { margin: 18px 0 0; font-size: 13.5px; line-height: 1.5; min-height: 20px; }
 .message.ko { color: #ffb3b3; }
 .message.ok { color: var(--lime); }
@@ -83,6 +84,12 @@ button:focus-visible { outline: 3px solid var(--violet-clair); outline-offset: 3
  <form id="f" autocomplete="off">
   <label for="mp">Mot de passe</label>
   <input id="mp" type="password" name="mp" autocomplete="current-password" required autofocus />
+  <!-- Champ piege : invisible et hors du parcours clavier. Un humain ne le voit jamais,
+       un robot qui remplit tous les champs se trahit en le renseignant. -->
+  <div class="piege" aria-hidden="true">
+   <label for="societe">Société</label>
+   <input id="societe" name="societe" type="text" tabindex="-1" autocomplete="off" />
+  </div>
   <button type="submit">Ouvrir le site</button>
  </form>
 
@@ -96,33 +103,76 @@ button:focus-visible { outline: 3px solid var(--violet-clair); outline-offset: 3
 (function () {
  var f = document.getElementById('f'), msg = document.getElementById('msg');
 
- if (!window.DUQQUE_ACCES) {
+ if (!window.DUQQUE_ACCES || !window.DUQQUE_ACCES.cle) {
   msg.className = 'message ko';
   msg.textContent = "Le fichier acces-cle.js est absent du serveur. Déposez-le à la racine, à côté de cette page.";
   f.querySelector('button').disabled = true;
   return;
  }
 
- // SHA-256 : le mot de passe n'est jamais ecrit nulle part, seule son empreinte
- // est comparee. crypto.subtle exige une origine sure (https ou localhost).
- async function empreinte(txt) {
-  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt));
-  return Array.from(new Uint8Array(buf)).map(function (b) {
-   return b.toString(16).padStart(2, '0');
-  }).join('');
+ // Derivation PBKDF2 : chaque essai coute environ deux dixiemes de seconde de calcul.
+ // Instantane pour qui connait le mot de passe, dissuasif pour un parcours exhaustif.
+ var hex = function (buf) {
+  return Array.from(new Uint8Array(buf)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+ };
+ var octets = function (h) {
+  return new Uint8Array(h.match(/../g).map(function (b) { return parseInt(b, 16); }));
+ };
+
+ async function derive(mdp) {
+  var base = await crypto.subtle.importKey('raw', new TextEncoder().encode(mdp), 'PBKDF2', false, ['deriveBits']);
+  var bits = await crypto.subtle.deriveBits({
+   name: 'PBKDF2',
+   salt: octets(window.DUQQUE_ACCES.sel),
+   iterations: window.DUQQUE_ACCES.iterations,
+   hash: 'SHA-256'
+  }, base, 256);
+  return hex(bits);
  }
+
+ // Blocage progressif : au-dela de cinq echecs, l'attente double a chaque fois.
+ var CLE_ECHECS = 'duqque_echecs';
+ function etat() {
+  try { return JSON.parse(localStorage.getItem(CLE_ECHECS)) || { n: 0, jusqua: 0 }; }
+  catch (e) { return { n: 0, jusqua: 0 }; }
+ }
+ function noter(v) { try { localStorage.setItem(CLE_ECHECS, JSON.stringify(v)); } catch (err) {} }
+
+ var charge = Date.now();
 
  f.addEventListener('submit', async function (e) {
   e.preventDefault();
+  var st = etat();
+  var reste = Math.ceil((st.jusqua - Date.now()) / 1000);
+  if (reste > 0) {
+   msg.className = 'message ko';
+   msg.textContent = 'Trop de tentatives. Réessayez dans ' + reste + ' seconde' + (reste > 1 ? 's' : '') + '.';
+   return;
+  }
+
+  // Deux signaux de robot : le champ piege rempli, ou un envoi quasi instantane.
+  if (document.getElementById('societe').value !== '' || Date.now() - charge < 1200) {
+   msg.className = 'message ko';
+   msg.textContent = 'Vérification impossible. Rechargez la page et réessayez.';
+   return;
+  }
+
   msg.className = 'message';
   msg.textContent = 'Vérification…';
+  f.querySelector('button').disabled = true;
   try {
-   var h = await empreinte(document.getElementById('mp').value);
-   if (h !== window.DUQQUE_ACCES.empreinte) {
+   var k = await derive(document.getElementById('mp').value);
+   if (k !== window.DUQQUE_ACCES.cle) {
+    var n = st.n + 1;
+    var attente = n >= 5 ? Math.min(30 * Math.pow(2, n - 5), 900) : 0;
+    noter({ n: n, jusqua: attente ? Date.now() + attente * 1000 : 0 });
     msg.className = 'message ko';
-    msg.textContent = 'Mot de passe incorrect.';
+    msg.textContent = attente
+     ? 'Mot de passe incorrect. Nouvelle tentative dans ' + attente + ' secondes.'
+     : 'Mot de passe incorrect.';
     return;
    }
+   noter({ n: 0, jusqua: 0 });
    // 30 jours, tout le site. SameSite=Lax pour que le cookie suive la navigation.
    document.cookie = 'duqque_apercu=' + window.DUQQUE_ACCES.jeton +
     '; Max-Age=2592000; Path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
@@ -132,6 +182,8 @@ button:focus-visible { outline: 3px solid var(--violet-clair); outline-offset: 3
   } catch (err) {
    msg.className = 'message ko';
    msg.textContent = "Vérification impossible sur cette connexion. Ouvrez la page en https.";
+  } finally {
+   f.querySelector('button').disabled = false;
   }
  });
 })();
