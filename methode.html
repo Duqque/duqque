@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Notre approche · Duqque Sports</title>
+<meta name="description" content="Auditer, positionner, déployer, valoriser. L'approche Duqque Sports pour construire la marque et la carrière des athlètes." />
+<link rel="stylesheet" href="css/style.css?v=20260890" />
+<style>
+ .met-why { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: start; }
+ .met-why blockquote {
+  font-family: var(--serif); font-style: italic; font-weight: 500;
+  font-size: clamp(22px, 2.2vw, 30px); line-height: 1.3;
+  color: var(--ink); margin: 0 0 24px; padding-left: 24px;
+  border-left: 3px solid var(--accent);
+ }
+ .met-why p { color: var(--ink-soft); font-size: 16px; line-height: 1.65; margin-bottom: 16px; }
+ @media (max-width: 900px){ .met-why { grid-template-columns: 1fr; gap: 32px; } }
+
+ .met-keynums { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+ .met-keynums > div {
+  border-radius: 16px; padding: 36px 28px;
+  background: var(--cream-dark); border: 1px solid var(--line);
+ }
+ .met-keynums .num { font-family: var(--serif); font-weight: 600; font-size: clamp(40px, 4vw, 56px); line-height: 1; letter-spacing: -0.02em; color: var(--ink); }
+ .met-keynums .num em { font-style: italic; color: var(--accent-ink); }
+ .met-keynums .lbl { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-muted); margin-top: 18px; font-weight: 700; }
+ .met-keynums > div:nth-child(2) { background: var(--accent); border-color: transparent; }
+ .met-keynums > div:nth-child(2) .num, .met-keynums > div:nth-child(2) .lbl { color: #fff; }
+ .met-keynums > div:nth-child(2) .num em { color: #d9ccff; }
+ @media (max-width: 900px){ .met-keynums { grid-template-columns: 1fr 1fr; } }
+
+ .met-process { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+ .met-step {
+  border-radius: 16px; padding: 32px 28px;
+  display: flex; flex-direction: column; gap: 14px;
+  min-height: 340px; position: relative; overflow: hidden;
+ }
+ .met-step .nstep { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; opacity: 1; }
+ .met-step h3 { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.05; letter-spacing: -0.02em; }
+ /* color: inherit indispensable : sans lui, la regle globale p { color: var(--ink-soft) }
+    l'emporte et le texte tombe a 1,53:1 sur le violet. */
+ .met-step p { font-size: 13.5px; line-height: 1.55; opacity: 1; color: inherit; }
+ .met-step .icn { width: 38px; height: 38px; opacity: 0.9; margin-bottom: auto; }
+ .met-step.violet { background: var(--accent); color: #fff; }
+ .met-step.lav    { background: #b8a4f0; color: #1a1033; }
+ .met-step.cream  { background: #f7eccf; color: #2a1402; }
+ .met-step.dark   { background: #050505; color: #f5f3ef; border: 1px solid rgba(255,255,255,0.08); }
+ @media (max-width: 1000px){ .met-process { grid-template-columns: 1fr 1fr; } }
+ @media (max-width: 600px){ .met-process { grid-template-columns: 1fr; } }
+
+ .met-feature.bg-in {
+  position: relative; border-radius: 16px; overflow: hidden;
+  min-height: 460px;
+  background: url('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1000&auto=format&fit=crop&q=55') center/cover no-repeat;
+  background-color: #0a0a0a;
+ }
+ .met-feature::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0.35) 60%, transparent 100%);
+ }
+ .met-feature-content {
+  position: relative; z-index: 1; padding: clamp(40px, 5vw, 72px);
+  max-width: 620px; color: #f5f3ef;
+  display: flex; flex-direction: column; gap: 16px; height: 100%;
+  justify-content: flex-end;
+ }
+ .met-feature h3 { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 3vw, 40px); line-height: 1.1; letter-spacing: -0.02em; }
+ .met-feature p { font-size: 15px; line-height: 1.6; opacity: 1; max-width: 50ch; }
+ .met-feature .badge {
+  display: inline-flex; align-self: flex-start;
+  padding: 8px 14px; border-radius: 100px;
+  background: rgba(245,243,239,0.12); border: 1px solid rgba(245,243,239,0.25);
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700;
+ }
+
+ .met-compare {
+  background: #050505; color: #f5f3ef; border-radius: 16px;
+  padding: clamp(36px, 4vw, 56px);
+  border: 1px solid rgba(255,255,255,0.08);
+ }
+ .met-compare .head {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  padding-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.12);
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 700; opacity: 1;
+ }
+ .met-compare .head > div:nth-child(3) { color: var(--accent-soft); opacity: 1; }
+ .met-compare .row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  align-items: start; gap: 24px;
+ }
+ .met-compare .row:last-child { border-bottom: none; }
+ .met-compare .axis { font-family: var(--serif); font-weight: 600; font-size: 20px; line-height: 1.2; }
+ .met-compare .col { font-size: 14px; line-height: 1.5; opacity: 1; }
+ .met-compare .col.us { opacity: 1; color: #f5f3ef; font-weight: 500; }
+ @media (max-width: 800px){
+  .met-compare .head { display: none; }
+  .met-compare .row { grid-template-columns: 1fr; gap: 8px; }
+  .met-compare .col::before { content: attr(data-lbl); display: block; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 1; margin-bottom: 4px; }
+ }
+
+ .met-quote {
+  background: #050505; color: #f5f3ef; border-radius: 16px;
+  padding: clamp(48px, 6vw, 90px);
+  text-align: center; position: relative; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+ }
+ .met-quote::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, rgba(119,71,255,0.18), transparent 65%);
+ }
+ .met-quote > * { position: relative; z-index: 1; }
+ .met-quote p {
+  font-family: var(--serif); font-style: italic; font-weight: 600;
+  font-size: clamp(26px, 3.2vw, 44px); line-height: 1.2;
+  max-width: 28ch; margin: 0 auto 24px; color: #f5f3ef;
+ }
+ .met-quote .author { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent-soft); font-weight: 700; }
+
+ /* =====================================================================
+    HARMONISATION AVEC LE RESTE DU SITE
+    La page reprend les dispositifs deja en place ailleurs : tuiles d'icones colorees,
+    bandeaux de tete sur les cartes (comme la formation de Team Espoirs), pictogrammes
+    dans les tableaux. Objectif : qu'on reconnaisse le meme site d'une page a l'autre.
+    ===================================================================== */
+
+ /* Tuile d'icone, meme vocabulaire que .mls-ico / .fm-head / .mfx-ico */
+ .met-ico {
+  display: inline-flex; width: 38px; height: 38px; border-radius: 11px;
+  align-items: center; justify-content: center; flex: 0 0 auto;
+  background: var(--c, var(--accent)); color: var(--i, #fff);
+ }
+ .met-ico svg { width: 20px; height: 20px; }
+
+ /* Le constat : trois couts de l'improvisation, en cartes */
+ .met-costs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(12px, 1.5vw, 20px); margin-top: clamp(28px, 3.4vw, 44px); }
+ .met-cost {
+  border: 1px solid var(--line); border-radius: 14px; background: #fff;
+  padding: clamp(20px, 2.2vw, 28px);
+ }
+ .met-cost .met-ico { margin-bottom: 16px; }
+ .met-cost h4 { font-family: var(--display); font-weight: 900; font-size: 16px; letter-spacing: -0.01em; line-height: 1.15; margin: 0 0 8px; }
+ .met-cost p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+ @media (max-width: 800px) { .met-costs { grid-template-columns: 1fr; } }
+
+ /* Chiffres cles : une icone par tuile */
+ .met-keynums > div { display: flex; flex-direction: column; }
+ .met-keynums .met-ico { margin-bottom: 20px; }
+ .met-keynums > div:nth-child(2) .met-ico { background: rgba(255,255,255,0.18); color: #fff; }
+
+ /* Protocole : bandeau colore en tete, comme les fiches de formation de Team Espoirs */
+ .met-step { padding: 0 !important; overflow: hidden; min-height: 0 !important; gap: 0 !important; }
+ .met-step-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 13px 20px; background: rgba(0,0,0,0.16);
+ }
+ .met-step.cream .met-step-head { background: rgba(0,0,0,0.1); }
+ .met-step.dark .met-step-head { background: rgba(255,255,255,0.1); }
+ .met-step-head .nstep { font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+ .met-step-head .nnum { font-family: var(--display); font-weight: 900; font-size: 19px; letter-spacing: -0.02em; line-height: 1; }
+ .met-step-body { padding: clamp(20px, 2.2vw, 28px); display: flex; flex-direction: column; gap: 12px; }
+ .met-step-body .met-ico { background: rgba(0,0,0,0.14); color: currentColor; margin-bottom: 4px; }
+ .met-step.dark .met-step-body .met-ico { background: rgba(255,255,255,0.12); }
+ .met-step h3 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(19px, 1.8vw, 24px); line-height: 1.08; letter-spacing: -0.02em; margin: 0; }
+
+ /* Comparatif : un pictogramme par critere, et un marqueur par colonne */
+ .met-compare .row { grid-template-columns: 1.05fr 1fr 1fr; }
+ .met-compare .axis { display: flex; align-items: center; gap: 12px; }
+ .met-compare .axis .met-ico { width: 32px; height: 32px; border-radius: 9px; background: rgba(255,255,255,0.1); color: #f5f3ef; }
+ .met-compare .axis .met-ico svg { width: 17px; height: 17px; }
+ .met-compare .col { position: relative; padding-left: 26px; }
+ .met-compare .col::after {
+  content: ""; position: absolute; left: 0; top: 4px; width: 15px; height: 15px; border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+ }
+ .met-compare .col.us::after { background: #d9ff3d; }
+ @media (max-width: 800px) {
+  .met-compare .row { grid-template-columns: 1fr; }
+  .met-compare .col::before { padding-left: 0; }
+ }
+ /* Pourquoi une association : la comparaison des deux modeles */
+ .mt-modele { background: #050505; color: #f5f3ef; border-radius: 18px; padding: clamp(28px, 3.6vw, 52px); }
+ .mt-k { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700; color: rgba(245,243,239,0.7); margin: 0 0 14px; }
+ .mt-modele h2 { color: #f5f3ef; margin: 0 0 clamp(26px, 3vw, 40px); max-width: 26ch; }
+ .mt-modele h2 em { color: #d9ff3d; }
+ .mt-modele-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(18px, 2.4vw, 36px); }
+ .mt-modele-cols > div { border-top: 1px solid rgba(255,255,255,0.16); padding-top: 22px; }
+ .mt-modele-cols h3 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: 14px; letter-spacing: 0.02em; margin: 0 0 16px; color: rgba(245,243,239,0.72); }
+ .mt-nous h3 { color: #d9ff3d; }
+ .mt-modele-cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+ .mt-modele-cols li { position: relative; padding-left: 26px; font-size: 14.5px; line-height: 1.55; color: rgba(245,243,239,0.86); }
+ .mt-modele-cols li::before { content: ""; position: absolute; left: 0; top: 7px; width: 14px; height: 14px; border-radius: 50%; background: rgba(255,255,255,0.14); }
+ .mt-nous li::before { background: #d9ff3d; }
+ .mt-note { margin-top: clamp(20px, 2.4vw, 30px); font-size: 14px; line-height: 1.6; color: var(--ink-muted); max-width: 62ch; }
+ @media (max-width: 760px) { .mt-modele-cols { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<!-- HERO -->
+<section class="page-hero methode">
+ <div class="container">
+  <div class="breadcrumb"><span>Notre approche</span></div>
+  <h1 class="serif">La rigueur d'une agence. <em class="accent">Le modèle d'une association.</em></h1>
+  <p class="lead">Nous travaillons votre image comme vous travaillez votre sport : avec un plan, des indicateurs, et une discipline de tous les jours. Auditer, positionner, déployer, valoriser.</p>
+ </div>
+</section>
+
+<!-- POURQUOI -->
+<section>
+ <div class="container">
+  <div class="section-tag reveal">Pourquoi une approche</div>
+  <h2 class="serif reveal" style="margin-bottom: 48px; max-width: 24ch;">L'improvisation coûte cher. <em class="accent">Surtout à 25 ans.</em></h2>
+  <div class="met-why reveal">
+   <blockquote>
+    « Un athlète a une fenêtre de dix ans pour construire ce qui devra le porter pendant cinquante. Chaque saison sans stratégie est une saison perdue. »
+   </blockquote>
+   <div>
+    <p>Trop de carrières se gèrent au fil de l'eau. Chaque décision isolée paraît anodine. Leur accumulation dessine une trajectoire, ou la sabote.</p>
+    <p>Nous appliquons au jeune athlète les méthodes d'une agence de marque&nbsp;: un diagnostic honnête, un positionnement clair, un déploiement discipliné et une mesure permanente de la valeur créée. La différence tient au modèle, pas au niveau d'exigence.</p>
+    <p>C'est exigeant. C'est ce qui la rend rentable.</p>
+   </div>
+  </div>
+
+  <div class="met-costs reveal">
+   <div class="met-cost">
+    <span class="met-ico" style="--c: var(--accent); --i: #fff;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span>
+    <h4>Un contrat signé trop vite</h4>
+    <p>Une exclusivité mal bornée à vingt ans ferme des portes pendant les cinq saisons suivantes.</p>
+   </div>
+   <div class="met-cost">
+    <span class="met-ico" style="--c: #0b0b0b; --i: #d9ff3d;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4h3l6 4V6l-6 4H4z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></span>
+    <h4>Un message mal calibré</h4>
+    <p>Une prise de parole isolée efface des mois de travail d'image, et reste accessible des années.</p>
+   </div>
+   <div class="met-cost">
+    <span class="met-ico" style="--c: #b8a4f0; --i: #1a1033;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 13l3 3 5-5"/><path d="M3 12a9 9 0 1 1 18 0 9 9 0 0 1-18 0z"/></svg></span>
+    <h4>Un partenaire accepté par défaut</h4>
+    <p>Le premier sponsor qui se présente fixe le niveau de tous ceux qui suivront.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section style="padding-top: 0;">
+ <div class="container">
+  <div class="mt-modele reveal">
+   <div class="mt-modele-txt">
+    <p class="mt-k">Pourquoi ce modèle</p>
+    <h2 class="serif">Une agence gagne <em>sur</em> l'athlète. Nous gagnons <em>quand</em> il n'a plus besoin de nous.</h2>
+   </div>
+   <div class="mt-modele-cols">
+    <div>
+     <h3>Le modèle d'une agence</h3>
+     <ul>
+      <li>Une commission sur chaque contrat négocié</li>
+      <li>Un intérêt à ce que l'athlète délègue durablement</li>
+      <li>Un conseil qui coûte quand il consiste à refuser</li>
+     </ul>
+    </div>
+    <div class="mt-nous">
+     <h3>Le nôtre</h3>
+      <ul>
+      <li>Zéro commission&nbsp;: tout revient à l'athlète</li>
+      <li>Un objectif de transmission, pas de dépendance</li>
+      <li>La liberté de déconseiller un contrat sans rien y perdre</li>
+     </ul>
+    </div>
+   </div>
+  </div>
+  <p class="mt-note reveal">Le protocole ci-dessous ne change pas pour autant. Ce sont les mêmes quatre étapes, la même exigence de méthode. Ce qui change, c'est qui en tire le bénéfice.</p>
+ </div>
+</section>
+
+<!-- CHIFFRES CLÉS -->
+<section style="padding-top: 0;">
+ <div class="container">
+  <div class="section-tag reveal">Ce que ça engage</div>
+  <div class="met-keynums reveal">
+   <div><span class="met-ico" style="--c: var(--accent); --i:#fff;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg></span><div class="num">04</div><div class="lbl">Pôles d'expertise intégrés</div></div>
+   <div><span class="met-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 2.5 14.4 0 17M12 3.5c-2.5 2.6-2.5 14.4 0 17"/></svg></span><div class="num">360<em>°</em></div><div class="lbl">Vision carrière, image, revenus</div></div>
+   <div><span class="met-ico" style="--c: #b8a4f0; --i:#1a1033;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><div class="num">12</div><div class="lbl">Reportings par an, minimum</div></div>
+   <div><span class="met-ico" style="--c: #d9ff3d; --i:#101400;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3l9-16z"/><path d="M12 10v4M12 17h.01"/></svg></span><div class="num">7j/7</div><div class="lbl">Cellule de crise joignable</div></div>
+  </div>
+ </div>
+</section>
+
+<!-- PROCESS BENTO -->
+<section>
+ <div class="container">
+  <div class="section-tag reveal">Notre protocole</div>
+  <h2 class="serif reveal" style="margin-bottom: 48px; max-width: 20ch;">Auditer. Positionner. <em class="accent">Déployer.</em> Valoriser.</h2>
+
+  <div class="met-process reveal">
+   <div class="met-step violet">
+    <div class="met-step-head"><span class="nstep">Diagnostic</span><span class="nnum">01</span></div>
+    <div class="met-step-body">
+     <span class="met-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span>
+     <h3>Auditer</h3>
+     <p>Audit complet de votre situation : contrats en cours, image publique, présence digitale, revenus, entourage. On mesure la valeur actuelle de votre nom, sans complaisance.</p>
+    </div>
+   </div>
+   <div class="met-step lav">
+    <div class="met-step-head"><span class="nstep">Stratégie</span><span class="nnum">02</span></div>
+    <div class="met-step-body">
+     <span class="met-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.5"/></svg></span>
+     <h3>Positionner</h3>
+     <p>Définition de votre marque personnelle : identité, valeurs, récit, publics cibles. La feuille de route qui guidera chaque contenu, chaque contrat, chaque prise de parole.</p>
+    </div>
+   </div>
+   <div class="met-step cream">
+    <div class="met-step-head"><span class="nstep">Exécution</span><span class="nnum">03</span></div>
+    <div class="met-step-body">
+     <span class="met-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19L13 7l3 5 4-8"/><path d="M4 19h16"/></svg></span>
+     <h3>Déployer</h3>
+     <p>La marque prend vie : contenus produits, réseaux pilotés, presse activée, sponsors approchés. Un calendrier calé sur vos compétitions, jamais contre elles.</p>
+    </div>
+   </div>
+   <div class="met-step dark">
+    <div class="met-step-head"><span class="nstep">Mesure</span><span class="nnum">04</span></div>
+    <div class="met-step-body">
+     <span class="met-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V12M12 20V5M19 20v-6"/></svg></span>
+     <h3>Valoriser</h3>
+     <p>Contrats négociés, audience monétisée, reconversion préparée. Chaque trimestre, nous mesurons la valeur créée et ajustons la stratégie.</p>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- FEATURE PHOTO -->
+<section style="padding-top: 0;">
+ <div class="container">
+  <div class="section-tag reveal">L'équipe</div>
+  <div class="met-feature reveal">
+   <div class="met-feature-content">
+    <span class="badge">Une équipe intégrée</span>
+    <h3>Un seul interlocuteur. Toute une équipe derrière.</h3>
+    <p>Stratège de marque, créateurs de contenus, attaché de presse, négociateur sponsoring : chez Duqque, tous travaillent sur le même brief, le vôtre.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- COMPARE -->
+<section>
+ <div class="container">
+  <div class="section-tag reveal">Notre différence</div>
+  <h2 class="serif reveal" style="margin-bottom: 48px; max-width: 22ch;">Ce qui change <em class="accent">avec nous.</em></h2>
+  <div class="met-compare reveal">
+   <div class="head">
+    <div>Critère</div>
+    <div>Gestion classique</div>
+    <div>Duqque</div>
+   </div>
+   <div class="row">
+    <div class="axis"><span class="met-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></span>Vision</div>
+    <div class="col" data-lbl="Gestion classique">Des prestataires séparés : un CM, un agent, un photographe.</div>
+    <div class="col us" data-lbl="Duqque">Une équipe intégrée qui partage une seule stratégie de marque.</div>
+   </div>
+   <div class="row">
+    <div class="axis"><span class="met-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15h18M6 15a6 6 0 0 1 12 0"/><path d="M12 3v3M4.6 6.6l2 2M19.4 6.6l-2 2"/></svg></span>Horizon</div>
+    <div class="col" data-lbl="Gestion classique">L'opportunité du moment, contrat par contrat.</div>
+    <div class="col us" data-lbl="Duqque">La carrière entière, reconversion comprise, planifiée dès le premier jour.</div>
+   </div>
+   <div class="row">
+    <div class="axis"><span class="met-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="8" rx="2"/><path d="M7 8v4M11 8v3M15 8v4M19 8v3"/></svg></span>Mesure</div>
+    <div class="col" data-lbl="Gestion classique">Des likes et un ressenti.</div>
+    <div class="col us" data-lbl="Duqque">Reach, valeur média, revenus générés : un reporting chiffré chaque mois.</div>
+   </div>
+   <div class="row">
+    <div class="axis"><span class="met-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 21V4M6 4h11l-2 4 2 4H6"/></svg></span>Priorité</div>
+    <div class="col" data-lbl="Gestion classique">L'exposition avant tout, parfois au détriment du sportif.</div>
+    <div class="col us" data-lbl="Duqque">La performance d'abord : la communication s'adapte au calendrier sportif.</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- BIG QUOTE -->
+<section style="padding-top: 0;">
+ <div class="container">
+  <div class="met-quote reveal">
+   <p>Nous ne promettons pas la célébrité. Nous construisons <em>un actif qui vous appartient</em> et qui travaille pour vous, sur la durée.</p>
+   <div class="author">Duqque Sports</div>
+  </div>
+ </div>
+</section>
+
+<!-- CTA -->
+<section>
+ <div class="container center reveal">
+  <h2 class="serif" style="max-width: 22ch; margin: 0 auto 24px;">Envie de voir ce que ça donne <em class="accent">appliqué à votre carrière ?</em></h2>
+  <p style="max-width: 540px; margin: 0 auto 36px;">30 minutes pour comprendre votre situation et vous dire honnêtement ce que nous pouvons apporter. Sans engagement.</p>
+  <a href="rdv.html" class="btn btn-primary">Prendre RDV <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260890"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>À propos · Duqque</title>
+<meta name="description" content="Duqque est une association qui aide les jeunes athlètes à performer : gestion de carrière, marketing, image, communication et partenariats, sans commission." />
+<link rel="stylesheet" href="css/style.css?v=20260890" />
+<style>
+ /* =====================================================================
+    NOTRE MODELE
+    Quatre cartes, la premiere en lime parce que l'absence de commission est
+    l'argument qui porte tout le reste. Tuiles d'icone du meme vocabulaire que
+    le reste du site, titres en LT Museum Black.
+    ===================================================================== */
+ .ab-modele {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 1.8vw, 22px);
+ }
+ .ab-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 18px;
+  padding: clamp(24px, 2.8vw, 36px);
+  display: flex; flex-direction: column;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+ }
+ .ab-card:hover { transform: translateY(-3px); box-shadow: 0 20px 46px rgba(10,10,14,0.08); }
+ .ab-ico {
+  display: inline-flex; width: 46px; height: 46px; border-radius: 13px;
+  align-items: center; justify-content: center; flex: 0 0 auto;
+  background: var(--c); color: var(--i); margin-bottom: 20px;
+ }
+ .ab-ico svg { width: 23px; height: 23px; }
+ .ab-card h3 {
+  font-family: var(--display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(17px, 1.6vw, 21px); line-height: 1.08; letter-spacing: -0.015em;
+  margin: 0 0 12px;
+ }
+ .ab-card p { font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); margin: 0; max-width: 44ch; }
+
+ /* La carte maitresse : zero commission */
+ .ab-card.ab-lead { background: #d9ff3d; border-color: transparent; }
+ .ab-card.ab-lead .ab-ico { background: #101400; color: #d9ff3d; }
+ .ab-card.ab-lead h3 { font-size: clamp(20px, 2vw, 26px); }
+ .ab-card.ab-lead p { color: #2e3300; }
+
+ .ab-note {
+  margin-top: clamp(20px, 2.4vw, 30px);
+  display: grid; grid-template-columns: 3px minmax(0, 1fr); gap: 18px; align-items: start;
+  font-size: 14px; line-height: 1.65; color: var(--ink-muted); max-width: 66ch;
+ }
+ .ab-note::before { content: ""; background: var(--accent); border-radius: 2px; align-self: stretch; }
+
+ @media (max-width: 820px) { .ab-modele { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<section class="page-hero about">
+ <div class="container">
+  <div class="breadcrumb"><span>À propos</span></div>
+  <h1 class="serif">Nous ne sommes pas une agence. <em class="accent">Nous devenons une association.</em></h1>
+  <p class="lead">Duqque aide les jeunes athlètes à performer, en les accompagnant sur tout ce qui entoure la performance&nbsp;: gestion de carrière, marketing, image, communication et partenariats. Ce que presque personne ne leur apprend, et qui décide pourtant de la suite.</p>
+ </div>
+</section>
+
+<section style="padding-top:0;">
+ <div class="container">
+  <div class="split">
+   <div class="reveal">
+    <div class="section-tag">Histoire</div>
+    <h2 class="serif">Du bord des tatamis <em class="accent">aux salles de négociation.</em></h2>
+   </div>
+   <div class="reveal">
+    <p class="lead" style="margin-top:40px;">Duqque est née d'un constat simple&nbsp;: les jeunes athlètes savent tout donner sur le terrain, et presque personne ne s'occupe sérieusement du reste. Les contrats, l'image, les réseaux, la presse, la reconversion.</p>
+    <p style="margin-top:24px;">Pendant des années, nous avons vu des trajectoires prometteuses s'abîmer sur des sujets qui n'avaient rien de sportif&nbsp;: un premier contrat signé sans être lu, une image publique laissée au hasard, une fin de parcours subie au lieu d'être préparée.</p>
+    <p style="margin-top:24px;">Nous avons donc choisi la forme associative plutôt que celle d'une agence, et Duqque Sports se constitue actuellement en association. Le but n'est pas de prélever une part de ce qu'un athlète gagne, mais de lui transmettre ce dont il a besoin pour décider lui-même&nbsp;: comprendre un contrat, construire son image, parler aux médias, aller chercher des partenaires. Ce qui est négocié lui revient intégralement.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section style="padding-top:0;">
+ <div class="container">
+  <div class="section-tag reveal">Notre modèle</div>
+  <h2 class="serif reveal" style="margin-bottom: clamp(28px, 4vw, 48px); max-width: 24ch;">Ce que la forme associative <em class="accent">change concrètement.</em></h2>
+
+  <div class="ab-modele reveal">
+   <div class="ab-card ab-lead">
+    <span class="ab-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M6 18L18 6"/></svg></span>
+    <h3>Aucune commission</h3>
+    <p>Une agence se rémunère sur un pourcentage de ce qu'elle négocie. Nous ne prenons rien. Ce qu'un jeune athlète obtient lui revient intégralement, et cela ne dépend d'aucune performance commerciale de notre part.</p>
+   </div>
+   <div class="ab-card">
+    <span class="ab-ico" style="--c: var(--accent); --i:#fff;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M15 12v2"/></svg></span>
+    <h3>Transmettre, pas remplacer</h3>
+    <p>Notre travail consiste à rendre l'athlète et sa famille capables de décider seuls&nbsp;: lire un contrat, refuser une clause, tenir une prise de parole. Une agence a intérêt à rester indispensable. Une association a intérêt à ne plus l'être.</p>
+   </div>
+   <div class="ab-card">
+    <span class="ab-ico" style="--c:#b8a4f0; --i:#1a1033;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.2-7-10a3.7 3.7 0 0 1 7-2.3A3.7 3.7 0 0 1 19 10c0 5.8-7 10-7 10z"/></svg></span>
+    <h3>L'intérêt du jeune avant le nôtre</h3>
+    <p>Quand la structure ne gagne rien sur un contrat, elle peut conseiller de le refuser. C'est exactement la raison d'être de ce choix&nbsp;: retirer le conflit d'intérêts de la relation.</p>
+   </div>
+   <div class="ab-card">
+    <span class="ab-ico" style="--c:#0b0b0b; --i:#d9ff3d;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></svg></span>
+    <h3>Le club reste au centre</h3>
+    <p>Nous n'entrons jamais en concurrence avec le club, l'entraîneur ou la structure fédérale. Nous intervenons sur ce que personne ne prend en charge&nbsp;: l'image, les partenariats, la parole publique et la préparation de l'après.</p>
+   </div>
+  </div>
+
+  <p class="ab-note reveal">Ce modèle a une contrepartie assumée&nbsp;: nous ne pouvons pas accompagner tout le monde. Le nombre de places est limité, et la sélection se fait sur le projet et le besoin réel, pas sur le palmarès.</p>
+ </div>
+</section>
+
+<!-- VALEURS -->
+<section style="background: var(--bg-soft);">
+ <div class="container">
+  <div class="section-tag">Valeurs</div>
+  <h2 class="serif reveal" style="margin-bottom:60px;">Quatre principes <em class="accent">non négociables.</em></h2>
+
+  <div class="pillars">
+   <div class="reveal">
+    <div class="num" style="font-size:36px;">01</div>
+    <h4 class="serif">Le sportif d'abord</h4>
+    <p style="margin-top:16px;">Aucune exposition ne vaut une contre-performance. Le calendrier médiatique s'adapte au calendrier sportif, jamais l'inverse.</p>
+   </div>
+   <div class="reveal">
+    <div class="num" style="font-size:36px;">02</div>
+    <h4 class="serif">Savoir dire non</h4>
+    <p style="margin-top:16px;">Un partenaire mal aligné, une exposition prématurée, une clause déséquilibrée&nbsp;: nous disons de refuser aussi souvent que d'accepter. C'est le service le plus utile que nous rendons.</p>
+   </div>
+   <div class="reveal">
+    <div class="num" style="font-size:36px;">03</div>
+    <h4 class="serif">Tout par écrit</h4>
+    <p style="margin-top:16px;">Aucun engagement pris oralement, aucune promesse en fin de compétition. Ce qui n'est pas écrit et daté n'existe pas, et cela protège l'athlète autant que ses partenaires.</p>
+   </div>
+  </div>
+  <div class="pillars" style="border-top:none;">
+   <div class="reveal" style="grid-column: span 3;">
+    <div class="num" style="font-size:36px;">04</div>
+    <h4 class="serif">Vision longue</h4>
+    <p style="margin-top:16px; max-width:60ch;">Nous ne travaillons pas pour le buzz d'un été. Ce qui se construit avec nous doit tenir saison après saison, et continuer de porter l'athlète longtemps après sa dernière compétition.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="big-quote reveal" style="max-width:1100px;">
+   « Un palmarès prend fin un jour. Ce qu'un jeune athlète a compris de son métier, lui, <em>continue de le porter</em> longtemps après. »
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="container center reveal">
+  <h2 class="serif" style="max-width:18ch; margin: 0 auto 40px;">Travaillons <em class="accent">ensemble.</em></h2>
+  <a href="rdv.html" class="btn btn-primary">Prendre RDV <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260890"></script>
+</body>
+</html>

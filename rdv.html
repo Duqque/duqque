@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prendre RDV · Duqque Sports</title>
+<meta name="description" content="Réservez un entretien découverte de 30 minutes avec Duqque Sports. Choisissez votre créneau, recevez la confirmation par email." />
+<link rel="stylesheet" href="css/style.css?v=20260890" />
+<style>
+ .rdv-hero { padding-top: clamp(140px, 16vh, 190px); padding-bottom: 0 !important; }
+ .rdv-kicker { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--ink-muted); font-weight: 600; margin-bottom: 22px; }
+ .rdv-hero h1 { font-size: clamp(34px, 4.2vw, 58px); letter-spacing: -0.035em; max-width: 22ch; margin-bottom: 18px; }
+ .rdv-hero .lead { max-width: 56ch; font-size: 15.5px; line-height: 1.65; color: var(--ink-soft); }
+
+ /* Panneau façon Calendly : 3 colonnes */
+ .rdv-panel {
+  display: grid; grid-template-columns: 300px 1fr 300px;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,0.1); border-radius: 16px;
+  overflow: hidden;
+  min-height: 540px;
+ }
+ /* Col gauche : brief */
+ .rdv-brief {
+  padding: 32px 28px;
+  border-right: 1px solid rgba(0,0,0,0.08);
+  display: flex; flex-direction: column; gap: 18px;
+ }
+ .rdv-brief .mark {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #111; display: inline-flex; align-items: center; justify-content: center;
+ }
+ .rdv-brief .mark img { width: 60%; }
+ .rdv-brief .who { font-size: 12px; color: var(--ink-muted); font-weight: 600; }
+ .rdv-brief h2 { font-size: 24px; letter-spacing: -0.02em; line-height: 1.1; }
+ .rdv-brief ul { list-style: none; padding: 0; margin: 4px 0 0; display: flex; flex-direction: column; gap: 12px; }
+ .rdv-brief li { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink-soft); }
+ .rdv-brief li svg { flex-shrink: 0; color: var(--accent-ink); }
+ .rdv-brief .note { margin-top: auto; font-size: 12px; line-height: 1.55; color: var(--ink-muted); }
+
+ /* Col centre : calendrier */
+ .rdv-cal { padding: 32px 28px; }
+ .rdv-cal h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; letter-spacing: -0.01em; }
+ .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+ .cal-month { font-family: var(--serif); font-weight: 600; font-size: 17px; text-transform: capitalize; }
+ .cal-nav { display: flex; gap: 6px; }
+ .cal-nav button {
+  width: 32px; height: 32px; border-radius: 9px;
+  border: 1px solid rgba(0,0,0,0.14); background: transparent;
+  color: var(--ink); cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  transition: background .2s, color .2s;
+ }
+ .cal-nav button:hover:not(:disabled) { background: #111; color: #fff; }
+ .cal-nav button:disabled { opacity: 0.3; cursor: default; }
+ .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+ .cal-grid .dow { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-muted); font-weight: 700; text-align: center; padding: 8px 0; }
+ .cal-day {
+  aspect-ratio: 1; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 13.5px; font-weight: 600; color: var(--ink);
+  border: none; background: transparent; cursor: pointer;
+  transition: background .2s, color .2s, transform .2s;
+ }
+ .cal-day.avail { background: rgba(119,71,255,0.1); color: var(--accent-ink); }
+ .cal-day.avail:hover { background: var(--accent); color: #fff; transform: scale(1.06); }
+ .cal-day.selected { background: var(--accent); color: #fff; }
+ .cal-day.off { color: #5c5c5c; opacity: 1; cursor: default; }
+ .rdv-tz { margin-top: 18px; font-size: 12px; color: var(--ink-muted); display: flex; align-items: center; gap: 8px; }
+
+ /* Col droite : créneaux puis formulaire */
+ .rdv-side { padding: 32px 24px; border-left: 1px solid rgba(0,0,0,0.08); overflow-y: auto; max-height: 640px; }
+ .rdv-side h3 { font-size: 14px; font-weight: 700; margin-bottom: 16px; }
+ .slot {
+  display: block; width: 100%;
+  padding: 13px; margin-bottom: 10px;
+  border: 1px solid rgba(119,71,255,0.45); border-radius: 10px;
+  background: transparent; color: var(--accent-ink);
+  font-family: var(--sans); font-size: 14px; font-weight: 700;
+  cursor: pointer; text-align: center;
+  transition: background .2s, color .2s;
+ }
+ .slot:hover { background: var(--accent); color: #fff; }
+ .slot.picked { background: #111; border-color: #111; color: #fff; }
+ .rdv-empty { font-size: 13px; color: var(--ink-muted); line-height: 1.6; }
+
+ /* Étape formulaire */
+ .rdv-form { display: none; }
+ .rdv-form.on { display: grid; gap: 14px; }
+ .rdv-form .picked-info {
+  padding: 12px 14px; border-radius: 10px;
+  background: rgba(119,71,255,0.08); border: 1px solid rgba(119,71,255,0.3);
+  font-size: 13px; font-weight: 600; color: var(--ink);
+ }
+ .rdv-field { display: flex; flex-direction: column; gap: 5px; }
+ .rdv-field label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-muted); font-weight: 700; }
+ .rdv-field input, .rdv-field select, .rdv-field textarea {
+  border: none; border-bottom: 1px solid rgba(0,0,0,0.2); border-radius: 0;
+  background: transparent; padding: 9px 0; font: inherit; font-size: 14.5px;
+  color: var(--ink); font-family: var(--sans);
+ }
+ .rdv-field input:focus, .rdv-field select:focus, .rdv-field textarea:focus { outline: none; border-color: var(--accent-ink); }
+ .rdv-submit {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  background: #111; color: #fff; border: none; border-radius: 100px;
+  padding: 14px 24px; font-size: 13px; font-weight: 700;
+  font-family: var(--sans); cursor: pointer;
+  transition: background .3s, transform .3s;
+ }
+ .rdv-submit:hover { background: var(--accent); transform: translateY(-2px); }
+ .rdv-submit:disabled { opacity: 0.6; cursor: wait; transform: none; }
+ .rdv-back { background: none; border: none; color: var(--ink-muted); font-size: 12px; cursor: pointer; text-align: left; padding: 0; font-family: var(--sans); }
+ .rdv-back:hover { color: var(--accent-ink); }
+
+ /* Confirmation */
+ .rdv-done { display: none; text-align: center; padding: 20px 0; }
+ .rdv-done.on { display: block; }
+ .rdv-done .check {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+ }
+ .rdv-done h3 { font-family: var(--serif); font-size: 20px; margin-bottom: 10px; }
+ .rdv-done p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 16px; }
+ .rdv-ics { font-size: 13px; font-weight: 700; color: var(--accent-ink); border-bottom: 1px solid currentColor; }
+
+ @media (max-width: 1000px) {
+  .rdv-panel { grid-template-columns: 1fr; }
+  .rdv-brief { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .rdv-side { border-left: none; border-top: 1px solid rgba(0,0,0,0.08); max-height: none; }
+ }
+</style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<section class="rdv-hero">
+ <div class="container">
+  <p class="rdv-kicker reveal">Prendre RDV</p>
+  <h1 class="serif reveal">Choisissez votre créneau, <em class="accent">on s'occupe du reste.</em></h1>
+  <p class="lead reveal">30 minutes en visio pour parler de votre carrière, de votre image et de ce que Duqque peut vous apporter. Sans engagement.</p>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="rdv-panel reveal">
+
+   <!-- Brief -->
+   <aside class="rdv-brief">
+    <span class="mark"><img src="assets/duqque-logo-white.svg" alt="Duqque" class="notranslate" translate="no" /></span>
+    <span class="who">Duqque Sports</span>
+    <h2 class="serif">Entretien découverte</h2>
+    <ul>
+     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>30 minutes</li>
+     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="14" height="14" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg>Visioconférence</li>
+     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Paris · Lisbonne</li>
+     <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v12H8l-4 4V4z"/></svg>Français · Português · English</li>
+    </ul>
+    <p class="note">Vous recevrez une confirmation par email avec le lien de visioconférence. Besoin d'un autre créneau ? Écrivez-nous : contact@duqque.fr</p>
+   </aside>
+
+   <!-- Calendrier -->
+   <div class="rdv-cal">
+    <h3>Sélectionnez une date</h3>
+    <div class="cal-head">
+     <span class="cal-month" id="calMonth"></span>
+     <div class="cal-nav">
+      <button type="button" id="calPrev" aria-label="Mois précédent"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 12L6 8l4-4"/></svg></button>
+      <button type="button" id="calNext" aria-label="Mois suivant"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4l4 4-4 4"/></svg></button>
+     </div>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <p class="rdv-tz"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18"/></svg><span id="tzLabel"></span></p>
+   </div>
+
+   <!-- Créneaux + formulaire + confirmation -->
+   <aside class="rdv-side">
+    <div id="slotsView">
+     <h3 id="slotsTitle">Sélectionnez d'abord une date</h3>
+     <div id="slotsList"><p class="rdv-empty">Les créneaux du jour choisi s'afficheront ici. Du lundi au vendredi, de 9h30 à 18h.</p></div>
+    </div>
+
+    <form class="rdv-form" id="rdvForm">
+     <button type="button" class="rdv-back" id="rdvBack">← Changer de créneau</button>
+     <div class="picked-info" id="pickedInfo"></div>
+     <div class="rdv-field"><label>Prénom & nom</label><input type="text" id="fName" required /></div>
+     <div class="rdv-field"><label>Email</label><input type="email" id="fEmail" required /></div>
+     <div class="rdv-field"><label>Téléphone</label><input type="tel" id="fPhone" /></div>
+     <div class="rdv-field"><label>Vous êtes</label>
+      <select id="fProfile" required>
+       <option value="">Choisir</option>
+       <option>Athlète</option>
+       <option>Parent / Famille</option>
+       <option>Club / Fédération</option>
+       <option>Marque / Sponsor</option>
+       <option>Média</option>
+      </select>
+     </div>
+     <div class="rdv-field"><label>De quoi voulez-vous parler ?</label><textarea id="fMsg" rows="3" placeholder="Votre situation, votre objectif..."></textarea></div>
+     <button type="submit" class="rdv-submit" id="rdvSubmit">Confirmer le rendez-vous</button>
+    </form>
+
+    <div class="rdv-done" id="rdvDone">
+     <span class="check"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+     <h3>Rendez-vous confirmé</h3>
+     <p id="doneInfo"></p>
+     <p>Une confirmation vient de vous être envoyée par email. L'équipe Duqque a également été prévenue et vous enverra le lien de visioconférence.</p>
+     <a href="#" id="icsLink" class="rdv-ics" download="rdv-duqque.ics">Ajouter à mon calendrier (.ics)</a>
+    </div>
+   </aside>
+
+  </div>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script>
+(function(){
+ const MONTHS = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
+ const DOWS = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+ const SLOTS = ['09:30','10:00','10:30','11:00','11:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30'];
+
+ const grid = document.getElementById('calGrid');
+ const monthLbl = document.getElementById('calMonth');
+ const prevBtn = document.getElementById('calPrev');
+ const nextBtn = document.getElementById('calNext');
+ const slotsList = document.getElementById('slotsList');
+ const slotsTitle = document.getElementById('slotsTitle');
+ const slotsView = document.getElementById('slotsView');
+ const form = document.getElementById('rdvForm');
+ const done = document.getElementById('rdvDone');
+ const pickedInfo = document.getElementById('pickedInfo');
+ const tzLabel = document.getElementById('tzLabel');
+
+ tzLabel.textContent = 'Fuseau : ' + Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+ const today = new Date(); today.setHours(0,0,0,0);
+ let view = new Date(today.getFullYear(), today.getMonth(), 1);
+ let selDate = null, selSlot = null;
+
+ function fmtDate(d) {
+  return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+ }
+
+ function render() {
+  monthLbl.textContent = MONTHS[view.getMonth()] + ' ' + view.getFullYear();
+  prevBtn.disabled = view.getFullYear() === today.getFullYear() && view.getMonth() === today.getMonth();
+  grid.innerHTML = DOWS.map(d => '<span class="dow">'+d+'</span>').join('');
+  const first = new Date(view.getFullYear(), view.getMonth(), 1);
+  const startCol = (first.getDay() + 6) % 7;
+  const days = new Date(view.getFullYear(), view.getMonth()+1, 0).getDate();
+  for (let i = 0; i < startCol; i++) grid.appendChild(document.createElement('span'));
+  for (let d = 1; d <= days; d++) {
+   const date = new Date(view.getFullYear(), view.getMonth(), d);
+   const dow = (date.getDay() + 6) % 7;
+   const past = date <= today;
+   const btn = document.createElement('button');
+   btn.type = 'button';
+   btn.textContent = d;
+   const ok = !past && dow < 5;
+   btn.className = 'cal-day ' + (ok ? 'avail' : 'off');
+   if (selDate && date.getTime() === selDate.getTime()) btn.classList.add('selected');
+   if (ok) btn.addEventListener('click', () => { selDate = date; selSlot = null; render(); renderSlots(); });
+   else btn.disabled = true;
+   grid.appendChild(btn);
+  }
+ }
+
+ function renderSlots() {
+  form.classList.remove('on'); done.classList.remove('on'); slotsView.style.display = '';
+  if (!selDate) return;
+  slotsTitle.textContent = selDate.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+  slotsList.innerHTML = '';
+  SLOTS.forEach(s => {
+   const b = document.createElement('button');
+   b.type = 'button'; b.className = 'slot'; b.textContent = s;
+   b.addEventListener('click', () => {
+    selSlot = s;
+    slotsView.style.display = 'none';
+    pickedInfo.textContent = fmtDate(selDate) + ' à ' + s + ' (30 min, visio)';
+    form.classList.add('on');
+   });
+   slotsList.appendChild(b);
+  });
+ }
+
+ prevBtn.addEventListener('click', () => { view = new Date(view.getFullYear(), view.getMonth()-1, 1); render(); });
+ nextBtn.addEventListener('click', () => { view = new Date(view.getFullYear(), view.getMonth()+1, 1); render(); });
+ document.getElementById('rdvBack').addEventListener('click', () => { form.classList.remove('on'); slotsView.style.display = ''; });
+
+ form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('rdvSubmit');
+  btn.disabled = true; btn.textContent = 'Confirmation en cours...';
+
+  const name = document.getElementById('fName').value.trim();
+  const email = document.getElementById('fEmail').value.trim();
+  const phone = document.getElementById('fPhone').value.trim();
+  const profile = document.getElementById('fProfile').value;
+  const msg = document.getElementById('fMsg').value.trim();
+  const when = fmtDate(selDate) + ' à ' + selSlot;
+
+  const payload = {
+   _subject: 'Nouveau RDV Duqque : ' + when + ' avec ' + name,
+   _template: 'table',
+   _autoresponse: 'Bonjour ' + name + ',\n\nVotre rendez-vous avec Duqque Sports est confirmé : ' + when + ' (30 minutes, en visioconférence).\n\nNous vous enverrons le lien de connexion avant l\u2019entretien. Si vous devez modifier ou annuler ce créneau, répondez simplement à cet email.\n\nÀ très vite,\nL\u2019équipe Duqque\ncontact@duqque.fr · duqque.fr',
+   'Rendez-vous': when,
+   'Nom': name,
+   'Email': email,
+   'Téléphone': phone || 'Non renseigné',
+   'Profil': profile,
+   'Sujet': msg || 'Non précisé'
+  };
+
+  let sent = false;
+  try {
+   const res = await fetch('https://formsubmit.co/ajax/contact@duqque.fr', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify(Object.assign({ name: name, email: email }, payload))
+   });
+   sent = res.ok;
+  } catch (err) { sent = false; }
+
+  if (!sent) {
+   // Repli hors-ligne : email pré-rempli
+   const body = encodeURIComponent('Rendez-vous demandé : ' + when + '\nNom : ' + name + '\nEmail : ' + email + '\nTéléphone : ' + phone + '\nProfil : ' + profile + '\nSujet : ' + msg);
+   window.location.href = 'mailto:contact@duqque.fr?subject=' + encodeURIComponent('Demande de RDV : ' + when) + '&body=' + body;
+  }
+
+  // Fichier .ics
+  const [h, m] = selSlot.split(':').map(Number);
+  const start = new Date(selDate); start.setHours(h, m, 0, 0);
+  const end = new Date(start.getTime() + 30*60000);
+  const ics = (d) => d.toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
+  const NL = '\r\n';
+  const icsData = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Duqque//RDV//FR','BEGIN:VEVENT','UID:' + start.getTime() + '@duqque.fr','DTSTAMP:' + ics(new Date()),'DTSTART:' + ics(start),'DTEND:' + ics(end),'SUMMARY:Entretien Duqque Sports','DESCRIPTION:Entretien découverte (30 min\\, visio). Le lien vous sera envoyé par email.','LOCATION:Visioconférence','END:VEVENT','END:VCALENDAR'].join(NL);
+  document.getElementById('icsLink').href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(icsData);
+
+  document.getElementById('doneInfo').textContent = when + ' · 30 minutes · Visioconférence';
+  form.classList.add('on'); form.classList.remove('on');
+  done.classList.add('on');
+  btn.disabled = false; btn.textContent = 'Confirmer le rendez-vous';
+ });
+
+ render();
+})();
+</script>
+
+<script src="js/main.js?v=20260890"></script>
+</body>
+</html>

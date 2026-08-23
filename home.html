@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Duqque Sports Gestion de carrière et d'image des athlètes</title>
+<meta name="description" content="Duqque Sports accompagne les jeunes athlètes : gestion de carrière, image, communication et partenariats. Carrière, sponsoring, médias, reconversion." />
+<link rel="stylesheet" href="css/style.css?v=20260890" />
+<style>
+ /* Section Chiffres clés autonome */
+ .stats-section { background: var(--bg-soft); }
+ .trois-stats {
+ display: grid; grid-template-columns: repeat(3, 1fr);
+ gap: 0;
+ border-top: 1px solid var(--line-strong);
+ border-bottom: 1px solid var(--line-strong);
+ }
+ .ts-item {
+ padding: 48px 32px 48px 0;
+ border-right: 1px solid var(--line);
+ }
+ .ts-item:last-child { border-right: none; }
+ .ts-item:not(:first-child) { padding-left: 32px; }
+ .ts-n {
+ font-family: var(--sans); font-weight: 600;
+ font-size: clamp(56px, 6vw, 84px);
+ line-height: 1; color: var(--accent-ink);
+ letter-spacing: -0.04em;
+ margin-bottom: 18px;
+ }
+ .ts-t {
+ font-size: 15px; color: var(--ink); line-height: 1.5;
+ max-width: 30ch;
+ }
+ .ts-src {
+ display: inline-flex; align-items: center; gap: 8px;
+ margin-top: 18px;
+ font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+ color: var(--ink-muted); font-weight: 600;
+ text-decoration: none;
+ transition: color .25s ease, transform .25s ease;
+ padding: 4px 0;
+ }
+ .ts-src .ts-src-arrow { font-size: 11px; transition: transform .25s ease; }
+ .ts-src:hover { color: var(--accent-ink); }
+ .ts-src:hover .ts-src-arrow { transform: translate(2px, -2px); }
+ @media (max-width: 800px){
+ .trois-stats { grid-template-columns: 1fr 1fr; }
+ .ts-item { border-bottom: 1px solid var(--line); padding: 22px 14px !important; }
+ .ts-item:nth-child(2n) { border-right: none; }
+ .ts-n { font-size: clamp(30px, 9vw, 48px) !important; }
+ .ts-t { font-size: 12.5px !important; }
+ }
+
+ .perf-venn { position: relative; max-width: 520px; margin: 0 auto; }
+ .perf-venn svg { width: 100%; height: auto; display: block; overflow: visible; }
+ .venn-html-label {
+  position: absolute;
+  font-family: var(--sans);
+  font-size: 14px; font-weight: 700; letter-spacing: 0.21em;
+  text-transform: uppercase;
+  pointer-events: none; white-space: nowrap;
+ }
+ .venn-html-mental {
+  top: 4.5%; left: 50%; transform: translateX(-50%);
+  color: var(--accent-ink);
+ }
+ .venn-html-phys {
+  bottom: 1%; left: 23%; transform: translateX(-50%);
+  color: #1a1410;
+ }
+ .venn-html-nutri {
+  bottom: 1%; left: 77%; transform: translateX(-50%);
+  color: #1a1410;
+ }
+ .venn-html-core {
+  position: absolute;
+  top: 52.5%; left: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
+  pointer-events: none;
+  color: #fff; font-family: var(--sans); text-transform: uppercase;
+  text-align: center;
+ }
+ .venn-html-core-top { font-size: 10px; letter-spacing: 0.18em; font-weight: 600; }
+ .venn-html-core-bot { font-size: 11px; letter-spacing: 0.04em; font-weight: 700; }
+
+ /* Orbites chaque cercle dérive doucement autour de son centre */
+ .venn-orbit { transform-origin: 260px 280px; transform-box: fill-box; }
+ .venn-orbit-mental { animation: venn-orbit-m 16s ease-in-out infinite; }
+ .venn-orbit-phys { animation: venn-orbit-p 18s 1s ease-in-out infinite; }
+ .venn-orbit-nutri { animation: venn-orbit-n 17s 2s ease-in-out infinite; }
+ @keyframes venn-orbit-m {
+ 0%,100% { transform: translate(0,0); }
+ 33% { transform: translate(-6px,-4px); }
+ 66% { transform: translate(8px,3px); }
+ }
+ @keyframes venn-orbit-p {
+ 0%,100% { transform: translate(0,0); }
+ 50% { transform: translate(-7px,5px); }
+ }
+ @keyframes venn-orbit-n {
+ 0%,100% { transform: translate(0,0); }
+ 50% { transform: translate(7px,4px); }
+ }
+
+ /* Pulsation subtile des cercles */
+ .venn-c { transform-origin: center; transform-box: fill-box; }
+ .venn-c-mental { animation: venn-pulse-m 4.5s ease-in-out infinite; }
+ .venn-c-phys { animation: venn-pulse-p 5s 0.5s ease-in-out infinite; }
+ .venn-c-nutri { animation: venn-pulse-n 5.5s 1s ease-in-out infinite; }
+ @keyframes venn-pulse-m { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.025); opacity: 0.92; } }
+ @keyframes venn-pulse-p { 0%,100% { transform: scale(1); opacity: 0.95; } 50% { transform: scale(1.02); opacity: 0.85; } }
+ @keyframes venn-pulse-n { 0%,100% { transform: scale(1); opacity: 0.95; } 50% { transform: scale(1.02); opacity: 0.85; } }
+
+ /* Centre POINT PERFORMANCE statique */
+ .venn-core circle { filter: drop-shadow(0 0 12px rgba(119, 71, 255,0.55)); }
+
+ /* Labels petite respiration */
+ .venn-label { animation: venn-label-breath 6s ease-in-out infinite; }
+ @keyframes venn-label-breath { 0%,100% { opacity: 0.92; } 50% { opacity: 1; } }
+
+ @media (prefers-reduced-motion: reduce) {
+ .venn-orbit-mental, .venn-orbit-phys, .venn-orbit-nutri,
+ .venn-c-mental, .venn-c-phys, .venn-c-nutri,
+ .venn-core, .venn-label { animation: none !important; }
+ }
+
+ .steps-illus { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+ .step-illus {
+ position: relative; aspect-ratio: 3/4;
+ border-radius: 6px; overflow: hidden; background: #050505;
+ }
+ .step-illus .ph { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.6; }
+ .step-illus::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 30%, rgba(5,5,5,0.95) 100%); }
+ .step-illus .body { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; color: #f5f3ef; z-index:1; }
+ .step-illus > .step-icon {
+ position: absolute; top: 18px; left: 18px;
+ width: 40px; height: 40px;
+ display: flex; align-items: center; justify-content: center;
+ background: rgba(5,5,5,0.5); backdrop-filter: blur(8px);
+ border: 1px solid rgba(245,243,239,0.18); border-radius: 4px;
+ color: var(--accent-soft);
+ z-index: 3;
+ }
+ .step-illus .body .step-icon { display: none; }
+ .step-illus .n { font-size: 11px; letter-spacing: 0.3em; color: var(--accent-soft); }
+ .step-illus h4 { color: #f5f3ef; margin: 6px 0 8px; font-size: 22px; }
+ .step-illus p { font-size: 13px; color: rgba(245,243,239,0.85); } .step-illus.s1.bg-in .ph { background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&auto=format&fit=crop&q=55'); } .step-illus.s2.bg-in .ph { background-image: url('https://images.unsplash.com/photo-1483721310020-03333e577078?w=800&auto=format&fit=crop&q=55'); } .step-illus.s3.bg-in .ph { background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&auto=format&fit=crop&q=55'); } .step-illus.s4.bg-in .ph { background-image: url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=800&auto=format&fit=crop&q=55'); }
+ @media (max-width: 900px){ .steps-illus { grid-template-columns: 1fr 1fr; } }
+ @media (max-width: 560px){ .steps-illus { grid-template-columns: 1fr; } }
+
+ .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+ .stat-photo {
+ position: relative; aspect-ratio: 5/4;
+ border-radius: 6px; overflow: hidden; color: #f5f3ef;
+ display: flex; flex-direction: column; justify-content: flex-end;
+ padding: 32px; isolation: isolate;
+ }
+ .stat-photo::before { content: ""; position: absolute; inset: 0; background-size: cover; background-position: center; z-index: -2; }
+ .stat-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.92) 100%); z-index: -1; }
+ .stat-photo .num { font-size: clamp(56px, 8vw, 96px); line-height: 0.95; color: var(--accent-soft); margin-bottom: 8px; font-weight: 600; letter-spacing: -0.03em; }
+ .stat-photo h3 { color: #f5f3ef; margin-bottom: 8px; font-size: 24px; }
+ .stat-photo p { color: rgba(245,243,239,0.88); font-size: 14px; max-width: 38ch; }
+ .stat-photo .src {
+ display: inline-flex; align-items: center; gap: 8px;
+ margin-top: 16px;
+ font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;
+ color: rgba(245,243,239,0.85); text-decoration: none;
+ transition: color .25s, transform .25s;
+ align-self: flex-start;
+ }
+ .stat-photo .src span { transition: transform .25s; }
+ .stat-photo .src:hover { color: var(--accent-soft); }
+ .stat-photo .src:hover span { transform: translate(2px, -2px); } .stat-photo.s1.bg-in::before { background-image: url('https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1000&auto=format&fit=crop&q=55'); } .stat-photo.s2.bg-in::before { background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1000&auto=format&fit=crop&q=55'); } .stat-photo.s3.bg-in::before { background-image: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1000&auto=format&fit=crop&q=55'); } .stat-photo.s4.bg-in::before { background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1000&auto=format&fit=crop&q=55'); }
+ @media (max-width: 900px){
+ .stat-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+ /* Sans cela, aspect-ratio 5/4 + min-height 280px calculait une LARGEUR de 350px :
+    la carte debordait de sa colonne de 273px et la page defilait horizontalement.
+    La regle equivalente de style.css ne pouvait pas gagner, ce <style> etant charge apres. */
+ .stat-photo { aspect-ratio: auto; min-width: 0; width: 100%; }
+ }
+
+ .timeline-bar {
+ display: grid; grid-template-columns: repeat(3, 1fr);
+ border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong);
+ }
+ .timeline-bar > div { padding: 32px 24px; border-right: 1px solid var(--line); }
+ .timeline-bar > div:last-child { border-right: none; }
+ .timeline-bar .tl-icon {
+ display: inline-flex; align-items: center; justify-content: center;
+ width: 44px; height: 44px;
+ border-radius: 6px;
+ background: rgba(119, 71, 255,0.12);
+ border: 1px solid rgba(119, 71, 255,0.25);
+ color: var(--accent-ink);
+ margin-bottom: 22px;
+ }
+ .timeline-bar .moment { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 14px; }
+ .timeline-bar h4 { margin-bottom: 12px; }
+ .timeline-bar p { font-size: 14px; }
+ @media (max-width: 800px){ .timeline-bar { grid-template-columns: 1fr 1fr; } .timeline-bar > div { border-bottom: 1px solid var(--line); padding: 20px 14px; } .timeline-bar > div:nth-child(2n) { border-right: none; } .timeline-bar h4 { font-size: 16px; } .timeline-bar p { font-size: 12.5px; } }
+
+ .audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+ .audience {
+ border-radius: 14px; overflow: hidden;
+ display: flex; flex-direction: column; text-decoration: none;
+ transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+ }
+ .audience:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+ .audience .img { aspect-ratio: 16/11; background-size: cover; background-position: center; }
+ .audience .b { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+ .audience .t { display:inline-block; align-self:flex-start; white-space:nowrap; max-width:100%; overflow:hidden; text-overflow:ellipsis; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight:700; padding:5px 11px; border-radius:100px; background: rgba(0,0,0,0.14); margin-bottom: 14px; }
+ .audience h4 { font-size: 21px; margin-bottom: 10px; line-height:1.12; }
+ .audience p { font-size: 13px; flex: 1; opacity: 1; }
+ .audience .more { display:inline-flex; align-items:center; gap:8px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight:700; margin-top: 16px; }
+ /* Couleurs vives par profil */
+ .audience.a1 { background: var(--accent); color: #ffffff; }
+ .audience p, .audience h3, .audience h4 { color: inherit; }
+ .audience.a2 .t, .audience.a3 .t, .audience.a4 .t { background: rgba(255,255,255,0.35); }
+ .audience.a2 { background: #b8a4f0; color:#1a1033; }
+ .audience.a3 { background: #b7d2bf; color:#14241a; }
+ .audience.a4 { background: #f2e94e; color:#2a2705; } .audience.a1.bg-in .img { background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&auto=format&fit=crop&q=55'); } .audience.a2.bg-in .img { background-image: url('https://images.unsplash.com/photo-1521804906057-1df8fdb718b7?w=800&auto=format&fit=crop&q=55'); } .audience.a3.bg-in .img { background-image: url('https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&auto=format&fit=crop&q=55'); } .audience.a4.bg-in .img { background-image: url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&auto=format&fit=crop&q=55'); }
+ @media (max-width: 900px){ .audience-grid { grid-template-columns: 1fr 1fr; } }
+ @media (max-width: 560px){ .audience-grid { grid-template-columns: 1fr 1fr; } .audience .t { font-size: 9px; } .audience h3 { font-size: 15px; } .audience p { font-size: 12px; } }
+
+ .focus-schema {
+ margin: 0 auto 64px;
+ max-width: 620px;
+ aspect-ratio: 1/1;
+ position: relative;
+ }
+ .focus-schema svg { width: 100%; height: 100%; display: block; overflow: visible; }
+ .focus-ring-spin { transform-origin: 300px 300px; animation: focusSpin 90s linear infinite; }
+ .focus-ring-spin.rev { animation-direction: reverse; animation-duration: 140s; }
+ @keyframes focusSpin { to { transform: rotate(360deg); } }
+ .focus-sat { transform-box: fill-box; transform-origin: center; animation: focusFloat 6s ease-in-out infinite; }
+ .focus-sat.s2 { animation-delay: -1.5s; } .focus-sat.s3 { animation-delay: -3s; } .focus-sat.s4 { animation-delay: -4.5s; }
+ @keyframes focusFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+ .focus-core-pulse { transform-box: fill-box; transform-origin: center; animation: focusPulse 4s ease-out infinite; }
+ @keyframes focusPulse { 0% { transform: scale(1); opacity: .45; } 100% { transform: scale(1.9); opacity: 0; } }
+ .focus-label {
+  position: absolute; pointer-events: none;
+  font-family: var(--sans); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.16em;
+  color: var(--ink); white-space: nowrap; text-align: center;
+  font-size: 12px;
+ }
+ .focus-label small { display: block; font-weight: 500; letter-spacing: 0.04em; text-transform: none; font-size: 12px; color: var(--ink-muted); margin-top: 3px; }
+ .focus-core { top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 13px; letter-spacing: 0.18em; }
+ .focus-top    { top: 5.5%;  left: 50%; transform: translate(-50%, -100%); }
+ .focus-bottom { top: 94.5%; left: 50%; transform: translate(-50%, 0); }
+ .focus-right  { top: 61%; left: 81.7%; transform: translate(-50%, 0); }
+ .focus-left   { top: 61%; left: 18.3%; transform: translate(-50%, 0); }
+ @media (max-width: 560px) {
+  .focus-schema { max-width: 100%; }
+  .focus-label { font-size: 10px; letter-spacing: 0.12em; }
+  .focus-label small { font-size: 10.5px; }
+  .focus-core { font-size: 11px; }
+ }
+ @media (prefers-reduced-motion: reduce) { .focus-ring-spin, .focus-sat, .focus-core-pulse { animation: none; } }
+
+ .mental-grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 16px;
+ }
+ .mental-block {
+ background: #050505; color: #f5f3ef;
+ border: 1px solid rgba(255,255,255,0.08);
+ border-radius: 6px;
+ padding: 36px;
+ display: flex; flex-direction: column;
+ gap: 18px;
+ min-height: 260px;
+ transition: border-color .4s var(--ease), transform .4s var(--ease);
+ }
+ .mental-block:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
+ .mental-block .top {
+ display: flex; justify-content: space-between; align-items: center;
+ padding-bottom: 18px;
+ border-bottom: 1px solid rgba(255,255,255,0.1);
+ }
+ .mental-block .top .icn {
+ width: 44px; height: 44px;
+ border-radius: 4px;
+ background: rgba(119, 71, 255,0.12); color: var(--accent-soft);
+ display: flex; align-items: center; justify-content: center;
+ border: 1px solid rgba(119, 71, 255,0.25);
+ }
+ .mental-block .top .num {
+ font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+ color: rgba(245,243,239,0.78); font-weight: 600;
+ }
+ .mental-block h4 {
+ color: #f5f3ef; font-size: 26px; margin-bottom: 8px;
+ }
+ .mental-block p {
+ color: rgba(245,243,239,0.78);
+ font-size: 14px; line-height: 1.55;
+ margin-top: auto;
+ }
+ @media (max-width: 800px){ .mental-grid { grid-template-columns: 1fr 1fr; } }
+
+ /* Actualités bento vivant */
+ .bento {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ grid-auto-rows: 240px;
+ gap: 16px;
+ }
+ .bento-card {
+ border-radius: 14px; overflow: hidden;
+ text-decoration: none; position: relative;
+ display: flex; flex-direction: column;
+ transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+ }
+ .bento-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.12); }
+ .bento-lead { grid-column: span 2; grid-row: span 2; }
+
+ /* Text cards */
+ .bento-text { padding: 26px; justify-content: space-between; }
+ .bc-top { display: flex; justify-content: space-between; align-items: center; }
+ .bc-tag {
+ display: inline-block; padding: 6px 12px; border-radius: 100px;
+ background: rgba(0,0,0,0.14); font-size: 10px; letter-spacing: 0.12em;
+ text-transform: uppercase; font-weight: 700;
+ }
+ .bc-tag.light { background: rgba(0,0,0,0.85); color:#fff; backdrop-filter: blur(6px); }
+ .bc-date { font-size: 11px; letter-spacing: 0.1em; font-weight: 600; opacity: 1; }
+ .bento-text h3 { font-size: clamp(19px, 1.6vw, 23px); line-height: 1.15; font-weight: 600; }
+ .bc-foot {
+ display: flex; align-items: center; justify-content: space-between;
+ font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+ }
+ .bc-arrow {
+ width: 38px; height: 38px; border-radius: 50%;
+ display: flex; align-items: center; justify-content: center;
+ background: rgba(0,0,0,0.85); color: #fff;
+ transition: transform .35s var(--ease);
+ }
+ .bento-card:hover .bc-arrow { transform: translateX(4px); }
+
+ /* Couleurs vives */
+ .bento-purple { background: #b8a4f0; color: #1a1033; }
+ .bento-orange { background: var(--accent); color: #ffffff; }
+ .bento-green { background: #b7d2bf; color: #14241a; }
+ .bento-yellow { background: #f2e94e; color: #2a2705; }
+ .bento-purple .bc-tag, .bento-green .bc-tag { background: rgba(255,255,255,0.35); }
+ .bento-orange .bc-tag { background: rgba(0,0,0,0.28); }
+ .bento-yellow .bc-tag { background: rgba(0,0,0,0.12); }
+
+ /* Image cards */
+ .bento-img { background: var(--bg) center/cover no-repeat; background-image: var(--bg); padding: 20px; justify-content: space-between; }
+ .bento-img::after { content:""; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.78) 100%); }
+ .bento-img .bc-tag { position: relative; z-index: 1; align-self: flex-start; }
+ .bc-img-title { position: relative; z-index: 1; color: #fff; }
+ .bc-img-title h3 { color: #fff; font-size: clamp(20px, 1.7vw, 26px); line-height: 1.15; font-weight: 600; }
+ .bento-lead .bc-img-title h3 { font-size: clamp(24px, 2.2vw, 34px); max-width: 20ch; }
+ .bc-foot-img { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #fff; }
+ .bc-arrow-sm { transition: transform .35s var(--ease); }
+ .bento-card:hover .bc-arrow-sm { transform: translateX(4px); }
+
+ @media (max-width: 900px) {
+ .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 200px; }
+ .bento-lead { grid-column: span 2; grid-row: span 1; aspect-ratio: auto; }
+ }
+ @media (max-width: 560px) {
+ .bento { grid-template-columns: 1fr; }
+ .bento-lead { grid-column: span 1; }
+ }
+
+ /* Hero CTAs sous le bio (gauche) */
+ .hero .hero-foot { display: block; margin-top: clamp(24px, 3vw, 48px); }
+ .hero-foot-col { max-width: 560px; }
+ .hero-foot-col .hero-tagline { max-width: none; margin-top: 28px; margin-bottom: 0; }
+ .hero-foot-col .hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+
+ .faq-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: start; }
+ @media (max-width: 900px){ .faq-grid { grid-template-columns: 1fr; gap: 40px; } }
+ .faq-list { display: grid; gap: 0; border-top: 1px solid var(--line-strong); }
+ .faq-item { border-bottom: 1px solid var(--line); padding: 24px 0; }
+
+ /* Bloc Posez-vos-questions */
+ .faq-ask {
+ background: #050505; color: #f5f3ef;
+ border-radius: 12px; padding: 36px;
+ border: 1px solid rgba(255,255,255,0.08);
+ position: sticky; top: 110px;
+ }
+ .faq-ask-tag { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 14px; }
+ .faq-ask h3 { color: #f5f3ef; font-size: 24px; margin-bottom: 12px; }
+ .faq-ask-head p { font-size: 13px; color: rgba(245,243,239,0.78); line-height: 1.55; }
+ .faq-ask-form { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+ .faq-ask-form label { display: flex; flex-direction: column; gap: 6px; }
+ .faq-ask-form label span {
+ font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+ color: rgba(245,243,239,0.78); font-weight: 600;
+ }
+ .faq-ask-form input, .faq-ask-form textarea {
+ background: transparent; border: none;
+ border-bottom: 1px solid rgba(245,243,239,0.18);
+ color: #f5f3ef; font: inherit; font-size: 14px;
+ padding: 8px 0; transition: border-color .3s;
+ font-family: var(--sans);
+ }
+ .faq-ask-form input:focus, .faq-ask-form textarea:focus {
+ outline: none; border-color: var(--accent-soft);
+ }
+ .faq-ask-form textarea { resize: vertical; min-height: 80px; }
+ .faq-ask-form button { margin-top: 8px; justify-content: center; transition: background .3s, color .3s, border-color .3s, transform .3s var(--ease); }
+ /* Survol en lime : sur ce fond noir, le violet du bouton primaire ne se detachait pas. */
+ .faq-ask-form button:hover,
+ .faq-ask-form button:focus-visible {
+  background: #d9ff3d; border-color: #d9ff3d; color: #101400; transform: translateY(-2px);
+ }
+ .faq-ask-form button:hover .arrow svg,
+ .faq-ask-form button:focus-visible .arrow svg { stroke: #101400; }
+ .faq-msg { font-size: 12px; letter-spacing: 0.1em; color: var(--accent-soft); min-height: 18px; }
+ .faq-item summary {
+ list-style: none; cursor: pointer;
+ display: flex; justify-content: space-between; align-items: center;
+ font-size: 18px; font-weight: 600; padding-right: 8px;
+ }
+ .faq-item summary::-webkit-details-marker { display: none; }
+ .faq-item summary::after { content: "+"; font-size: 22px; color: var(--accent-ink); transition: transform .3s; }
+ .faq-item[open] summary::after { transform: rotate(45deg); }
+ .faq-item p { margin-top: 14px; }
+
+ .feature-photo {
+ aspect-ratio: 16/9;
+ background-size: cover; background-position: center;
+ border-radius: 6px; position: relative; overflow: hidden;
+ }
+ .feature-photo .badge {
+ position: absolute; top: 24px; left: 24px;
+ background: rgba(0,0,0,0.85); backdrop-filter: blur(6px);
+ color: #f5f3ef; padding: 10px 16px; border-radius: 4px;
+ font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600;
+ border: 1px solid rgba(255,255,255,0.18);
+ }
+
+ /* Testimonials Hypefin-style */
+ .testi-card {
+ position: relative;
+ background: #050505; color: #f5f3ef;
+ border-radius: 16px;
+ padding: clamp(36px, 5vw, 64px);
+ overflow: hidden;
+ isolation: isolate;
+ border: 1px solid rgba(255,255,255,0.08);
+ min-height: 520px;
+ display: flex; flex-direction: column;
+ }
+ .testi-card .testi-body { flex: 1; }
+ .testi-quote, .testi-context, .testi-author { transition: opacity .4s ease; }
+ .testi-card.fading .testi-quote,
+ .testi-card.fading .testi-context,
+ .testi-card.fading .testi-author { opacity: 0; }
+ .testi-card::before {
+ content: ""; position: absolute;
+ right: 4%; bottom: -10%;
+ width: 60%; height: 80%;
+ background: radial-gradient(ellipse at center, rgba(119, 71, 255,0.55) 0%, rgba(119, 71, 255,0.18) 35%, transparent 70%);
+ filter: blur(60px);
+ z-index: 0;
+ pointer-events: none;
+ }
+ .testi-card > * { position: relative; z-index: 1; }
+ .testi-head {
+ display: flex; justify-content: space-between; align-items: center;
+ margin-bottom: clamp(36px, 4vw, 56px);
+ font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600;
+ }
+ .testi-head .lbl { color: var(--accent-soft); }
+ .testi-head .num { color: rgba(245,243,239,0.78); }
+
+ .testi-body {
+ display: grid;
+ grid-template-columns: 280px 1fr;
+ gap: clamp(32px, 4vw, 64px);
+ align-items: start;
+ }
+ .testi-author { display: flex; flex-direction: column; gap: 14px; }
+ .testi-avatar {
+ width: 110px; height: 110px;
+ border-radius: 50%;
+ background-size: cover; background-position: center;
+ background-color: #1a1410;
+ border: 1px solid rgba(255,255,255,0.1);
+ filter: grayscale(0.4);
+ }
+ .testi-name {
+ font-family: var(--serif); font-weight: 600;
+ color: var(--accent-soft); font-size: 26px;
+ line-height: 1.1; margin-top: 12px;
+ }
+ .testi-role {
+ color: rgba(245,243,239,0.85);
+ font-size: 16px;
+ }
+ .testi-handle {
+ color: rgba(245,243,239,0.78);
+ font-size: 13px;
+ margin-top: 4px;
+ }
+
+ .testi-quote {
+ font-family: var(--serif); font-weight: 600;
+ font-size: clamp(22px, 2.4vw, 32px);
+ line-height: 1.25; letter-spacing: -0.02em;
+ color: #f5f3ef;
+ max-width: 32ch;
+ }
+ .testi-context {
+ color: rgba(245,243,239,0.78);
+ font-size: 15px; line-height: 1.55;
+ margin-top: 28px; max-width: 52ch;
+ }
+
+ .testi-marks {
+ position: absolute; right: clamp(28px, 4vw, 56px); bottom: clamp(28px, 4vw, 56px);
+ display: flex; gap: 6px;
+ z-index: 2;
+ }
+ .testi-marks span {
+ width: 36px; height: 50px;
+ background: var(--accent);
+ clip-path: polygon(0 0, 100% 0, 100% 60%, 60% 100%, 0 100%);
+ }
+
+ .testi-footer {
+ margin-top: clamp(40px, 5vw, 64px);
+ padding-top: 18px;
+ border-top: 1px solid rgba(255,255,255,0.08);
+ font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600;
+ color: rgba(245,243,239,0.78);
+ }
+
+ .testi-nav {
+ display: flex; gap: 12px; justify-content: center;
+ margin-top: 24px;
+ }
+ .testi-dot {
+ width: 32px; height: 4px; border-radius: 2px;
+ background: rgba(26,20,16,0.18);
+ border: none; cursor: pointer; padding: 0;
+ transition: background .3s;
+ }
+ .testi-dot.active { background: var(--accent); }
+
+ @media (max-width: 800px) {
+ .testi-body { grid-template-columns: 1fr; }
+ .testi-marks { display: none; }
+ }
+
+ /* === MANIFESTE — luxe minimal, centrage strict === */
+ .manifesto { padding: clamp(110px, 14vw, 200px) var(--pad); background: var(--bg); }
+ .manifesto .mf-inner {
+  max-width: 1040px; margin: 0 auto;
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center;
+ }
+ .manifesto .mf-inner > * { width: 100%; }
+ .manifesto .mf-inner > .mf-rule { width: 1px; }
+ .mf-rule {
+  width: 1px; height: 64px; margin: 0 auto;
+  background: linear-gradient(180deg, transparent, rgba(119,71,255,0.7), transparent);
+  transform: scaleY(0); transform-origin: top center;
+  transition: transform 1.4s cubic-bezier(.16,.84,.28,1);
+ }
+ .mf-rule:last-child { transform-origin: bottom center; }
+ .mf-kicker {
+  margin: 36px 0 44px;
+  font-size: 11px; text-transform: uppercase;
+  color: var(--ink-muted); font-weight: 600;
+  text-align: center;
+  /* padding-left compense l'espace fantôme du letter-spacing après la dernière lettre */
+  letter-spacing: 0.5em; padding-left: 0.5em;
+  opacity: 0; transition: opacity 1.2s ease 0.3s;
+ }
+ .mf-line {
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(22px, 2.9vw, 40px); line-height: 1.3;
+  letter-spacing: -0.02em; color: var(--ink);
+  text-align: center; text-wrap: balance;
+  max-width: 26ch; margin-inline: auto;
+  opacity: 0; transform: translateY(26px);
+  transition: opacity 1.3s cubic-bezier(.16,.84,.28,1), transform 1.3s cubic-bezier(.16,.84,.28,1);
+ }
+ .mf-line em { font-style: italic; color: var(--accent-ink); }
+ .mf-line:nth-of-type(3) { transition-delay: 0.25s; }
+ .mf-line:nth-of-type(4) { transition-delay: 0.5s; }
+ .mf-sign {
+  margin: 48px auto 36px; text-align: center;
+  font-family: var(--serif); font-weight: 600; font-style: italic;
+  font-size: clamp(20px, 2vw, 28px); letter-spacing: 0.02em;
+  color: var(--ink);
+  opacity: 0; transition: opacity 1.4s ease 0.85s;
+ }
+ .mf-icons {
+  display: flex; justify-content: center; align-items: flex-start;
+  gap: clamp(36px, 6vw, 88px);
+  margin: 52px auto 8px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 1.3s cubic-bezier(.16,.84,.28,1) 0.65s, transform 1.3s cubic-bezier(.16,.84,.28,1) 0.65s;
+ }
+ .mf-icon-item { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+ .mf-ico {
+  width: 52px; height: 52px; border-radius: 13px;
+  display: inline-flex; align-items: center; justify-content: center;
+ }
+ .mf-ico svg { width: 22px; height: 22px; }
+ .mf-ico-lbl {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; color: var(--ink-muted); line-height: 1.5; text-align: center;
+ }
+ .manifesto.in .mf-icons { opacity: 1; transform: translateY(0); }
+ @media (max-width: 560px){ .mf-icons { gap: 24px; } .mf-ico { width: 44px; height: 44px; } }
+ .manifesto.in .mf-rule { transform: scaleY(1); }
+ .manifesto.in .mf-kicker { opacity: 1; }
+ .manifesto.in .mf-line { opacity: 1; transform: translateY(0); }
+ .manifesto.in .mf-sign { opacity: 1; }
+ @media (prefers-reduced-motion: reduce) {
+  .mf-rule, .mf-kicker, .mf-line, .mf-sign, .mf-icons { transition: none !important; opacity: 1 !important; transform: none !important; }
+ }
+
+ /* === CTA TEAM ESPOIRS === */
+ .espoirs-cta {
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  gap: clamp(28px, 4vw, 64px); align-items: center;
+  background: #050505; color: #f5f3ef;
+  border-radius: 16px; border: 1px solid rgba(255,255,255,0.08);
+  padding: clamp(36px, 5vw, 72px);
+  position: relative; overflow: hidden;
+ }
+ .espoirs-cta::before {
+  content: ""; position: absolute; right: -15%; top: -30%;
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(119,71,255,0.35) 0%, transparent 65%);
+  filter: blur(30px);
+ }
+ .espoirs-cta > * { position: relative; }
+ .ec-kick { font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 700; color: #b8a4f0; margin-bottom: 22px; }
+ .espoirs-cta h2 { font-size: clamp(28px, 3.2vw, 46px); line-height: 1.06; letter-spacing: -0.03em; margin-bottom: 20px; max-width: 18ch; }
+ .espoirs-cta h2 em { font-style: italic; color: #b8a4f0; }
+ .ec-txt { font-size: 15px; line-height: 1.65; color: rgba(245,243,239,0.82); max-width: 52ch; margin-bottom: 26px; }
+ .ec-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+ .ec-badges span {
+  padding: 8px 14px; border-radius: 100px;
+  border: 1px solid rgba(245,243,239,0.25);
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+  color: rgba(245,243,239,0.85);
+ }
+ .ec-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--accent); color: #fff;
+  padding: 16px 30px; border-radius: 100px;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.05em;
+  transition: background .3s, transform .3s;
+ }
+ .ec-btn:hover { background: #f5f3ef; color: #050505; transform: translateY(-2px); }
+ .ec-right { display: flex; justify-content: center; }
+ .ec-zero {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(72px, 8vw, 130px); line-height: 0.9; letter-spacing: -0.05em;
+  color: var(--accent-soft); text-align: center;
+ }
+ .ec-zero span {
+  display: block; margin-top: 18px;
+  font-family: var(--sans); font-size: 11px; letter-spacing: 0.3em;
+  text-transform: uppercase; font-weight: 700; color: rgba(245,243,239,0.78);
+  line-height: 1.7;
+ }
+ @media (max-width: 860px){
+  .espoirs-cta { grid-template-columns: 1fr; }
+  .ec-right { justify-content: flex-start; }
+  .ec-zero { text-align: left; }
+ }
+ /* =====================================================================
+    MANIFESTE IMMERSIF
+    Piste de defilement de 150vh, scene epinglee sur toute la hauteur d'ecran.
+    Au depart les photos et les cartes sont dispersees loin du centre, inclinees et
+    agrandies ; le defilement les fait converger vers le manifeste. Chaque element a
+    son propre retard et sa propre trajectoire, sinon le mouvement parait mecanique.
+    Fond identique au reste de la page : la scene ne doit pas casser le minimalisme.
+    ===================================================================== */
+ .mfx { background: var(--bg); }
+ .mfx-runway { height: 260vh; position: relative; }
+ .mfx-stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+ }
+
+ /* Bloc central ancre sur le milieu exact de la scene : il est en absolu, donc le texte
+    qui s'ecrit le fait grandir sans jamais le decaler du centre, et sans reserver de vide. */
+ .mfx-core {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  z-index: 5; text-align: center;
+  width: min(760px, calc(100% - 2 * var(--pad)));
+  pointer-events: none;
+ }
+ .mfx-kicker {
+  font-size: 11px; letter-spacing: 0.42em; text-transform: uppercase; font-weight: 700;
+  color: var(--ink-muted); margin-bottom: 26px;
+ }
+ /* Machine a ecrire : LT Museum Medium, en gris. Le texte s'ecrit au defilement,
+    caractere par caractere, avec un curseur qui suit la frappe. */
+ .mfx-type {
+  font-family: var(--display); font-weight: 500; text-transform: uppercase;
+  font-size: clamp(20px, 2.4vw, 36px); line-height: 1.25; letter-spacing: -0.01em;
+  color: var(--ink-muted); margin: 0 auto; max-width: 24ch;
+ }
+ /* Les caracteres pas encore ecrits sont retires du flux, et non simplement transparents :
+    en gardant leur place, ils decalaient la ligne en cours et le texte paraissait cale a
+    gauche pendant toute la frappe. Le bloc etant en absolu et centre, sa hauteur peut
+    varier sans rien deplacer autour. */
+ .mfx-type .ch { display: none; }
+ .mfx-type .ch.on { display: inline; }
+ .mfx-type em { font-style: italic; color: var(--accent-ink); }
+ .mfx-type .ch.tete { position: relative; }
+ .mfx-type .ch.tete::after {
+  content: ""; position: absolute; right: -0.09em; top: 4%; bottom: 4%;
+  width: 2px; background: var(--ink-muted);
+  animation: mfxCaret 1s steps(1) infinite;
+ }
+ @keyframes mfxCaret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+ .mfx-type.fini .ch.tete::after { display: none; }
+
+ .mfx-el {
+  position: absolute; margin: 0;
+  will-change: transform, opacity;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+ }
+ .mfx-photo {
+  border-radius: 10px; background-size: cover; background-position: center;
+  background-color: #dedede;
+  box-shadow: 0 26px 70px rgba(10,10,14,0.22);
+ }
+ /* Formats varies : portrait, carre, panoramique */
+ .ph-1 { left: 34%; top: 40%; width: clamp(120px, 13vw, 196px); aspect-ratio: 3 / 4;  z-index: 6; }
+ .ph-2 { left: 66%; top: 37%; width: clamp(112px, 12vw, 178px); aspect-ratio: 1 / 1;  z-index: 7; }
+ .ph-3 { left: 38%; top: 63%; width: clamp(140px, 16vw, 240px); aspect-ratio: 16 / 9; z-index: 8; }
+ .ph-4 { left: 63%; top: 62%; width: clamp(118px, 12.5vw, 186px); aspect-ratio: 3 / 4; z-index: 9; }
+ .ph-5 { left: 50%; top: 30%; width: clamp(150px, 17vw, 262px); aspect-ratio: 21 / 9; z-index: 10; }
+ .ph-6 { left: 50%; top: 72%; width: clamp(120px, 13vw, 190px); aspect-ratio: 1 / 1;  z-index: 11; }
+
+ .mfx-card {
+  width: clamp(150px, 15vw, 208px);
+  background: var(--c); color: var(--i);
+  border-radius: 12px; padding: 15px 16px 17px;
+  box-shadow: 0 22px 56px rgba(10,10,14,0.2);
+ }
+ .mfx-ico {
+  display: inline-flex; width: 30px; height: 30px; border-radius: 9px;
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.12); margin-bottom: 12px;
+ }
+ .mfx-card[style*="#0b0b0b"] .mfx-ico { background: rgba(255,255,255,0.14); }
+ .mfx-ico svg { width: 17px; height: 17px; }
+ .mfx-card b { display: block; font-family: var(--display); font-weight: 900; font-size: 13.5px; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 6px; }
+ .mfx-card small { display: block; font-size: 11px; line-height: 1.45; opacity: 0.8; }
+
+ .cd-1 { left: 27%; top: 52%; z-index: 12; }
+ .cd-2 { left: 73%; top: 50%; z-index: 13; }
+ .cd-3 { left: 41%; top: 26%; z-index: 14; }
+ .cd-4 { left: 58%; top: 76%; z-index: 15; }
+ .cd-5 { left: 50%; top: 50%; z-index: 16; }
+
+ /* Mouvement reduit ou petits ecrans : composition finale, sans animation */
+ @media (prefers-reduced-motion: reduce) {
+  .mfx-runway { height: auto; }
+  .mfx-stage { position: static; height: auto; padding: clamp(80px, 12vw, 160px) 0; }
+ }
+ /* Version empilee (<= 900px) : colonne unique, un palier par element. Chacun traverse
+    l'ecran seul, l'opacite etant pilotee en JS par la distance au centre de la fenetre.
+    La grille a deux colonnes montrait toute la composition d'un bloc, ce qui tuait l'effet. */
+ @media (max-width: 900px) {
+  .mfx-runway { height: auto; }
+  .mfx-stage { position: static; height: auto; display: block; padding: clamp(70px, 12vw, 110px) var(--pad) 40vh; }
+  .mfx-core { position: static; transform: none; width: auto; margin-bottom: 32vh; }
+  .mfx-el {
+   position: static; width: min(100%, 460px);
+   margin: 0 auto 30vh; opacity: 0;
+   transform: none;
+   will-change: transform, opacity;
+  }
+  .mfx-el:last-child { margin-bottom: 0; }
+  .mfx-photo { aspect-ratio: 16 / 10; }
+  .ph-5, .ph-6 { display: none; }
+  .mfx-card { width: min(100%, 460px); padding: 22px 24px 24px; border-radius: 14px; }
+  .mfx-ico { width: 40px; height: 40px; border-radius: 11px; margin-bottom: 16px; }
+  .mfx-ico svg { width: 21px; height: 21px; }
+  .mfx-card b { font-size: 20px; margin-bottom: 8px; }
+  .mfx-card small { font-size: 14px; }
+ }
+
+ /* Bloc conviction centre sur la page, texte centre lui aussi */
+ .conviction { max-width: 1100px; margin-inline: auto; text-align: center; }
+ .conviction .kicker { justify-content: center; }
+ .conviction .big-quote { margin-inline: auto; max-width: 26ch; }
+</style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<header class="hero">
+ <div class="hero-bg"></div>
+ <div class="hero-content">
+ <div class="hero-eyebrow"><span class="dot"></span> Carrière, image, communication</div>
+ <h1 class="serif">
+ <span class="line"><span>Votre talent fait la différence.</span></span>
+ <span class="line"><span>Votre <em>marque</em> fait la carrière.</span></span>
+ </h1>
+ <div class="hero-foot">
+ <div class="hero-foot-col">
+ <div class="hero-ctas">
+ <a href="rdv.html" class="btn btn-primary">Prendre RDV <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+ <a href="#methode" class="btn btn-outline">Découvrir nos services</a>
+ </div>
+ <p class="hero-tagline">Nous accompagnons les athlètes sur la gestion de carrière, l'image et la communication. Nous piloterons votre trajectoire, vos partenariats et votre récit. Pour tirer le maximum de votre plein potentiel.</p>
+ </div>
+ </div>
+
+ </div>
+</header>
+
+<!-- MANIFESTE -->
+<section class="mfx" aria-label="Manifeste Duqque">
+ <div class="mfx-runway" id="mfxRunway">
+  <div class="mfx-stage">
+
+   <div class="mfx-core">
+    <p class="mfx-kicker">Manifeste</p>
+    <p class="mfx-type" id="mfxType" aria-label="Nous croyons que le talent mérite mieux que le hasard. Qu'une carrière se construit, qu'une image se protège, et qu'un nom, bien porté, devient un héritage."></p>
+   </div>
+
+   <figure class="mfx-el mfx-photo ph-1" data-dx="-17.0" data-dy="-8.0" data-r="-11" data-s="1.26" data-lag="0.00"
+           data-bgimg="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Un athlète et son entourage"></figure>
+
+   <figure class="mfx-el mfx-photo ph-2" data-dx="15.0" data-dy="-11.0" data-r="9" data-s="1.3" data-lag="0.06"
+           data-bgimg="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Entraînement au lever du jour"></figure>
+
+   <figure class="mfx-el mfx-photo ph-3" data-dx="-15.0" data-dy="12.0" data-r="7" data-s="1.22" data-lag="0.12"
+           data-bgimg="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Effort en compétition"></figure>
+
+   <figure class="mfx-el mfx-photo ph-4" data-dx="16.0" data-dy="10.0" data-r="-8" data-s="1.28" data-lag="0.18"
+           data-bgimg="https://images.unsplash.com/photo-1547104442-9d09e7d8aa2c?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Concentration avant le combat"></figure>
+
+   <figure class="mfx-el mfx-photo ph-5" data-dx="-4.0" data-dy="-15.0" data-r="5" data-s="1.24" data-lag="0.24"
+           data-bgimg="https://images.unsplash.com/photo-1531315396756-905d68d21b56?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Geste technique"></figure>
+
+   <figure class="mfx-el mfx-photo ph-6" data-dx="5.0" data-dy="15.0" data-r="-6" data-s="1.2" data-lag="0.30"
+           data-bgimg="https://images.unsplash.com/photo-1483721310020-03333e577078?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Après la compétition"></figure>
+
+   <article class="mfx-el mfx-card cd-1" data-dx="-20.0" data-dy="2.0"  data-r="-9" data-s="1.18" data-lag="0.36" style="--c:#5a2fe6; --i:#fff;">
+    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L14 6l4 6 4-8"/></svg></span>
+    <b>Une carrière construite</b>
+    <small>Rien n'est laissé au hasard du calendrier</small>
+   </article>
+
+   <article class="mfx-el mfx-card cd-2" data-dx="19.0" data-dy="-2.0" data-r="8"  data-s="1.2"  data-lag="0.42" style="--c:#f5f3ef; --i:#101400;">
+    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></span>
+    <b>Une image protégée</b>
+    <small>Le droit à l'image avant la première signature</small>
+   </article>
+
+   <article class="mfx-el mfx-card cd-3" data-dx="-8.0" data-dy="-17.0" data-r="6" data-s="1.16" data-lag="0.48" style="--c:#0b0b0b; --i:#f5f3ef;">
+    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 7c0 3 2 5 5 5M17 7c0 3-2 5-5 5M5 21h14"/></svg></span>
+    <b>Un héritage transmis</b>
+    <small>Un nom qui vaut après les résultats</small>
+   </article>
+
+   <article class="mfx-el mfx-card cd-4" data-dx="9.0" data-dy="17.0"  data-r="-7" data-s="1.16" data-lag="0.54" style="--c:#d9ff3d; --i:#101400;">
+    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.2-7-10a3.7 3.7 0 0 1 7-2.3A3.7 3.7 0 0 1 19 10c0 5.8-7 10-7 10z"/></svg></span>
+    <b>Zéro commission</b>
+    <small>Sur tout ce qui est négocié pour les espoirs</small>
+   </article>
+
+   <article class="mfx-el mfx-card cd-5" data-dx="-18.0" data-dy="-14.0" data-r="10" data-s="1.14" data-lag="0.60" style="--c:#b8a4f0; --i:#1a1033;">
+    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/></svg></span>
+    <b>Le club au centre</b>
+    <small>Nous renforçons, nous ne remplaçons pas</small>
+   </article>
+
+  </div>
+ </div>
+</section>
+
+<!-- TRIANGLE DE PERFORMANCE -->
+<section>
+ <div class="container">
+ <div class="split">
+ <div class="reveal">
+ <div class="section-tag">Pourquoi ?</div>
+ <h2 class="serif">Trois piliers. <em class="accent">Une seule trajectoire.</em></h2>
+ <p style="margin-top:24px; max-width:46ch;">Le terrain fait le palmarès. La carrière fait le patrimoine. L'image fait la longévité. Quand l'un des trois piliers est négligé, c'est toute la trajectoire de l'athlète qui plafonne. Notre métier consiste à piloter le versant que la plupart découvrent trop tard : <strong>la valeur de votre nom au-delà de vos résultats.</strong></p>
+ </div>
+ <div class="reveal">
+ <div class="perf-venn">
+ <svg viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+ <radialGradient id="venn-mental" cx="50%" cy="50%" r="50%">
+ <stop offset="0%" stop-color="#7747ff" stop-opacity="0.35"/>
+ <stop offset="100%" stop-color="#7747ff" stop-opacity="0.06"/>
+ </radialGradient>
+ <radialGradient id="venn-phys" cx="50%" cy="50%" r="50%">
+ <stop offset="0%" stop-color="#1a1410" stop-opacity="0.18"/>
+ <stop offset="100%" stop-color="#1a1410" stop-opacity="0.02"/>
+ </radialGradient>
+ <radialGradient id="venn-nutri" cx="50%" cy="50%" r="50%">
+ <stop offset="0%" stop-color="#1a1410" stop-opacity="0.18"/>
+ <stop offset="100%" stop-color="#1a1410" stop-opacity="0.02"/>
+ </radialGradient>
+ </defs>
+
+ <!-- Cercles entremêlés avec orbites animées -->
+ <g class="venn-orbit venn-orbit-mental">
+ <circle cx="260" cy="200" r="120" fill="url(#venn-mental)" stroke="#7747ff" stroke-width="1.5" class="venn-c venn-c-mental"/>
+ </g>
+ <g class="venn-orbit venn-orbit-phys">
+ <circle cx="190" cy="310" r="120" fill="url(#venn-phys)" stroke="#1a1410" stroke-width="1" stroke-opacity="0.55" class="venn-c venn-c-phys"/>
+ </g>
+ <g class="venn-orbit venn-orbit-nutri">
+ <circle cx="330" cy="310" r="120" fill="url(#venn-nutri)" stroke="#1a1410" stroke-width="1" stroke-opacity="0.55" class="venn-c venn-c-nutri"/>
+ </g>
+
+ <!-- Centre POINT PERFORMANCE statique -->
+ <g class="venn-core">
+ <circle cx="260" cy="273" r="38" fill="#5a2fe6"/>
+ </g>
+ </svg>
+
+ <!-- Labels HTML pour traduction Google Translate -->
+ <span class="venn-html-label venn-html-mental">Carrière</span>
+ <span class="venn-html-label venn-html-phys">Image</span>
+ <span class="venn-html-label venn-html-nutri">Communication</span>
+ <span class="venn-html-core">
+ <span class="venn-html-core-top">Votre</span>
+ <span class="venn-html-core-bot">Marque</span>
+ </span>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- CHIFFRES CLÉS -->
+<section class="stats-section">
+ <div class="container">
+ <div class="section-tag reveal">Chiffres clés</div>
+ <h2 class="serif reveal" style="margin-bottom: 60px; max-width: 22ch;">Ce que dit <em class="accent">le marché.</em></h2>
+
+ <div class="trois-stats reveal">
+ <div class="ts-item">
+ <div class="ts-n">72 %</div>
+ <div class="ts-t">des sponsors choisissent un athlète autant pour son image que pour ses résultats sportifs.</div>
+ <a class="ts-src" href="https://www.nielsensports.com/" target="_blank" rel="noopener">Nielsen Sports <span class="ts-src-arrow">↗</span></a>
+ </div>
+ <div class="ts-item">
+ <div class="ts-n">×5</div>
+ <div class="ts-t">la valeur moyenne des contrats obtenus avec une structure d'accompagnement, face à un athlète qui négocie seul.</div>
+ <a class="ts-src" href="https://www.sportsbusinessjournal.com/" target="_blank" rel="noopener">Sports Business Journal <span class="ts-src-arrow">↗</span></a>
+ </div>
+ <div class="ts-item">
+ <div class="ts-n">+180 %</div>
+ <div class="ts-t">de reach en 6 mois quand la communication digitale d'un athlète est pilotée par des professionnels.</div>
+ <a class="ts-src" href="https://www.hookit.com/" target="_blank" rel="noopener">Hookit Analytics <span class="ts-src-arrow">↗</span></a>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- BRAIN MAP -->
+<section>
+ <div class="container">
+ <div class="section-tag">Nos services</div>
+ <h2 class="serif reveal" style="margin-bottom:60px; max-width:20ch;">Tout ce qui entoure votre carrière, <em class="accent">orchestré.</em></h2>
+
+ <div class="focus-schema reveal" role="img" aria-label="L'athlète au centre, entouré de quatre pôles : carrière, image, sponsoring, médias">
+ <svg viewBox="0 0 600 600" fill="none">
+  <defs>
+   <radialGradient id="focusGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#7747ff" stop-opacity="0.16"/>
+    <stop offset="60%" stop-color="#7747ff" stop-opacity="0.04"/>
+    <stop offset="100%" stop-color="#7747ff" stop-opacity="0"/>
+   </radialGradient>
+  </defs>
+  <circle cx="300" cy="300" r="280" fill="url(#focusGlow)"/>
+  <!-- Anneaux : l'extérieur tourne lentement -->
+  <g class="focus-ring-spin"><circle cx="300" cy="300" r="262" stroke="#7747ff" stroke-width="1" stroke-dasharray="2 9" opacity="0.28"/></g>
+  <g class="focus-ring-spin rev"><circle cx="300" cy="300" r="190" stroke="#7747ff" stroke-width="1" stroke-dasharray="2 7" opacity="0.42"/></g>
+  <circle cx="300" cy="300" r="108" stroke="#7747ff" stroke-width="1.2" opacity="0.55"/>
+  <!-- Connecteurs anneau intérieur -> satellites -->
+  <g stroke="#7747ff" stroke-width="1" opacity="0.5">
+   <line x1="300" y1="192" x2="300" y2="162"/><line x1="408" y1="300" x2="438" y2="300"/>
+   <line x1="300" y1="408" x2="300" y2="438"/><line x1="192" y1="300" x2="162" y2="300"/>
+  </g>
+  <g fill="#7747ff">
+   <circle cx="300" cy="192" r="3.5"/><circle cx="408" cy="300" r="3.5"/><circle cx="300" cy="408" r="3.5"/><circle cx="192" cy="300" r="3.5"/>
+  </g>
+  <!-- Coeur -->
+  <circle class="focus-core-pulse" cx="300" cy="300" r="60" stroke="#7747ff" stroke-width="1.5" fill="none"/>
+  <circle cx="300" cy="300" r="60" fill="#5a2fe6"/>
+  <!-- Satellites sur l'anneau médian -->
+   <g class="focus-sat s1">
+    <circle cx="300" cy="110" r="52" fill="#050505"/>
+    <circle cx="300" cy="110" r="52" stroke="#7747ff" stroke-width="1" opacity="0.6"/>
+    <g transform="translate(284 94) scale(1.333)" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M4 20L14 6l4 6 4-8"/></g>
+   </g>
+   <g class="focus-sat s2">
+    <circle cx="490" cy="300" r="52" fill="#050505"/>
+    <circle cx="490" cy="300" r="52" stroke="#7747ff" stroke-width="1" opacity="0.6"/>
+    <g transform="translate(474 284) scale(1.333)" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></g>
+   </g>
+   <g class="focus-sat s3">
+    <circle cx="300" cy="490" r="52" fill="#050505"/>
+    <circle cx="300" cy="490" r="52" stroke="#7747ff" stroke-width="1" opacity="0.6"/>
+    <g transform="translate(284 474) scale(1.333)" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5L12 2z"/></g>
+   </g>
+   <g class="focus-sat s4">
+    <circle cx="110" cy="300" r="52" fill="#050505"/>
+    <circle cx="110" cy="300" r="52" stroke="#7747ff" stroke-width="1" opacity="0.6"/>
+    <g transform="translate(94 284) scale(1.333)" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"><path d="M3 11l18-7-7 18-2.5-7.5L3 11z"/></g>
+   </g>
+ </svg>
+ <span class="focus-label focus-core">Athlète</span>
+ <span class="focus-label focus-top">Carrière<small>Contrats, trajectoire, reconversion</small></span>
+ <span class="focus-label focus-right">Image<small>Marque personnelle, réputation</small></span>
+ <span class="focus-label focus-bottom">Sponsoring<small>Partenaires, négociation, suivi</small></span>
+ <span class="focus-label focus-left">Médias<small>Presse, réseaux, contenus</small></span>
+ </div>
+
+ <div class="mental-grid reveal">
+ <div class="mental-block">
+ <div class="top">
+ <div class="icn">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 20L14 6l4 6 4-8"/><path d="M4 20h16" opacity="0.5"/></svg>
+ </div>
+ <span class="num">01 Gestion de carrière</span>
+ </div>
+ <h4 class="serif">Piloter la trajectoire.</h4>
+ <p>Stratégie de carrière, négociation de contrats, plan de reconversion et gestion patrimoniale. Nous construisons la route, vous restez concentré sur le terrain.</p>
+ </div>
+
+ <div class="mental-block">
+ <div class="top">
+ <div class="icn">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5"/></svg>
+ </div>
+ <span class="num">02 Gestion d'image</span>
+ </div>
+ <h4 class="serif">Construire la marque.</h4>
+ <p>Identité, positionnement, droit à l'image, charte éditoriale. Votre nom devient un actif qui se valorise saison après saison, victoire ou pas.</p>
+ </div>
+
+ <div class="mental-block">
+ <div class="top">
+ <div class="icn">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l18-7-7 18-2.5-7.5L3 11z"/></svg>
+ </div>
+ <span class="num">03 Communication globale</span>
+ </div>
+ <h4 class="serif">Raconter l'histoire.</h4>
+ <p>Réseaux sociaux, relations presse, contenus, media training. Une communication pilotée à l'année qui fait grandir l'audience et protège la réputation.</p>
+ </div>
+
+ <div class="mental-block">
+ <div class="top">
+ <div class="icn">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5L12 2z"/></svg>
+ </div>
+ <span class="num">04 Sponsoring & partenariats</span>
+ </div>
+ <h4 class="serif">Monétiser la valeur.</h4>
+ <p>Recherche de sponsors, brand fit, négociation et suivi des partenariats. Des contrats alignés avec vos valeurs et à la hauteur de votre potentiel.</p>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- MÉTHODE 4 ÉTAPES -->
+<section id="methode" style="background: var(--bg-soft);">
+ <div class="container">
+ <div class="section-tag">Méthode</div>
+ <h2 class="serif reveal" style="margin-bottom:60px; max-width:20ch;">Quatre étapes. <em class="accent">Un seul interlocuteur.</em> Toute une carrière.</h2>
+
+ <div class="steps-illus">
+ <div class="step-illus s1 reveal">
+ <div class="step-icon">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+ </div>
+ <div class="ph"></div>
+ <div class="body">
+ <div class="n">Étape 01</div>
+ <h4 class="serif">Auditer</h4>
+ <p>Audit complet : carrière, contrats, image publique, présence digitale, patrimoine. On mesure la valeur actuelle de votre nom.</p>
+ </div>
+ </div>
+ <div class="step-illus s2 reveal">
+ <div class="step-icon">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>
+ </div>
+ <div class="ph"></div>
+ <div class="body">
+ <div class="n">Étape 02</div>
+ <h4 class="serif">Positionner</h4>
+ <p>Définition de votre marque personnelle : identité, valeurs, récit, cibles. La feuille de route qui guide chaque décision.</p>
+ </div>
+ </div>
+ <div class="step-illus s3 reveal">
+ <div class="step-icon">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12a9 9 0 0 1 15.5-6.3M21 4v5h-5M21 12a9 9 0 0 1-15.5 6.3M3 20v-5h5"/></svg>
+ </div>
+ <div class="ph"></div>
+ <div class="body">
+ <div class="n">Étape 03</div>
+ <h4 class="serif">Déployer</h4>
+ <p>Communication pilotée, contenus produits, sponsors approchés, presse activée. Votre marque prend vie sur tous les canaux.</p>
+ </div>
+ </div>
+ <div class="step-illus s4 reveal">
+ <div class="step-icon">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 21v-7M5 14V3M5 3l4 4M19 21v-7M19 14V3M19 14l-4-4"/><path d="M5 21h14"/></svg>
+ </div>
+ <div class="ph"></div>
+ <div class="body">
+ <div class="n">Étape 04</div>
+ <h4 class="serif">Valoriser</h4>
+ <p>Contrats négociés, audience monétisée, reconversion préparée. Chaque saison, votre valeur hors terrain progresse.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- TIMELINE COMPÉTITION -->
+<section>
+ <div class="container">
+ <div class="section-tag">Quand nous intervenons</div>
+ <h2 class="serif reveal" style="margin-bottom:60px; max-width:22ch;">Ascension. Sommet. <em class="accent">Reconversion.</em></h2>
+
+ <div class="timeline-bar reveal">
+ <div>
+ <div class="tl-icon">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3"/></svg>
+ </div>
+ <div class="moment">Début de carrière</div>
+ <h4 class="serif">Poser les fondations</h4>
+ <p>Sécuriser le nom et le droit à l'image, structurer les premiers contrats, bâtir une présence digitale saine. Les décisions prises à 20 ans pèsent sur toute la carrière.</p>
+ </div>
+ <div>
+ <div class="tl-icon ico-c4">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12c.5-.6 1-1.3 1-2 0-2-2-3-4-3-1.5 0-2.5.5-3 1.5C15.5 7.5 14.5 7 13 7c-2 0-4 1-4 3 0 .7.5 1.4 1 2"/><circle cx="12" cy="14" r="7"/><path d="M12 11v3l2 2"/></svg>
+ </div>
+ <div class="moment">Au sommet</div>
+ <h4 class="serif">Maximiser la valeur</h4>
+ <p>Négociation des grands contrats, gestion de la pression médiatique, arbitrage des sollicitations. Chaque exposition compte, chaque partenariat engage votre image.</p>
+ </div>
+ <div>
+ <div class="tl-icon">
+ <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"/></svg>
+ </div>
+ <div class="moment">Après la carrière</div>
+ <h4 class="serif">Réussir la transition</h4>
+ <p>Reconversion préparée des années en amont : investissements, media, business, transmission. Votre marque continue de travailler quand les compétitions s'arrêtent.</p>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- RÉSULTATS / STATS -->
+<section>
+ <div class="container">
+ <div class="section-tag">Résultats mesurés</div>
+ <h2 class="serif reveal" style="margin-bottom:60px;">Ce qu'un accompagnement structuré <em class="accent">change concrètement.</em></h2>
+
+ <div class="stat-grid">
+ <div class="stat-photo s1 reveal">
+ <div class="num">×5</div>
+ <h3 class="serif">Valeur des contrats</h3>
+ <p>Les athlètes accompagnés par une structure signent des contrats en moyenne 5 fois supérieurs à ceux négociés seuls.</p>
+ <a class="src" href="https://www.sportsbusinessjournal.com/" target="_blank" rel="noopener">Sports Business Journal <span>↗</span></a>
+ </div>
+ <div class="stat-photo s2 reveal">
+ <div class="num">+180%</div>
+ <h3 class="serif">Croissance d'audience</h3>
+ <p>Reach moyen gagné sur les 6 premiers mois quand la communication digitale passe entre les mains d'une équipe professionnelle.</p>
+ <a class="src" href="https://www.hookit.com/" target="_blank" rel="noopener">Hookit Analytics <span>↗</span></a>
+ </div>
+ <div class="stat-photo s3 reveal">
+ <div class="num">48 h</div>
+ <h3 class="serif">Gestion de crise</h3>
+ <p>Le temps moyen pour désamorcer une crise médiatique quand l'accompagnement est en place avant l'incident, contre plusieurs semaines sans dispositif.</p>
+ <a class="src" href="https://www.edelman.com/trust/" target="_blank" rel="noopener">Edelman Trust Barometer <span>↗</span></a>
+ </div>
+ <div class="stat-photo s4 reveal">
+ <div class="num">12 ans</div>
+ <h3 class="serif">De marque après-carrière</h3>
+ <p>La durée moyenne de vie d'une marque personnelle d'athlète après la retraite sportive, quand elle a été structurée pendant les années actives.</p>
+ <a class="src" href="https://hbr.org/" target="_blank" rel="noopener">Harvard Business Review <span>↗</span></a>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- AUDIENCES -->
+<section style="background: var(--bg-soft);">
+ <div class="container">
+ <div class="section-tag">Pour qui</div>
+ <h2 class="serif reveal" style="margin-bottom:60px; max-width:20ch;">Quatre profils. <em class="accent">Une seule exigence.</em></h2>
+
+ <div class="audience-grid">
+ <a href="team-espoirs.html" class="audience a4 reveal">
+ <div class="img"></div>
+ <div class="b">
+ <div class="t">Moins de 18 ans</div>
+ <h4 class="serif">Jeune talent</h4>
+ <p>Minimum Pôle Espoirs. Formation aux contrats et à l'image, démarchage de partenaires, relecture avant toute signature. Sans cotisation ni commission.</p>
+ <div class="more">Programme Espoirs →</div>
+ </div>
+ </a>
+ <a href="cotisations.html" class="audience a1 reveal">
+ <div class="img"></div>
+ <div class="b">
+ <div class="t">18 ans et plus</div>
+ <h4 class="serif">Athlète majeur</h4>
+ <p>Vos résultats décollent et les sollicitations arrivent. Audit d'image, feuille de route, formation aux contrats et au media training. Aucune commission.</p>
+ <div class="more">Voir la cotisation →</div>
+ </div>
+ </a>
+ <a href="cotisations.html" class="audience a2 reveal">
+ <div class="img"></div>
+ <div class="b">
+ <div class="t">Sélection internationale</div>
+ <h4 class="serif">Athlète sélectionné</h4>
+ <p>Championnat d'Europe ou du monde. Chaque exposition compte&nbsp;: arbitrage des sollicitations, gestion de crise, protection de la réputation.</p>
+ <div class="more">Voir la cotisation →</div>
+ </div>
+ </a>
+ <a href="cotisations.html" class="audience a3 reveal">
+ <div class="img"></div>
+ <div class="b">
+ <div class="t">Clubs et structures</div>
+ <h4 class="serif">Club · Fédération</h4>
+ <p>Former plusieurs athlètes à la fois. Ateliers collectifs, formation des encadrants, cadre type pour le droit à l'image, accompagnement des familles.</p>
+ <div class="more">Voir la convention →</div>
+ </div>
+ </a>
+ </div>
+</div>
+</section>
+
+<!-- BIG QUOTE -->
+<section>
+ <div class="container">
+ <div class="reveal conviction">
+ <div class="kicker">Conviction</div>
+ <p class="big-quote">À haut niveau, la différence entre une belle carrière et une grande carrière <em>se joue rarement sur le terrain.</em></p>
+ </div>
+ </div>
+</section>
+
+<!-- TEAM ESPOIRS CTA -->
+<section>
+ <div class="container">
+  <div class="espoirs-cta reveal">
+   <div class="ec-left">
+    <p class="ec-kick">Team Espoirs · Moins de 18 ans</p>
+    <h2 class="serif">Le futur du sport mérite <em>un coup d'avance.</em></h2>
+    <p class="ec-txt">Notre programme gratuit pour les meilleurs espoirs du judo, en France et au Portugal. Démarches sponsors, aide à l'équipement et formation à la gestion de carrière. Sans commission, jamais.</p>
+    <div class="ec-badges">
+     <span>0&nbsp;% commission</span>
+     <span>Paris · Lisbonne</span>
+     <span>Promo 01 · Judo</span>
+    </div>
+    <a href="team-espoirs.html" class="ec-btn">Découvrir la Team Espoirs
+     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+    </a>
+   </div>
+   <div class="ec-right" aria-hidden="true">
+    <div class="ec-zero">0&nbsp;%<span>de commission<br/>100&nbsp;% pour eux</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- FAQ -->
+<section style="background: var(--bg-soft);">
+ <div class="container">
+ <div class="section-tag">FAQ</div>
+ <h2 class="serif reveal" style="margin-bottom:48px; max-width:18ch;">Les questions <em class="accent">qu'on nous pose.</em></h2>
+
+ <div class="faq-grid">
+ <div class="faq-list reveal" style="max-width: 100%;">
+ <details class="faq-item">
+ <summary>À quel moment faut-il se faire accompagner ?</summary>
+ <p>Le plus tôt possible, dès que les résultats attirent des sollicitations. Les décisions prises en début de carrière (droit à l'image, premiers contrats, présence digitale) pèsent sur toute la trajectoire. Une image se construit, elle se répare beaucoup plus difficilement.</p>
+ </details>
+ <details class="faq-item">
+ <summary>Combien de temps avant de voir des résultats concrets ?</summary>
+ <p>L'audit initial livre ses conclusions en 3 à 4 semaines. Les premiers effets sur l'audience et la visibilité arrivent sous 3 à 6 mois de communication pilotée. Les grands contrats de sponsoring, eux, se construisent sur 6 à 18 mois de travail de fond.</p>
+ </details>
+ <details class="faq-item">
+ <summary>Quelle différence avec un agent sportif classique ?</summary>
+ <p>L'agent sportif négocie vos transferts et vos contrats de club. Nous pilotons tout le reste : image, communication, sponsoring, patrimoine de marque et reconversion. Les deux rôles sont complémentaires et nous travaillons main dans la main avec votre agent quand vous en avez un.</p>
+ </details>
+ <details class="faq-item">
+ <summary>Le suivi se fait en présentiel ou à distance ?</summary>
+ <p>Les deux. Le pilotage quotidien (contenus, communication, sponsors) se fait à distance. Pour les shootings, les négociations importantes, les media trainings et les événements clés, nous sommes à vos côtés physiquement, en France, en Suisse, en Europe et au-delà.</p>
+ </details>
+ <details class="faq-item">
+ <summary>Travaillez-vous en lien avec mon staff et mon entourage ?</summary>
+ <p>Toujours. Votre communication doit servir votre performance, jamais la perturber. Nous nous coordonnons avec votre staff sportif, votre agent et votre famille pour caler le calendrier médiatique sur le calendrier de compétitions.</p>
+ </details>
+ <details class="faq-item">
+ <summary>Comment êtes-vous financés&nbsp;?</summary>
+ <p>Nous ne prenons aucune commission sur les contrats que nous négocions&nbsp;: tout revient à l'athlète. L'accompagnement des moins de 18 ans est gratuit. Pour les athlètes majeurs, un forfait d'accompagnement couvre le travail d'image et de communication, sans jamais de pourcentage sur le sponsoring. Le premier échange de 30 minutes est gratuit et sans engagement.</p>
+ </details>
+ </div>
+
+ <aside class="faq-ask reveal">
+ <div class="faq-ask-head">
+ <div class="faq-ask-tag">Une autre question ?</div>
+ <h3 class="serif">Posez-la directement.</h3>
+ <p>Nous répondons sous 48 h ouvrées. Les meilleures questions sont ajoutées à cette FAQ pour aider les suivants.</p>
+ </div>
+ <form class="faq-ask-form" onsubmit="event.preventDefault(); const m=this.querySelector('.faq-msg'); m.textContent='Merci. Nous vous répondons sous 48 h.'; this.reset();">
+ <label>
+ <span>Votre prénom</span>
+ <input type="text" required />
+ </label>
+ <label>
+ <span>Votre email</span>
+ <input type="email" required />
+ </label>
+ <label>
+ <span>Votre question</span>
+ <textarea rows="4" required placeholder="Une seule question à la fois, idéalement."></textarea>
+ </label>
+ <button type="submit" class="btn btn-primary">Envoyer la question
+ <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></span>
+ </button>
+ <div class="faq-msg" role="status"></div>
+ </form>
+ </aside>
+ </div>
+ </div>
+</section>
+
+<!-- CTA FINAL -->
+<section>
+ <div class="container center reveal">
+ <div class="section-tag" style="margin-left:auto; margin-right:auto;">Démarrer</div>
+ <h2 class="serif" style="max-width:20ch; margin: 0 auto 32px;">Un entretien pour explorer <em class="accent">votre prochaine étape.</em></h2>
+ <p style="max-width:540px; margin:0 auto 40px;">30 minutes pour comprendre votre contexte, vos objectifs, et déterminer ensemble si une collaboration a du sens. Aucun engagement.</p>
+ <a href="contact.html" class="btn btn-primary">Réserver un entretien <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+
+<script src="js/main.js?v=20260890"></script>
+<script>
+(function(){
+ const runway = document.getElementById('mfxRunway');
+ if (!runway) return;
+ const stage = runway.firstElementChild;
+ const cible = document.getElementById('mfxType');
+
+ /* --- Machine a ecrire ------------------------------------------------------------
+    Le texte est decoupe caractere par caractere pour pouvoir s'ecrire au defilement.
+    Les segments en italique sont declares a part, sinon la mise en forme se perdrait. */
+ const SEGMENTS = [
+  { t: "Nous croyons que le talent mérite mieux que le hasard. Qu'une carrière se " },
+  { t: 'construit', em: true },
+  { t: ", qu'une image se " },
+  { t: 'protège', em: true },
+  { t: ", et qu'un nom, bien porté, devient " },
+  { t: 'un héritage.', em: true }
+ ];
+ const lettres = [];
+ SEGMENTS.forEach(seg => {
+  const hote = seg.em ? document.createElement('em') : cible;
+  [...seg.t].forEach(c => {
+   const sp = document.createElement('span');
+   sp.className = 'ch';
+   sp.textContent = c;
+   hote.appendChild(sp);
+   lettres.push(sp);
+  });
+  if (seg.em) cible.appendChild(hote);
+ });
+
+ const els = [...runway.querySelectorAll('.mfx-el')].map(el => ({
+  el,
+  dx: parseFloat(el.dataset.dx) || 0,
+  dy: parseFloat(el.dataset.dy) || 0,
+  r:  parseFloat(el.dataset.r)  || 0,
+  s:  parseFloat(el.dataset.s)  || 1,
+  lag: parseFloat(el.dataset.lag) || 0
+ }));
+ const reduit = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const epingle = () => getComputedStyle(stage).position === 'sticky';
+ const adouci = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+ let derniereTete = -1;
+ const ecrire = (avance) => {
+  const n = Math.round(avance * lettres.length);
+  if (n === derniereTete) return;
+  derniereTete = n;
+  lettres.forEach((sp, i) => {
+   sp.classList.toggle('on', i < n);
+   sp.classList.toggle('tete', i === n - 1);
+  });
+  cible.classList.toggle('fini', n >= lettres.length);
+ };
+
+ /* Version empilee : chaque element apparait seul. Son opacite depend de la distance
+    entre son centre et le centre de la fenetre — nulle a plus d'un demi-ecran, maximale
+    au centre. Comme deux elements consecutifs sont espaces de plus d'un demi-ecran, on
+    n'en voit jamais deux pleinement en meme temps : ils se relaient. */
+ const PORTEE = 0.47;
+ const placeEmpile = () => {
+  ecrire(1);
+  const mi = window.innerHeight / 2;
+  els.forEach(o => {
+   const r = o.el.getBoundingClientRect();
+   const centre = r.top + r.height / 2;
+   const d = Math.abs(centre - mi) / (window.innerHeight * PORTEE);
+   const v = Math.max(0, 1 - d);
+   const doux = v * v * (3 - 2 * v);
+   o.el.style.opacity = doux.toFixed(3);
+   o.el.style.transform =
+    'translateY(' + (((centre - mi) / mi) * 18).toFixed(1) + 'px)' +
+    ' scale(' + (0.93 + 0.07 * doux).toFixed(3) + ')';
+  });
+ };
+
+ const place = () => {
+  if (reduit()) {
+   ecrire(1);
+   els.forEach(o => { o.el.style.transform = ''; o.el.style.opacity = ''; });
+   return;
+  }
+  if (!epingle()) { placeEmpile(); return; }
+  const course = runway.offsetHeight - stage.offsetHeight;
+  if (course <= 0) return;
+  const brut = Math.min(1, Math.max(0, -runway.getBoundingClientRect().top / course));
+
+  // Premier temps : le manifeste s'ecrit. Second temps : les cartes viennent s'y poser,
+  // l'une apres l'autre. Le dernier dixieme maintient la composition finale.
+  ecrire(Math.min(1, brut / 0.34));
+  const p = Math.min(1, Math.max(0, (brut - 0.3) / 0.6));
+
+  els.forEach(o => {
+   const local = adouci(Math.min(1, Math.max(0, (p - o.lag) / (1 - o.lag))));
+   const reste = 1 - local;
+   o.el.style.transform =
+    'translate(-50%, -50%)' +
+    ' translate(' + (o.dx * reste).toFixed(2) + 'vw, ' + (o.dy * reste).toFixed(2) + 'vh)' +
+    ' rotate(' + (o.r * reste).toFixed(2) + 'deg)' +
+    ' scale(' + (1 + (o.s - 1) * reste).toFixed(3) + ')';
+   // Opacite pilotee par l'avance propre a l'element : rien n'est visible avant son entree.
+   o.el.style.opacity = Math.min(1, local * 1.6).toFixed(3);
+  });
+ };
+
+ let attend = false;
+ const surDefilement = () => {
+  if (attend) return;
+  attend = true;
+  requestAnimationFrame(() => { attend = false; place(); });
+ };
+ addEventListener('scroll', surDefilement, { passive: true });
+ addEventListener('resize', place);
+ place();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cotisations et accompagnements · Duqque Sports</title>
+<meta name="description" content="Les formules d'accompagnement de Duqque Sports : gratuit pour les moins de 18 ans, 60 € par an pour les athlètes majeurs, 120 € après une sélection internationale. Aucune commission sur les contrats négociés." />
+<link rel="stylesheet" href="css/style.css?v=20260890" />
+<style>
+ /* =====================================================================
+    COTISATIONS
+    Trois formules en cartes, puis un tableau comparatif detaille. Le tableau
+    est la piece maitresse : c'est lui qui repond a la vraie question, « qu'est-ce
+    qui est fait, exactement ». Sur mobile il se replie en listes par formule.
+    ===================================================================== */
+ .ct-intro { max-width: 62ch; }
+
+ .co-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(14px, 1.8vw, 22px); }
+ .co-card {
+  background: #fff; border: 1px solid var(--line); border-radius: 18px;
+  padding: clamp(24px, 2.6vw, 34px);
+  display: flex; flex-direction: column;
+  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+ }
+ .co-card:hover { transform: translateY(-3px); box-shadow: 0 20px 46px rgba(10,10,14,0.08); }
+ .co-ico {
+  display: inline-flex; width: 44px; height: 44px; border-radius: 13px;
+  align-items: center; justify-content: center; flex: 0 0 auto;
+  background: var(--c); color: var(--i); margin-bottom: 20px;
+ }
+ .co-ico svg { width: 22px; height: 22px; }
+ .co-k { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700; color: var(--ink-muted); margin: 0 0 10px; }
+ .co-card h2 { font-size: clamp(19px, 1.8vw, 24px); line-height: 1.08; margin: 0 0 6px; }
+ .co-pour { font-size: 13px; line-height: 1.5; color: var(--ink-soft); margin: 0 0 22px; }
+ .co-prix {
+  font-family: var(--display); font-weight: 900; font-size: clamp(34px, 3.6vw, 48px);
+  line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums;
+  margin: 0 0 4px;
+ }
+ .co-prix small { display: block; font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: 0.02em; color: var(--ink-muted); margin-top: 10px; }
+ .co-paliers { display: grid; gap: 16px; }
+ .co-palier { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: baseline; }
+ .co-palier .co-prix { margin: 0; font-size: clamp(30px, 3vw, 40px); }
+ .co-palier-txt { font-size: 12.5px; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+ .co-prix-note { font-size: 12px; line-height: 1.5; color: var(--ink-muted); margin: 14px 0 0; font-weight: 600; }
+
+ .co-list { list-style: none; margin: 22px 0 26px; padding: 22px 0 0; border-top: 1px solid var(--line); display: grid; gap: 11px; }
+ .co-list li { position: relative; padding-left: 26px; font-size: 14px; line-height: 1.5; color: var(--ink-soft); }
+ .co-list li::before {
+  content: ""; position: absolute; left: 0; top: 3px; width: 15px; height: 15px;
+  border-radius: 50%; background: var(--accent);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12.5l5 5L20 6.5' fill='none' stroke='%23000' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12.5l5 5L20 6.5' fill='none' stroke='%23000' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
+ }
+ .co-cta { margin-top: auto; }
+ /* Variante sombre, utilisee sur la carte lime ou le bouton violet manquerait de contraste */
+ .btn-dark { background: #0b0b0b; color: #fff; border-color: transparent; }
+ .btn-dark:hover { background: var(--accent); color: #fff; transform: translateY(-2px); }
+
+ /* Formule maitresse : la gratuite des moins de 18 ans */
+ .co-card.co-lead { background: #d9ff3d; border-color: transparent; }
+ .co-card.co-lead .co-ico { background: #101400; color: #d9ff3d; }
+ .co-card.co-lead .co-k, .co-card.co-lead .co-pour { color: #2e3300; }
+ .co-card.co-lead .co-list { border-top-color: rgba(0,0,0,0.16); }
+ .co-card.co-lead .co-list li { color: #2e3300; }
+ .co-card.co-lead .co-list li::before { background: #101400; }
+ .co-card.co-lead .co-prix small { color: #2e3300; }
+
+ /* --- Tableau comparatif --- */
+ .co-table { width: 100%; border-collapse: collapse; margin-top: clamp(28px, 3.4vw, 44px); }
+ .co-table caption { text-align: left; font-size: 13px; color: var(--ink-muted); padding-bottom: 18px; }
+ .co-table th, .co-table td { text-align: left; padding: 16px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+ .co-table thead th {
+  font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+  color: var(--ink-muted); border-bottom: 2px solid var(--ink); padding-bottom: 14px;
+ }
+ .co-table thead th:first-child { width: 34%; }
+ .co-table tbody th {
+  font-family: var(--sans); font-weight: 600; font-size: 14.5px; color: var(--ink);
+ }
+ .co-table tbody th small { display: block; font-weight: 400; font-size: 12.5px; color: var(--ink-muted); margin-top: 4px; line-height: 1.45; }
+ .co-table td { font-size: 13.5px; line-height: 1.5; color: var(--ink-soft); }
+ /* Chaque section porte sa couleur : le tableau se lit par blocs, pas comme une liste grise */
+ /* Specificite (0,3,1) : la regle .co-table tbody th est declaree plus haut et imposait
+    l'encre sombre a toutes les cellules de tete, y compris sur les fonds violets et noirs. */
+ .co-table tbody tr.co-sec th {
+  background: var(--sc, var(--accent)); color: var(--si, #fff);
+  border-bottom: 0; border-radius: 8px;
+  font-family: var(--display); font-weight: 900; text-transform: uppercase;
+  font-size: 12.5px; letter-spacing: 0.08em; padding: 13px 16px;
+ }
+ .co-sec { }
+ .co-s1 { --sc: #5a2fe6; --si: #fff; }
+ .co-s2 { --sc: #0b0b0b; --si: #d9ff3d; }
+ .co-s3 { --sc: #d9ff3d; --si: #101400; }
+ .co-s4 { --sc: #b8a4f0; --si: #1a1033; }
+ .co-s5 { --sc: #4a1fc7; --si: #fff; }
+
+ /* La colonne Espoirs est la formule phare : fond teinte sur toute sa hauteur */
+ .co-table thead th:nth-child(2),
+ .co-table tbody td:nth-child(2) { background: rgba(217, 255, 61, 0.22); }
+ .co-table thead th:nth-child(2) { color: #101400; border-bottom-color: #101400; }
+
+ /* Valeurs mises en avant */
+ .co-table strong {
+  display: inline-block; padding: 3px 9px; border-radius: 100px;
+  background: #101400; color: #d9ff3d;
+  font-family: var(--display); font-weight: 900; font-size: 12.5px; letter-spacing: 0.02em;
+ }
+ .co-table tbody tr:not(.co-sec):hover td,
+ .co-table tbody tr:not(.co-sec):hover th { background-color: rgba(90, 47, 230, 0.05); }
+ .co-table tbody tr:not(.co-sec):hover td:nth-child(2) { background-color: rgba(217, 255, 61, 0.34); }
+ .co-sec-ico {
+  display: inline-flex; width: 24px; height: 24px; border-radius: 7px;
+  align-items: center; justify-content: center; vertical-align: -6px; margin-right: 11px;
+  background: rgba(255,255,255,0.18);
+ }
+ .co-s3 .co-sec-ico, .co-s4 .co-sec-ico { background: rgba(0,0,0,0.14); }
+ .co-sec-ico svg { width: 14px; height: 14px; }
+
+ .co-val {
+  display: inline-flex; width: 18px; height: 18px; border-radius: 50%;
+  align-items: center; justify-content: center; vertical-align: -4px; margin-right: 8px;
+ }
+ .co-val svg { width: 10px; height: 10px; }
+ .co-val.co-oui { background: var(--accent); color: #fff; }
+ .co-val.co-non { background: #d8d5cf; color: #4a443d; }
+
+ .co-oui, .co-non {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%; flex: 0 0 auto;
+ }
+ .co-oui { background: var(--accent); color: #fff; }
+ .co-non { background: #e2e0dc; color: var(--ink-muted); }
+ .co-oui svg, .co-non svg { width: 12px; height: 12px; }
+
+ @media (max-width: 900px) { .co-grid { grid-template-columns: 1fr; } }
+ @media (max-width: 800px) {
+  /* Le tableau devient une liste par ligne, chaque cellule portant son intitule de colonne */
+  .co-table, .co-table tbody, .co-table tr, .co-table th, .co-table td { display: block; width: auto; }
+  .co-table thead { display: none; }
+  .co-table tr { border-bottom: 1px solid var(--line); padding: 16px 0; }
+  .co-table th, .co-table td { border: 0; padding: 0 0 8px; }
+  .co-table td::before {
+   content: attr(data-col); display: block;
+   font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+   color: var(--ink-muted); margin-bottom: 4px;
+  }
+  .co-sec th { background: none; padding: 24px 0 6px; }
+ }
+</style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<section class="page-hero">
+ <div class="container">
+  <div class="breadcrumb"><span>Cotisations</span></div>
+  <h1 class="serif">Ce que coûte <em class="accent">un accompagnement.</em></h1>
+  <p class="lead">Gratuité totale pour les moins de 18 ans. Soixante euros par an pour les athlètes majeurs, cent vingt à partir d'une sélection internationale. Et dans tous les cas, aucune commission sur ce qui est négocié.</p>
+ </div>
+</section>
+
+<section style="padding-top: 0;">
+ <div class="container">
+  <div class="section-tag reveal">Les formules</div>
+  <h2 class="serif reveal" style="margin-bottom: clamp(28px, 4vw, 48px); max-width: 24ch;">Trois façons <em class="accent">d'être accompagné.</em></h2>
+
+  <div class="co-grid reveal">
+
+   <div class="co-card co-lead">
+    <span class="co-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.2-7-10a3.7 3.7 0 0 1 7-2.3A3.7 3.7 0 0 1 19 10c0 5.8-7 10-7 10z"/></svg></span>
+    <p class="co-k">Moins de 18 ans</p>
+    <h2 class="serif">Programme Espoirs</h2>
+    <p class="co-pour">Judokas U15 et U18, minimum Pôle Espoirs, France et Portugal.</p>
+    <p class="co-prix">Gratuit<small>Aucune cotisation, aucune commission</small></p>
+    <ul class="co-list">
+     <li>Six ateliers de formation par an</li>
+     <li>Module dédié aux parents</li>
+     <li>Relecture de tout contrat avant signature</li>
+     <li>Démarchage de partenaires</li>
+     <li>Un référent joignable à l'année</li>
+    </ul>
+    <a href="team-espoirs.html" class="btn btn-dark co-cta">Découvrir le programme <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+   </div>
+
+   <div class="co-card">
+    <span class="co-ico" style="--c: var(--accent); --i:#fff;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L14 6l4 6 4-8"/></svg></span>
+    <p class="co-k">18 ans et plus</p>
+    <h2 class="serif">Cotisation Athlète</h2>
+    <p class="co-pour">Athlètes majeurs qui structurent leur image et leurs premiers partenariats.</p>
+    <div class="co-paliers">
+     <div class="co-palier">
+      <p class="co-prix">60&nbsp;€</p>
+      <p class="co-palier-txt">Par an, soit 5&nbsp;€ par mois. Pour tout athlète majeur accompagné.</p>
+     </div>
+     <div class="co-palier">
+      <p class="co-prix">120&nbsp;€</p>
+      <p class="co-palier-txt">Par an, à partir d'une sélection en championnat d'Europe ou du monde.</p>
+     </div>
+    </div>
+    <p class="co-prix-note">Aucune commission sur les contrats, à aucun palier.</p>
+    <ul class="co-list">
+     <li>Audit d'image et de présence digitale</li>
+     <li>Feuille de route annuelle</li>
+     <li>Formation aux contrats et au media training</li>
+     <li>Relecture illimitée des propositions reçues</li>
+     <li>Deux points de suivi par saison</li>
+    </ul>
+    <a href="contact.html" class="btn btn-outline co-cta">Nous écrire <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+   </div>
+
+   <div class="co-card">
+    <span class="co-ico" style="--c:#b8a4f0; --i:#1a1033;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20v-5a4 4 0 0 1 8 0v5M12 20v-4a3.5 3.5 0 0 1 7 0v4"/><circle cx="8" cy="7" r="3"/><circle cx="16.5" cy="8.5" r="2.5"/></svg></span>
+    <p class="co-k">Clubs et structures</p>
+    <h2 class="serif">Convention</h2>
+    <p class="co-pour">Clubs, comités et structures qui veulent former plusieurs athlètes à la fois.</p>
+    <p class="co-prix">Sur devis<small>Selon le nombre d'athlètes et la durée</small></p>
+    <ul class="co-list">
+     <li>Ateliers collectifs dans vos locaux</li>
+     <li>Formation des encadrants</li>
+     <li>Cadre type pour le droit à l'image</li>
+     <li>Accompagnement des familles</li>
+    </ul>
+    <a href="contact.html" class="btn btn-outline co-cta">Demander un devis <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+   </div>
+
+  </div>
+ </div>
+</section>
+
+<div class="container te-hr" aria-hidden="true"></div>
+
+<section>
+ <div class="container">
+  <div class="section-tag reveal">Le détail</div>
+  <h2 class="serif reveal" style="margin-bottom: clamp(20px, 3vw, 32px); max-width: 24ch;">Ce qui est fait, <em class="accent">exactement.</em></h2>
+  <p class="ct-intro reveal">Le tableau ci-dessous liste chaque prestation et la formule qui la couvre. Ce qui n'y figure pas n'est pas inclus.</p>
+
+  <div class="reveal" style="overflow-x: auto;">
+  <table class="co-table">
+   <caption>Prestations couvertes par formule d'accompagnement.</caption>
+   <thead>
+    <tr>
+     <th scope="col">Prestation</th>
+     <th scope="col">Programme Espoirs</th>
+     <th scope="col">Cotisation Athlète</th>
+     <th scope="col">Convention</th>
+    </tr>
+   </thead>
+   <tbody>
+
+    <tr class="co-sec co-s1"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19"/></svg></span>Cotisation</th></tr>
+    <tr>
+     <th scope="row">Montant annuel<small>Aucun prélèvement sur les contrats, quelle que soit la formule</small></th>
+     <td data-col="Espoirs"><strong>Gratuit</strong></td>
+     <td data-col="Athlète"><strong>60&nbsp;€</strong><br/>120&nbsp;€ après une sélection en championnat d'Europe ou du monde</td>
+     <td data-col="Convention">Sur devis</td>
+    </tr>
+
+    <tr class="co-sec co-s2"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L14 6l4 6 4-8"/></svg></span>Gestion de carrière</th></tr>
+    <tr>
+     <th scope="row">Audit de départ<small>Contrats en cours, image publique, présence digitale</small></th>
+     <td data-col="Espoirs">Complet</td>
+     <td data-col="Athlète">Complet</td>
+     <td data-col="Convention">Par athlète</td>
+    </tr>
+    <tr>
+     <th scope="row">Feuille de route annuelle<small>Objectifs sportifs, image, partenariats</small></th>
+     <td data-col="Espoirs"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+     <td data-col="Athlète"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+     <td data-col="Convention">Collective</td>
+    </tr>
+    <tr>
+     <th scope="row">Référent joignable à l'année</th>
+     <td data-col="Espoirs"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+     <td data-col="Athlète"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+     <td data-col="Convention">Un référent pour la structure</td>
+    </tr>
+    <tr>
+     <th scope="row">Préparation de la reconversion</th>
+     <td data-col="Espoirs">Sensibilisation</td>
+     <td data-col="Athlète">Plan individuel</td>
+     <td data-col="Convention">Atelier collectif</td>
+    </tr>
+
+    <tr class="co-sec co-s3"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5L12 2z"/></svg></span>Sponsoring</th></tr>
+    <tr>
+     <th scope="row">Relecture des contrats avant signature<small>Exclusivités, durée, droit à l'image, contreparties</small></th>
+     <td data-col="Espoirs">Illimitée</td>
+     <td data-col="Athlète">Illimitée</td>
+     <td data-col="Convention">Cadre type fourni</td>
+    </tr>
+    <tr>
+     <th scope="row">Construction du dossier partenaire</th>
+     <td data-col="Espoirs"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+     <td data-col="Athlète"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+     <td data-col="Convention">Modèle fourni</td>
+    </tr>
+    <tr>
+     <th scope="row">Démarchage et négociation</th>
+     <td data-col="Espoirs"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+     <td data-col="Athlète"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+     <td data-col="Convention"><span class="co-val co-non"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Non
+    </tr>
+    <tr>
+     <th scope="row">Commission prélevée sur les contrats</th>
+     <td data-col="Espoirs"><strong>0 %</strong></td>
+     <td data-col="Athlète"><strong>0 %</strong></td>
+     <td data-col="Convention"><strong>0 %</strong></td>
+    </tr>
+
+    <tr class="co-sec co-s4"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4V5z"/></svg></span>Communication</th></tr>
+    <tr>
+     <th scope="row">Media training<small>Interviews, zones mixtes, réseaux après une défaite</small></th>
+     <td data-col="Espoirs">Atelier annuel</td>
+     <td data-col="Athlète">Session individuelle</td>
+     <td data-col="Convention">Atelier collectif</td>
+    </tr>
+    <tr>
+     <th scope="row">Ligne éditoriale et réseaux sociaux</th>
+     <td data-col="Espoirs">Formation</td>
+     <td data-col="Athlète">Formation et suivi</td>
+     <td data-col="Convention">Formation</td>
+    </tr>
+    <tr>
+     <th scope="row">Gestion de crise</th>
+     <td data-col="Espoirs">Appui immédiat</td>
+     <td data-col="Athlète">Appui immédiat</td>
+     <td data-col="Convention">Protocole fourni</td>
+    </tr>
+
+    <tr class="co-sec co-s5"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M3 20v-2.5a4.5 4.5 0 0 1 9 0V20M13 20v-1.5a3.5 3.5 0 0 1 7 0V20"/></svg></span>Entourage</th></tr>
+    <tr>
+     <th scope="row">Module parents</th>
+     <td data-col="Espoirs"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+     <td data-col="Athlète">Sur demande</td>
+     <td data-col="Convention"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+    </tr>
+    <tr>
+     <th scope="row">Coordination avec le club et l'entraîneur</th>
+     <td data-col="Espoirs">Systématique</td>
+     <td data-col="Athlète">Systématique</td>
+     <td data-col="Convention">Le club est le cadre</td>
+    </tr>
+    <tr>
+     <th scope="row">Formation des encadrants</th>
+     <td data-col="Espoirs"><span class="co-val co-non"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Non
+     <td data-col="Athlète"><span class="co-val co-non"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>Non
+     <td data-col="Convention"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
+    </tr>
+
+   </tbody>
+  </table>
+  </div>
+ </div>
+</section>
+
+<div class="container te-hr" aria-hidden="true"></div>
+
+<section>
+ <div class="container">
+  <div class="ab-modele-note reveal" style="display:grid; grid-template-columns: 3px minmax(0,1fr); gap:18px; align-items:start; max-width:70ch;">
+   <span style="background: var(--accent); border-radius:2px; align-self:stretch;"></span>
+   <div>
+    <h3 class="serif" style="font-size:20px; margin:0 0 10px;">Pourquoi une cotisation et pas une commission&nbsp;?</h3>
+    <p style="font-size:14.5px; line-height:1.65; color: var(--ink-soft); margin:0;">Une commission lie notre rémunération au montant des contrats signés. Elle nous donnerait intérêt à ce que vous signiez, y compris quand il faudrait refuser. Une cotisation fixe supprime ce conflit&nbsp;: nous sommes payés pour vous conseiller, pas pour vous faire signer. Et pour les moins de 18 ans, nous ne sommes pas payés du tout.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="container" style="text-align:center;">
+  <h2 class="serif" style="max-width: 22ch; margin: 0 auto 20px;">Une question sur <em class="accent">la formule adaptée&nbsp;?</em></h2>
+  <p style="max-width: 52ch; margin: 0 auto 32px; color: var(--ink-soft);">Trente minutes en visio suffisent pour savoir si nous sommes utiles à votre projet, et laquelle des trois formules correspond.</p>
+  <a href="rdv.html" class="btn btn-primary">Prendre rendez-vous <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260890"></script>
+</body>
+</html>

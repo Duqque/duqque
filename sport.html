@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nos services · Duqque Sports</title>
+<meta name="description" content="Gestion de carrière, gestion d'image, communication globale, sponsoring et reconversion. Les services de Duqque Sports pour les athlètes." />
+<link rel="stylesheet" href="css/style.css?v=20260890" />
+<style>
+ /* === SERVICES BENTO === */
+ .sv-bento { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+ .sv-card {
+  border-radius: 16px; padding: clamp(32px, 3.5vw, 48px);
+  display: flex; flex-direction: column; gap: 16px;
+  min-height: 380px; position: relative; overflow: hidden;
+  cursor: pointer; text-decoration: none;
+  transition: transform .4s var(--ease);
+ }
+ .sv-card:hover { transform: translateY(-4px); }
+ .sv-card .tag { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; opacity: 1; }
+ .sv-card h3 { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.08; letter-spacing: -0.02em; }
+ /* color: inherit obligatoire : la regle globale p { color: var(--ink-soft) } l'emporte
+    sinon sur la couleur de la carte, et le texte tombe a 1,53:1 sur le violet. */
+ .sv-card p, .sv-card li { font-size: 14.5px; line-height: 1.6; opacity: 1; max-width: 52ch; color: inherit; }
+ .sv-card ul { list-style: none; padding: 0; margin-top: auto; display: flex; flex-direction: column; gap: 8px; }
+ .sv-card li { font-size: 13px; padding-left: 20px; position: relative; opacity: 1; }
+ .sv-card li::before { content: "→"; position: absolute; left: 0; opacity: 0.7; }
+ .sv-card.violet { background: var(--accent); color: #fff; }
+ .sv-card.lav    { background: #b8a4f0; color: #1a1033; }
+ .sv-card.cream  { background: #f7eccf; color: #2a1402; }
+ .sv-card.dark   { background: #050505; color: #f5f3ef; border: 1px solid rgba(255,255,255,0.08); }
+ .sv-card.dark::before {
+  content: ""; position: absolute; right: -25%; top: -35%;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(119,71,255,0.4) 0%, transparent 65%);
+  filter: blur(24px);
+ }
+ .sv-card.dark > * { position: relative; }
+ @media (max-width: 860px){ .sv-bento { grid-template-columns: 1fr; } .sv-card { min-height: 0; } }
+
+ /* === DELIVERABLES TRACK === */
+ .dl-track { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+ .dl-item {
+  border-radius: 16px; padding: 26px 22px;
+  background: var(--cream-dark); border: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 10px; min-height: 170px;
+ }
+ .dl-item .n { font-family: var(--serif); font-weight: 600; font-size: 26px; color: var(--accent-ink); }
+ .dl-item h4 { font-size: 15px; font-weight: 600; line-height: 1.2; }
+ .dl-item p { font-size: 12px; color: var(--ink-soft); line-height: 1.45; }
+ @media (max-width: 1000px){ .dl-track { grid-template-columns: repeat(3, 1fr); } }
+ @media (max-width: 640px){ .dl-track { grid-template-columns: 1fr 1fr; } }
+
+ /* === OFFRES === */
+ .offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+ .offer {
+  border-radius: 16px; padding: 36px 30px;
+  background: #fafaf8; border: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 18px;
+  transition: transform .4s var(--ease), border-color .4s var(--ease);
+ }
+ .offer:hover { transform: translateY(-4px); border-color: var(--accent-ink); }
+ .offer.lead { background: #050505; color: #f5f3ef; border-color: rgba(255,255,255,0.08); }
+ .offer .lvl { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; color: var(--accent-ink); }
+ /* Le violet fonce sur fond noir ne donne que 2,24:1 : sur la carte sombre on passe au lavande. */
+ .offer.lead .lvl { color: #c4b3ff; }
+ .offer h3 { font-family: var(--serif); font-weight: 600; font-size: 24px; letter-spacing: -0.01em; }
+ .offer p { font-size: 14px; line-height: 1.55; opacity: 1; color: inherit; }
+ .offer ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
+ .offer li { font-size: 13px; padding-left: 22px; position: relative; }
+ .offer li::before { content: "✓"; position: absolute; left: 0; color: var(--accent-ink); font-weight: 700; }
+ .offer .cta { margin-top: 20px; }
+ @media (max-width: 900px){ .offer-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<!-- HERO -->
+<section class="page-hero sport">
+ <div class="container">
+  <div class="breadcrumb"><span>Nos services</span></div>
+  <h1 class="serif">Un athlète. Une marque. <em class="accent">Un seul interlocuteur.</em></h1>
+  <p class="lead">Gestion de carrière, image, communication, sponsoring et reconversion. Tout ce qui entoure votre performance, orchestré par une seule équipe.</p>
+ </div>
+</section>
+
+<!-- SERVICES BENTO -->
+<section>
+ <div class="container">
+  <div class="section-tag">Quatre pôles</div>
+  <h2 class="serif reveal" style="margin-bottom: 48px; max-width: 22ch;">Ce que nous pilotons <em class="accent">pour vous.</em></h2>
+
+  <div class="sv-bento reveal">
+   <a href="service-carriere.html" class="sv-card violet">
+    <span class="tag">01 · Carrière</span>
+    <h3>Gestion de carrière.</h3>
+    <p>La trajectoire d'un athlète se construit comme un plan d'entreprise : des étapes, des arbitrages, des échéances. Nous les pilotons à vos côtés, saison après saison.</p>
+    <ul>
+     <li>Stratégie de carrière et planification des grandes échéances</li>
+     <li>Négociation et relecture de contrats</li>
+     <li>Coordination avec agents, clubs et staffs</li>
+     <li>Préparation de la reconversion dès les années actives</li>
+    </ul>
+   </a>
+   <a href="service-image.html" class="sv-card dark">
+    <span class="tag">02 · Image</span>
+    <h3>Gestion d'image.</h3>
+    <p>Votre nom est un actif. Nous le protégeons, le positionnons et le valorisons pour qu'il travaille pour vous, y compris quand vous ne gagnez pas.</p>
+    <ul>
+     <li>Identité et positionnement de marque personnelle</li>
+     <li>Sécurisation du droit à l'image et du naming</li>
+     <li>Charte éditoriale : ton, sujets, lignes rouges</li>
+     <li>Veille de réputation et gestion de crise</li>
+    </ul>
+   </a>
+   <a href="service-communication.html" class="sv-card cream">
+    <span class="tag">03 · Communication</span>
+    <h3>Communication globale.</h3>
+    <p>Réseaux sociaux, presse, contenus : une communication pilotée à l'année qui fait grandir votre audience sans jamais perturber votre calendrier sportif.</p>
+    <ul>
+     <li>Stratégie et production de contenus (photo, vidéo, écrit)</li>
+     <li>Pilotage des réseaux sociaux et community management</li>
+     <li>Relations presse et médias</li>
+     <li>Media training et prise de parole</li>
+    </ul>
+   </a>
+   <a href="service-sponsoring.html" class="sv-card lav">
+    <span class="tag">04 · Sponsoring</span>
+    <h3>Sponsoring & partenariats.</h3>
+    <p>Nous cherchons les marques qui vous ressemblent, négocions les contrats à la hauteur de votre valeur, et entretenons les partenariats dans la durée.</p>
+    <ul>
+     <li>Cartographie et approche des sponsors pertinents</li>
+     <li>Dossiers de partenariat et argumentaires chiffrés</li>
+     <li>Négociation, contractualisation, suivi des livrables</li>
+     <li>Activation des partenariats et bilans annuels</li>
+    </ul>
+   </a>
+  </div>
+ </div>
+</section>
+
+<!-- LIVRABLES -->
+<section style="background: var(--bg-soft);">
+ <div class="container">
+  <div class="section-tag">Concrètement</div>
+  <h2 class="serif reveal" style="margin-bottom: 48px; max-width: 22ch;">Ce que vous recevez <em class="accent">chaque saison.</em></h2>
+  <div class="dl-track reveal">
+   <div class="dl-item"><div class="n">01</div><h4>Feuille de route annuelle</h4><p>Objectifs carrière, image et revenus, revus chaque trimestre.</p></div>
+   <div class="dl-item"><div class="n">02</div><h4>Calendrier éditorial</h4><p>Contenus planifiés autour de vos compétitions, jamais contre elles.</p></div>
+   <div class="dl-item"><div class="n">03</div><h4>Dossier sponsors</h4><p>Un kit de présentation chiffré, mis à jour avec vos audiences.</p></div>
+   <div class="dl-item"><div class="n">04</div><h4>Bilan d'audience</h4><p>Reporting mensuel : reach, engagement, valeur média générée.</p></div>
+   <div class="dl-item"><div class="n">05</div><h4>Cellule de crise</h4><p>Une équipe joignable 7j/7 quand une situation sensible survient.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- OFFRES -->
+<section>
+ <div class="container">
+  <div class="section-tag">Nos formules</div>
+  <h2 class="serif reveal" style="margin-bottom: 48px; max-width: 20ch;">Trois niveaux <em class="accent">d'accompagnement.</em></h2>
+
+  <div class="offer-grid reveal">
+   <div class="offer">
+    <span class="lvl">Essentiel</span>
+    <h3>Lancer sa marque.</h3>
+    <p>Pour l'athlète en ascension qui veut poser des fondations saines avant que la notoriété n'arrive.</p>
+    <ul>
+     <li>Audit image & digital complet</li>
+     <li>Positionnement de marque personnelle</li>
+     <li>Charte éditoriale et ligne de contenus</li>
+     <li>Accompagnement mensuel</li>
+    </ul>
+    <div class="cta"><a href="contact.html" class="btn btn-outline">Discuter de ce niveau</a></div>
+   </div>
+   <div class="offer lead">
+    <span class="lvl">Signature</span>
+    <h3>Piloter la carrière.</h3>
+    <p>Le cœur de notre métier&nbsp;: nous pilotons image, communication et sponsoring pendant que vous performez.</p>
+    <ul>
+     <li>Tout le niveau Essentiel</li>
+     <li>Production et pilotage des contenus</li>
+     <li>Relations presse et media training</li>
+     <li>Recherche et négociation de sponsors</li>
+     <li>Reporting mensuel d'audience et de valeur</li>
+    </ul>
+    <div class="cta"><a href="rdv.html" class="btn btn-primary">Prendre RDV <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></span></a></div>
+   </div>
+   <div class="offer">
+    <span class="lvl">Héritage</span>
+    <h3>Préparer l'après.</h3>
+    <p>Pour l'athlète confirmé qui veut transformer sa notoriété en patrimoine durable au-delà de la carrière.</p>
+    <ul>
+     <li>Stratégie de reconversion personnalisée</li>
+     <li>Structuration de projets business et médias</li>
+     <li>Gestion du patrimoine de marque</li>
+     <li>Transmission et projets d'impact</li>
+    </ul>
+    <div class="cta"><a href="contact.html" class="btn btn-outline">Discuter de ce niveau</a></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- CTA -->
+<section style="background: var(--bg-soft);">
+ <div class="container center reveal">
+  <div class="section-tag" style="margin: 0 auto 24px;">Démarrer</div>
+  <h2 class="serif" style="max-width: 22ch; margin: 0 auto 24px;">Parlons de <em class="accent">votre trajectoire.</em></h2>
+  <p style="max-width: 540px; margin: 0 auto 36px;">30 minutes pour comprendre votre situation, vos ambitions, et voir si nous sommes la bonne équipe pour vous. Sans engagement.</p>
+  <a href="rdv.html" class="btn btn-primary">Prendre RDV <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg></span></a>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260890"></script>
+</body>
+</html>

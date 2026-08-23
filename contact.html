@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact · Duqque Sports</title>
+<meta name="description" content="Contactez Duqque Sports, Paris et Lisbonne. 30 minutes pour parler de votre carrière. Sans engagement." />
+<link rel="stylesheet" href="css/style.css?v=20260890" />
+<style>
+ /* === CONTACT GRID === */
+ .ct-grid {
+ display: grid;
+ grid-template-columns: 1.4fr 1fr;
+ gap: 20px;
+ align-items: start;
+ }
+
+ /* Form card cream */
+ .ct-form-card {
+ background: #f7eccf;
+ border-radius: 16px;
+ padding: clamp(36px, 4vw, 52px);
+ color: #2a1402;
+ }
+ .ct-form-card .section-tag { color: rgba(42,20,2,0.82); }
+ .ct-form-card h2 { margin-bottom: 8px; }
+ .ct-form-card > p { color: rgba(42,20,2,0.82); margin-bottom: 32px; max-width: 42ch; }
+
+ .ct-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+ .ct-chips button {
+ padding: 10px 18px; border-radius: 100px;
+ border: 1px solid rgba(42,20,2,0.18);
+ background: transparent; color: rgba(42,20,2,0.82);
+ font-size: 12px; letter-spacing: 0.05em; font-weight: 500;
+ cursor: pointer;
+ transition: all .25s ease;
+ }
+ .ct-chips button:hover { color: #2a1402; border-color: #2a1402; }
+ .ct-chips button.active { background: #2a1402; color: #f7eccf; border-color: #2a1402; }
+
+ .ct-form { display: grid; gap: 18px; }
+ .ct-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+ .ct-row.single { grid-template-columns: 1fr; }
+ .ct-field { display: flex; flex-direction: column; gap: 6px; }
+ .ct-field label {
+ font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+ color: rgba(42,20,2,0.82); font-weight: 700;
+ }
+ .ct-field input, .ct-field textarea, .ct-field select {
+ background: transparent;
+ border: none; border-bottom: 1px solid rgba(42,20,2,0.25);
+ color: #2a1402; padding: 12px 0; font: inherit; font-size: 16px;
+ transition: border-color .3s;
+ font-family: var(--sans);
+ }
+ .ct-field input:focus, .ct-field textarea:focus { outline: none; border-color: #2a1402; }
+ .ct-field textarea { resize: vertical; min-height: 110px; }
+ .ct-submit { margin-top: 8px; }
+ .ct-submit button {
+ background: #1a1410; color: #fff;
+ border: none; border-radius: 100px;
+ padding: 16px 28px;
+ font-size: 13px; letter-spacing: 0.08em; font-weight: 600;
+ cursor: pointer; font-family: var(--sans);
+ display: inline-flex; align-items: center; gap: 12px;
+ transition: background .3s, transform .3s;
+ }
+ .ct-submit button:hover { background: var(--accent); transform: translateY(-2px); }
+ @media (max-width: 700px) { .ct-row { grid-template-columns: 1fr; } }
+
+ /* Sidebar stack */
+ .ct-side { display: flex; flex-direction: column; gap: 16px; }
+ .ct-tile {
+ border-radius: 16px;
+ padding: 32px 28px;
+ display: flex; flex-direction: column; gap: 10px;
+ position: relative; overflow: hidden;
+ text-decoration: none;
+ transition: transform .4s var(--ease);
+ }
+ .ct-tile:hover { transform: translateY(-3px); }
+ .ct-tile .lbl {
+ font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+ font-weight: 700; opacity: 1;
+ }
+ .ct-tile .val {
+ font-family: var(--serif); font-weight: 600;
+ font-size: clamp(22px, 1.9vw, 26px); line-height: 1.1; letter-spacing: -0.01em;
+ }
+ .ct-tile.dark { background: #050505; color: #f5f3ef; border: 1px solid rgba(255,255,255,0.08); }
+ .ct-tile.dark::before {
+ content:""; position:absolute; right:-30%; bottom:-50%;
+ width: 280px; height: 280px;
+ background: radial-gradient(circle, rgba(119, 71, 255,0.4) 0%, transparent 65%);
+ filter: blur(20px); z-index: 0;
+ }
+ .ct-tile.dark > * { position: relative; z-index: 1; }
+ .ct-tile.purple { background: #b8a4f0; color: #1a1033; }
+ .ct-tile.green  { background: #b7d2bf; color: #14241a; }
+
+ .ct-tile .arrow-out {
+ align-self: flex-start; margin-top: 8px;
+ width: 34px; height: 34px; border-radius: 50%;
+ display: flex; align-items: center; justify-content: center;
+ background: rgba(0,0,0,0.85); color: #fff;
+ transition: transform .35s var(--ease);
+ }
+ .ct-tile:hover .arrow-out { transform: translateX(4px); }
+
+ /* CTA block - timeline */
+ .ct-timeline {
+ background: var(--accent); color: #ffffff;
+ border-radius: 16px; padding: 32px 28px;
+ display: flex; flex-direction: column; gap: 18px;
+ }
+ .ct-timeline h3 { font-size: 22px; font-weight: 600; }
+ .ct-timeline ol {
+ list-style: none; padding: 0; margin: 0;
+ display: flex; flex-direction: column; gap: 14px;
+ counter-reset: ctstep;
+ }
+ .ct-timeline li {
+ counter-increment: ctstep;
+ padding-left: 32px; position: relative;
+ font-size: 13px; line-height: 1.4;
+ }
+ .ct-timeline li::before {
+ content: counter(ctstep);
+ position: absolute; left: 0; top: -2px;
+ width: 22px; height: 22px; border-radius: 50%;
+ background: #ffffff; color: var(--accent-ink);
+ display: flex; align-items: center; justify-content: center;
+ font-size: 11px; font-weight: 700; font-family: var(--sans);
+ }
+
+ @media (max-width: 1000px) { .ct-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<!-- HERO -->
+<section class="page-hero contact" style="min-height: 50vh;">
+ <div class="container">
+ <div class="breadcrumb"><span>Contact</span></div>
+ <h1 class="serif">Trente minutes. <em class="accent">Aucun engagement.</em></h1>
+ <p class="lead">Un échange pour comprendre votre contexte, vos objectifs, et déterminer ensemble si une collaboration a du sens.</p>
+ </div>
+</section>
+
+<!-- CONTACT GRID -->
+<section>
+ <div class="container">
+ <div class="ct-grid">
+
+ <!-- LEFT : form card -->
+ <div class="ct-form-card reveal">
+ <div class="section-tag">Formulaire</div>
+ <h2 class="serif">Vous êtes&nbsp;?</h2>
+ <p>Sélectionnez votre profil, les questions s'adaptent. La première réponse arrive sous 48 heures.</p>
+
+ <div class="ct-chips profile-chips">
+ <button data-profile="sportif" class="active">Athlète</button>
+ <button data-profile="parent">Parent / Famille</button>
+ <button data-profile="club">Club / Fédération</button>
+ <button data-profile="entreprise">Marque / Sponsor</button>
+ <button data-profile="media">Média</button>
+ </div>
+
+ <form class="ct-form" onsubmit="event.preventDefault(); alert('Demande envoyée, merci.'); this.reset();">
+ <div class="ct-row">
+ <div class="ct-field"><label>Prénom</label><input type="text" required /></div>
+ <div class="ct-field"><label>Nom</label><input type="text" required /></div>
+ </div>
+ <div class="ct-row">
+ <div class="ct-field"><label>Email</label><input type="email" required /></div>
+ <div class="ct-field"><label>Téléphone</label><input type="tel" /></div>
+ </div>
+
+ <!-- Dynamic fields injected by main.js -->
+ <div class="ct-row" data-dynamic-fields></div>
+
+ <div class="ct-row single">
+ <div class="ct-field"><label>Votre message</label><textarea rows="5" placeholder="Quel est votre contexte ? Quel est votre objectif ?" required></textarea></div>
+ </div>
+
+ <div class="ct-submit">
+ <button type="submit">
+ Envoyer la demande
+ <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+ </button>
+ </div>
+ </form>
+ </div>
+
+ <!-- RIGHT : sidebar tiles -->
+ <aside class="ct-side reveal">
+
+ <a href="mailto:contact@duqque.fr" class="ct-tile dark">
+ <span class="lbl">France · Paris</span>
+ <span class="val">contact@duqque.fr</span>
+ <span class="arrow-out"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+ </a>
+
+ <a href="mailto:contact@duqque.pt" class="ct-tile purple">
+ <span class="lbl">Portugal · Lisbonne</span>
+ <span class="val">contact@duqque.pt</span>
+ <span class="arrow-out"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+ </a>
+
+ <a href="tel:+351932011866" class="ct-tile green">
+ <span class="lbl">Téléphone</span>
+ <span class="val">+351 932 011 866</span>
+ <span class="lbl" style="margin-top: 8px;">Lun‑Ven · 9h‑18h</span>
+ </a>
+
+ <div class="ct-tile dark" style="background:#1a1033; border:1px solid rgba(184,164,240,0.25); color:#f5f3ef;">
+ <span class="lbl">Nos bureaux</span>
+ <span class="val">Paris · Lisbonne</span>
+ <span class="lbl" style="margin-top: 8px;">Athlètes suivis dans le monde entier</span>
+ </div>
+
+ <div class="ct-timeline">
+ <span class="lbl" style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; opacity: 0.7;">Comment ça se passe</span>
+ <h3 class="serif">Quatre étapes simples.</h3>
+ <ol>
+ <li>Vous remplissez le formulaire.</li>
+ <li>Nous répondons sous 48 heures.</li>
+ <li>Premier appel de 30 minutes, sans engagement.</li>
+ <li>Nous construisons ensemble la suite, si c'est pertinent.</li>
+ </ol>
+ </div>
+
+ </aside>
+
+ </div>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260890"></script>
+</body>
+</html>
