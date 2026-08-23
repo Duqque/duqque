@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Accès administrateur · Duqque Sports</title>
+<meta name="robots" content="noindex, nofollow" />
+<style>
+/* =========================================================
+   ACCÈS ADMINISTRATEUR
+   Page autonome, dans la charte du site. Le mot de passe n'est pas ici : son
+   empreinte vit dans acces-cle.js, exclu du depot.
+   ========================================================= */
+@font-face { font-family: 'LT Museum'; src: url('assets/fonts/LTMuseum-Black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('assets/fonts/Gilroy-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('assets/fonts/Gilroy-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+
+:root {
+  --noir: #0a0a0a; --noir-doux: #121212; --creme: #f5f3ef;
+  --violet: #4a1fc7; --violet-clair: #c4b3ff; --lime: #d9ff3d;
+  --ligne: rgba(255,255,255,0.12);
+  --display: 'LT Museum', Georgia, serif;
+  --sans: 'Gilroy', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; background: var(--noir); color: var(--creme);
+  font-family: var(--sans); font-size: 16px; line-height: 1.6;
+  display: grid; place-items: center; padding: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+.halo {
+  position: fixed; top: -20%; right: -15%; width: min(70vw, 700px); aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(119,71,255,0.28) 0%, transparent 62%);
+  filter: blur(30px); pointer-events: none;
+}
+.boite {
+  position: relative; width: min(100%, 440px);
+  background: var(--noir-doux); border: 1px solid var(--ligne);
+  border-radius: 20px; padding: clamp(28px, 5vw, 44px);
+}
+.marque { font-family: var(--sans); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 26px; }
+h1 {
+  font-family: var(--display); font-weight: 900; text-transform: uppercase;
+  font-size: 27px; line-height: 1.06; letter-spacing: -0.025em; margin: 0 0 12px;
+}
+.intro { font-size: 14.5px; line-height: 1.6; color: rgba(245,243,239,0.86); margin: 0 0 28px; }
+label {
+  display: block; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 700; color: var(--violet-clair); margin-bottom: 9px;
+}
+input {
+  width: 100%; background: transparent; border: none;
+  border-bottom: 1.5px solid var(--ligne); color: var(--creme);
+  padding: 12px 0; font-family: var(--sans); font-size: 17px;
+  transition: border-color .3s var(--ease);
+}
+input:focus { outline: none; border-color: var(--lime); }
+button {
+  width: 100%; margin-top: 26px; cursor: pointer; border: none;
+  background: var(--violet); color: #fff; border-radius: 100px; padding: 16px 26px;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 600; letter-spacing: 0.04em;
+  transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+}
+button:hover { background: var(--lime); color: #0b0b0b; transform: translateY(-2px); }
+button:focus-visible { outline: 3px solid var(--violet-clair); outline-offset: 3px; }
+.message { margin: 18px 0 0; font-size: 13.5px; line-height: 1.5; min-height: 20px; }
+.message.ko { color: #ffb3b3; }
+.message.ok { color: var(--lime); }
+.retour { display: block; margin-top: 26px; font-size: 12.5px; color: rgba(245,243,239,0.72); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.25); width: max-content; }
+.retour:hover { color: var(--creme); border-color: var(--creme); }
+</style>
+</head>
+<body>
+<div class="halo" aria-hidden="true"></div>
+
+<main class="boite">
+ <p class="marque">duqque</p>
+ <h1>Accès administrateur</h1>
+ <p class="intro">Le site est en préparation. Cette page ouvre la version complète pour trente jours, sur cet appareil.</p>
+
+ <form id="f" autocomplete="off">
+  <label for="mp">Mot de passe</label>
+  <input id="mp" type="password" name="mp" autocomplete="current-password" required autofocus />
+  <button type="submit">Ouvrir le site</button>
+ </form>
+
+ <p class="message" id="msg" role="status" aria-live="polite"></p>
+ <a class="retour" href="/">Retour à la page d'accueil</a>
+</main>
+
+<!-- La cle vit hors du depot. Si ce fichier manque, la page le dit plutot que d'echouer en silence. -->
+<script src="acces-cle.js"></script>
+<script>
+(function () {
+ var f = document.getElementById('f'), msg = document.getElementById('msg');
+
+ if (!window.DUQQUE_ACCES) {
+  msg.className = 'message ko';
+  msg.textContent = "Le fichier acces-cle.js est absent du serveur. Déposez-le à la racine, à côté de cette page.";
+  f.querySelector('button').disabled = true;
+  return;
+ }
+
+ // SHA-256 : le mot de passe n'est jamais ecrit nulle part, seule son empreinte
+ // est comparee. crypto.subtle exige une origine sure (https ou localhost).
+ async function empreinte(txt) {
+  var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(txt));
+  return Array.from(new Uint8Array(buf)).map(function (b) {
+   return b.toString(16).padStart(2, '0');
+  }).join('');
+ }
+
+ f.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  msg.className = 'message';
+  msg.textContent = 'Vérification…';
+  try {
+   var h = await empreinte(document.getElementById('mp').value);
+   if (h !== window.DUQQUE_ACCES.empreinte) {
+    msg.className = 'message ko';
+    msg.textContent = 'Mot de passe incorrect.';
+    return;
+   }
+   // 30 jours, tout le site. SameSite=Lax pour que le cookie suive la navigation.
+   document.cookie = 'duqque_apercu=' + window.DUQQUE_ACCES.jeton +
+    '; Max-Age=2592000; Path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+   msg.className = 'message ok';
+   msg.textContent = 'Accès ouvert. Redirection…';
+   setTimeout(function () { location.href = '/home.html'; }, 500);
+  } catch (err) {
+   msg.className = 'message ko';
+   msg.textContent = "Vérification impossible sur cette connexion. Ouvrez la page en https.";
+  }
+ });
+})();
+</script>
+</body>
+</html>

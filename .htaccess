@@ -8,6 +8,24 @@
 # =========================================================
 <IfModule mod_rewrite.c>
   RewriteEngine On
+
+  # ---------------------------------------------------------
+  # ACCES ADMINISTRATEUR
+  # /acces.html demande un mot de passe et pose le cookie duqque_apercu.
+  # Le mot de passe et le jeton vivent dans acces-cle.js, exclu du depot.
+  # Deconnexion : /?apercu=stop
+  # ---------------------------------------------------------
+  RewriteCond %{QUERY_STRING} (^|&)apercu=stop($|&) [NC]
+  RewriteRule ^ - [CO=duqque_apercu:non:%{HTTP_HOST}:-1:/]
+
+  # Porteur du cookie : le site entier s'ouvre.
+  RewriteCond %{HTTP_COOKIE} duqque_apercu=ouvert- [NC]
+  RewriteRule ^ - [L]
+
+  # La page d'acces elle-meme reste evidemment joignable
+  RewriteCond %{REQUEST_URI} ^/(acces\.html|acces-cle\.js)$ [NC]
+  RewriteRule ^ - [L]
+
   # L'habillage reste servi : polices, images, feuille de style, script
   RewriteCond %{REQUEST_URI} !^/(assets|css|js)/ [NC]
   # Ces pages restent accessibles, les mentions legales etant obligatoires
