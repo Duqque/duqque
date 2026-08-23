@@ -1392,7 +1392,7 @@ const ARTICLES = [
  { url: 'art-blessure-longue-carriere.html', axe: 'Gestion de carrière',
    titre: "Blessure longue : ne pas perdre une saison de carrière" },
  { url: 'art-propriete-intellectuelle-sport.html', axe: 'Image de marque',
-   titre: "Copier un club, copier un athlète : le livre blanc de la propriété intellectuelle" }
+   titre: "On vous a copié : protéger l'identité d'un club et l'image d'un athlète" }
 ];
 const SERVICES = {
  'Gestion de carrière': { url: 'service-carriere.html', txt: "Contrats, trajectoire, reconversion : nous pilotons la carrière au-delà des résultats." },
