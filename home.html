@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Duqque Sports Gestion de carrière et d'image des athlètes</title>
 <meta name="description" content="Duqque Sports accompagne les jeunes athlètes : gestion de carrière, image, communication et partenariats. Carrière, sponsoring, médias, reconversion." />
-<link rel="stylesheet" href="css/style.css?v=20260897" />
+<link rel="stylesheet" href="css/style.css?v=20260902" />
 <style>
  /* Section Chiffres clés autonome */
  .stats-section { background: var(--bg-soft); }
@@ -678,14 +678,14 @@
  }
  /* =====================================================================
     MANIFESTE IMMERSIF
-    Piste de defilement de 260vh, scene epinglee sur toute la hauteur d'ecran.
+    Piste de defilement de 520vh : dix-sept vignettes ont besoin de course pour se relayer.
     Au depart les photos et les cartes sont dispersees loin du centre, inclinees et
     agrandies ; le defilement les fait converger vers le manifeste. Chaque element a
     son propre retard et sa propre trajectoire, sinon le mouvement parait mecanique.
     Fond identique au reste de la page : la scene ne doit pas casser le minimalisme.
     ===================================================================== */
- .mfx { background: var(--bg); }
- .mfx-runway { height: 260vh; position: relative; }
+ .mfx { background: var(--bg); padding-bottom: 0; }
+ .mfx-runway { height: 520vh; position: relative; }
  .mfx-stage {
   position: sticky; top: 0; height: 100svh; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
@@ -731,8 +731,12 @@
  @keyframes mfxCaret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
  .mfx-type.fini .ch.tete::after { display: none; }
 
+ /* Toutes les vignettes sont ancrees au meme point : elles arrivent de leur cote puis
+    viennent se poser au centre, les unes sur les autres, comme un paquet de cartes.
+    Sans left/top explicites elles retombaient sur leur position statique dans le flex,
+    et le paquet final se retrouvait etale sur 170px. */
  .mfx-el {
-  position: absolute; margin: 0;
+  position: absolute; left: 50%; top: 50%; margin: 0;
   will-change: transform, opacity;
   transform: translate(-50%, -50%);
   opacity: 0;
@@ -742,19 +746,13 @@
   background-color: #dedede;
   box-shadow: 0 26px 70px rgba(10,10,14,0.22);
  }
- /* Formats varies : portrait, carre, panoramique */
- /* Toutes les vignettes sont ancrees au meme point : elles arrivent de leur cote et
-    viennent se poser au centre, les unes sur les autres, comme un paquet de cartes.
-    Le decalage final de chacune est calcule en JS a partir de ses data-dx / dy / r. */
- .ph-1 { left: 50%; top: 50%; width: clamp(120px, 13vw, 196px); aspect-ratio: 3 / 4;  z-index: 6; }
- .ph-2 { left: 50%; top: 50%; width: clamp(112px, 12vw, 178px); aspect-ratio: 1 / 1;  z-index: 7; }
- .ph-3 { left: 50%; top: 50%; width: clamp(140px, 16vw, 240px); aspect-ratio: 16 / 9; z-index: 8; }
- .ph-4 { left: 50%; top: 50%; width: clamp(118px, 12.5vw, 186px); aspect-ratio: 3 / 4; z-index: 9; }
- .ph-5 { left: 50%; top: 50%; width: clamp(150px, 17vw, 262px); aspect-ratio: 21 / 9; z-index: 10; }
- .ph-6 { left: 50%; top: 50%; width: clamp(120px, 13vw, 190px); aspect-ratio: 1 / 1;  z-index: 11; }
+ /* Deux formats seulement, tires des photos elles-memes. Le z-index est pose en JS
+    (ordre d'arrivee dans le paquet), il n'a plus a etre declare ici. */
+ .mfx-photo.pay { width: clamp(158px, 17.5vw, 254px); aspect-ratio: 4 / 3; }
+ .mfx-photo.por { width: clamp(124px, 13.5vw, 196px); aspect-ratio: 3 / 4; }
 
  .mfx-card {
-  width: clamp(150px, 15vw, 208px);
+  width: clamp(158px, 15.5vw, 214px);
   background: var(--c); color: var(--i);
   border-radius: 12px; padding: 15px 16px 17px;
   box-shadow: 0 22px 56px rgba(10,10,14,0.2);
@@ -769,7 +767,32 @@
  .mfx-card b { display: block; font-family: var(--display); font-weight: 900; font-size: 13.5px; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 6px; }
  .mfx-card small { display: block; font-size: 11px; line-height: 1.45; opacity: 0.8; }
 
- .cd-1, .cd-2, .cd-3, .cd-4, .cd-5 { left: 50%; top: 50%; }
+ /* Etiquette qui distingue une offre d'un simple constat. currentColor : elle suit la
+    couleur d'encre de la carte, donc le contraste est celui, deja verifie, du titre. */
+ .of-tag {
+  display: block; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 700; color: currentColor; opacity: 0.62; margin-bottom: 10px;
+ }
+
+ /* Anecdotes : fond clair, pastille violette datee, pictogramme du sport concerne.
+    Volontairement differentes des cartes d'offre pour qu'on distingue au premier coup
+    d'oeil ce qui raconte une histoire de ce qui propose un service. */
+ .mfx-note {
+  width: clamp(168px, 17.5vw, 246px);
+  background: #fff; color: var(--ink);
+  border: 1px solid rgba(26,20,16,0.10);
+  border-radius: 12px; padding: 14px 16px 16px;
+  box-shadow: 0 22px 56px rgba(10,10,14,0.2);
+ }
+ .an-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
+  color: var(--accent-ink); background: rgba(90,47,230,0.10);
+  padding: 4px 9px; border-radius: 100px; margin-bottom: 11px;
+ }
+ .an-tag svg { width: 12px; height: 12px; flex: 0 0 auto; }
+ .mfx-note b { display: block; font-family: var(--display); font-weight: 900; font-size: 13.5px; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 6px; }
+ .mfx-note small { display: block; font-size: 11px; line-height: 1.5; color: var(--ink-soft); }
 
  /* Mouvement reduit : pas d'animation. Les vignettes etant toutes ancrees au meme point,
     il faut les remettre dans le flux, sinon elles se masquent entre elles. */
@@ -785,18 +808,21 @@
     s'ecrit au defilement, puis les cartes qui viennent s'empiler dessus l'une apres l'autre.
     Seules les dimensions changent. */
  @media (max-width: 900px) {
-  .mfx-runway { height: 420vh; }
+  .mfx-runway { height: 560vh; }
   .mfx-stage { padding: 0 var(--pad); }
   .mfx-core { width: calc(100% - 2 * var(--pad)); }
   .mfx-type { font-size: clamp(19px, 5.4vw, 30px); max-width: 20ch; }
-  .mfx-el { width: min(72vw, 300px) !important; }
-  .mfx-photo { aspect-ratio: 4 / 3 !important; }
-  .ph-5, .ph-6 { display: none; }
-  .mfx-card { padding: 18px 20px 20px; border-radius: 14px; }
+  .mfx-el { width: min(74vw, 306px) !important; }
+  .mfx-photo.pay { aspect-ratio: 4 / 3; }
+  .mfx-photo.por { aspect-ratio: 3 / 4; max-height: 44vh; }
+  .mfx-card, .mfx-note { padding: 18px 20px 20px; border-radius: 14px; }
   .mfx-ico { width: 34px; height: 34px; border-radius: 10px; margin-bottom: 12px; }
   .mfx-ico svg { width: 18px; height: 18px; }
-  .mfx-card b { font-size: 16px; }
-  .mfx-card small { font-size: 12.5px; }
+  .mfx-card b, .mfx-note b { font-size: 16px; }
+  .mfx-card small, .mfx-note small { font-size: 12.5px; }
+  .of-tag { font-size: 10px; }
+  .an-tag { font-size: 10px; padding: 5px 10px; }
+  .an-tag svg { width: 13px; height: 13px; }
  }
 
  /* Bloc conviction centre sur la page, texte centre lui aussi */
@@ -841,52 +867,90 @@
     <p class="mfx-type" id="mfxType" aria-label="Nous croyons que le talent mérite mieux que le hasard. Qu'une carrière se construit, qu'une image se protège, et qu'un nom, bien porté, devient un héritage."></p>
    </div>
 
-   <figure class="mfx-el mfx-photo ph-1" data-dx="-17.0" data-dy="-8.0" data-r="-11" data-s="1.26" data-lag="0.00"
-           data-bgimg="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Un athlète et son entourage"></figure>
+   <figure class="mfx-el mfx-photo pay" data-dx="17.9" data-dy="1.3" data-r="-10.0" data-s="1.14"
+           data-bgimg="assets/manifeste/randori.jpg" role="img" aria-label="Randori dans un dojo"></figure>
 
-   <figure class="mfx-el mfx-photo ph-2" data-dx="15.0" data-dy="-11.0" data-r="9" data-s="1.3" data-lag="0.06"
-           data-bgimg="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Entraînement au lever du jour"></figure>
+   <article class="mfx-el mfx-note" data-dx="18.1" data-dy="6.7" data-r="11.9" data-s="1.185">
+    <span class="an-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5v17M6 5.5c3 3 3 10 0 13M18 5.5c-3 3-3 10 0 13"/></svg>1984 · NBA</span>
+    <b>Jordan négocie un pourcentage</b>
+    <small>Plutôt qu'un cachet fixe, il obtient une part sur chaque paire vendue. La chaussure devient une marque.</small>
+   </article>
 
-   <figure class="mfx-el mfx-photo ph-3" data-dx="-15.0" data-dy="12.0" data-r="7" data-s="1.22" data-lag="0.12"
-           data-bgimg="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Effort en compétition"></figure>
-
-   <figure class="mfx-el mfx-photo ph-4" data-dx="16.0" data-dy="10.0" data-r="-8" data-s="1.28" data-lag="0.18"
-           data-bgimg="https://images.unsplash.com/photo-1547104442-9d09e7d8aa2c?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Concentration avant le combat"></figure>
-
-   <figure class="mfx-el mfx-photo ph-5" data-dx="-4.0" data-dy="-15.0" data-r="5" data-s="1.24" data-lag="0.24"
-           data-bgimg="https://images.unsplash.com/photo-1531315396756-905d68d21b56?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Geste technique"></figure>
-
-   <figure class="mfx-el mfx-photo ph-6" data-dx="5.0" data-dy="15.0" data-r="-6" data-s="1.2" data-lag="0.30"
-           data-bgimg="https://images.unsplash.com/photo-1483721310020-03333e577078?w=760&auto=format&fit=crop&q=60" role="img" aria-label="Après la compétition"></figure>
-
-   <article class="mfx-el mfx-card cd-1" data-dx="-20.0" data-dy="2.0"  data-r="-9" data-s="1.18" data-lag="0.36" style="--c:#5a2fe6; --i:#fff;">
+   <article class="mfx-el mfx-card" data-dx="6.8" data-dy="12.2" data-r="-11.8" data-s="1.23" style="--c:#5a2fe6; --i:#fff;">
+    <span class="of-tag">Offre</span>
     <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L14 6l4 6 4-8"/></svg></span>
-    <b>Une carrière construite</b>
-    <small>Rien n'est laissé au hasard du calendrier</small>
+    <b>Gestion de carrière</b>
+    <small>Calendrier, choix de club, échéances : rien au hasard</small>
    </article>
 
-   <article class="mfx-el mfx-card cd-2" data-dx="19.0" data-dy="-2.0" data-r="8"  data-s="1.2"  data-lag="0.42" style="--c:#f5f3ef; --i:#101400;">
+   <figure class="mfx-el mfx-photo por" data-dx="10.3" data-dy="14.7" data-r="13.7" data-s="1.275"
+           data-bgimg="assets/manifeste/bureau-carriere.jpg" role="img" aria-label="Un athlète et son agent autour d'un plan de carrière"></figure>
+
+   <article class="mfx-el mfx-note" data-dx="-3.5" data-dy="13.6" data-r="-13.6" data-s="1.14">
+    <span class="an-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5l4 3-1.5 4.8h-5L8 10.5z"/></svg>13 ans · Santos</span>
+    <b>Neymar signe avant ses débuts</b>
+    <small>Nike le repère et le signe à treize ans, avant son premier match professionnel.</small>
+   </article>
+
+   <figure class="mfx-el mfx-photo por" data-dx="-10.4" data-dy="10.5" data-r="11.0" data-s="1.185"
+           data-bgimg="assets/manifeste/piste-athletisme.jpg" role="img" aria-label="Athlète sur la piste après l'effort"></figure>
+
+   <article class="mfx-el mfx-card" data-dx="-13.4" data-dy="13.3" data-r="-10.9" data-s="1.23" style="--c:#f5f3ef; --i:#101400;">
+    <span class="of-tag">Offre</span>
     <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></span>
-    <b>Une image protégée</b>
-    <small>Le droit à l'image avant la première signature</small>
+    <b>Image et droit à l'image</b>
+    <small>Ce que vous cédez, à qui, et pour combien de temps</small>
    </article>
 
-   <article class="mfx-el mfx-card cd-3" data-dx="-8.0" data-dy="-17.0" data-r="6" data-s="1.16" data-lag="0.48" style="--c:#0b0b0b; --i:#f5f3ef;">
-    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 7c0 3 2 5 5 5M17 7c0 3-2 5-5 5M5 21h14"/></svg></span>
-    <b>Un héritage transmis</b>
-    <small>Un nom qui vaut après les résultats</small>
+   <article class="mfx-el mfx-note" data-dx="-16.6" data-dy="4.0" data-r="12.8" data-s="1.275">
+    <span class="an-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M4.5 8.5C8 9.5 10 12 10 20M19.5 8.5C16 9.5 14 12 14 20"/></svg>2016 · Manacor</span>
+    <b>Nadal ouvre son académie</b>
+    <small>Une école est installée dans l'académie : s'entraîner ne coûte plus la scolarité.</small>
    </article>
 
-   <article class="mfx-el mfx-card cd-4" data-dx="9.0" data-dy="17.0"  data-r="-7" data-s="1.16" data-lag="0.54" style="--c:#d9ff3d; --i:#101400;">
-    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.2-7-10a3.7 3.7 0 0 1 7-2.3A3.7 3.7 0 0 1 19 10c0 5.8-7 10-7 10z"/></svg></span>
-    <b>Zéro commission</b>
-    <small>Sur tout ce qui est négocié pour les espoirs</small>
+   <figure class="mfx-el mfx-photo pay" data-dx="-20.7" data-dy="-4.3" data-r="-12.7" data-s="1.14"
+           data-bgimg="assets/manifeste/studio-image.jpg" role="img" aria-label="Séance photo en studio pour un athlète"></figure>
+
+   <article class="mfx-el mfx-card mfx-prog" data-dx="-17.6" data-dy="-1.5" data-r="14.6" data-s="1.185" style="--c:#d9ff3d; --i:#101400;">
+    <span class="of-tag">Programme</span>
+    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11.5V17c0 1.6 2.2 3 5 3s5-1.4 5-3v-5.5"/></svg></span>
+    <b>Programme Espoirs</b>
+    <small>Gratuit pour les moins de 18 ans, sans commission</small>
    </article>
 
-   <article class="mfx-el mfx-card cd-5" data-dx="-18.0" data-dy="-14.0" data-r="10" data-s="1.14" data-lag="0.60" style="--c:#b8a4f0; --i:#1a1033;">
-    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/></svg></span>
-    <b>Le club au centre</b>
-    <small>Nous renforçons, nous ne remplaçons pas</small>
+   <figure class="mfx-el mfx-photo pay" data-dx="-15.9" data-dy="-11.5" data-r="-10.0" data-s="1.23"
+           data-bgimg="assets/manifeste/medias-heritage.jpg" role="img" aria-label="Judoka face aux photographes"></figure>
+
+   <article class="mfx-el mfx-note" data-dx="-3.5" data-dy="-15.8" data-r="11.9" data-s="1.275">
+    <span class="an-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21V4M5 4h11l-2 3.5L16 11H5"/></svg>2022 · Équipe de France</span>
+    <b>Mbappé refuse un shooting</b>
+    <small>Son refus de poser pour des sponsors pousse la fédération à revoir sa convention d'image.</small>
+   </article>
+
+   <article class="mfx-el mfx-card" data-dx="-6.9" data-dy="-13.1" data-r="-11.8" data-s="1.14" style="--c:#0b0b0b; --i:#f5f3ef;">
+    <span class="of-tag">Offre</span>
+    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+    <b>Communication</b>
+    <small>Prise de parole, réseaux, relation aux médias</small>
+   </article>
+
+   <figure class="mfx-el mfx-photo por" data-dx="7.1" data-dy="-15.7" data-r="13.7" data-s="1.185"
+           data-bgimg="assets/manifeste/ceinture-noire.jpg" role="img" aria-label="Judoka de dos, ceinture noire à la main"></figure>
+
+   <article class="mfx-el mfx-note" data-dx="13.0" data-dy="-11.2" data-r="-13.6" data-s="1.23">
+    <span class="an-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11.5V17c0 1.6 2.2 3 5 3s5-1.4 5-3v-5.5"/></svg>2018 · Akron</span>
+    <b>LeBron ouvre une école</b>
+    <small>L'I PROMISE School est une école publique, financée par sa fondation, dans sa ville d'origine.</small>
+   </article>
+
+   <figure class="mfx-el mfx-photo pay" data-dx="16.0" data-dy="-8.8" data-r="11.0" data-s="1.275"
+           data-bgimg="assets/manifeste/terrain-transmission.jpg" role="img" aria-label="Un entraîneur et un jeune joueur sur le terrain"></figure>
+
+   <article class="mfx-el mfx-card" data-dx="17.6" data-dy="-4.0" data-r="-10.9" data-s="1.14" style="--c:#b8a4f0; --i:#1a1033;">
+    <span class="of-tag">Offre</span>
+    <span class="mfx-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l4-4 5 3 5-3 4 4-5 6H8z"/></svg></span>
+    <b>Sponsoring et partenariats</b>
+    <small>Zéro commission : tout revient à l'athlète</small>
    </article>
 
   </div>
@@ -1367,7 +1431,7 @@
 <footer class="footer"></footer>
 
 
-<script src="js/main.js?v=20260897"></script>
+<script src="js/main.js?v=20260902"></script>
 <script>
 (function(){
  const runway = document.getElementById('mfxRunway');
@@ -1421,6 +1485,20 @@
   cible.classList.toggle('fini', n >= lettres.length);
  };
 
+ // Hauteur reelle du paquet une fois pose, mesuree une seule fois : elle sert a calculer
+ // de combien descendre pour que rien ne reste vide sous lui. Une mesure par image coute
+ // un recalcul de mise en page a chaque cran de molette.
+ let paquetH = 0;
+ const mesurePaquet = () => {
+  // offsetHeight, et non getBoundingClientRect : la boite englobante refleterait la
+  // transformation de l'image precedente, donc les vignettes encore eparpillees, et on
+  // mesurait 616px au lieu de 294. La hauteur de mise en page, elle, ne bouge pas. On
+  // ajoute une marge pour les quelques pixels de decalage et l'inclinaison des cartes.
+  let h = 0;
+  els.forEach(o => { if (o.el.offsetHeight > h) h = o.el.offsetHeight; });
+  return h + 26;
+ };
+
  const place = () => {
   if (reduit()) {
    ecrire(1);
@@ -1440,7 +1518,18 @@
   // reste : a la fin, les onze forment un paquet, legerement decale et incline carte par
   // carte, l'ordre d'empilement suivant l'ordre d'arrivee.
   ecrire(Math.min(1, brut / 0.24));
-  const p = Math.min(1, Math.max(0, (brut - 0.22) / 0.76));
+  const p = Math.min(1, Math.max(0, (brut - 0.22) / 0.68));
+
+  // Sortie de scene. Le paquet est centre dans une scene haute d'un ecran : une fois
+  // depinglee, on traversait la moitie basse restee vide, soit environ 330px de blanc
+  // entre le paquet et la section suivante. Sur le dernier dixieme, tout le contenu
+  // descend donc de cette demi-hauteur : le paquet finit colle au bas de l'ecran et sort
+  // par le haut au moment exact ou la piste se termine, sans vide derriere lui.
+  const sortie = Math.max(0, (brut - 0.90) / 0.10);
+  if (sortie > 0 && !paquetH) paquetH = mesurePaquet();
+  const glisse = sortie * Math.max(0, (stage.offsetHeight - paquetH) / 2);
+  const noyau = runway.querySelector('.mfx-core');
+  if (noyau) noyau.style.transform = 'translate(-50%, -50%) translateY(' + glisse.toFixed(1) + 'px)';
 
   // La derniere carte doit avoir fini de se poser exactement a la fin de la piste : on
   // calcule donc le pas a partir de la duree d'une pose, et non l'inverse. Avec PAS = 1/N
@@ -1457,7 +1546,8 @@
     ' translate(' + (o.dx * reste).toFixed(2) + 'vw, ' + (o.dy * reste).toFixed(2) + 'vh)' +
     ' translate(' + (o.dx * 0.62 * pose).toFixed(1) + 'px, ' + (o.dy * 0.55 * pose).toFixed(1) + 'px)' +
     ' rotate(' + (o.r * reste + o.r * 0.42 * pose).toFixed(2) + 'deg)' +
-    ' scale(' + (1 + (o.s - 1) * reste).toFixed(3) + ')';
+    ' scale(' + (1 + (o.s - 1) * reste).toFixed(3) + ')' +
+    ' translateY(' + glisse.toFixed(1) + 'px)';
    o.el.style.opacity = Math.min(1, pose * 2.4).toFixed(3);
    // La derniere arrivee est sur le dessus du paquet.
    o.el.style.zIndex = 20 + i;
@@ -1471,7 +1561,7 @@
   requestAnimationFrame(() => { attend = false; place(); });
  };
  addEventListener('scroll', surDefilement, { passive: true });
- addEventListener('resize', place);
+ addEventListener('resize', () => { paquetH = 0; place(); });
  place();
 })();
 </script>
