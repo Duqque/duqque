@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cotisations et accompagnements · Duqque Sports</title>
 <meta name="description" content="Les formules d'accompagnement de Duqque Sports : gratuit pour les moins de 18 ans, 60 € par an pour les athlètes majeurs, 120 € après une sélection internationale. Aucune commission sur les contrats négociés." />
-<link rel="stylesheet" href="css/style.css?v=20260905" />
+<link rel="stylesheet" href="css/style.css?v=20260906" />
 <style>
  /* =====================================================================
     COTISATIONS
@@ -123,9 +123,14 @@
  .co-table tbody tr:not(.co-sec):hover td,
  .co-table tbody tr:not(.co-sec):hover th { background-color: rgba(90, 47, 230, 0.05); }
  .co-table tbody tr:not(.co-sec):hover td:nth-child(2) { background-color: rgba(217, 255, 61, 0.34); }
+ /* Pictogramme et libelle dans une ligne flex centree. Le pictogramme etait auparavant
+    cale avec un vertical-align: -6px : la police d'affichage ayant un jambage superieur
+    important, le libelle se retrouvait 3px au-dessus du centre de la bande et 4px au-dessus
+    du pictogramme. Le centrage ne repose plus sur une valeur en dur. */
+ .co-sec-in { display: flex; align-items: center; gap: 11px; }
  .co-sec-ico {
   display: inline-flex; width: 24px; height: 24px; border-radius: 7px;
-  align-items: center; justify-content: center; vertical-align: -6px; margin-right: 11px;
+  align-items: center; justify-content: center; flex: 0 0 auto;
   background: rgba(255,255,255,0.18);
  }
  .co-s3 .co-sec-ico, .co-s4 .co-sec-ico { background: rgba(0,0,0,0.14); }
@@ -265,7 +270,7 @@
    </thead>
    <tbody>
 
-    <tr class="co-sec co-s1"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19"/></svg></span>Cotisation</th></tr>
+    <tr class="co-sec co-s1"><th scope="rowgroup" colspan="4"><span class="co-sec-in"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19"/></svg></span><span>Cotisation</span></span></th></tr>
     <tr>
      <th scope="row">Montant annuel<small>Aucun prélèvement sur les contrats, quelle que soit la formule</small></th>
      <td data-col="Espoirs"><strong>Gratuit</strong></td>
@@ -273,7 +278,7 @@
      <td data-col="Convention">Sur devis</td>
     </tr>
 
-    <tr class="co-sec co-s2"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L14 6l4 6 4-8"/></svg></span>Gestion de carrière</th></tr>
+    <tr class="co-sec co-s2"><th scope="rowgroup" colspan="4"><span class="co-sec-in"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L14 6l4 6 4-8"/></svg></span><span>Gestion de carrière</span></span></th></tr>
     <tr>
      <th scope="row">Audit de départ<small>Contrats en cours, image publique, présence digitale</small></th>
      <td data-col="Espoirs">Complet</td>
@@ -299,7 +304,7 @@
      <td data-col="Convention">Atelier collectif</td>
     </tr>
 
-    <tr class="co-sec co-s3"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5L12 2z"/></svg></span>Sponsoring</th></tr>
+    <tr class="co-sec co-s3"><th scope="rowgroup" colspan="4"><span class="co-sec-in"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5L12 2z"/></svg></span><span>Sponsoring</span></span></th></tr>
     <tr>
      <th scope="row">Relecture des contrats avant signature<small>Exclusivités, durée, droit à l'image, contreparties</small></th>
      <td data-col="Espoirs">Illimitée</td>
@@ -325,7 +330,7 @@
      <td data-col="Convention"><strong>0 %</strong></td>
     </tr>
 
-    <tr class="co-sec co-s4"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4V5z"/></svg></span>Communication</th></tr>
+    <tr class="co-sec co-s4"><th scope="rowgroup" colspan="4"><span class="co-sec-in"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4V5z"/></svg></span><span>Communication</span></span></th></tr>
     <tr>
      <th scope="row">Media training<small>Interviews, zones mixtes, réseaux après une défaite</small></th>
      <td data-col="Espoirs">Atelier annuel</td>
@@ -345,7 +350,7 @@
      <td data-col="Convention">Protocole fourni</td>
     </tr>
 
-    <tr class="co-sec co-s5"><th scope="rowgroup" colspan="4"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M3 20v-2.5a4.5 4.5 0 0 1 9 0V20M13 20v-1.5a3.5 3.5 0 0 1 7 0V20"/></svg></span>Entourage</th></tr>
+    <tr class="co-sec co-s5"><th scope="rowgroup" colspan="4"><span class="co-sec-in"><span class="co-sec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3"/><circle cx="16.5" cy="9.5" r="2.5"/><path d="M3 20v-2.5a4.5 4.5 0 0 1 9 0V20M13 20v-1.5a3.5 3.5 0 0 1 7 0V20"/></svg></span><span>Entourage</span></span></th></tr>
     <tr>
      <th scope="row">Module parents</th>
      <td data-col="Espoirs"><span class="co-val co-oui"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5 5L20 6.5"/></svg></span>Oui
@@ -395,6 +400,6 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260905"></script>
+<script src="js/main.js?v=20260906"></script>
 </body>
 </html>
