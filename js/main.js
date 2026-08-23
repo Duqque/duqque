@@ -787,6 +787,9 @@ function buildNav() {
  'art-reseaux-sociaux-jeune-athlete.html': 'Communication',
  'art-changer-de-club.html': 'Gestion de carrière',
  'art-droit-a-l-image-athlete.html': 'Image de marque',
+ 'art-dossier-de-partenariat.html': 'Sponsoring',
+ 'art-premiere-interview.html': 'Communication',
+ 'art-blessure-longue-carriere.html': 'Gestion de carrière',
  'art-sponsor-a-15-ans.html': 'Sponsoring', 'about.html': 'À propos',
  'contact.html': 'Contact', 'rdv.html': 'Prendre RDV', 'athletes.html': 'Athlètes & Team',
  'mentions-legales.html': 'Mentions légales',
@@ -1380,7 +1383,13 @@ const ARTICLES = [
  { url: 'art-changer-de-club.html', axe: 'Gestion de carrière',
    titre: "Changer de club : les questions à se poser avant de signer" },
  { url: 'art-droit-a-l-image-athlete.html', axe: 'Image de marque',
-   titre: "Droit à l'image : ce que vous signez sans le lire" }
+   titre: "Droit à l'image : ce que vous signez sans le lire" },
+ { url: 'art-dossier-de-partenariat.html', axe: 'Sponsoring',
+   titre: "Construire un dossier de partenariat qui obtient une réponse" },
+ { url: 'art-premiere-interview.html', axe: 'Communication',
+   titre: "Première interview : ce qu'il faut savoir avant de répondre" },
+ { url: 'art-blessure-longue-carriere.html', axe: 'Gestion de carrière',
+   titre: "Blessure longue : ne pas perdre une saison de carrière" }
 ];
 const SERVICES = {
  'Gestion de carrière': { url: 'service-carriere.html', txt: "Contrats, trajectoire, reconversion : nous pilotons la carrière au-delà des résultats." },
