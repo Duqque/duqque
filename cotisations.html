@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cotisations et accompagnements · Duqque Sports</title>
 <meta name="description" content="Les formules d'accompagnement de Duqque Sports : gratuit pour les moins de 18 ans, 60 € par an pour les athlètes majeurs, 120 € après une sélection internationale. Aucune commission sur les contrats négociés." />
-<link rel="stylesheet" href="css/style.css?v=20260904" />
+<link rel="stylesheet" href="css/style.css?v=20260905" />
 <style>
  /* =====================================================================
     COTISATIONS
@@ -38,10 +38,17 @@
   margin: 0 0 4px;
  }
  .co-prix small { display: block; font-family: var(--sans); font-weight: 600; font-size: 12px; letter-spacing: 0.02em; color: var(--ink-muted); margin-top: 10px; }
- .co-paliers { display: grid; gap: 16px; }
- .co-palier { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: baseline; }
- .co-palier .co-prix { margin: 0; font-size: clamp(30px, 3vw, 40px); }
- .co-palier-txt { font-size: 12.5px; line-height: 1.5; color: var(--ink-soft); margin: 0; }
+ /* Une seule grille pour tous les paliers, et non une par ligne : la colonne des tarifs
+    prend alors la largeur du plus large, si bien que les descriptions demarrent toutes au
+    meme endroit. Avec une grille par palier, `auto` etait recalcule ligne par ligne et le
+    texte de « 60 € » commencait 19px avant celui de « 120 € ». */
+ .co-paliers { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 20px 18px; align-items: center; }
+ .co-palier { display: contents; }
+ /* Alignement vertical au centre optique et non sur la ligne de base : un nombre de 40px
+    a cote d'un texte de 12.5px, cale sur la meme ligne de base, fait pendre le texte tout
+    en bas du chiffre. */
+ .co-palier .co-prix { margin: 0; font-size: clamp(30px, 3vw, 40px); justify-self: start; }
+ .co-palier-txt { font-size: 12.5px; line-height: 1.55; color: var(--ink-soft); margin: 0; text-wrap: pretty; }
  .co-prix-note { font-size: 12px; line-height: 1.5; color: var(--ink-muted); margin: 14px 0 0; font-weight: 600; }
 
  .co-list { list-style: none; margin: 22px 0 26px; padding: 22px 0 0; border-top: 1px solid var(--line); display: grid; gap: 11px; }
@@ -67,7 +74,11 @@
  .co-card.co-lead .co-prix small { color: #2e3300; }
 
  /* --- Tableau comparatif --- */
- .co-table { width: 100%; border-collapse: collapse; margin-top: clamp(28px, 3.4vw, 44px); }
+ /* table-layout: fixed impose la repartition declaree au lieu de laisser le navigateur
+    dimensionner d'apres le contenu : sans cela « Cotisation Athlète », qui porte la ligne
+    la plus longue du tableau, s'octroyait plus du double de la largeur des deux autres
+    colonnes de formule. */
+ .co-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: clamp(28px, 3.4vw, 44px); }
  .co-table caption { text-align: left; font-size: 13px; color: var(--ink-muted); padding-bottom: 18px; }
  .co-table th, .co-table td { text-align: left; padding: 16px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
  .co-table thead th {
@@ -75,6 +86,8 @@
   color: var(--ink-muted); border-bottom: 2px solid var(--ink); padding-bottom: 14px;
  }
  .co-table thead th:first-child { width: 34%; }
+ /* Les trois formules se partagent le reste a parts egales. */
+ .co-table thead th:nth-child(n+2) { width: 22%; }
  .co-table tbody th {
   font-family: var(--sans); font-weight: 600; font-size: 14.5px; color: var(--ink);
  }
@@ -382,6 +395,6 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260904"></script>
+<script src="js/main.js?v=20260905"></script>
 </body>
 </html>
