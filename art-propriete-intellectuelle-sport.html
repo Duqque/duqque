@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Copier un club, copier un athlète : le livre blanc de la propriété intellectuelle dans le sport · Duqque Sports</title>
+<meta name="description" content="Marque, dessin et modèle, droit d'auteur, droit à l'image : ce que le droit protège vraiment dans un écusson, un maillot, une photo de compétition ou le nom d'un athlète. Cas pratiques, schémas, et la marche à suivre quand on est copié." />
+<link rel="canonical" href="https://duqque.fr/art-propriete-intellectuelle-sport.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Copier un club, copier un athlète : le livre blanc de la propriété intellectuelle dans le sport" />
+<meta property="og:description" content="Ce que le droit protège vraiment dans un écusson, un maillot, une photo ou le nom d'un athlète." />
+<meta property="og:locale" content="fr_FR" />
+<link rel="stylesheet" href="css/style.css?v=20260920" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Copier un club, copier un athlète : le livre blanc de la propriété intellectuelle dans le sport",
+  "description": "Marque, dessin et modèle, droit d'auteur, droit à l'image : ce que le droit protège vraiment dans un écusson, un maillot, une photo de compétition ou le nom d'un athlète. Cas pratiques, schémas, et la marche à suivre quand on est copié.",
+  "inLanguage": "fr-FR",
+  "datePublished": "2026-08-23",
+  "author": { "@type": "Organization", "name": "Duqque Sports" },
+  "publisher": { "@type": "Organization", "name": "Duqque Sports" },
+  "articleSection": "Image de marque"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://duqque.fr/home.html" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://duqque.fr/actualites.html" },
+    { "@type": "ListItem", "position": 3, "name": "Copier un club, copier un athlète : le livre blanc de la propriété intellectuelle dans le sport" }
+  ]
+}
+</script>
+<style>
+ /* ---- Gabarit d'article : colonne de lecture, encadrés, sources ---- */
+ .art-hero { padding-bottom: clamp(30px, 4vw, 50px); }
+ .art-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-bottom: 26px; }
+ .art-axe {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 8px 14px; border-radius: 100px;
+  background: var(--accent); color: #fff;
+  font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+ }
+ .art-axe svg { width: 15px; height: 15px; }
+ /* Le hero de l'article est sombre : les gris d'encre du site sont prevus pour fond clair
+    et tombaient a 1,9:1. Valeurs claires, verifiees au-dessus du seuil AAA de 7:1. */
+ .art-info { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: rgba(245, 243, 239, 0.82); }
+ .art-hero h1 { max-width: 20ch; }
+ .art-chapo { font-size: clamp(16.5px, 1.5vw, 19px); line-height: 1.6; color: rgba(245, 243, 239, 0.9); max-width: 58ch; margin-top: 26px; }
+
+ .breadcrumb .sep { margin: 0 10px; opacity: 0.5; }
+
+ /* Photo d'ouverture pleine largeur, collee au bloc sombre du titre :
+    pas de marge haute, pas d'arrondi, pas de container. */
+ .art-hero { padding-bottom: clamp(46px, 6vw, 80px) !important; }
+ .art-cover { margin: 0; }
+ .art-cover-img {
+  width: 100%; aspect-ratio: 21 / 9; display: block;
+  background-size: cover; background-position: center; background-color: #e2e0dc;
+ }
+ .art-cover figcaption {
+  margin-top: 14px; font-size: 12.5px; line-height: 1.5;
+  color: var(--ink-muted); max-width: 62ch;
+ }
+ @media (max-width: 900px) { .art-cover-img { aspect-ratio: 3 / 2; } }
+
+ /* Le contenu est centre dans une carte blanche, detachee du fond gris de la page. */
+ .art-body {
+  max-width: 860px; margin: 0 auto;
+  background: #fff; border-radius: 20px;
+  padding: clamp(26px, 4vw, 68px);
+  box-shadow: 0 18px 50px rgba(10, 10, 14, 0.06);
+ }
+ .art-body > h2:first-child, .art-body > p:first-child { margin-top: 0; }
+ @media (max-width: 700px) { .art-body { border-radius: 14px; } }
+ .art-body h2 {
+  font-size: clamp(24px, 2.4vw, 34px); line-height: 1.1;
+  margin: clamp(46px, 5vw, 70px) 0 18px;
+ }
+ .art-body h3 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: 18px; letter-spacing: -0.01em; margin: 34px 0 12px; }
+ .art-body p { font-size: 16.5px; line-height: 1.72; color: var(--ink-soft); margin-bottom: 20px; max-width: none; }
+ .art-body strong { color: var(--ink); font-weight: 600; }
+ /* Exclure les boutons et la barre de partage : sinon le lien du CTA devient violet fonce
+    souligne sur fond violet (illisible) et les pictogrammes de partage passent en violet. */
+ .art-body a:not(.btn):not(.share-btn) { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 3px; }
+ .art-body a:not(.btn):not(.share-btn):hover { color: var(--ink); }
+ .art-body .btn { text-decoration: none; }
+ .art-body .share-btn { color: #f5f3ef; text-decoration: none; }
+ .art-body .share-btn:hover { color: #101400; }
+
+ .art-pull {
+  border-left: 3px solid var(--accent); padding: 4px 0 4px 24px; margin: 34px 0;
+  font-family: var(--display); font-weight: 500; font-size: clamp(19px, 1.9vw, 24px);
+  line-height: 1.3; color: var(--ink);
+ }
+ .art-note {
+  display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 16px;
+  background: #f5f3ef; border-radius: 14px; padding: 22px 24px; margin: 34px 0;
+ }
+ .art-note .met-ico, .art-note .ico {
+  display: inline-flex; width: 40px; height: 40px; border-radius: 11px;
+  align-items: center; justify-content: center; background: var(--accent); color: #fff;
+ }
+ .art-note .ico svg { width: 21px; height: 21px; }
+ .art-note h4 { font-family: var(--display); font-weight: 900; font-size: 15px; margin: 0 0 6px; }
+ .art-note p { font-size: 14.5px; line-height: 1.6; margin: 0; }
+
+ .art-takeaways { display: grid; gap: clamp(12px, 1.5vw, 18px); margin: 30px 0; }
+ .art-take {
+  border: 1px solid var(--line); border-radius: 14px; padding: 22px 24px; background: #fff;
+ }
+ .art-take .n {
+  font-family: var(--display); font-weight: 900; font-size: 13px;
+  color: var(--accent-ink); display: block; margin-bottom: 8px;
+ }
+ .art-take b { display: block; font-family: var(--display); font-weight: 900; font-size: 15.5px; margin-bottom: 6px; }
+ .art-take p { font-size: 14.5px; line-height: 1.6; margin: 0; }
+ .art-take.parents .n { color: #2e6b1f; }
+ .art-take.coach .n { color: #7a4a00; }
+
+ .art-sources { border-top: 1px solid var(--line); margin-top: clamp(50px, 6vw, 80px); padding-top: 30px; }
+ .art-sources h2 { font-size: 20px; margin: 0 0 18px; }
+ .art-sources ol { list-style: none; padding: 0; margin: 0; counter-reset: src; }
+ .art-sources li {
+  counter-increment: src; position: relative; padding-left: 34px; margin-bottom: 14px;
+  font-size: 14px; line-height: 1.6; color: var(--ink-soft);
+ }
+ .art-sources li::before {
+  content: counter(src); position: absolute; left: 0; top: 1px;
+  width: 22px; height: 22px; border-radius: 50%; background: #eceae5;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-weight: 900; font-size: 11px; color: var(--ink);
+ }
+ .art-sources a { color: var(--accent-ink); }
+
+ .art-next {
+  background: #050505; color: #f5f3ef; border-radius: 18px;
+  padding: clamp(28px, 3.6vw, 48px); margin-top: clamp(50px, 6vw, 80px);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;
+ }
+ .art-next h3 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(20px, 2vw, 28px); line-height: 1.1; margin: 0 0 10px; max-width: 20ch; }
+ .art-next p { font-size: 14.5px; line-height: 1.6; color: rgba(245,243,239,0.8); margin: 0; max-width: 46ch; }
+ .art-next .btn { flex: 0 0 auto; justify-content: center; text-align: center; }
+ @media (max-width: 700px) { .art-note { grid-template-columns: 1fr; } }
+ /* ============ LIVRE BLANC ============ */
+ .lb-som {
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  padding: 26px 28px; margin: 0 0 40px;
+ }
+ .lb-som .t { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; color: var(--ink-muted); margin: 0 0 16px; }
+ .lb-som ol { list-style: none; margin: 0; padding: 0; counter-reset: lb; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px 24px; }
+ .lb-som li { counter-increment: lb; }
+ .lb-som a {
+  display: grid; grid-template-columns: 26px minmax(0, 1fr); gap: 10px; align-items: baseline;
+  padding: 9px 10px; border-radius: 9px; text-decoration: none; border: none;
+  font-size: 14px; line-height: 1.35; color: var(--ink-soft);
+  transition: background .22s var(--ease), color .22s var(--ease);
+ }
+ .lb-som a::before {
+  content: counter(lb, decimal-leading-zero);
+  font-family: var(--display); font-weight: 900; font-size: 12px; color: var(--accent-ink);
+ }
+ .lb-som a:hover { background: rgba(90, 47, 230, 0.08); color: var(--accent-ink); }
+ @media (max-width: 620px) { .lb-som ol { grid-template-columns: 1fr; } }
+
+ .art-body h2[id] { scroll-margin-top: calc(var(--nav-bas, 76px) + 24px); }
+
+ /* Figures : les schemas sont dessines en SVG, jamais repris a un tiers. */
+ .lb-fig { margin: 34px 0; }
+ .lb-fig svg { display: block; width: 100%; height: auto; border-radius: 14px; background: #fff; border: 1px solid var(--line); }
+ .lb-fig figcaption {
+  font-size: 12.5px; line-height: 1.55; color: var(--ink-muted);
+  margin-top: 12px; padding-left: 14px; border-left: 2px solid var(--accent-soft);
+ }
+
+ /* Cas pratiques : nettement distincts du texte courant. */
+ .lb-cas {
+  background: #0b0b0b; color: #f5f3ef; border-radius: 16px;
+  padding: clamp(22px, 2.6vw, 32px); margin: 34px 0;
+ }
+ .lb-cas .k { display: inline-block; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+  color: #101400; background: #d9ff3d; padding: 5px 10px; border-radius: 100px; margin-bottom: 14px; }
+ .lb-cas h4 { font-family: var(--display); font-weight: 900; font-size: 17px; margin: 0 0 10px; color: #fff; }
+ .lb-cas p { font-size: 14.5px; line-height: 1.65; color: rgba(245,243,239,0.9); margin: 0 0 10px; }
+ .lb-cas p:last-child { margin-bottom: 0; }
+ .lb-cas .issue { border-top: 1px solid rgba(255,255,255,0.14); margin-top: 14px; padding-top: 14px; font-size: 13.5px; color: #d9ff3d; }
+
+ /* Tableau de synthese */
+ .lb-tab { width: 100%; border-collapse: collapse; table-layout: fixed; margin: 30px 0; font-size: 14px; }
+ .lb-tab caption { text-align: left; font-size: 12.5px; color: var(--ink-muted); padding-bottom: 14px; }
+ .lb-tab th, .lb-tab td { text-align: left; padding: 13px 12px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
+ .lb-tab thead th { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 700; color: var(--ink-muted); border-bottom: 2px solid var(--ink); }
+ .lb-tab tbody th { font-weight: 600; color: var(--ink); }
+ .lb-tab td { color: var(--ink-soft); }
+ @media (max-width: 700px) {
+  .lb-tab, .lb-tab tbody, .lb-tab tr, .lb-tab th, .lb-tab td { display: block; width: auto; }
+  .lb-tab thead { display: none; }
+  .lb-tab tr { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  .lb-tab td { border: none; padding: 3px 0; }
+  .lb-tab td::before { content: attr(data-col) " : "; font-weight: 700; color: var(--ink-muted); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+ }
+
+ .lb-photo { margin: 36px 0; }
+ .lb-photo .im { width: 100%; aspect-ratio: 16 / 9; border-radius: 14px; background-size: cover; background-position: center; background-color: #dedede; }
+ .lb-photo figcaption { font-size: 12.5px; line-height: 1.55; color: var(--ink-muted); margin-top: 12px; padding-left: 14px; border-left: 2px solid var(--accent-soft); }
+
+ /* Reperes chiffres en ligne */
+ .lb-chiffres { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; border-radius: 14px; overflow: hidden; background: var(--line); margin: 32px 0; }
+ .lb-chiffre { background: var(--accent-ink); color: #fff; padding: 22px 20px; }
+ .lb-chiffre .n { display: block; font-family: var(--display); font-weight: 900; font-size: clamp(30px, 3vw, 42px); line-height: 1; letter-spacing: -0.03em; margin-bottom: 8px; }
+ .lb-chiffre p { font-size: 13px; line-height: 1.5; color: rgba(255,255,255,0.92); margin: 0; }
+ @media (max-width: 700px) { .lb-chiffres { grid-template-columns: 1fr; } }
+</style></head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<section class="page-hero art-hero">
+ <div class="container">
+  <div class="breadcrumb"><a href="actualites.html">Blog</a><span class="sep" aria-hidden="true">›</span><span>Image de marque</span></div>
+  <div class="art-meta">
+   <span class="art-axe" style="background:#b8a4f0; color:#1a1033;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg>
+    Image de marque
+   </span>
+   <span class="art-info">23 août 2026</span>
+   <span class="art-info">32 minutes de lecture</span>
+  </div>
+  <h1 class="serif">Copier un club, copier un athlète&nbsp;: le livre blanc de la propriété intellectuelle dans le sport</h1>
+  <p class="art-chapo">Un écusson repris à trente kilomètres, une photo de podium devenue affiche publicitaire, un nom de tournoi déposé par quelqu'un d'autre. Ce document réunit ce qu'un club et un athlète doivent savoir sur la propriété intellectuelle&nbsp;: ce qui est protégé, ce qui ne l'est pas, et l'ordre dans lequel réagir.</p>
+ </div>
+</section>
+
+<figure class="art-cover">
+ <div class="art-cover-img" data-bgimg="assets/articles/cover-reputation.jpg" role="img" aria-label="Randori dans un dojo"></div>
+ <figcaption class="container">Une identité sportive se construit en quarante ans et se copie en une soirée. La différence se joue sur ce qui a été fait avant.</figcaption>
+</figure>
+
+<section style="padding-top: clamp(40px, 5vw, 70px);">
+ <div class="container">
+  <div class="art-body">
+
+<div class="lb-som">
+    <p class="t">Ce que contient ce document</p>
+    <ol>
+     <li><a href="#p1">Quatre droits, et pourquoi on les confond</a></li>
+     <li><a href="#p2">L'identité d'un club : nom, écusson, couleurs</a></li>
+     <li><a href="#p3">Le maillot et les produits dérivés</a></li>
+     <li><a href="#p4">L'athlète : son nom, son image, sa marque</a></li>
+     <li><a href="#p5">Les photos et les vidéos : qui détient quoi</a></li>
+     <li><a href="#p6">Réseaux sociaux : reposter, monter, sonoriser</a></li>
+     <li><a href="#p7">Le parasitisme et l'ambush marketing</a></li>
+     <li><a href="#p8">Vous êtes copié : la marche à suivre</a></li>
+     <li><a href="#p9">Vous avez copié : comment s'en sortir</a></li>
+     <li><a href="#p10">Prévenir : deux listes à cocher</a></li>
+    </ol>
+   </div>
+
+   <p>Un club de judo de deux cent cinquante licenciés découvre qu'une structure ouverte à trente kilomètres utilise un écusson qui ressemble beaucoup au sien, avec la même palette et un nom dont une seule lettre diffère. Un athlète voit sa photo de podium servir d'illustration à la publicité d'une salle de sport où il n'a jamais mis les pieds. Une association reprend le nom d'un tournoi créé quinze ans plus tôt par un club voisin, et dépose ce nom à l'INPI avant lui.</p>
+
+   <p>Ces trois situations sont réelles dans leur mécanique, et elles se produisent chaque saison, à tous les niveaux. Elles ont un point commun : dans la quasi-totalité des cas, celui qui copie n'a pas conscience de commettre une faute, et celui qui est copié ne sait pas de quel droit il dispose. Résultat : des mois de tension, des courriers maladroits, parfois une procédure ruineuse pour un enjeu de quelques centaines d'euros, et souvent rien du tout parce que personne ne sait par où commencer.</p>
+
+   <p>Ce document est fait pour être lu une fois, calmement, avant que le problème n'arrive. Il ne remplace pas un avocat, et il ne prétend pas le faire. Il vous donne le vocabulaire, la logique et l'ordre des opérations, c'est-à-dire exactement ce qui manque quand on découvre une copie un dimanche soir.</p>
+
+   <div class="lb-chiffres">
+    <div class="lb-chiffre"><span class="n">4</span><p>Droits différents peuvent protéger un seul écusson. La plupart des clubs n'en activent aucun.</p></div>
+    <div class="lb-chiffre"><span class="n">0 €</span><p>Coût de la protection par le droit d'auteur : elle naît de la création, sans dépôt.</p></div>
+    <div class="lb-chiffre"><span class="n">10 ans</span><p>Durée d'une marque déposée, renouvelable indéfiniment. C'est la seule protection sans fin.</p></div>
+   </div>
+
+   <h2 class="serif" id="p1">1. Quatre droits, et pourquoi on les confond</h2>
+
+   <p>La première difficulté n'est pas juridique, elle est lexicale. On dit « copyright », « droits », « propriété » sans distinguer des mécanismes qui n'ont ni la même origine, ni la même durée, ni la même façon de se défendre. Or c'est ce choix initial qui détermine tout le reste.</p>
+
+   <p>Précisons d'emblée un point de vocabulaire : le mot « copyright » n'a pas de valeur en droit français. Il désigne un système anglo-saxon voisin mais distinct. En France, l'équivalent est le <strong>droit d'auteur</strong>, et il obéit à des règles différentes, notamment parce qu'il comporte un volet moral incessible. Le symbole © n'a aucun effet créateur de droit : il informe, il ne protège pas.</p>
+
+<figure class="lb-fig">
+<svg viewBox="0 0 600 430" role="img" aria-labelledby="fd-t fd-d" xmlns="http://www.w3.org/2000/svg">
+ <title id="fd-t">Les quatre droits qui protègent une identité sportive</title>
+ <desc id="fd-d">Quatre cartes : la marque protège un nom et un logo déposés, dix ans renouvelables sans limite. Le dessin ou modèle protège une apparence, cinq ans renouvelables jusqu'à vingt-cinq. Le droit d'auteur protège une création originale dès sa création, soixante-dix ans après la mort de l'auteur. Le droit à l'image protège la personne, toute sa vie, et ne se cède pas.</desc>
+ <rect width="600" height="430" fill="#ffffff"/>
+ <g font-family="Gilroy, system-ui, sans-serif">
+  <text x="24" y="34" font-size="13" font-weight="700" fill="#4a443d" letter-spacing="2">QUATRE DROITS, QUATRE PORTÉES</text>
+
+  <rect x="24" y="52" width="270" height="172" rx="14" fill="#4a1fc7"/>
+  <text x="44" y="88" font-size="21" font-weight="800" fill="#ffffff">Marque</text>
+  <text x="44" y="114" font-size="14" fill="#ffffff">Un nom, un logo, un slogan</text>
+  <text x="44" y="134" font-size="14" fill="#ffffff">déposés</text>
+  <line x1="44" y1="152" x2="274" y2="152" stroke="#ffffff" stroke-opacity="0.35"/>
+  <text x="44" y="176" font-size="12" font-weight="700" fill="#d9ff3d" letter-spacing="1.4">AU DÉPÔT, À L'INPI</text>
+  <text x="44" y="202" font-size="15" font-weight="700" fill="#ffffff">10 ans, renouvelable sans fin</text>
+
+  <rect x="306" y="52" width="270" height="172" rx="14" fill="#b8a4f0"/>
+  <text x="326" y="88" font-size="21" font-weight="800" fill="#1a1033">Dessin ou modèle</text>
+  <text x="326" y="114" font-size="14" fill="#1a1033">L'apparence : maillot,</text>
+  <text x="326" y="134" font-size="14" fill="#1a1033">écusson, trophée</text>
+  <line x1="326" y1="152" x2="556" y2="152" stroke="#1a1033" stroke-opacity="0.3"/>
+  <text x="326" y="176" font-size="12" font-weight="700" fill="#3d1f8a" letter-spacing="1.4">AU DÉPÔT</text>
+  <text x="326" y="202" font-size="15" font-weight="700" fill="#1a1033">5 ans, jusqu'à 25 ans</text>
+
+  <rect x="24" y="238" width="270" height="172" rx="14" fill="#d9ff3d"/>
+  <text x="44" y="274" font-size="21" font-weight="800" fill="#101400">Droit d'auteur</text>
+  <text x="44" y="300" font-size="14" fill="#101400">Toute création originale :</text>
+  <text x="44" y="320" font-size="14" fill="#101400">logo, photo, texte, vidéo</text>
+  <line x1="44" y1="338" x2="274" y2="338" stroke="#101400" stroke-opacity="0.3"/>
+  <text x="44" y="362" font-size="12" font-weight="700" fill="#3d4a00" letter-spacing="1.4">À LA CRÉATION, SANS FORMALITÉ</text>
+  <text x="44" y="388" font-size="15" font-weight="700" fill="#101400">70 ans après la mort</text>
+
+  <rect x="306" y="238" width="270" height="172" rx="14" fill="#0b0b0b"/>
+  <text x="326" y="274" font-size="21" font-weight="800" fill="#f5f3ef">Droit à l'image</text>
+  <text x="326" y="300" font-size="14" fill="#f5f3ef">La personne elle-même,</text>
+  <text x="326" y="320" font-size="14" fill="#f5f3ef">athlète ou spectateur</text>
+  <line x1="326" y1="338" x2="556" y2="338" stroke="#f5f3ef" stroke-opacity="0.3"/>
+  <text x="326" y="362" font-size="12" font-weight="700" fill="#d9ff3d" letter-spacing="1.4">À LA NAISSANCE</text>
+  <text x="326" y="388" font-size="15" font-weight="700" fill="#f5f3ef">Toute la vie, incessible</text>
+ </g>
+</svg>
+<figcaption>Un même écusson peut relever de trois de ces droits en même temps. C'est ce cumul qui rend la protection solide, et son absence qui rend un club vulnérable.</figcaption>
+</figure>
+
+   <h3>La marque : ce que vous avez déposé</h3>
+
+   <p>Une marque protège un signe utilisé pour désigner des produits ou des services : un nom, un logo, parfois un slogan. Elle s'acquiert par le dépôt, en France auprès de l'Institut national de la propriété industrielle, et non par l'usage. C'est le point le plus contre-intuitif : un club qui utilise son nom depuis 1974 sans l'avoir déposé n'a pas de marque, et un tiers peut en principe la déposer avant lui.</p>
+
+   <p>Le dépôt se fait pour des <strong>classes</strong> de produits et services, selon une nomenclature internationale. Pour un club sportif, trois classes reviennent constamment : la classe 25 pour les vêtements, la classe 28 pour les articles de sport et de jeu, la classe 41 pour l'éducation, la formation et les activités sportives. Déposer en classe 41 seulement laisse le champ libre à quelqu'un qui vendrait des tee-shirts sous votre nom.</p>
+
+   <p>La protection dure dix ans et se renouvelle sans limite de nombre. C'est le seul des quatre droits qui peut, en pratique, durer éternellement. En contrepartie, une marque non exploitée pendant cinq ans devient vulnérable : un tiers peut en demander la déchéance.</p>
+
+   <h3>Le dessin ou modèle : ce à quoi ça ressemble</h3>
+
+   <p>Il protège l'apparence d'un produit : la forme d'un écusson, le graphisme d'un maillot, le dessin d'une médaille ou d'un trophée. Il se dépose lui aussi, pour cinq ans renouvelables jusqu'à vingt-cinq ans au total.</p>
+
+   <p>C'est le droit le moins utilisé par les clubs, et pourtant le plus adapté quand le litige porte sur une ressemblance visuelle sans reprise du nom. Un maillot dont la combinaison de bandes, de couleurs et de découpes est reprise à l'identique relève du dessin ou modèle bien plus que de la marque.</p>
+
+   <h3>Le droit d'auteur : ce que quelqu'un a créé</h3>
+
+   <p>Il protège toute création de forme originale, dès sa création, sans aucune formalité et sans aucun coût. Un logo dessiné par un graphiste, une photographie, un texte de présentation, une vidéo de club, un hymne : tout cela est protégé du seul fait d'exister, à condition de porter l'empreinte d'un choix créatif.</p>
+
+   <p>Deux conséquences que presque personne n'anticipe. D'abord, la protection joue aussi contre vous : le logo commandé à un graphiste appartient au graphiste tant qu'une cession écrite n'a pas été signée. Payer une facture ne transfère pas les droits. Ensuite, la durée est très longue : soixante-dix ans après la mort de l'auteur. Un club qui utilise depuis vingt ans un dessin dont il n'a jamais obtenu la cession est dans une situation fragile, et il l'ignore.</p>
+
+   <h3>Le droit à l'image : ce qui appartient à la personne</h3>
+
+   <p>Il ne relève pas de la propriété intellectuelle mais du respect de la vie privée. Il porte sur la personne elle-même, il dure toute sa vie, et il ne se cède pas : on n'autorise que des usages, pour une durée et un périmètre définis. Nous lui avons consacré un article entier, <a href="art-droit-a-l-image-athlete.html">Droit à l'image : ce que vous signez sans le lire</a>, et nous n'en reprenons ici que ce qui touche à la copie.</p>
+
+   <p>La confusion la plus fréquente consiste à croire qu'une autorisation d'image règle la question de la photo. Elle ne règle que la question de la personne photographiée. Le cliché, lui, appartient au photographe.</p>
+
+<figure class="lb-fig">
+<svg viewBox="0 0 600 340" role="img" aria-labelledby="du-t du-d" xmlns="http://www.w3.org/2000/svg">
+ <title id="du-t">Durée de protection selon le droit invoqué</title>
+ <desc id="du-d">Barres comparées sur une échelle de trente ans : la marque dure dix ans mais se renouvelle indéfiniment, le dessin ou modèle vingt-cinq ans au maximum, le droit d'auteur soixante-dix ans après la mort de l'auteur, le droit à l'image toute la vie de la personne.</desc>
+ <rect width="600" height="340" fill="#ffffff"/>
+ <g font-family="Gilroy, system-ui, sans-serif">
+  <text x="24" y="34" font-size="13" font-weight="700" fill="#4a443d" letter-spacing="2">COMBIEN DE TEMPS ÊTES-VOUS PROTÉGÉ&#160;?</text>
+
+  <text x="24" y="72" font-size="15" font-weight="700" fill="#1a1410">Marque</text>
+  <rect x="24" y="82" width="168" height="28" rx="6" fill="#4a1fc7"/>
+  <rect x="196" y="82" width="168" height="28" rx="6" fill="#4a1fc7" opacity="0.55"/>
+  <rect x="368" y="82" width="168" height="28" rx="6" fill="#4a1fc7" opacity="0.28"/>
+  <text x="36" y="102" font-size="13" font-weight="700" fill="#ffffff">10 ans</text>
+  <text x="208" y="102" font-size="13" font-weight="700" fill="#ffffff">+ 10 ans</text>
+  <text x="380" y="102" font-size="13" font-weight="600" fill="#2a1070">et ainsi de suite</text>
+
+  <text x="24" y="146" font-size="15" font-weight="700" fill="#1a1410">Dessin ou modèle</text>
+  <rect x="24" y="156" width="420" height="28" rx="6" fill="#7747ff"/>
+  <text x="36" y="176" font-size="13" font-weight="700" fill="#ffffff">25 ans au maximum, puis plus rien</text>
+
+  <text x="24" y="220" font-size="15" font-weight="700" fill="#1a1410">Droit d'auteur</text>
+  <rect x="24" y="230" width="540" height="28" rx="6" fill="#101400"/>
+  <text x="36" y="250" font-size="13" font-weight="700" fill="#d9ff3d">70 ans après la mort de l'auteur</text>
+
+  <text x="24" y="294" font-size="15" font-weight="700" fill="#1a1410">Droit à l'image</text>
+  <rect x="24" y="304" width="480" height="28" rx="6" fill="#b8a4f0"/>
+  <text x="36" y="324" font-size="13" font-weight="700" fill="#1a1033">toute la vie, et il ne se vend pas</text>
+ </g>
+</svg>
+<figcaption>Les échelles ne sont pas strictement comparables : le droit d'auteur et le droit à l'image se comptent à partir d'une personne, la marque à partir d'un dépôt. Le graphique donne un ordre de grandeur, pas une équivalence.</figcaption>
+</figure>
+
+   <h2 class="serif" id="p2">2. L'identité d'un club : nom, écusson, couleurs</h2>
+
+   <p>C'est le terrain le plus conflictuel, parce que l'identité d'un club se construit lentement, qu'elle a une valeur affective considérable, et qu'elle est presque toujours juridiquement nue.</p>
+
+   <h3>Le nom</h3>
+
+   <p>Le nom d'une association déclarée bénéficie d'une certaine protection au titre de la dénomination sociale, mais elle est limitée : elle joue surtout contre un risque de confusion dans le même secteur et sur le même territoire. Elle ne vous permet pas d'empêcher un usage commercial du même nom dans un autre domaine, et elle ne vaut pas titre opposable comme une marque.</p>
+
+   <p>La règle pratique tient en une phrase : si le nom de votre club a une valeur (tournoi connu, boutique, école de sport, partenariats), déposez-le. Le coût d'un dépôt français pour une classe se compte en dizaines d'euros, quelques dizaines de plus par classe supplémentaire. Rapporté au budget d'une saison, c'est une ligne négligeable. Rapporté au coût d'un litige, c'est dérisoire.</p>
+
+   <h3>L'écusson</h3>
+
+   <p>Un écusson peut relever de trois droits en même temps : marque s'il est déposé, dessin ou modèle s'il est déposé comme tel, droit d'auteur s'il est original. Ce cumul est une force, et c'est précisément ce que la plupart des clubs n'exploitent pas.</p>
+
+   <p>Quand un litige survient, la question n'est jamais « est-ce que ça se ressemble ». Elle est : <strong>y a-t-il un risque de confusion dans l'esprit du public concerné</strong>. Ce public n'est pas un juriste, c'est un parent qui cherche un club pour son enfant. On compare donc l'impression d'ensemble, pas les détails, et on tient compte de la proximité des activités et des territoires.</p>
+
+<figure class="lb-fig">
+<svg viewBox="0 0 600 470" role="img" aria-labelledby="cp-t cp-d" xmlns="http://www.w3.org/2000/svg">
+ <title id="cp-t">Anatomie d'une copie d'écusson</title>
+ <desc id="cp-d">Deux écussons fictifs côte à côte. Le second reprend la forme du bouclier, le symbole central, la palette, la typographie et jusqu'à la date de fondation du premier, en ne changeant qu'une lettre du nom. Le critère juridique n'est pas la ressemblance mais le risque de confusion dans l'esprit du public.</desc>
+ <rect width="600" height="470" fill="#ffffff"/>
+ <g font-family="Gilroy, system-ui, sans-serif">
+  <text x="24" y="34" font-size="13" font-weight="700" fill="#4a443d" letter-spacing="2">CE QUI FAIT LA COPIE (ÉCUSSONS FICTIFS)</text>
+
+  <text x="150" y="70" font-size="12" font-weight="700" fill="#4a1fc7" letter-spacing="1.6" text-anchor="middle">L'ORIGINAL</text>
+  <path d="M80 86 h140 v112 a70 70 0 0 1 -70 66 a70 70 0 0 1 -70 -66 z" fill="#4a1fc7"/>
+  <circle cx="150" cy="140" r="27" fill="#d9ff3d"/>
+  <path d="M139 140 l8 9 l15 -19" stroke="#101400" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="150" y="202" font-size="19" font-weight="800" fill="#ffffff" text-anchor="middle">AVALON</text>
+  <text x="150" y="226" font-size="12.5" fill="#ffffff" text-anchor="middle" letter-spacing="1.2">JUDO CLUB 1974</text>
+  <text x="150" y="290" font-size="13" font-weight="700" fill="#1a1410" text-anchor="middle">Déposé en 2019</text>
+  <text x="150" y="310" font-size="13" fill="#4a443d" text-anchor="middle">classes 25, 28 et 41</text>
+
+  <text x="420" y="70" font-size="12" font-weight="700" fill="#8a2b2b" letter-spacing="1.6" text-anchor="middle">LA REPRISE</text>
+  <path d="M350 86 h140 v112 a70 70 0 0 1 -70 66 a70 70 0 0 1 -70 -66 z" fill="#4a1fc7"/>
+  <circle cx="420" cy="140" r="27" fill="#d9ff3d"/>
+  <path d="M409 140 l8 9 l15 -19" stroke="#101400" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="420" y="202" font-size="19" font-weight="800" fill="#ffffff" text-anchor="middle">AVELON</text>
+  <text x="420" y="226" font-size="12.5" fill="#ffffff" text-anchor="middle" letter-spacing="1.2">JUDO CLUB 1974</text>
+  <text x="420" y="290" font-size="13" font-weight="700" fill="#1a1410" text-anchor="middle">Créé en 2024</text>
+  <text x="420" y="310" font-size="13" fill="#4a443d" text-anchor="middle">aucun dépôt</text>
+
+  <g font-size="14" fill="#1a1410">
+   <circle cx="32" cy="345" r="4" fill="#8a2b2b"/><text x="48" y="350">La forme du bouclier, au tracé près</text>
+   <circle cx="32" cy="373" r="4" fill="#8a2b2b"/><text x="48" y="378">Le symbole et sa position centrale</text>
+   <circle cx="32" cy="401" r="4" fill="#8a2b2b"/><text x="48" y="406">Une seule lettre change dans le nom</text>
+   <circle cx="32" cy="429" r="4" fill="#8a2b2b"/><text x="48" y="434">La date de fondation, qui n'est pas la sienne</text>
+  </g>
+ </g>
+</svg>
+<figcaption>Les deux écussons ci-dessus sont inventés pour cet article. Ce n'est pas la ressemblance qui fonde la contrefaçon, c'est le risque de confusion dans l'esprit du public concerné : ici, un parent qui cherche un club pour son enfant.</figcaption>
+</figure>
+
+   <div class="lb-cas">
+    <span class="k">Cas type</span>
+    <h4>Le club voisin au nom presque identique</h4>
+    <p>Un club fondé en 1974, écusson en forme de bouclier violet, symbole central, nom en capitales. Une structure ouverte cinquante ans plus tard à trente kilomètres adopte la même forme, la même palette, le même symbole, et un nom dont une lettre diffère. Elle reprend même la date de fondation, qui n'est pas la sienne.</p>
+    <p>Le club historique n'a jamais rien déposé. Il n'est donc pas démuni pour autant : le droit d'auteur sur l'écusson joue s'il en détient la cession, et la reprise de la date de fondation caractérise une volonté de se placer dans son sillage.</p>
+    <p class="issue">Issue habituelle : un courrier documenté obtient la modification de l'écusson et le retrait de la date. Le nom, lui, est beaucoup plus difficile à faire changer sans marque déposée.</p>
+   </div>
+
+   <figure class="lb-photo">
+    <div class="im" data-bgimg="assets/manifeste/ceinture-noire.jpg" role="img" aria-label="Judoka de dos, ceinture noire à la main"></div>
+    <figcaption>Ce qu'un club protège n'est pas seulement un dessin : c'est ce que ce dessin représente pour ceux qui le portent. C'est aussi ce qui rend les litiges d'identité si difficiles à traiter à froid.</figcaption>
+   </figure>
+
+   <h3>Les couleurs</h3>
+
+   <p>Une couleur seule est très difficile à s'approprier. Il existe des marques de couleur, mais elles supposent de démontrer qu'un public associe spontanément cette teinte précise à cette entreprise précise, ce qui exige des années d'usage massif et des preuves lourdes. Aucun club amateur n'est dans cette situation.</p>
+
+   <p>En revanche, une <strong>combinaison</strong> de couleurs associée à une disposition, une typographie et un symbole constitue un ensemble qui, lui, se défend. Ce n'est pas le violet qui est protégé, c'est le violet posé de cette façon, avec ce lettrage, dans cette forme.</p>
+
+   <h3>Le nom d'un tournoi, l'angle mort le plus coûteux</h3>
+
+   <p>Un club organise un tournoi depuis quinze ans. Le nom est connu dans toute la région, il attire trois cents combattants et deux partenaires locaux. Personne ne l'a jamais déposé, parce que personne n'a jamais pensé qu'un nom d'événement puisse appartenir à quelqu'un.</p>
+
+   <p>C'est pourtant l'actif le plus facilement captable de tout le patrimoine d'un club. Un nom d'événement se dépose comme une marque, en classe 41, et le dépôt est acquis à celui qui le fait en premier. Rien n'oblige le déposant à être l'organisateur historique.</p>
+
+   <p>Le club dépossédé n'est pas entièrement démuni : il peut faire valoir un usage antérieur et demander l'annulation d'un dépôt effectué de mauvaise foi. Mais il devra le prouver, c'est-à-dire produire des affiches datées, des articles de presse, des règlements, des listes d'engagés année par année. Ceux qui ont archivé gagnent ; ceux qui ont tout jeté à chaque changement de local perdent.</p>
+
+   <p>Deux gestes suffisent à écarter ce risque. Déposer le nom dès qu'un événement dépasse deux éditions et attire des partenaires. Et conserver systématiquement une trace datée de chaque édition, ne serait-ce qu'une affiche en fichier et l'article du journal local.</p>
+
+   <h3>Les signes qu'on oublie de protéger</h3>
+
+   <p>Au-delà du nom principal, un club détient souvent sans le savoir plusieurs signes qui ont acquis une valeur propre : le nom de son école de sport, celui de sa section jeunes, le surnom de son gymnase, une mascotte, une devise reprise sur les tenues. Chacun peut être déposé séparément, et chacun peut être capté séparément.</p>
+
+   <p>Le bon réflexe consiste à faire une fois l'inventaire de tout ce qui porte un nom dans la structure, puis à trancher pour chaque ligne : cela a-t-il une valeur qui dépasse notre usage interne&nbsp;? Si oui, on dépose. Si non, on note simplement la date du premier usage et on archive une preuve.</p>
+
+   <h2 class="serif" id="p3">3. Le maillot et les produits dérivés</h2>
+
+   <p>Le maillot concentre à lui seul presque tous les droits évoqués jusqu'ici. Il porte une marque, il constitue un objet dont l'apparence peut être déposée, son graphisme est une création protégée, et il est photographié sur des personnes qui disposent d'un droit sur leur image.</p>
+
+   <h3>Ce qui est protégé, ce qui ne l'est pas</h3>
+
+   <p>Un maillot rayé rouge et blanc n'est protégé par rien : c'est une idée, et les idées sont de libre parcours. Une combinaison précise de découpes, de proportions, de motifs et de placements peut en revanche être déposée comme dessin ou modèle, et elle est protégée par le droit d'auteur si elle porte l'empreinte d'un travail créatif.</p>
+
+   <p>La frontière se juge sur l'ensemble. Deux maillots partageant les mêmes couleurs se ressemblent nécessairement ; ce n'est pas une copie. Deux maillots dont le motif, la position du col, la coupe de l'épaule et l'emplacement des marquages coïncident au centimètre ne se ressemblent pas par hasard.</p>
+
+   <h3>Les produits dérivés et la contrefaçon</h3>
+
+   <p>C'est ici que le droit devient beaucoup plus sévère, parce qu'on quitte le terrain de la ressemblance malheureuse pour entrer dans celui de la fabrication et de la vente. La contrefaçon de marque est un délit pénal, et les peines encourues se comptent en années d'emprisonnement et en centaines de milliers d'euros d'amende, alourdies quand les faits sont commis en bande organisée ou sur des réseaux de communication en ligne.</p>
+
+   <p>Deux points concernent directement les clubs. D'abord, l'acheteur de bonne foi n'est pas poursuivi, mais le revendeur l'est, y compris s'il s'agit d'une association qui écoule des articles achetés en gros sur une plateforme sans vérifier leur origine. Ensuite, une boutique de club qui vend des tee-shirts floqués d'un logo dont elle ne détient pas les droits est dans la même situation qu'un vendeur professionnel, quelle que soit sa bonne foi.</p>
+
+   <div class="lb-cas">
+    <span class="k">Cas type</span>
+    <h4>La boutique de club et le logo emprunté</h4>
+    <p>Pour financer un déplacement, un club fait floquer cent sweat-shirts avec un visuel trouvé en ligne, légèrement modifié, associant son nom à un motif graphique repéré sur le compte d'un club étranger. Les articles se vendent en trois semaines.</p>
+    <p>Le motif était protégé et exploité commercialement par son auteur. La modification légère n'écarte rien : ce qui compte est la reprise des éléments originaux, pas le pourcentage de différence.</p>
+    <p class="issue">Issue habituelle : retrait de la vente, destruction du stock restant, et une indemnisation négociée qui dépasse souvent le bénéfice de l'opération.</p>
+   </div>
+
+   <h3>Le réflexe qui coûte le plus cher</h3>
+
+   <p>Il consiste à demander à un bénévole, ou à un prestataire bon marché, un visuel « dans l'esprit de » quelque chose d'existant. La consigne elle-même construit le litige : elle demande explicitement une ressemblance. Et quand le litige survient, c'est le club qui a commandé qui répond, pas le bénévole qui a exécuté.</p>
+
+   <h2 class="serif" id="p4">4. L'athlète : son nom, son image, sa marque</h2>
+
+   <p>Un athlète dispose de trois actifs distincts, et il les confond presque toujours : son nom, son image, et sa notoriété. Chacun se protège différemment.</p>
+
+   <h3>Le nom patronymique</h3>
+
+   <p>Porter un nom ne donne pas de monopole sur ce nom. Chacun a le droit d'utiliser le sien, y compris commercialement, ce qui produit régulièrement des situations complexes entre homonymes. En revanche, un athlète peut <strong>déposer son nom comme marque</strong> pour des produits et services identifiés, et c'est ce que font tous ceux qui construisent une activité au-delà de leur carrière : école, académie, ligne d'équipement, contenus.</p>
+
+   <p>Le dépôt du nom patronymique est possible et courant. Il devient particulièrement utile dans deux cas : quand un tiers commence à exploiter votre notoriété, et quand vous montez une structure qui portera votre nom après votre carrière. Le faire tôt coûte quelques dizaines d'euros ; le faire tard, quand quelqu'un a déposé avant vous, coûte une procédure.</p>
+
+   <h3>L'image</h3>
+
+   <p>Le principe a été détaillé plus haut : rien n'est autorisé par défaut, l'autorisation doit être expresse et spéciale, et pour un mineur elle est donnée par les représentants légaux. Ce qui nous intéresse ici est le cas de la reprise sans accord.</p>
+
+   <p>Trois situations reviennent constamment. Une salle de sport illustre sa publicité avec la photo d'un athlète local qui n'y est jamais venu. Un équipementier republie une photo de compétition en y ajoutant son logo, sans contrat. Un club utilise encore, deux ans après son départ, l'image d'un athlète en page d'accueil de son site.</p>
+
+   <p>Dans les trois cas, l'usage est fautif, et dans les trois cas il cesse presque toujours sur simple demande écrite. Ce qui bloque, ce n'est pas le droit, c'est que l'athlète ne sait pas qu'il peut demander.</p>
+
+   <div class="lb-cas">
+    <span class="k">Cas type</span>
+    <h4>La photo de podium devenue affiche</h4>
+    <p>Une salle de remise en forme ouvre dans une ville moyenne et compose sa campagne d'affichage avec des photos trouvées sur les comptes de sportifs de la région, dont une jeune athlète de dix-sept ans. Aucun accord n'a été demandé, à personne.</p>
+    <p>Trois droits sont ici en cause en même temps : celui de l'athlète sur son image, celui de ses parents qui l'exercent pour elle, et celui du photographe sur le cliché. La salle n'en a réglé aucun.</p>
+    <p class="issue">Issue habituelle : retrait immédiat des affiches et une régularisation financière, l'usage commercial étant caractérisé et le préjudice facile à établir.</p>
+   </div>
+
+   <figure class="lb-photo">
+    <div class="im" data-bgimg="assets/manifeste/medias-heritage.jpg" role="img" aria-label="Athlète face aux photographes"></div>
+    <figcaption>Sur cette scène, quatre titulaires de droits coexistent : l'athlète, chaque photographe, l'organisateur de l'événement et les marques visibles. Une autorisation obtenue de l'un ne vaut pas pour les autres.</figcaption>
+   </figure>
+
+   <h3>La notoriété, qui ne se protège pas comme telle</h3>
+
+   <p>Il n'existe pas de droit sur la notoriété en soi. On ne peut pas interdire à quelqu'un de parler de vous, de commenter vos résultats ou de citer votre nom dans un article. La liberté d'information couvre cela largement, et c'est heureux.</p>
+
+   <p>La limite se situe à l'<strong>exploitation commerciale</strong> : citer votre nom dans un compte rendu de compétition est licite ; l'utiliser pour vendre un produit ne l'est pas sans accord. Entre les deux se trouve une zone grise, celle du contenu éditorial à visée promotionnelle, qui se règle au cas par cas et le plus souvent à l'amiable.</p>
+
+   <h2 class="serif" id="p5">5. Les photos et les vidéos : qui détient quoi</h2>
+
+   <p>C'est le chapitre où les clubs commettent le plus d'erreurs, parce que la logique du droit y contredit frontalement l'intuition.</p>
+
+<figure class="lb-fig">
+<svg viewBox="0 0 600 400" role="img" aria-labelledby="ph-t ph-d" xmlns="http://www.w3.org/2000/svg">
+ <title id="ph-t">Qui détient quoi sur une photographie de compétition</title>
+ <desc id="ph-d">Une même photographie fait intervenir quatre titulaires de droits : le photographe détient le droit d'auteur sur le cliché, l'athlète le droit sur son image, l'organisateur le droit d'exploitation de la manifestation, le club et l'équipementier les marques visibles. Une autorisation obtenue de l'un ne couvre pas les autres.</desc>
+ <rect width="600" height="400" fill="#ffffff"/>
+ <g font-family="Gilroy, system-ui, sans-serif">
+  <text x="24" y="34" font-size="13" font-weight="700" fill="#4a443d" letter-spacing="2">UNE PHOTO, QUATRE TITULAIRES</text>
+
+  <rect x="24" y="54" width="552" height="72" rx="12" fill="#4a1fc7"/>
+  <text x="46" y="84" font-size="17" font-weight="800" fill="#ffffff">Le photographe</text>
+  <text x="46" y="108" font-size="14" fill="#ffffff">le droit d'auteur sur le cliché, même commandé et payé par le club</text>
+
+  <rect x="24" y="136" width="552" height="72" rx="12" fill="#0b0b0b"/>
+  <text x="46" y="166" font-size="17" font-weight="800" fill="#f5f3ef">L'athlète</text>
+  <text x="46" y="190" font-size="14" fill="#f5f3ef">le droit sur son image, exercé par ses parents s'il est mineur</text>
+
+  <rect x="24" y="218" width="552" height="72" rx="12" fill="#b8a4f0"/>
+  <text x="46" y="248" font-size="17" font-weight="800" fill="#1a1033">L'organisateur</text>
+  <text x="46" y="272" font-size="14" fill="#1a1033">le droit d'exploitation de la manifestation qu'il organise</text>
+
+  <rect x="24" y="300" width="552" height="72" rx="12" fill="#d9ff3d"/>
+  <text x="46" y="330" font-size="17" font-weight="800" fill="#101400">Le club et l'équipementier</text>
+  <text x="46" y="354" font-size="14" fill="#101400">les marques visibles sur la tenue, sur le tapis et sur les panneaux</text>
+ </g>
+</svg>
+<figcaption>Une autorisation obtenue auprès d'un seul de ces quatre titulaires ne couvre pas les trois autres. C'est l'erreur la plus fréquente, et la plus coûteuse.</figcaption>
+</figure>
+
+   <figure class="lb-photo">
+    <div class="im" data-bgimg="assets/manifeste/studio-image.jpg" role="img" aria-label="Séance photo en studio pour un athlète"></div>
+    <figcaption>Une séance commandée et payée par un club ne lui donne pas la propriété des images. Sans cession écrite, il n'obtient qu'un droit d'usage, souvent plus étroit qu'il ne le croit.</figcaption>
+   </figure>
+
+   <h3>Le photographe d'abord</h3>
+
+   <p>Une photographie appartient à celui qui l'a prise. Le fait qu'un club l'ait commandée et payée ne change rien : sans cession écrite, il n'acquiert qu'un droit d'usage, souvent limité à ce qui était prévu. Le photographe conserve son droit d'auteur, y compris moral, ce qui implique notamment d'être crédité.</p>
+
+   <p>La cession doit être écrite et détailler les usages, les supports, le territoire et la durée. Une facture mentionnant « reportage photo » ne vaut pas cession. C'est le point qui, dix ans plus tard, empêche un club de réutiliser ses propres archives.</p>
+
+   <p>Le cas du photographe bénévole est le plus délicat, parce que personne ne signe rien. Un parent qui photographie les compétitions pendant cinq ans détient les droits sur des milliers de clichés que le club considère comme siens. Le règlement est simple : une cession d'une page, signée une fois, pour l'ensemble des prises de vue réalisées dans le cadre du club.</p>
+
+   <h3>L'athlète ensuite</h3>
+
+   <p>La personne photographiée dispose d'un droit distinct de celui du photographe. Autrement dit, une photo peut être parfaitement licite du point de vue du droit d'auteur et illicite du point de vue du droit à l'image, et inversement. Les deux autorisations sont indépendantes et se cumulent.</p>
+
+   <h3>L'organisateur enfin</h3>
+
+   <p>Le Code du sport reconnaît aux fédérations et aux organisateurs un droit d'exploitation sur les manifestations qu'ils organisent. C'est ce qui fonde la commercialisation des droits audiovisuels, et c'est aussi ce qui encadre la captation par des tiers.</p>
+
+   <p>Conséquence concrète : filmer intégralement une compétition et diffuser la vidéo n'est pas libre, même si vous y participez, même si vous ne gagnez pas d'argent. La reprise d'extraits dans un cadre d'information ou de critique bénéficie d'exceptions, mais celles-ci sont plus étroites qu'on ne le croit, et la « courte citation » est en pratique très limitée pour l'audiovisuel.</p>
+
+   <h2 class="serif" id="p6">6. Réseaux sociaux : reposter, monter, sonoriser</h2>
+
+   <p>Les plateformes donnent le sentiment d'un espace où tout circule librement. Le droit ne change pourtant pas parce que le support change, et trois pratiques quotidiennes posent problème.</p>
+
+   <h3>Republier la photo de quelqu'un</h3>
+
+   <p>Le partage par les fonctions natives d'une plateforme est prévu par ses conditions et ne pose en général pas de difficulté : le contenu reste attribué à son auteur. Enregistrer une image et la republier comme sienne est en revanche une reproduction, et le fait de créditer l'auteur ne rend pas l'usage licite. Créditer est une politesse, ce n'est pas une autorisation.</p>
+
+   <h3>La musique</h3>
+
+   <p>C'est l'angle mort le plus général. Utiliser une musique sous licence dans une vidéo de club revient à en faire une exploitation. Les bibliothèques musicales des plateformes couvrent l'usage personnel, mais leurs conditions restreignent souvent l'usage par les comptes professionnels ou commerciaux, ce qui inclut de nombreuses associations dès lors qu'elles promeuvent une activité payante.</p>
+
+   <p>La conséquence n'est le plus souvent pas judiciaire : elle est algorithmique. La vidéo est bloquée, sa portée est réduite, ou les revenus sont réaffectés. C'est une sanction discrète, mais elle vide de sa valeur un travail parfois considérable.</p>
+
+   <h3>Les images de compétition</h3>
+
+   <p>Republier des extraits d'une retransmission relève des droits de l'organisateur et du diffuseur. Là encore, la sanction habituelle est le retrait automatique, parfois assorti d'un avertissement sur le compte. Trois avertissements suffisent, sur la plupart des plateformes, à faire disparaître un compte construit en plusieurs années.</p>
+
+   <div class="lb-cas">
+    <span class="k">Cas type</span>
+    <h4>Le compte effacé pour trois vidéos</h4>
+    <p>Un jeune athlète construit une audience de onze mille abonnés en deux saisons. Il publie trois montages reprenant des extraits de retransmission, sonorisés avec un titre du moment. Les trois sont signalés automatiquement. Le compte est fermé.</p>
+    <p>Aucun juge n'est intervenu, aucune plainte n'a été déposée. Le préjudice est pourtant réel : deux ans d'audience et l'ensemble des archives, perdus en une semaine.</p>
+    <p class="issue">À retenir : sur les réseaux, le risque n'est presque jamais le procès. Il est la disparition, et elle est immédiate.</p>
+   </div>
+
+   <h2 class="serif" id="p7">7. Le parasitisme et l'ambush marketing</h2>
+
+   <p>Il existe une catégorie de comportements qui ne violent aucun droit privatif et qui sont pourtant sanctionnés : se placer dans le sillage d'autrui pour profiter de ses efforts sans bourse délier. On parle de <strong>parasitisme</strong>, et il se juge sur le terrain de la responsabilité civile, indépendamment de tout dépôt.</p>
+
+   <p>C'est une ressource précieuse pour les clubs qui n'ont rien déposé. Reprendre la date de fondation d'un autre, imiter sa communication, s'installer dans son sillage en jouant sur la confusion : rien de tout cela ne suppose une marque pour être sanctionné.</p>
+
+   <h3>L'ambush marketing</h3>
+
+   <p>C'est la version commerciale du parasitisme : une marque non partenaire d'un événement organise sa communication pour donner l'impression qu'elle l'est. Le sport est le terrain historique de cette pratique, et elle est aujourd'hui étroitement encadrée pour les grands événements.</p>
+
+   <p>En France, les propriétés olympiques bénéficient d'une protection spécifique inscrite dans le Code du sport : les emblèmes, le drapeau, la devise, ainsi que les termes « jeux Olympiques » et « olympiade » sont réservés, et leur usage sans autorisation est sanctionné comme une contrefaçon. C'est l'une des protections les plus fortes du droit français en la matière.</p>
+
+   <p>Pour un club ou un athlète, la règle pratique est simple : on ne se présente pas comme partenaire, officiel, agréé ou associé à un événement dont on n'est rien. Publier une photo de soi en compétition est licite ; laisser entendre qu'une marque est partenaire de l'événement parce qu'on porte son logo ne l'est pas.</p>
+
+   <h2 class="serif" id="p8">8. Vous êtes copié : la marche à suivre</h2>
+
+   <p>La réaction spontanée est mauvaise dans presque tous les cas. Elle consiste à publier une capture d'écran indignée, à taguer le contrevenant et à laisser la communauté s'en charger. Cette méthode détruit la preuve, transforme un dossier en conflit public et vous expose à une riposte pour dénigrement.</p>
+
+<figure class="lb-fig">
+<svg viewBox="0 0 600 560" role="img" aria-labelledby="ar-t ar-d" xmlns="http://www.w3.org/2000/svg">
+ <title id="ar-t">Que faire quand on découvre une copie</title>
+ <desc id="ar-d">Trois étapes toujours dans cet ordre : constater et dater la preuve, vérifier son propre titre, mesurer le risque de confusion. Puis un choix selon l'enjeu : un simple contact quand la reprise est involontaire, une mise en demeure quand l'enjeu est réel, une action judiciaire quand le préjudice est majeur.</desc>
+ <rect width="600" height="560" fill="#ffffff"/>
+ <g font-family="Gilroy, system-ui, sans-serif">
+  <text x="24" y="34" font-size="13" font-weight="700" fill="#4a443d" letter-spacing="2">L'ORDRE DES OPÉRATIONS</text>
+
+  <rect x="24" y="52" width="552" height="70" rx="12" fill="#4a1fc7"/>
+  <text x="46" y="80" font-size="12" font-weight="700" fill="#d9ff3d" letter-spacing="1.4">ÉTAPE 1</text>
+  <text x="46" y="105" font-size="16" font-weight="800" fill="#ffffff">Constater : captures datées, constat d'huissier</text>
+
+  <path d="M300 122 v18" stroke="#c9c7c2" stroke-width="2"/>
+  <path d="M294 134 l6 10 l6 -10 z" fill="#c9c7c2"/>
+
+  <rect x="24" y="148" width="552" height="70" rx="12" fill="#4a1fc7"/>
+  <text x="46" y="176" font-size="12" font-weight="700" fill="#d9ff3d" letter-spacing="1.4">ÉTAPE 2</text>
+  <text x="46" y="201" font-size="16" font-weight="800" fill="#ffffff">Vérifier son titre : dépôt, date, classes, cession</text>
+
+  <path d="M300 218 v18" stroke="#c9c7c2" stroke-width="2"/>
+  <path d="M294 230 l6 10 l6 -10 z" fill="#c9c7c2"/>
+
+  <rect x="24" y="244" width="552" height="70" rx="12" fill="#4a1fc7"/>
+  <text x="46" y="272" font-size="12" font-weight="700" fill="#d9ff3d" letter-spacing="1.4">ÉTAPE 3</text>
+  <text x="46" y="297" font-size="16" font-weight="800" fill="#ffffff">Mesurer le risque de confusion pour le public</text>
+
+  <line x1="24" y1="338" x2="576" y2="338" stroke="#e2e0dc" stroke-width="1.5"/>
+  <text x="24" y="366" font-size="13" font-weight="700" fill="#4a443d" letter-spacing="2">PUIS, SELON CE QUE LA COPIE VOUS COÛTE</text>
+
+  <rect x="24" y="382" width="552" height="52" rx="12" fill="#d9ff3d"/>
+  <text x="46" y="404" font-size="12" font-weight="700" fill="#3d4a00" letter-spacing="1.4">ENJEU FAIBLE</text>
+  <text x="46" y="424" font-size="15" font-weight="700" fill="#101400">Un appel ou un mail. La reprise cesse en une semaine.</text>
+
+  <rect x="24" y="444" width="552" height="52" rx="12" fill="#b8a4f0"/>
+  <text x="46" y="466" font-size="12" font-weight="700" fill="#3d1f8a" letter-spacing="1.4">ENJEU RÉEL</text>
+  <text x="46" y="486" font-size="15" font-weight="700" fill="#1a1033">Mise en demeure : demande précise, délai chiffré.</text>
+
+  <rect x="24" y="506" width="552" height="52" rx="12" fill="#0b0b0b"/>
+  <text x="46" y="528" font-size="12" font-weight="700" fill="#d9ff3d" letter-spacing="1.4">ENJEU MAJEUR</text>
+  <text x="46" y="548" font-size="15" font-weight="700" fill="#ffffff">Saisie-contrefaçon et tribunal judiciaire.</text>
+ </g>
+</svg>
+<figcaption>Les trois étapes du haut se font toujours, et dans cet ordre. Le choix du bas dépend de ce que la copie vous coûte réellement, pas de l'agacement qu'elle provoque.</figcaption>
+</figure>
+
+   <h3>Étape 1 : constater et dater</h3>
+
+   <p>Captures d'écran complètes avec l'adresse visible et la date, enregistrement des pages, relevé des mentions légales du site. Si l'enjeu est important, un constat par commissaire de justice donne une preuve difficilement contestable, pour un coût de quelques centaines d'euros. Faites-le <strong>avant</strong> tout contact : une page modifiée après un appel devient très difficile à prouver.</p>
+
+   <h3>Étape 2 : vérifier votre propre titre</h3>
+
+   <p>Avez-vous une marque ? Depuis quand ? Dans quelles classes ? Détenez-vous la cession des droits sur votre logo ? Beaucoup de courriers de mise en demeure s'effondrent parce que leur auteur découvre, en cours de route, qu'il ne détient rien de ce qu'il invoque. C'est aussi le moment de vérifier que l'autre n'a pas déposé avant vous.</p>
+
+   <h3>Étape 3 : mesurer le risque de confusion</h3>
+
+   <p>Les signes sont-ils proches visuellement, phonétiquement, conceptuellement ? Les activités sont-elles similaires ? Les publics se recoupent-ils géographiquement ? Un club de judo et une marque de logiciels peuvent porter le même nom sans que personne ne s'y trompe. Deux clubs de la même discipline à trente kilomètres, non.</p>
+
+   <h3>Étape 4 : choisir la réponse proportionnée</h3>
+
+   <p>Dans la majorité des cas que nous voyons, la copie est involontaire : un bénévole a repris un visuel trouvé en ligne, un prestataire a livré un travail qu'il n'avait pas créé. Un appel ou un message courtois règle le problème en une semaine, sans frais et sans rancune durable, ce qui compte dans un milieu où l'on se recroise.</p>
+
+   <p>Quand l'enjeu est réel, la mise en demeure écrite est l'outil adapté : elle rappelle les faits, elle identifie le droit invoqué, elle formule une demande précise et elle fixe un délai. Elle ouvre la négociation autant qu'elle la ferme.</p>
+
+   <p>L'action judiciaire ne se justifie que si le préjudice est substantiel et documenté. La contrefaçon relève du tribunal judiciaire, avec des juridictions spécialisées, et la saisie-contrefaçon permet de faire constater les faits chez l'adversaire. C'est efficace et c'est coûteux. La question à trancher n'est pas « ai-je raison » mais « qu'est-ce que j'obtiendrai, en combien de temps, et pour quel budget ».</p>
+
+   <table class="lb-tab">
+    <caption>Ce que chaque voie coûte et rapporte, en ordre de grandeur.</caption>
+    <thead>
+     <tr><th>Voie</th><th>Délai</th><th>Coût</th><th>Ce qu'elle obtient</th></tr>
+    </thead>
+    <tbody>
+     <tr>
+      <th scope="row">Contact direct</th>
+      <td data-col="Délai">Quelques jours</td>
+      <td data-col="Coût">Nul</td>
+      <td data-col="Obtient">L'arrêt, quand la reprise est involontaire</td>
+     </tr>
+     <tr>
+      <th scope="row">Constat d'huissier</th>
+      <td data-col="Délai">Une à deux semaines</td>
+      <td data-col="Coût">Quelques centaines d'euros</td>
+      <td data-col="Obtient">Une preuve solide, utilisable ensuite</td>
+     </tr>
+     <tr>
+      <th scope="row">Mise en demeure</th>
+      <td data-col="Délai">Deux à six semaines</td>
+      <td data-col="Coût">Faible à modéré</td>
+      <td data-col="Obtient">L'arrêt et parfois une indemnisation</td>
+     </tr>
+     <tr>
+      <th scope="row">Action judiciaire</th>
+      <td data-col="Délai">Un à trois ans</td>
+      <td data-col="Coût">Élevé</td>
+      <td data-col="Obtient">Interdiction, dommages et intérêts, publication</td>
+     </tr>
+    </tbody>
+   </table>
+
+   <h3>Quand la copie vient de l'étranger</h3>
+
+   <p>Le cas devient courant avec les boutiques en ligne : un vendeur situé hors de l'Union européenne propose des articles reprenant votre écusson, expédiés directement au client. Une action judiciaire contre lui est en pratique hors de portée pour un club amateur.</p>
+
+   <p>La réponse efficace n'est alors pas judiciaire, elle est procédurale. Les grandes plateformes de vente disposent toutes d'un dispositif de signalement des atteintes à la propriété intellectuelle, et le traitement est rapide quand le signalement est bien fait : titre invoqué, numéro de dépôt, liste des annonces litigieuses. C'est précisément le moment où l'existence d'une marque déposée fait toute la différence, parce que ces dispositifs demandent un numéro d'enregistrement et non un récit.</p>
+
+   <p>Le même mécanisme existe sur les réseaux sociaux et chez les hébergeurs, tenus de retirer promptement un contenu manifestement illicite une fois notifiés dans les formes. La notification doit être précise : une plainte vague reste sans effet, une notification identifiant chaque contenu et le droit invoqué produit généralement un retrait en quelques jours.</p>
+
+   <p>Enfin, pour les marchandises physiques, la douane peut retenir des articles soupçonnés de contrefaçon à la demande du titulaire d'un droit. La démarche suppose là encore un titre enregistré. C'est un outil puissant, gratuit à demander, et presque jamais utilisé par les clubs parce qu'ils ignorent qu'il leur est ouvert.</p>
+
+   <h2 class="serif" id="p9">9. Vous avez copié : comment s'en sortir</h2>
+
+   <p>La situation inverse est plus fréquente qu'on ne l'admet, et elle se gère mal parce que le premier réflexe est défensif. Or la position d'un club qui a repris un visuel sans le savoir n'est pas désespérée, à condition de réagir dans le bon ordre.</p>
+
+   <h3>Ce qu'il ne faut pas faire</h3>
+
+   <p>Ne modifiez pas discrètement le visuel en espérant que cela règle le passé : la reprise antérieure reste établie, et la modification furtive est interprétée comme un aveu. Ne répondez pas par un courrier agressif : les mises en demeure sont souvent plus larges que ce que le droit permet réellement, et une réponse mesurée obtient bien davantage. Ne laissez pas la discussion se tenir en public.</p>
+
+   <h3>Ce qu'il faut faire</h3>
+
+   <p>D'abord, suspendre l'usage litigieux le temps d'y voir clair. Cette suspension n'est pas un aveu, et elle arrête le préjudice, donc son chiffrage.</p>
+
+   <p>Ensuite, remonter à la source : qui a créé le visuel, sur quelle commande, à partir de quoi. Si un prestataire a livré un travail qu'il n'avait pas créé, il engage sa propre responsabilité, et le club dispose d'un recours contre lui.</p>
+
+   <p>Enfin, répondre par écrit, factuellement : ce qui a été fait, depuis quand, ce qui est arrêté, ce qui est proposé. Dans la grande majorité des cas, le titulaire cherche l'arrêt de l'usage, pas une bataille. Une réponse rapide et honnête ferme le dossier bien plus sûrement qu'un silence.</p>
+
+   <div class="lb-cas">
+    <span class="k">Cas type</span>
+    <h4>Le visuel livré par un prestataire</h4>
+    <p>Une association commande une identité complète à un prestataire pour un budget modeste. Deux ans plus tard, elle reçoit une mise en demeure : le pictogramme central provient d'une banque d'images dont la licence n'autorise pas l'usage comme marque, et le lettrage est une police dont la licence de diffusion n'a jamais été acquise.</p>
+    <p>L'association est responsable de l'usage, mais elle dispose d'un recours contre le prestataire, qui a livré un travail non conforme. Le contrat initial et les échanges écrits deviennent alors la pièce maîtresse du dossier.</p>
+    <p class="issue">À retenir : conservez toujours le contrat, les échanges et les fichiers sources. Sans eux, le recours contre le prestataire est très difficile à mener.</p>
+   </div>
+
+   <h3>Le cas particulier des polices de caractères</h3>
+
+   <p>C'est l'oubli le plus universel. Une police est un logiciel, et sa licence détermine ce qu'on peut en faire : usage bureautique, intégration dans un site, incorporation dans une application, utilisation dans un logo commercialisé. Une police téléchargée gratuitement pour un usage personnel et employée dans l'identité d'un club en vente sur une boutique n'est pas couverte.</p>
+
+   <p>La vérification prend dix minutes : ouvrez la licence livrée avec la police, cherchez les mots « commercial », « web », « logo ». Les fonderies sérieuses distinguent explicitement ces usages, et beaucoup proposent des licences abordables pour les associations.</p>
+
+   <h2 class="serif" id="p10">10. Prévenir : deux listes à cocher</h2>
+
+   <p>Tout ce qui précède se résume à un principe : la protection se construit avant le litige, et elle coûte alors une fraction de ce qu'elle coûtera après. Voici ce que nous vérifions systématiquement.</p>
+
+   <h3>Pour un club ou une structure</h3>
+
+   <div class="art-takeaways">
+    <div class="art-take"><span class="n">01</span><b>Obtenez la cession écrite de votre logo</b><p>Auprès du graphiste, du bénévole ou de l'agence. Payer une facture ne transfère pas les droits.</p></div>
+    <div class="art-take"><span class="n">02</span><b>Déposez votre nom et votre écusson</b><p>Au minimum en classes 25, 28 et 41. Le coût est négligeable au regard du budget d'une saison.</p></div>
+    <div class="art-take"><span class="n">03</span><b>Vérifiez les licences de vos polices</b><p>Usage web, usage commercial, incorporation dans un logo : ce sont trois autorisations distinctes.</p></div>
+    <div class="art-take"><span class="n">04</span><b>Faites signer une cession à vos photographes</b><p>Y compris et surtout au parent bénévole qui couvre les compétitions depuis cinq ans.</p></div>
+    <div class="art-take"><span class="n">05</span><b>Datez vos autorisations d'image</b><p>« Sans limitation de durée » est contestable et vous protège moins que vous ne le croyez.</p></div>
+    <div class="art-take"><span class="n">06</span><b>Archivez tout, avec les dates</b><p>Premiers usages, fichiers sources, contrats, échanges. C'est ce qui fait gagner un dossier.</p></div>
+   </div>
+
+   <h3>Pour un athlète</h3>
+
+   <div class="art-takeaways">
+    <div class="art-take parents"><span class="n">01</span><b>Réunissez vos quatre documents</b><p>Licence, autorisation de club, convention de structure, contrats. Un dossier, quatre fichiers.</p></div>
+    <div class="art-take parents"><span class="n">02</span><b>Déposez votre nom si vous construisez quelque chose autour</b><p>Académie, contenus, équipement : le dépôt coûte peu et se fait une fois.</p></div>
+    <div class="art-take parents"><span class="n">03</span><b>Ne portez aucune marque sans contrat</b><p>Ce que vous offrez, vous ne pourrez plus le vendre.</p></div>
+    <div class="art-take parents"><span class="n">04</span><b>Vérifiez la musique de vos vidéos</b><p>Le risque n'est pas le procès, c'est le blocage automatique et la perte de portée.</p></div>
+    <div class="art-take parents"><span class="n">05</span><b>Surveillez votre nom une fois par trimestre</b><p>Dix minutes de recherche suffisent à repérer un usage non autorisé avant qu'il ne s'installe.</p></div>
+   </div>
+
+   <h2 class="serif" id="fin">Ce qu'il faut retenir</h2>
+
+   <p>La propriété intellectuelle dans le sport n'est pas un sujet d'avocat : c'est un sujet de gestion. Les quatre droits présentés dans ce document ne se ressemblent pas, ne durent pas le même temps et ne se défendent pas de la même façon, mais ils obéissent à une même logique : ils protègent d'autant mieux qu'on s'en est occupé avant d'en avoir besoin.</p>
+
+   <p>Trois idées suffisent à éviter l'essentiel des litiges. Payer une création ne donne pas les droits sur cette création, il faut une cession écrite. Utiliser un nom depuis longtemps ne constitue pas un titre, il faut un dépôt. Et sur une photographie de compétition, quatre personnes détiennent des droits, pas une.</p>
+
+   <p>Le reste est une question d'ordre : constater avant de contacter, vérifier son propre titre avant d'invoquer celui des autres, et choisir une réponse proportionnée à ce que la copie coûte réellement. Un appel bien fait règle plus de dossiers qu'une procédure, et il coûte infiniment moins cher.</p>
+
+   <p class="art-mention" style="font-size: 13.5px; color: var(--ink-muted); border-top: 1px solid var(--line); padding-top: 20px; margin-top: 34px;">Ce document présente le cadre général du droit français et européen à la date de sa publication. Il ne constitue pas une consultation juridique et ne remplace pas l'avis d'un avocat sur une situation particulière. Les montants, délais et références cités sont donnés en ordre de grandeur et doivent être vérifiés au cas par cas.</p>
+
+   <div class="art-sources">
+    <h2 class="serif">Sources</h2>
+    <ol>
+     <li>Marques, dessins et modèles : conditions de dépôt, classes de produits et services, durée et renouvellement. <a href="https://www.inpi.fr/" target="_blank" rel="noopener">Institut national de la propriété industrielle (INPI)</a>.</li>
+     <li>Marque de l'Union européenne et dessins ou modèles communautaires. <a href="https://www.euipo.europa.eu/" target="_blank" rel="noopener">Office de l'Union européenne pour la propriété intellectuelle (EUIPO)</a>.</li>
+     <li>Droit d'auteur, droits voisins, cession des droits et sanctions de la contrefaçon. <a href="https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006069414/" target="_blank" rel="noopener">Legifrance, Code de la propriété intellectuelle</a>.</li>
+     <li>Droit au respect de la vie privée, fondement du droit à l'image. <a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006419288" target="_blank" rel="noopener">Legifrance, Code civil, article 9</a>.</li>
+     <li>Droit d'exploitation des manifestations sportives par les fédérations et les organisateurs, et protection des propriétés olympiques. <a href="https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006071318/" target="_blank" rel="noopener">Legifrance, Code du sport</a>.</li>
+     <li>Protection des données personnelles des mineurs et usage de leur image en ligne. <a href="https://www.cnil.fr/fr/les-droits-des-mineurs" target="_blank" rel="noopener">CNIL, les droits des mineurs</a>.</li>
+     <li>Droit à l'image du sportif, autorisation expresse et spéciale, mentions du contrat d'image. <a href="https://www.bertrand-sport-avocat.com/conseils/image-sponsoring-sportif/" target="_blank" rel="noopener">Cabinet Bertrand, avocat en droit du sport</a>.</li>
+    </ol>
+   </div>
+
+   <div class="art-next">
+    <div>
+     <h3>Vous voulez faire le point sur votre identité&nbsp;?</h3>
+     <p>Nous auditons ce que vous détenez réellement : cessions, dépôts, licences, autorisations. Gratuit pour les athlètes du Programme Espoirs.</p>
+    </div>
+    <a href="contact.html" class="btn btn-primary">Nous en parler <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+   </div>
+
+  </div>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260920"></script>
+</body>
+</html>

@@ -790,6 +790,7 @@ function buildNav() {
  'art-dossier-de-partenariat.html': 'Sponsoring',
  'art-premiere-interview.html': 'Communication',
  'art-blessure-longue-carriere.html': 'Gestion de carrière',
+ 'art-propriete-intellectuelle-sport.html': 'Image de marque',
  'art-sponsor-a-15-ans.html': 'Sponsoring', 'about.html': 'À propos',
  'contact.html': 'Contact', 'rdv.html': 'Prendre RDV', 'athletes.html': 'Athlètes & Team',
  'mentions-legales.html': 'Mentions légales',
@@ -1389,7 +1390,9 @@ const ARTICLES = [
  { url: 'art-premiere-interview.html', axe: 'Communication',
    titre: "Première interview : ce qu'il faut savoir avant de répondre" },
  { url: 'art-blessure-longue-carriere.html', axe: 'Gestion de carrière',
-   titre: "Blessure longue : ne pas perdre une saison de carrière" }
+   titre: "Blessure longue : ne pas perdre une saison de carrière" },
+ { url: 'art-propriete-intellectuelle-sport.html', axe: 'Image de marque',
+   titre: "Copier un club, copier un athlète : le livre blanc de la propriété intellectuelle" }
 ];
 const SERVICES = {
  'Gestion de carrière': { url: 'service-carriere.html', txt: "Contrats, trajectoire, reconversion : nous pilotons la carrière au-delà des résultats." },
