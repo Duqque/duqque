@@ -4,136 +4,144 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Contact · Duqque Sports</title>
-<meta name="description" content="Contactez Duqque Sports, Paris et Lisbonne. 30 minutes pour parler de votre carrière. Sans engagement." />
-<link rel="stylesheet" href="css/style.css?v=20260906" />
+<meta name="description" content="Parlez à Duqque Sports. Premier échange de trente minutes, gratuit et sans engagement. WhatsApp, téléphone, email ou formulaire. Réponse sous 48 heures." />
+<link rel="stylesheet" href="css/style.css?v=20260908" />
 <style>
- /* === CONTACT GRID === */
- .ct-grid {
- display: grid;
- grid-template-columns: 1.4fr 1fr;
- gap: 20px;
- align-items: start;
- }
+ /* =========================================================
+    CONTACT
+    Trois blocs, dans l'ordre ou l'on en a besoin : joindre quelqu'un tout de suite,
+    ecrire si ce n'est pas urgent, savoir ce qui se passe ensuite.
+    ========================================================= */
 
- /* Form card cream */
+ /* --- Canaux directs ------------------------------------------------------------- */
+ .ct-canaux { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+ .ct-canal {
+  display: flex; flex-direction: column; gap: 12px;
+  padding: clamp(24px, 2.6vw, 34px);
+  border-radius: 16px; text-decoration: none;
+  background: var(--c); color: var(--i);
+  border: 1px solid transparent;
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+ }
+ .ct-canal:hover { transform: translateY(-3px); box-shadow: 0 20px 50px rgba(10,10,14,0.14); }
+ .ct-canal-ico {
+  display: inline-flex; width: 42px; height: 42px; border-radius: 12px;
+  align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.18); flex: 0 0 auto;
+ }
+ .ct-canal-ico svg { width: 21px; height: 21px; }
+ .ct-canal .k { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; }
+ .ct-canal .v {
+  font-family: var(--display); font-weight: 900;
+  font-size: clamp(19px, 1.9vw, 25px); line-height: 1.1; letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+ }
+ /* color: inherit est indispensable : la regle globale `p { color: var(--ink-soft) }`
+    l'emporte sinon sur la couleur d'encre de la carte, et le paragraphe tombait a 1.18:1
+    sur le fond violet. Pas d'opacite non plus, qui degraderait un contraste deja calcule. */
+ .ct-canal .d { font-size: 13px; line-height: 1.55; color: inherit; margin: 0; }
+ .ct-canal .fl { display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding-top: 14px;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+ .ct-canal .fl svg { transition: transform .35s var(--ease); }
+ .ct-canal:hover .fl svg { transform: translateX(4px); }
+
+ /* Le vert WhatsApp officiel ne donne que 3.1:1 en blanc, tres loin du AAA vise sur le
+    reste du site. La carte prend donc un vert profond (9.3:1), et c'est la pastille du
+    pictogramme qui porte la couleur de la marque. */
+ .ct-wa { --c: #0a5227; --i: #fff; }
+ .ct-wa .ct-canal-ico { background: #25d366; color: #05341a; }
+ .ct-tel { --c: #0b0b0b; --i: #f5f3ef; }
+ .ct-tel .ct-canal-ico { background: rgba(217,255,61,0.18); color: #d9ff3d; }
+ .ct-tel .k { color: #d9ff3d; }
+ .ct-mail { --c: var(--accent-ink); --i: #fff; }
+
+ /* --- Formulaire ------------------------------------------------------------------ */
  .ct-form-card {
- background: #f7eccf;
- border-radius: 16px;
- padding: clamp(36px, 4vw, 52px);
- color: #2a1402;
+  background: #fff; border: 1px solid var(--line); border-radius: 20px;
+  padding: clamp(30px, 4vw, 56px);
+  max-width: 880px; margin: 0 auto;
  }
- .ct-form-card .section-tag { color: rgba(42,20,2,0.82); }
- .ct-form-card h2 { margin-bottom: 8px; }
- .ct-form-card > p { color: rgba(42,20,2,0.82); margin-bottom: 32px; max-width: 42ch; }
+ .ct-form-card h2 { margin: 0 0 10px; }
+ .ct-intro { font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 30px; max-width: 54ch; }
 
- .ct-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+ .ct-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 30px; }
  .ct-chips button {
- padding: 10px 18px; border-radius: 100px;
- border: 1px solid rgba(42,20,2,0.18);
- background: transparent; color: rgba(42,20,2,0.82);
- font-size: 12px; letter-spacing: 0.05em; font-weight: 500;
- cursor: pointer;
- transition: all .25s ease;
+  padding: 10px 16px; border-radius: 100px;
+  border: 1px solid var(--line); background: transparent; color: var(--ink-soft);
+  font-family: var(--sans); font-size: 12px; letter-spacing: 0.04em; font-weight: 600;
+  cursor: pointer; transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
  }
- .ct-chips button:hover { color: #2a1402; border-color: #2a1402; }
- .ct-chips button.active { background: #2a1402; color: #f7eccf; border-color: #2a1402; }
+ .ct-chips button:hover { border-color: var(--ink); color: var(--ink); }
+ .ct-chips button.active { background: var(--accent-ink); border-color: var(--accent-ink); color: #fff; }
+ .ct-chips button:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 2px; }
 
- .ct-form { display: grid; gap: 18px; }
- .ct-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
- .ct-row.single { grid-template-columns: 1fr; }
- .ct-field { display: flex; flex-direction: column; gap: 6px; }
- .ct-field label {
- font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
- color: rgba(42,20,2,0.82); font-weight: 700;
+ .ct-form { display: grid; gap: 20px; }
+ .ct-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+ .ct-row.plein { grid-template-columns: 1fr; }
+ /* Les champs adaptes au profil sont injectes par main.js sous la classe .field. */
+ .ct-form .field, .ct-field { display: flex; flex-direction: column; gap: 7px; }
+ .ct-form .field label, .ct-field label {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  font-weight: 700; color: var(--ink-muted);
  }
- .ct-field input, .ct-field textarea, .ct-field select {
- background: transparent;
- border: none; border-bottom: 1px solid rgba(42,20,2,0.25);
- color: #2a1402; padding: 12px 0; font: inherit; font-size: 16px;
- transition: border-color .3s;
- font-family: var(--sans);
+ .ct-form .field input, .ct-field input, .ct-field textarea {
+  background: transparent; border: none; border-bottom: 1.5px solid var(--line);
+  color: var(--ink); padding: 11px 0; font-family: var(--sans); font-size: 16px;
+  transition: border-color .3s var(--ease);
  }
- .ct-field input:focus, .ct-field textarea:focus { outline: none; border-color: #2a1402; }
- .ct-field textarea { resize: vertical; min-height: 110px; }
- .ct-submit { margin-top: 8px; }
- .ct-submit button {
- background: #1a1410; color: #fff;
- border: none; border-radius: 100px;
- padding: 16px 28px;
- font-size: 13px; letter-spacing: 0.08em; font-weight: 600;
- cursor: pointer; font-family: var(--sans);
- display: inline-flex; align-items: center; gap: 12px;
- transition: background .3s, transform .3s;
+ .ct-form .field input:focus, .ct-field input:focus, .ct-field textarea:focus {
+  outline: none; border-color: var(--accent-ink);
  }
- .ct-submit button:hover { background: var(--accent); transform: translateY(-2px); }
- @media (max-width: 700px) { .ct-row { grid-template-columns: 1fr; } }
+ .ct-field textarea { resize: vertical; min-height: 120px; line-height: 1.55; }
+ .ct-field input::placeholder, .ct-field textarea::placeholder { color: var(--ink-muted); opacity: 0.75; }
 
- /* Sidebar stack */
- .ct-side { display: flex; flex-direction: column; gap: 16px; }
- .ct-tile {
- border-radius: 16px;
- padding: 32px 28px;
- display: flex; flex-direction: column; gap: 10px;
- position: relative; overflow: hidden;
- text-decoration: none;
- transition: transform .4s var(--ease);
+ .ct-pied { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 6px; }
+ .ct-envoi {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--accent-ink); color: #fff;
+  border: none; border-radius: 100px; padding: 16px 28px;
+  font-family: var(--sans); font-size: 13px; letter-spacing: 0.06em; font-weight: 600;
+  cursor: pointer; transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
  }
- .ct-tile:hover { transform: translateY(-3px); }
- .ct-tile .lbl {
- font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
- font-weight: 700; opacity: 1;
- }
- .ct-tile .val {
- font-family: var(--serif); font-weight: 600;
- font-size: clamp(22px, 1.9vw, 26px); line-height: 1.1; letter-spacing: -0.01em;
- }
- .ct-tile.dark { background: #050505; color: #f5f3ef; border: 1px solid rgba(255,255,255,0.08); }
- .ct-tile.dark::before {
- content:""; position:absolute; right:-30%; bottom:-50%;
- width: 280px; height: 280px;
- background: radial-gradient(circle, rgba(119, 71, 255,0.4) 0%, transparent 65%);
- filter: blur(20px); z-index: 0;
- }
- .ct-tile.dark > * { position: relative; z-index: 1; }
- .ct-tile.purple { background: #b8a4f0; color: #1a1033; }
- .ct-tile.green  { background: #b7d2bf; color: #14241a; }
+ .ct-envoi:hover { background: var(--lime, #d9ff3d); color: #0b0b0b; transform: translateY(-2px); }
+ .ct-envoi:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 3px; }
+ .ct-envoi svg { transition: transform .35s var(--ease); }
+ .ct-envoi:hover svg { transform: translateX(4px); }
+ .ct-mention { font-size: 12px; line-height: 1.5; color: var(--ink-muted); margin: 0; max-width: 40ch; }
 
- .ct-tile .arrow-out {
- align-self: flex-start; margin-top: 8px;
- width: 34px; height: 34px; border-radius: 50%;
- display: flex; align-items: center; justify-content: center;
- background: rgba(0,0,0,0.85); color: #fff;
- transition: transform .35s var(--ease);
+ /* --- Suite ----------------------------------------------------------------------- */
+ .ct-suite { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+ .ct-etape { border-top: 2px solid var(--ink); padding-top: 16px; }
+ .ct-etape .n {
+  display: block; font-family: var(--display); font-weight: 900;
+  font-size: clamp(38px, 3.6vw, 54px); line-height: 1; letter-spacing: -0.04em;
+  color: var(--accent-ink); margin-bottom: 12px;
  }
- .ct-tile:hover .arrow-out { transform: translateX(4px); }
+ .ct-etape b { display: block; font-size: 15px; line-height: 1.25; margin-bottom: 6px; }
+ .ct-etape p { font-size: 13px; line-height: 1.55; color: var(--ink-soft); margin: 0; max-width: 30ch; }
 
- /* CTA block - timeline */
- .ct-timeline {
- background: var(--accent); color: #ffffff;
- border-radius: 16px; padding: 32px 28px;
- display: flex; flex-direction: column; gap: 18px;
+ /* --- Reassurance ------------------------------------------------------------------ */
+ .ct-faits {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px;
+  border-radius: 16px; overflow: hidden; background: var(--line);
  }
- .ct-timeline h3 { font-size: 22px; font-weight: 600; }
- .ct-timeline ol {
- list-style: none; padding: 0; margin: 0;
- display: flex; flex-direction: column; gap: 14px;
- counter-reset: ctstep;
+ .ct-fait { background: #0b0b0b; color: #f5f3ef; padding: clamp(24px, 2.6vw, 34px); }
+ .ct-fait .n {
+  display: block; font-family: var(--display); font-weight: 900;
+  font-size: clamp(38px, 4vw, 60px); line-height: 1; letter-spacing: -0.04em;
+  color: #d9ff3d; margin-bottom: 10px; white-space: nowrap;
  }
- .ct-timeline li {
- counter-increment: ctstep;
- padding-left: 32px; position: relative;
- font-size: 13px; line-height: 1.4;
- }
- .ct-timeline li::before {
- content: counter(ctstep);
- position: absolute; left: 0; top: -2px;
- width: 22px; height: 22px; border-radius: 50%;
- background: #ffffff; color: var(--accent-ink);
- display: flex; align-items: center; justify-content: center;
- font-size: 11px; font-weight: 700; font-family: var(--sans);
- }
+ .ct-fait p { font-size: 13.5px; line-height: 1.5; color: rgba(245,243,239,0.86); margin: 0; max-width: 26ch; }
 
- @media (max-width: 1000px) { .ct-grid { grid-template-columns: 1fr; } }
+ @media (max-width: 900px) {
+  .ct-canaux { grid-template-columns: 1fr; }
+  .ct-suite { grid-template-columns: 1fr 1fr; }
+  .ct-faits { grid-template-columns: 1fr; }
+ }
+ @media (max-width: 600px) {
+  .ct-row { grid-template-columns: 1fr; }
+  .ct-suite { grid-template-columns: 1fr; }
+ }
 </style>
 </head>
 <body>
@@ -142,105 +150,183 @@
 <div class="menu"></div>
 
 <!-- HERO -->
-<section class="page-hero contact" style="min-height: 50vh;">
+<section class="page-hero contact" style="min-height: 48vh;">
  <div class="container">
- <div class="breadcrumb"><span>Contact</span></div>
- <h1 class="serif">Trente minutes. <em class="accent">Aucun engagement.</em></h1>
- <p class="lead">Un échange pour comprendre votre contexte, vos objectifs, et déterminer ensemble si une collaboration a du sens.</p>
+  <div class="breadcrumb"><span>Contact</span></div>
+  <h1 class="serif">Trente minutes. <em class="accent">Aucun engagement.</em></h1>
+  <p class="lead">Un échange pour comprendre où vous en êtes, ce que vous visez, et vous dire franchement si nous sommes utiles. Si nous ne le sommes pas, nous vous le dirons aussi.</p>
  </div>
 </section>
 
-<!-- CONTACT GRID -->
+<!-- CANAUX DIRECTS -->
 <section>
  <div class="container">
- <div class="ct-grid">
+  <div class="kicker reveal"><span class="line"></span> Nous joindre</div>
+  <h2 class="serif reveal" style="max-width: 22ch; margin-bottom: 40px;">Trois façons de nous parler <em class="accent">dès aujourd'hui.</em></h2>
 
- <!-- LEFT : form card -->
- <div class="ct-form-card reveal">
- <div class="section-tag">Formulaire</div>
- <h2 class="serif">Vous êtes&nbsp;?</h2>
- <p>Sélectionnez votre profil, les questions s'adaptent. La première réponse arrive sous 48 heures.</p>
+  <div class="ct-canaux">
 
- <div class="ct-chips profile-chips">
- <button data-profile="sportif" class="active">Athlète</button>
- <button data-profile="parent">Parent / Famille</button>
- <button data-profile="club">Club / Fédération</button>
- <button data-profile="entreprise">Marque / Sponsor</button>
- <button data-profile="media">Média</button>
+   <a href="https://wa.me/351932011866" target="_blank" rel="noopener" class="ct-canal ct-wa reveal">
+    <span class="ct-canal-ico"><svg viewBox="0 0 360 362" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M307.546 52.5655C273.709 18.685 228.706 0.0171895 180.756 0C81.951 0 1.53846 80.404 1.50408 179.235C1.48689 210.829 9.74646 241.667 25.4319 268.844L0 361.736L95.0236 336.811C121.203 351.096 150.683 358.616 180.679 358.625H180.756C279.544 358.625 359.966 278.212 360 179.381C360.017 131.483 341.392 86.4547 307.546 52.5741V52.5655ZM180.756 328.354H180.696C153.966 328.346 127.744 321.16 104.865 307.589L99.4242 304.358L43.034 319.149L58.0834 264.168L54.5423 258.53C39.6304 234.809 31.749 207.391 31.7662 179.244C31.8006 97.1036 98.6334 30.2707 180.817 30.2707C220.61 30.2879 258.015 45.8015 286.145 73.9665C314.276 102.123 329.755 139.562 329.738 179.364C329.703 261.513 262.871 328.346 180.756 328.346V328.354ZM262.475 216.777C257.997 214.534 235.978 203.704 231.869 202.209C227.761 200.713 224.779 199.966 221.796 204.452C218.814 208.939 210.228 219.029 207.615 222.011C205.002 225.002 202.389 225.372 197.911 223.128C193.434 220.885 179.003 216.158 161.891 200.902C148.578 189.024 139.587 174.362 136.975 169.875C134.362 165.389 136.7 162.965 138.934 160.739C140.945 158.728 143.412 155.505 145.655 152.892C147.899 150.279 148.638 148.406 150.133 145.423C151.629 142.432 150.881 139.82 149.764 137.576C148.646 135.333 139.691 113.287 135.952 104.323C132.316 95.5909 128.621 96.777 125.879 96.6309C123.266 96.5019 120.284 96.4762 117.293 96.4762C114.302 96.4762 109.454 97.5935 105.346 102.08C101.238 106.566 89.6691 117.404 89.6691 139.441C89.6691 161.478 105.716 182.785 107.959 185.776C110.202 188.767 139.544 234.001 184.469 253.408C195.153 258.023 203.498 260.782 210.004 262.845C220.731 266.257 230.494 265.776 238.212 264.624C246.816 263.335 264.71 253.786 268.44 243.326C272.17 232.866 272.17 223.893 271.053 222.028C269.936 220.163 266.945 219.037 262.467 216.794L262.475 216.777Z"/></svg></span>
+    <span class="k">Le plus rapide</span>
+    <span class="v">WhatsApp</span>
+    <p class="d">Une question courte, une pièce jointe, un créneau à caler. Souvent répondu dans la journée.</p>
+    <span class="fl">Ouvrir la conversation <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+   </a>
+
+   <a href="tel:+351932011866" class="ct-canal ct-tel reveal">
+    <span class="ct-canal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+    <span class="k">Du lundi au vendredi, 9h–18h</span>
+    <span class="v">+351&nbsp;932&nbsp;011&nbsp;866</span>
+    <p class="d">Pour les sujets qui se règlent mieux à la voix qu'à l'écrit. Vous tombez sur quelqu'un, pas sur un standard.</p>
+    <span class="fl">Appeler <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+   </a>
+
+   <a href="mailto:contact@duqque.fr" class="ct-canal ct-mail reveal">
+    <span class="ct-canal-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M3 7l9 6 9-6"/></svg></span>
+    <span class="k">Par écrit</span>
+    <span class="v">contact@duqque.fr</span>
+    <p class="d">Le bon canal pour un dossier, un contrat à relire ou une demande de la part d'un club. Réponse sous 48 heures.</p>
+    <span class="fl">Écrire un message <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+   </a>
+
+  </div>
  </div>
+</section>
 
- <form class="ct-form" onsubmit="event.preventDefault(); alert('Demande envoyée, merci.'); this.reset();">
- <div class="ct-row">
- <div class="ct-field"><label>Prénom</label><input type="text" required /></div>
- <div class="ct-field"><label>Nom</label><input type="text" required /></div>
+<!-- FORMULAIRE -->
+<section style="background: var(--bg-soft);">
+ <div class="container">
+  <div class="ct-form-card reveal">
+   <div class="section-tag">Formulaire</div>
+   <h2 class="serif">Vous êtes&nbsp;?</h2>
+   <p class="ct-intro">Choisissez votre profil, les questions s'adaptent. Plus votre contexte est précis, plus notre réponse le sera.</p>
+
+   <div class="ct-chips profile-chips">
+    <button type="button" data-profile="sportif" class="active">Athlète</button>
+    <button type="button" data-profile="parent">Parent ou famille</button>
+    <button type="button" data-profile="club">Club ou fédération</button>
+    <button type="button" data-profile="entreprise">Marque ou sponsor</button>
+    <button type="button" data-profile="media">Média</button>
+   </div>
+
+   <form class="ct-form" id="ctForm" novalidate>
+    <div class="ct-row">
+     <div class="ct-field"><label for="ct-prenom">Prénom</label><input id="ct-prenom" name="prenom" type="text" autocomplete="given-name" required /></div>
+     <div class="ct-field"><label for="ct-nom">Nom</label><input id="ct-nom" name="nom" type="text" autocomplete="family-name" required /></div>
+    </div>
+    <div class="ct-row">
+     <div class="ct-field"><label for="ct-email">Email</label><input id="ct-email" name="email" type="email" autocomplete="email" required /></div>
+     <div class="ct-field"><label for="ct-tel">Téléphone</label><input id="ct-tel" name="telephone" type="tel" autocomplete="tel" /></div>
+    </div>
+
+    <!-- Champs adaptes au profil, injectes par main.js -->
+    <div class="ct-row" data-dynamic-fields></div>
+
+    <div class="ct-row plein">
+     <div class="ct-field">
+      <label for="ct-msg">Votre message</label>
+      <textarea id="ct-msg" name="message" rows="5" placeholder="Où en êtes-vous aujourd'hui, et qu'est-ce que vous cherchez à mettre en place&nbsp;?" required></textarea>
+     </div>
+    </div>
+
+    <div class="ct-pied">
+     <button type="submit" class="ct-envoi">
+      Préparer le message
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+     </button>
+     <p class="ct-mention">Le formulaire ouvre votre messagerie avec le message déjà rédigé. Rien n'est envoyé sans que vous validiez.</p>
+    </div>
+   </form>
+  </div>
  </div>
- <div class="ct-row">
- <div class="ct-field"><label>Email</label><input type="email" required /></div>
- <div class="ct-field"><label>Téléphone</label><input type="tel" /></div>
+</section>
+
+<!-- CE QUI SE PASSE ENSUITE -->
+<section>
+ <div class="container">
+  <div class="kicker reveal"><span class="line"></span> Ensuite</div>
+  <h2 class="serif reveal" style="max-width: 24ch; margin-bottom: 44px;">Quatre étapes, <em class="accent">et vous décidez à chacune.</em></h2>
+
+  <div class="ct-suite">
+   <div class="ct-etape reveal">
+    <span class="n">01</span>
+    <b>Vous écrivez</b>
+    <p>Par le canal qui vous arrange. Aucun formulaire obligatoire.</p>
+   </div>
+   <div class="ct-etape reveal">
+    <span class="n">02</span>
+    <b>Nous répondons sous 48 heures</b>
+    <p>Une vraie réponse, écrite par une personne qui a lu votre message.</p>
+   </div>
+   <div class="ct-etape reveal">
+    <span class="n">03</span>
+    <b>Trente minutes ensemble</b>
+    <p>En visio ou au téléphone. Gratuit, et sans aucun engagement derrière.</p>
+   </div>
+   <div class="ct-etape reveal">
+    <span class="n">04</span>
+    <b>Vous décidez</b>
+    <p>Nous vous disons ce que nous ferions. Vous choisissez si nous le faisons.</p>
+   </div>
+  </div>
  </div>
+</section>
 
- <!-- Dynamic fields injected by main.js -->
- <div class="ct-row" data-dynamic-fields></div>
-
- <div class="ct-row single">
- <div class="ct-field"><label>Votre message</label><textarea rows="5" placeholder="Quel est votre contexte ? Quel est votre objectif ?" required></textarea></div>
- </div>
-
- <div class="ct-submit">
- <button type="submit">
- Envoyer la demande
- <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
- </button>
- </div>
- </form>
- </div>
-
- <!-- RIGHT : sidebar tiles -->
- <aside class="ct-side reveal">
-
- <a href="mailto:contact@duqque.fr" class="ct-tile dark">
- <span class="lbl">France · Paris</span>
- <span class="val">contact@duqque.fr</span>
- <span class="arrow-out"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
- </a>
-
- <a href="mailto:contact@duqque.pt" class="ct-tile purple">
- <span class="lbl">Portugal · Lisbonne</span>
- <span class="val">contact@duqque.pt</span>
- <span class="arrow-out"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
- </a>
-
- <a href="tel:+351932011866" class="ct-tile green">
- <span class="lbl">Téléphone</span>
- <span class="val">+351 932 011 866</span>
- <span class="lbl" style="margin-top: 8px;">Lun‑Ven · 9h‑18h</span>
- </a>
-
- <div class="ct-tile dark" style="background:#1a1033; border:1px solid rgba(184,164,240,0.25); color:#f5f3ef;">
- <span class="lbl">Nos bureaux</span>
- <span class="val">Paris · Lisbonne</span>
- <span class="lbl" style="margin-top: 8px;">Athlètes suivis dans le monde entier</span>
- </div>
-
- <div class="ct-timeline">
- <span class="lbl" style="font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; opacity: 0.7;">Comment ça se passe</span>
- <h3 class="serif">Quatre étapes simples.</h3>
- <ol>
- <li>Vous remplissez le formulaire.</li>
- <li>Nous répondons sous 48 heures.</li>
- <li>Premier appel de 30 minutes, sans engagement.</li>
- <li>Nous construisons ensemble la suite, si c'est pertinent.</li>
- </ol>
- </div>
-
- </aside>
-
- </div>
+<!-- FAITS -->
+<section style="padding-top: 0;">
+ <div class="container">
+  <div class="ct-faits reveal">
+   <div class="ct-fait">
+    <span class="n">0 €</span>
+    <p>Le premier échange, quel que soit votre profil et quelle que soit la suite.</p>
+   </div>
+   <div class="ct-fait">
+    <span class="n">48 h</span>
+    <p>Le délai dans lequel nous répondons à toute demande écrite, jours ouvrés.</p>
+   </div>
+   <div class="ct-fait">
+    <span class="n">0 %</span>
+    <p>De commission sur les contrats que nous négocions. Tout revient à l'athlète.</p>
+   </div>
+  </div>
  </div>
 </section>
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260906"></script>
+<script src="js/main.js?v=20260908"></script>
+<script>
+/* Le site est statique : sans serveur, un formulaire ne peut rien envoyer. Plutot que de
+   faire semblant, on compose le message dans la messagerie de la personne, qui garde la
+   main sur l'envoi. A remplacer par un vrai point d'entree le jour ou il y en a un. */
+(function () {
+ const form = document.getElementById('ctForm');
+ if (!form) return;
+ form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (!form.reportValidity()) return;
+  const val = (n) => (form.querySelector('[name="' + n + '"]')?.value || '').trim();
+  const profil = document.querySelector('.profile-chips button.active')?.textContent.trim() || '';
+  const lignes = [
+   'Profil : ' + profil,
+   'Nom : ' + val('prenom') + ' ' + val('nom'),
+   'Email : ' + val('email'),
+   'Téléphone : ' + (val('telephone') || '—'),
+  ];
+  // Champs adaptes au profil : leur libelle est porte par le <label> voisin.
+  form.querySelectorAll('[data-dynamic-fields] .field').forEach(f => {
+   const l = f.querySelector('label')?.textContent.trim();
+   const v = f.querySelector('input')?.value.trim();
+   if (l && v) lignes.push(l + ' : ' + v);
+  });
+  lignes.push('', val('message'));
+  const sujet = 'Demande de contact — ' + profil + ' — ' + val('prenom') + ' ' + val('nom');
+  location.href = 'mailto:contact@duqque.fr'
+   + '?subject=' + encodeURIComponent(sujet)
+   + '&body=' + encodeURIComponent(lignes.join('\n'));
+ });
+})();
+</script>
 </body>
 </html>
