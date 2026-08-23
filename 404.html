@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Page introuvable · Duqque Sports</title>
+<meta name="description" content="Cette page n'existe pas ou plus sur duqque.fr." />
+<meta name="robots" content="noindex, follow" />
+<style>
+/* =========================================================
+   ERREUR 404
+   Page autonome : servie par Apache pour toute adresse inexistante, elle doit
+   fonctionner meme si le reste du site est indisponible. Ni style.css ni main.js.
+   ========================================================= */
+@font-face { font-family: 'LT Museum'; src: url('/assets/fonts/LTMuseum-Black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('/assets/fonts/Gilroy-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('/assets/fonts/Gilroy-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+
+:root {
+  --noir: #0a0a0a; --noir-doux: #121212; --creme: #f5f3ef;
+  --violet: #4a1fc7; --violet-clair: #c4b3ff; --lime: #d9ff3d;
+  --ligne: rgba(255,255,255,0.12);
+  --display: 'LT Museum', Georgia, serif;
+  --sans: 'Gilroy', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100dvh; background: var(--noir); color: var(--creme);
+  font-family: var(--sans); font-size: 16px; line-height: 1.6;
+  display: grid; place-items: center; padding: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+.halo {
+  position: fixed; top: -25%; left: -15%; width: min(75vw, 760px); aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(119,71,255,0.26) 0%, transparent 62%);
+  filter: blur(30px); pointer-events: none;
+}
+.boite { position: relative; width: min(100%, 620px); text-align: left; }
+.marque { font-family: var(--sans); font-weight: 600; font-size: 24px; letter-spacing: -0.02em; margin: 0 0 34px; }
+.code {
+  display: block; font-family: var(--display); font-weight: 900;
+  font-size: clamp(76px, 16vw, 150px); line-height: 0.86; letter-spacing: -0.05em;
+  color: var(--lime); margin: 0 0 20px;
+}
+h1 {
+  font-family: var(--display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(24px, 4.2vw, 38px); line-height: 1.06; letter-spacing: -0.025em;
+  margin: 0 0 16px; max-width: 18ch;
+}
+.intro { font-size: 16px; line-height: 1.6; color: rgba(245,243,239,0.88); margin: 0 0 32px; max-width: 52ch; }
+.url {
+  display: inline-block; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px; color: var(--violet-clair);
+  background: var(--noir-doux); border: 1px solid var(--ligne);
+  padding: 9px 14px; border-radius: 8px; margin-bottom: 30px;
+  max-width: 100%; overflow-wrap: anywhere;
+}
+.liens { display: flex; flex-wrap: wrap; gap: 12px; }
+.bouton {
+  display: inline-flex; align-items: center; gap: 11px;
+  padding: 15px 26px; border-radius: 100px; text-decoration: none;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+  transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+}
+.bouton svg { transition: transform .3s var(--ease); }
+.bouton:hover svg { transform: translateX(4px); }
+.b-violet { background: var(--violet); color: #fff; }
+.b-violet:hover { background: var(--lime); color: #0b0b0b; transform: translateY(-2px); }
+.b-nu { border: 1px solid rgba(255,255,255,0.28); color: var(--creme); }
+.b-nu:hover { border-color: var(--creme); background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+@media (max-width: 520px) { .liens { flex-direction: column; } .bouton { justify-content: center; } }
+</style>
+</head>
+<body>
+<div class="halo" aria-hidden="true"></div>
+
+<main class="boite">
+ <p class="marque">duqque</p>
+ <span class="code" aria-hidden="true">404</span>
+ <h1>Cette page n'existe pas</h1>
+ <p class="intro">Une faute de frappe dans l'adresse, un lien qui a vieilli, ou une page que nous n'avons pas encore ouverte. Rien de grave&nbsp;: tout se retrouve depuis l'accueil.</p>
+ <p class="url" id="url">&nbsp;</p>
+
+ <div class="liens">
+  <a href="/" class="bouton b-violet">
+   Retour à l'accueil
+   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+  </a>
+  <a href="mailto:contact@duqque.fr?subject=Lien%20cass%C3%A9%20sur%20duqque.fr" class="bouton b-nu">
+   Signaler un lien cassé
+   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+  </a>
+ </div>
+</main>
+
+<script>
+/* L'adresse demandee est affichee telle quelle, en texte : textContent et non
+   innerHTML, sinon une adresse forgee pourrait injecter du balisage dans la page. */
+(function () {
+ var u = document.getElementById('url');
+ u.textContent = location.pathname + location.search;
+ // Le lien de signalement emporte l'adresse fautive et la page d'ou l'on venait.
+ var a = document.querySelector('.b-nu');
+ a.href = 'mailto:contact@duqque.fr?subject=' + encodeURIComponent('Lien cassé sur duqque.fr')
+  + '&body=' + encodeURIComponent(
+    "Adresse demandée : " + location.href +
+    "\nPage d'origine : " + (document.referrer || "inconnue"));
+})();
+</script>
+</body>
+</html>

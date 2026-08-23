@@ -24,11 +24,37 @@
   --ease: cubic-bezier(.22,.61,.36,1);
 }
 *, *::before, *::after { box-sizing: border-box; }
+/* Page fixe : pas de defilement. 100dvh et non 100vh, sinon la barre d'adresse
+   mobile rogne la hauteur et la carte se retrouve coupee clavier ouvert. */
+html, body { height: 100%; overflow: hidden; }
 body {
-  margin: 0; min-height: 100vh; background: var(--noir); color: var(--creme);
+  margin: 0; height: 100dvh; background: var(--noir); color: var(--creme);
   font-family: var(--sans); font-size: 16px; line-height: 1.6;
-  display: grid; place-items: center; padding: 24px;
+  display: grid; place-items: center; padding: 20px;
+  overscroll-behavior: none;
   -webkit-font-smoothing: antialiased;
+}
+/* Si la hauteur manque vraiment, la carte se resserre plutot que d'etre tronquee. */
+@media (max-height: 620px) {
+  .boite { padding: 22px 26px; }
+  h1 { font-size: 22px; }
+  .intro { font-size: 13.5px; margin-bottom: 20px; }
+  .marque { margin-bottom: 18px; }
+  button { margin-top: 20px; padding: 14px 24px; }
+  .retour { margin-top: 18px; }
+}
+/* Tres petits ecrans : la carte debordait de 20px et le lien de retour se retrouvait
+   coupe. La phrase d'introduction disparait, elle n'est pas necessaire pour agir. */
+@media (max-height: 560px) {
+  body { padding: 12px; }
+  .boite { padding: 18px 22px; }
+  .marque { font-size: 21px; margin-bottom: 14px; }
+  h1 { font-size: 19px; margin-bottom: 0; }
+  .intro { display: none; }
+  form { margin-top: 18px; }
+  button { margin-top: 16px; padding: 13px 22px; }
+  .message { margin-top: 12px; }
+  .retour { margin-top: 14px; }
 }
 .halo {
   position: fixed; top: -20%; right: -15%; width: min(70vw, 700px); aspect-ratio: 1;

@@ -1,3 +1,7 @@
+# Page d'erreur du site. Elle doit rester joignable meme en mode attente,
+# elle figure donc dans les exceptions de la redirection ci-dessous.
+ErrorDocument 404 /404.html
+
 # =========================================================
 # MODE ATTENTE
 # Seules la page d'attente et les pages legales sont servies. Le reste du site
@@ -30,8 +34,11 @@
   RewriteCond %{REQUEST_URI} !^/(assets|css|js)/ [NC]
   # Ces pages restent accessibles, les mentions legales etant obligatoires
   RewriteCond %{REQUEST_URI} !^/(index\.html|mentions-legales\.html|confidentialite\.html)$ [NC]
-  RewriteCond %{REQUEST_URI} !^/(favicon\.ico|robots\.txt|sitemap\.xml)$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(favicon\.ico|robots\.txt|sitemap\.xml|404\.html)$ [NC]
   RewriteCond %{REQUEST_URI} !^/$
+  # Uniquement pour un fichier qui existe : une adresse inexistante doit aboutir
+  # a une vraie 404, pas etre silencieusement renvoyee vers l'accueil.
+  RewriteCond %{REQUEST_FILENAME} -f
   RewriteRule ^ / [R=302,L]
 </IfModule>
 
