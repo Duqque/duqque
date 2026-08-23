@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Blog · Duqque Sports</title>
 <meta name="description" content="Signatures, partenariats, Team Espoirs, coulisses : ce qui se passe en ce moment chez Duqque Sports." />
-<link rel="stylesheet" href="css/style.css?v=20260913" />
+<link rel="stylesheet" href="css/style.css?v=20260915" />
 <style>
  .act-filters { display: flex; flex-wrap: wrap; gap: 10px; padding: 22px 0 0; }
  .act-filters button {
@@ -47,11 +47,17 @@
  transition: transform .35s var(--ease);
  }
  .ac-card:hover .ac-arrow { transform: translateX(4px); }
- .ac-orange { background: var(--accent); color: #2a1402; }
+ .ac-violet { background: var(--accent-ink); color: #fff; }
+ /* Voile noir et non blanc : eclaircir la pastille sous une encre blanche la faisait
+    tomber a 6.4:1. Avec un voile sombre elle remonte a 11:1. */
+ .ac-violet .ac-tag { background: rgba(0,0,0,0.16); color: #fff; }
+ .ac-violet .ac-arrow { background: #fff; color: var(--accent-ink); }
  .ac-purple { background: #b8a4f0; color: #1a1033; }
- .ac-green  { background: #b7d2bf; color: #14241a; }
- .ac-yellow { background: #f2e94e; color: #2a2705; }
- .ac-cream  { background: #f7eccf; color: #2a1402; }
+ /* Sur le lavande, l'encre est sombre : c'est en eclaircissant la pastille qu'on gagne du
+    contraste. Le voile noir generique ne donnait que 6.1:1, sous le seuil AAA. */
+ .ac-purple .ac-tag { background: rgba(255,255,255,0.42); }
+ .ac-lime   { background: #d9ff3d; color: #101400; }
+ .ac-ivoire { background: #fff; color: var(--ink); border: 1px solid var(--line); }
  .ac-dark   { background: #050505; color: #f5f3ef; border: 1px solid rgba(255,255,255,0.08); }
  .ac-dark .ac-tag { background: rgba(255,255,255,0.08); color: #f5f3ef; }
  .ac-dark .ac-arrow { background: var(--accent); }
@@ -108,7 +114,25 @@
    <div class="ac-foot"><span>Lire l'article</span><span class="ac-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></div>
   </a>
 
-  <a href="art-carriere-14-15-16-ans.html" class="ac-card ac-purple reveal">
+  <a href="art-droit-a-l-image-athlete.html" class="ac-card ac-purple reveal">
+   <div class="ac-top"><span class="ac-tag">Image de marque</span><span class="ac-date">23.08.26</span></div>
+   <h3 class="serif">Droit à l'image&nbsp;: ce que vous signez sans le lire</h3>
+   <div class="ac-foot"><span>Lire l'article</span><span class="ac-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></div>
+  </a>
+
+  <a href="art-changer-de-club.html" class="ac-card ac-violet reveal">
+   <div class="ac-top"><span class="ac-tag">Gestion de carrière</span><span class="ac-date">23.08.26</span></div>
+   <h3 class="serif">Changer de club&nbsp;: les questions à se poser avant de signer</h3>
+   <div class="ac-foot"><span>Lire l'article</span><span class="ac-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></div>
+  </a>
+
+  <a href="art-reseaux-sociaux-jeune-athlete.html" class="ac-card ac-lime reveal">
+   <div class="ac-top"><span class="ac-tag">Communication</span><span class="ac-date">23.08.26</span></div>
+   <h3 class="serif">Réseaux sociaux&nbsp;: que publier quand on est un jeune athlète&nbsp;?</h3>
+   <div class="ac-foot"><span>Lire l'article</span><span class="ac-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></div>
+  </a>
+
+  <a href="art-carriere-14-15-16-ans.html" class="ac-card ac-ivoire reveal">
    <div class="ac-top"><span class="ac-tag">Gestion de carrière</span><span class="ac-date">22.08.26</span></div>
    <h3 class="serif">Faut-il déjà penser à sa carrière à 14, 15 ou 16 ans&nbsp;?</h3>
    <div class="ac-foot"><span>Lire l'article</span><span class="ac-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></div>
@@ -119,6 +143,6 @@
 </section>
 
 <footer class="footer"></footer>
-<script src="js/main.js?v=20260913"></script>
+<script src="js/main.js?v=20260915"></script>
 </body>
 </html>

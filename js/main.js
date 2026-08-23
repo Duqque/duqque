@@ -784,6 +784,9 @@ function buildNav() {
  'success-stories.html': 'Résultats', 'media.html': 'Blog',
  'actualites.html': 'Blog', 'cotisations.html': 'Cotisations',
  'art-carriere-14-15-16-ans.html': 'Gestion de carrière',
+ 'art-reseaux-sociaux-jeune-athlete.html': 'Communication',
+ 'art-changer-de-club.html': 'Gestion de carrière',
+ 'art-droit-a-l-image-athlete.html': 'Image de marque',
  'art-sponsor-a-15-ans.html': 'Sponsoring', 'about.html': 'À propos',
  'contact.html': 'Contact', 'rdv.html': 'Prendre RDV', 'athletes.html': 'Athlètes & Team',
  'mentions-legales.html': 'Mentions légales',
@@ -1371,7 +1374,13 @@ const ARTICLES = [
  { url: 'art-carriere-14-15-16-ans.html', axe: 'Gestion de carrière',
    titre: "Faut-il déjà penser à sa carrière à 14, 15 ou 16 ans ?" },
  { url: 'art-sponsor-a-15-ans.html', axe: 'Sponsoring',
-   titre: "À 15 ans, peut-on déjà intéresser un sponsor ?" }
+   titre: "À 15 ans, peut-on déjà intéresser un sponsor ?" },
+ { url: 'art-reseaux-sociaux-jeune-athlete.html', axe: 'Communication',
+   titre: "Réseaux sociaux : que publier quand on est un jeune athlète ?" },
+ { url: 'art-changer-de-club.html', axe: 'Gestion de carrière',
+   titre: "Changer de club : les questions à se poser avant de signer" },
+ { url: 'art-droit-a-l-image-athlete.html', axe: 'Image de marque',
+   titre: "Droit à l'image : ce que vous signez sans le lire" }
 ];
 const SERVICES = {
  'Gestion de carrière': { url: 'service-carriere.html', txt: "Contrats, trajectoire, reconversion : nous pilotons la carrière au-delà des résultats." },
