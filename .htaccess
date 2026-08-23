@@ -1,3 +1,22 @@
+# =========================================================
+# MODE ATTENTE
+# Seules la page d'attente et les pages legales sont servies. Le reste du site
+# existe toujours dans le depot, il n'est simplement plus accessible.
+# Pour rouvrir le site en entier : commenter ce bloc, rien d'autre.
+# Redirection en 302 et non 301 : un 301 serait mis en cache definitivement par
+# les navigateurs et continuerait de rediriger apres la reouverture.
+# =========================================================
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # L'habillage reste servi : polices, images, feuille de style, script
+  RewriteCond %{REQUEST_URI} !^/(assets|css|js)/ [NC]
+  # Ces pages restent accessibles, les mentions legales etant obligatoires
+  RewriteCond %{REQUEST_URI} !^/(index\.html|mentions-legales\.html|confidentialite\.html)$ [NC]
+  RewriteCond %{REQUEST_URI} !^/(favicon\.ico|robots\.txt|sitemap\.xml)$ [NC]
+  RewriteCond %{REQUEST_URI} !^/$
+  RewriteRule ^ / [R=302,L]
+</IfModule>
+
 # Compression
 <IfModule mod_brotli.c>
   AddOutputFilterByType BROTLI_COMPRESS text/html text/css application/javascript application/json image/svg+xml font/ttf font/otf

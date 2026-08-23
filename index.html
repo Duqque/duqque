@@ -3,13 +3,302 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Duqque Sports</title>
-<meta name="description" content="Duqque Sports accompagne les athlètes sur la gestion de carrière, l'image et la communication." />
-<meta http-equiv="refresh" content="0; url=home.html" />
-<link rel="canonical" href="home.html" />
-<script>window.location.replace('home.html');</script>
+<title>Duqque Sports · Bientôt</title>
+<meta name="description" content="Duqque Sports réunit de jeunes athlètes en collectif pour trouver des partenaires et gérer leur image. Nous cherchons des partenaires pour un collectif, pas pour un nom." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://duqque.fr/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Duqque Sports · Bientôt" />
+<meta property="og:description" content="Un collectif de jeunes athlètes. Partenariats et gestion de l'image, sans commission." />
+<meta property="og:locale" content="fr_FR" />
+<style>
+/* =========================================================
+   PAGE D'ATTENTE
+   Volontairement autonome : ni style.css, ni main.js. Elle doit pouvoir etre
+   deployee seule, avant le reste du site, et ne depend que des polices.
+   ========================================================= */
+
+@font-face { font-family: 'LT Museum'; src: url('assets/fonts/LTMuseum-Black.woff2') format('woff2'); font-weight: 900; font-style: normal; font-display: swap; }
+@font-face { font-family: 'LT Museum'; src: url('assets/fonts/LTMuseum-BlackItalic.woff2') format('woff2'); font-weight: 900; font-style: italic; font-display: swap; }
+@font-face { font-family: 'LT Museum'; src: url('assets/fonts/LTMuseum-Medium.woff2') format('woff2'); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('assets/fonts/Gilroy-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Gilroy'; src: url('assets/fonts/Gilroy-SemiBold.woff2') format('woff2'); font-weight: 600; font-style: normal; font-display: swap; }
+
+:root {
+  --noir: #0a0a0a;
+  --noir-doux: #121212;
+  --creme: #f5f3ef;
+  /* #7747ff est le violet decoratif de la marque : il ne porte pas de texte.
+     Toute surface qui en porte utilise --violet-fond, ou le blanc atteint 7:1
+     et le lime 7,9:1, seuils AAA. */
+  --violet: #7747ff;
+  --violet-fond: #4a1fc7;
+  --violet-clair: #c4b3ff;
+  --lime: #d9ff3d;
+  --ligne: rgba(255,255,255,0.10);
+  --display: 'LT Museum', Georgia, serif;
+  --sans: 'Gilroy', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--noir); color: var(--creme);
+  font-family: var(--sans); font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+.zone { width: min(100% - 44px, 1080px); margin-inline: auto; }
+
+/* --- Bandeau --- */
+.tete { padding: 30px 0 0; }
+.tete .zone { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.marque { font-family: var(--display); font-weight: 900; font-size: 26px; letter-spacing: -0.02em; }
+.etat {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;
+  color: var(--lime); border: 1px solid rgba(217,255,61,0.35);
+  padding: 8px 14px; border-radius: 100px;
+}
+.pastille { width: 7px; height: 7px; border-radius: 50%; background: var(--lime); flex: 0 0 auto; }
+
+/* --- Ouverture --- */
+.ouverture { padding: clamp(60px, 11vh, 130px) 0 clamp(50px, 8vh, 90px); position: relative; overflow: hidden; }
+.halo {
+  position: absolute; top: -30%; right: -12%; width: min(70vw, 720px); aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(119,71,255,0.30) 0%, transparent 62%);
+  filter: blur(30px); pointer-events: none;
+}
+.ouverture .zone { position: relative; }
+h1 {
+  font-family: var(--display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(38px, 7.4vw, 92px); line-height: 0.98; letter-spacing: -0.035em;
+  margin: 0 0 30px; max-width: 15ch;
+}
+h1 em { font-style: italic; color: var(--violet-clair); }
+.chapo { font-size: clamp(17px, 1.8vw, 21px); line-height: 1.55; color: rgba(245,243,239,0.9); max-width: 56ch; margin: 0; }
+
+/* --- Le principe --- */
+.principe {
+  border-top: 1px solid var(--ligne); border-bottom: 1px solid var(--ligne);
+  padding: clamp(44px, 7vw, 80px) 0; background: var(--noir-doux);
+}
+.surtitre {
+  font-size: 10.5px; letter-spacing: 0.24em; text-transform: uppercase;
+  font-weight: 600; color: var(--violet-clair); margin: 0 0 22px;
+}
+.principe h2 {
+  font-family: var(--display); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(26px, 3.6vw, 46px); line-height: 1.05; letter-spacing: -0.025em;
+  margin: 0 0 26px; max-width: 20ch;
+}
+.principe h2 em { font-style: italic; color: var(--lime); }
+.principe p { font-size: 16.5px; line-height: 1.65; color: rgba(245,243,239,0.88); max-width: 62ch; margin: 0 0 16px; }
+
+.compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 38px; }
+.carte {
+  border-radius: 16px; padding: clamp(22px, 2.6vw, 32px);
+  border: 1px solid var(--ligne);
+}
+.carte .k { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin: 0 0 14px; }
+.carte b { display: block; font-family: var(--display); font-weight: 900; font-size: clamp(19px, 2vw, 24px); line-height: 1.12; margin-bottom: 12px; }
+.carte p { font-size: 14.5px; line-height: 1.6; margin: 0; max-width: none; }
+.seul { background: transparent; }
+.seul .k { color: rgba(245,243,239,0.78); }
+.seul p { color: rgba(245,243,239,0.82); }
+.ensemble { background: var(--violet-fond); border-color: transparent; }
+.ensemble .k { color: var(--lime); }
+.ensemble b, .ensemble p { color: #fff; }
+
+/* --- Ce que nous faisons --- */
+.metiers { padding: clamp(50px, 8vw, 90px) 0; }
+.grille { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.metier {
+  border: 1px solid var(--ligne); border-radius: 16px;
+  padding: clamp(22px, 2.4vw, 30px); background: var(--noir-doux);
+}
+.ico {
+  display: inline-flex; width: 44px; height: 44px; border-radius: 13px;
+  align-items: center; justify-content: center; margin-bottom: 18px;
+  background: rgba(119,71,255,0.22); color: var(--violet-clair);
+}
+.ico svg { width: 21px; height: 21px; }
+.metier h3 { font-family: var(--display); font-weight: 900; font-size: 19px; line-height: 1.14; margin: 0 0 10px; }
+.metier p { font-size: 14.5px; line-height: 1.6; color: rgba(245,243,239,0.85); margin: 0; }
+
+/* --- Engagements --- */
+.faits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; border-radius: 16px; overflow: hidden; background: var(--ligne); margin-top: 44px; }
+.fait { background: var(--noir-doux); padding: clamp(22px, 2.6vw, 32px); }
+.fait .n { display: block; font-family: var(--display); font-weight: 900; font-size: clamp(30px, 3.4vw, 46px); line-height: 1; letter-spacing: -0.03em; color: var(--lime); margin-bottom: 10px; white-space: nowrap; }
+.fait p { font-size: 14px; line-height: 1.55; color: rgba(245,243,239,0.85); margin: 0; }
+
+/* --- Contact --- */
+.fin { border-top: 1px solid var(--ligne); padding: clamp(50px, 8vw, 90px) 0 0; }
+.fin h2 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(24px, 3.2vw, 40px); line-height: 1.06; letter-spacing: -0.025em; margin: 0 0 18px; max-width: 18ch; }
+.fin > .zone > p { font-size: 16.5px; line-height: 1.65; color: rgba(245,243,239,0.88); max-width: 56ch; margin: 0 0 34px; }
+.liens { display: flex; flex-wrap: wrap; gap: 14px; }
+.bouton {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 17px 28px; border-radius: 100px; text-decoration: none;
+  font-size: 13px; letter-spacing: 0.05em; font-weight: 600;
+  transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+}
+.bouton svg { transition: transform .3s var(--ease); }
+.bouton:hover svg { transform: translateX(4px); }
+.b-violet { background: var(--violet-fond); color: #fff; }
+.b-violet:hover { background: var(--lime); color: #0a0a0a; transform: translateY(-2px); }
+.b-vert { background: #0a5227; color: #fff; }
+.b-vert:hover { background: #0d6b33; transform: translateY(-2px); }
+.b-nu { border: 1px solid rgba(255,255,255,0.28); color: var(--creme); }
+.b-nu:hover { border-color: var(--creme); background: rgba(255,255,255,0.06); transform: translateY(-2px); }
+
+.pied { margin-top: clamp(50px, 7vw, 80px); border-top: 1px solid var(--ligne); padding: 26px 0 34px; }
+.pied .zone { display: flex; flex-wrap: wrap; gap: 10px 26px; align-items: center; justify-content: space-between; }
+.pied p { font-size: 12.5px; color: rgba(245,243,239,0.7); margin: 0; }
+.pied a { color: rgba(245,243,239,0.7); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.25); }
+.pied a:hover { color: var(--creme); border-color: var(--creme); }
+
+@media (max-width: 860px) {
+  .grille, .faits { grid-template-columns: 1fr; }
+  .compare { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .tete .zone { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .liens { flex-direction: column; align-items: stretch; }
+  .bouton { justify-content: center; }
+}
+/* --- Onglet contact, fixe --- */
+.onglet {
+  position: fixed; right: 22px; bottom: 22px; z-index: 50;
+  display: inline-flex; align-items: center; gap: 11px;
+  background: var(--lime); color: #101400; text-decoration: none;
+  padding: 15px 22px; border-radius: 100px;
+  font-size: 13.5px; font-weight: 600; letter-spacing: 0.01em;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+  transition: transform .3s var(--ease), background .3s var(--ease);
+}
+.onglet:hover { background: #e4ff5c; transform: translateY(-3px); }
+.onglet:focus-visible { outline: 3px solid var(--creme); outline-offset: 3px; }
+.onglet svg { width: 17px; height: 17px; flex: 0 0 auto; }
+/* Sous 560px l'adresse ne tient plus a cote du pictogramme : l'onglet s'etale
+   sur toute la largeur, ce qui reste plus lisible qu'une adresse tronquee. */
+@media (max-width: 560px) {
+  .onglet { left: 16px; right: 16px; bottom: 16px; justify-content: center; padding: 15px 18px; font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+</style>
 </head>
 <body>
-<p><a href="home.html">Duqque Sports</a></p>
+
+<header class="tete">
+ <div class="zone">
+  <span class="marque">duqque</span>
+  <span class="etat"><span class="pastille" aria-hidden="true"></span>Association en cours de création</span>
+ </div>
+</header>
+
+<section class="ouverture">
+ <div class="halo" aria-hidden="true"></div>
+ <div class="zone">
+  <h1>Seul, un jeune athlète ne pèse rien. <em>Ensemble, si.</em></h1>
+  <p class="chapo">Duqque Sports réunit de jeunes sportifs en collectif pour trouver des partenaires et construire leur image. Nous ne démarchons pas au nom d'une vedette&nbsp;: nous démarchons au nom d'un groupe, et c'est ce qui change tout pour ceux qui n'ont pas encore de palmarès.</p>
+ </div>
+</section>
+
+<section class="principe">
+ <div class="zone">
+  <p class="surtitre">Le principe</p>
+  <h2>Nous cherchons des partenaires pour un <em>collectif</em>, pas pour un nom.</h2>
+  <p>Un athlète de seize ans qui frappe seul à la porte d'une entreprise propose une audience modeste, une exposition incertaine et un interlocuteur unique. La réponse est presque toujours la même, et elle est polie.</p>
+  <p>Le même athlète, présenté au sein d'un collectif de trente sportifs de plusieurs disciplines et de plusieurs régions, propose autre chose&nbsp;: une couverture territoriale, une régularité d'exposition sur toute l'année, une pluralité de publics et un seul interlocuteur pour l'entreprise. Ce n'est plus une demande d'aide, c'est une proposition qui se compare à un budget de communication.</p>
+  <p>C'est la seule façon que nous connaissons de donner du poids à ceux qui n'en ont pas encore individuellement, sans attendre qu'ils deviennent des vedettes.</p>
+
+  <div class="compare">
+   <div class="carte seul">
+    <p class="k">Un nom, tout seul</p>
+    <b>Une demande</b>
+    <p>Une audience limitée, une saison incertaine, un seul sport, une seule région. L'entreprise arbitre entre le soutien et le refus, et elle refuse le plus souvent.</p>
+   </div>
+   <div class="carte ensemble">
+    <p class="k">Un collectif</p>
+    <b>Une proposition</b>
+    <p>Plusieurs disciplines, plusieurs territoires, une présence toute l'année et un interlocuteur unique. L'entreprise arbitre entre plusieurs supports, et celui-ci se défend.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="metiers">
+ <div class="zone">
+  <p class="surtitre">Ce que nous faisons</p>
+  <h2 style="font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: clamp(26px, 3.6vw, 46px); line-height: 1.05; letter-spacing: -0.025em; margin: 0; max-width: 20ch;">Trouver des partenaires, et tenir une image.</h2>
+
+  <div class="grille">
+   <article class="metier">
+    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l4-4 5 3 5-3 4 4-5 6H8z"/></svg></span>
+    <h3>Partenariats</h3>
+    <p>Nous construisons le dossier, identifions les entreprises dont le territoire recoupe celui du collectif, démarchons et négocions. Aucune commission sur ce qui est signé.</p>
+   </article>
+
+   <article class="metier">
+    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></span>
+    <h3>Image et droits</h3>
+    <p>Ce qui est cédé, à qui, pour combien de temps. Nous relisons tout avant signature, et nous formons les jeunes et leurs familles à ce qu'ils signent.</p>
+   </article>
+
+   <article class="metier">
+    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11.5V17c0 1.6 2.2 3 5 3s5-1.4 5-3v-5.5"/></svg></span>
+    <h3>Les jeunes d'abord</h3>
+    <p>L'accompagnement des moins de 18 ans est gratuit. Le club reste au centre du projet sportif&nbsp;: nous renforçons, nous ne remplaçons personne.</p>
+   </article>
+  </div>
+
+  <div class="faits">
+   <div class="fait"><span class="n">0 %</span><p>De commission sur les contrats négociés. Tout revient à l'athlète.</p></div>
+   <div class="fait"><span class="n">0 €</span><p>Pour les moins de 18 ans, et pour le premier échange quel que soit l'âge.</p></div>
+   <div class="fait"><span class="n">1</span><p>Interlocuteur unique pour l'entreprise, quel que soit le nombre d'athlètes.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="fin">
+ <div class="zone">
+  <p class="surtitre">Parlons-en</p>
+  <h2>Le site complet arrive. Le collectif se constitue maintenant.</h2>
+  <p>Vous êtes une entreprise et l'idée d'un partenariat collectif vous parle&nbsp;? Vous êtes un athlète, un parent ou un club et vous voulez en faire partie&nbsp;? Écrivez-nous, le premier échange dure trente minutes et n'engage à rien.</p>
+
+  <div class="liens">
+   <a href="mailto:contact@duqque.fr?subject=Duqque%20Sports%20%C2%B7%20Prise%20de%20contact" class="bouton b-violet">
+    contact@duqque.fr
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+   </a>
+   <a href="https://wa.me/351932011866" target="_blank" rel="noopener" class="bouton b-vert">
+    WhatsApp
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+   </a>
+   <a href="tel:+351932011866" class="bouton b-nu">
+    +351 932 011 866
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+   </a>
+  </div>
+ </div>
+
+ <div class="pied">
+  <div class="zone">
+   <p>Duqque Sports · Association en cours de création · France et Portugal</p>
+   <p><a href="mentions-legales.html">Mentions légales</a></p>
+  </div>
+ </div>
+</section>
+
+<a href="mailto:contact@duqque.fr?subject=Duqque%20Sports%20%C2%B7%20Prise%20de%20contact" class="onglet">
+ <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="3"/><path d="M3 7l9 6 9-6"/></svg>
+ contact@duqque.fr
+</a>
+
 </body>
 </html>

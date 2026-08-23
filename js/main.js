@@ -680,7 +680,6 @@ function buildFooter() {
  <div class="f2-info-col">
  <h5>Contact</h5>
  <a href="mailto:contact@duqque.fr">contact@duqque.fr</a>
- <a href="mailto:contact@duqque.pt">contact@duqque.pt</a>
  <a href="tel:+351932011866">+351 932 011 866</a>
  </div>
  <div class="f2-info-col">
