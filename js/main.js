@@ -616,6 +616,17 @@ function buildMenu() {
  return menu;
 }
 
+/* Les derniers articles parus, du plus recent au plus ancien. ARTICLES est tenu par
+   ordre chronologique, le dernier entre est donc le plus recent. Le pied de page
+   affichait jusqu'ici les rubriques, qui pointaient toutes vers la meme page. */
+function derniersArticles(n) {
+ return [...ARTICLES].reverse().slice(0, n).map(a => `
+ <li><a href="${a.url}" class="f2-art">
+  <span class="f2-art-axe">${a.axe}</span>
+  <span class="f2-art-titre">${a.titre}</span>
+ </a></li>`).join('');
+}
+
 function buildFooter() {
  const footer = document.querySelector('.footer');
  if (!footer) return;
@@ -655,11 +666,7 @@ function buildFooter() {
  <div class="f2-col">
  <h5>Blog</h5>
  <ul>
- <li><a href="actualites.html">Gestion de carrière</a></li>
- <li><a href="actualites.html">Sponsoring</a></li>
- <li><a href="actualites.html">Communication</a></li>
- <li><a href="actualites.html">Image de marque</a></li>
- <li><a href="actualites.html">Programme Espoirs</a></li>
+ ${derniersArticles(4)}
  <li><a href="actualites.html" class="f2-more">Tous les articles →</a></li>
  </ul>
  </div>

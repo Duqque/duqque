@@ -5,19 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mentions légales · Duqque Sports</title>
 <meta name="description" content="Mentions légales et objet social de l'association Duqque Sports." />
-<link rel="stylesheet" href="css/style.css?v=20260908" />
+<link rel="stylesheet" href="css/style.css?v=20260913" />
 <style>
- .legal-wrap { max-width: 66ch; }
+ /* Sommaire epingle a gauche, contenu sur une seule colonne. Le sommaire suffit a
+    parcourir la page : decouper le texte en deux colonnes en plus n'aurait fait
+    qu'ajouter du bruit a de la prose juridique. */
+ .legal-layout {
+  display: grid; grid-template-columns: 268px minmax(0, 1fr);
+  gap: clamp(30px, 4vw, 72px); align-items: start;
+ }
+ .legal-som {
+  position: sticky; top: calc(var(--nav-bas, 76px) + 26px);
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px 18px 18px;
+  box-shadow: 0 16px 44px rgba(10,10,14,0.06);
+ }
+ .legal-som .t {
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 700; color: var(--ink-muted); margin: 0 0 14px; padding-left: 10px;
+ }
+ .legal-som ol { list-style: none; margin: 0; padding: 0; counter-reset: ls; display: grid; gap: 1px; }
+ .legal-som li { counter-increment: ls; }
+ .legal-som a {
+  display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 9px; align-items: baseline;
+  padding: 8px 10px; border-radius: 9px; border: none;
+  font-size: 13px; line-height: 1.35; color: var(--ink-soft); text-decoration: none;
+  transition: background .22s var(--ease), color .22s var(--ease);
+ }
+ .legal-som a::before {
+  content: counter(ls, decimal-leading-zero);
+  font-family: var(--display); font-weight: 900; font-size: 11px;
+  color: var(--accent-ink); letter-spacing: 0;
+ }
+ .legal-som a:hover { background: rgba(90, 47, 230, 0.08); color: var(--accent-ink); }
+ .legal-som a:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 1px; }
+
+ .legal-wrap { max-width: 74ch; }
  .legal-wrap h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; margin: 48px 0 18px; letter-spacing: -0.01em; }
  .legal-wrap h2:first-of-type { margin-top: 0; }
+ .legal-wrap h2[id] { scroll-margin-top: calc(var(--nav-bas, 76px) + 24px); }
  .legal-wrap p, .legal-wrap li { font-size: 15.5px; line-height: 1.7; color: var(--ink); }
  .legal-wrap p { margin-bottom: 14px; }
  .legal-wrap ul { padding-left: 22px; margin-bottom: 14px; }
  .legal-wrap li { margin-bottom: 6px; }
- .legal-wrap .kvs { display: grid; grid-template-columns: 220px 1fr; gap: 10px 24px; margin-bottom: 14px; }
+ .legal-wrap .kvs { display: grid; grid-template-columns: minmax(0, 210px) minmax(0, 1fr); gap: 10px 24px; margin-bottom: 14px; }
  .legal-wrap .kvs dt { color: var(--ink-muted); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; padding-top: 4px; }
- .legal-wrap .kvs dd { margin: 0; font-size: 15.5px; color: var(--ink); }
+ .legal-wrap .kvs dd { margin: 0; font-size: 15.5px; color: var(--ink); overflow-wrap: anywhere; }
  .legal-wrap a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+ @media (max-width: 980px) {
+  .legal-layout { grid-template-columns: 1fr; gap: 30px; }
+  .legal-som { position: static; }
+  .legal-som ol { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px 10px; }
+ }
+ @media (max-width: 560px) {
+  .legal-som ol { grid-template-columns: 1fr; }
+ }
  @media (max-width: 700px) { .legal-wrap .kvs { grid-template-columns: 1fr; gap: 4px 0; } .legal-wrap .kvs dt { padding-top: 12px; } }
 </style>
 </head>
@@ -36,10 +79,27 @@
 
 <section>
  <div class="container">
-  <div class="legal-wrap reveal">
+  <div class="legal-layout">
 
-   <h2>Éditeur du site</h2>
-   <dl class="kvs">
+   <nav class="legal-som reveal" aria-label="Sommaire des mentions légales">
+    <p class="t">Sommaire</p>
+    <ol>
+     <li><a href="#editeur">Éditeur du site</a></li>
+     <li><a href="#objet">Objet social</a></li>
+     <li><a href="#direction">Direction</a></li>
+     <li><a href="#hebergement">Hébergement</a></li>
+     <li><a href="#propriete">Propriété intellectuelle</a></li>
+     <li><a href="#credits">Crédits</a></li>
+     <li><a href="#responsabilite">Limitation de responsabilité</a></li>
+     <li><a href="#liens">Liens hypertextes</a></li>
+     <li><a href="#droit">Droit applicable</a></li>
+    </ol>
+   </nav>
+
+   <div class="legal-wrap reveal">
+
+    <h2 id="editeur">Éditeur du site</h2>
+    <dl class="kvs">
     <dt>Dénomination</dt><dd>DUQQUE SPORTS</dd>
     <dt>Forme juridique</dt><dd>Association [à compléter lors de la déclaration]</dd>
     <dt>N° RNA</dt><dd>[À compléter]</dd>
@@ -52,11 +112,11 @@
     <dt>Date de déclaration</dt><dd>[À compléter]</dd>
     <dt>Email</dt><dd><a href="mailto:contact@duqque.fr">contact@duqque.fr</a> (France) · <a href="mailto:contact@duqque.pt">contact@duqque.pt</a> (Portugal)</dd>
     <dt>Téléphone</dt><dd><a href="tel:+351932011866">+351 932 011 866</a></dd>
-   </dl>
+    </dl>
 
-   <h2>Objet social</h2>
-   <p>L'association a pour objet, en France comme à l'étranger, sans distinction de discipline, de niveau de pratique, d'âge ou de statut&nbsp;:</p>
-   <ul>
+    <h2 id="objet">Objet social</h2>
+    <p>L'association a pour objet, en France comme à l'étranger, sans distinction de discipline, de niveau de pratique, d'âge ou de statut&nbsp;:</p>
+    <ul>
     <li>l'accompagnement, le conseil, la formation et le soutien des sportives et des sportifs, amateurs comme professionnels, ainsi que de leur entourage familial et de leurs encadrants, sur l'ensemble des dimensions de leur parcours&nbsp;: développement et gestion de carrière, projet de formation et double projet scolaire ou universitaire, insertion professionnelle, préparation de l'après-carrière et reconversion&nbsp;;</li>
     <li>la valorisation de l'image et de la notoriété des personnes, des équipes, des clubs, des structures et des territoires liés au sport&nbsp;: stratégie de communication, identité visuelle, prise de parole publique, relations avec les médias, gestion de la réputation et accompagnement en situation de crise&nbsp;;</li>
     <li>la création, la production et la diffusion de contenus sur tout support, existant ou à venir&nbsp;: réseaux sociaux, plateformes numériques, sites internet, presse écrite, radio, télévision, photographie, vidéo, podcast, édition et publication&nbsp;;</li>
@@ -67,50 +127,52 @@
     <li>la promotion de la pratique sportive et de ses valeurs sous toutes ses formes&nbsp;: sport pour toutes et tous, sport santé, sport scolaire et universitaire, sport adapté, égalité entre les femmes et les hommes, inclusion, lutte contre toute forme de discrimination, de violence et de harcèlement, éthique et intégrité de la compétition&nbsp;;</li>
     <li>la coopération et les échanges avec toute personne physique ou morale, en France et à l'international, poursuivant des objectifs compatibles avec ceux de l'association, notamment par des projets communs, des jumelages, des programmes de mobilité et des réseaux d'entraide&nbsp;;</li>
     <li>la conduite d'études, de travaux de recherche, de publications et de toute action d'information ou de représentation utile à la défense des intérêts des personnes accompagnées.</li>
-   </ul>
-   <p>Pour la réalisation de son objet, l'association peut recourir à tout moyen, et notamment&nbsp;: percevoir des cotisations, des dons, des legs et des subventions&nbsp;; conclure des conventions et des contrats de partenariat&nbsp;; fournir des prestations et vendre des produits ou services en lien direct avec son objet&nbsp;; employer du personnel et faire appel à des intervenants extérieurs&nbsp;; acquérir, louer et gérer tout bien mobilier ou immobilier&nbsp;; créer, éditer et exploiter tout support de communication&nbsp;; adhérer à toute union, fédération ou groupement, ou en susciter la création.</p>
-   <p>Et plus généralement, toutes opérations de quelque nature qu'elles soient se rattachant directement ou indirectement à cet objet, ou susceptibles d'en faciliter la réalisation ou le développement.</p>
-   <p>L'association est à but non lucratif. Elle ne perçoit aucune commission sur les contrats négociés au bénéfice des personnes qu'elle accompagne.</p>
+    </ul>
+    <p>Pour la réalisation de son objet, l'association peut recourir à tout moyen, et notamment&nbsp;: percevoir des cotisations, des dons, des legs et des subventions&nbsp;; conclure des conventions et des contrats de partenariat&nbsp;; fournir des prestations et vendre des produits ou services en lien direct avec son objet&nbsp;; employer du personnel et faire appel à des intervenants extérieurs&nbsp;; acquérir, louer et gérer tout bien mobilier ou immobilier&nbsp;; créer, éditer et exploiter tout support de communication&nbsp;; adhérer à toute union, fédération ou groupement, ou en susciter la création.</p>
+    <p>Et plus généralement, toutes opérations de quelque nature qu'elles soient se rattachant directement ou indirectement à cet objet, ou susceptibles d'en faciliter la réalisation ou le développement.</p>
+    <p>L'association est à but non lucratif. Elle ne perçoit aucune commission sur les contrats négociés au bénéfice des personnes qu'elle accompagne.</p>
 
-   <h2>Direction</h2>
-   <dl class="kvs">
+    <h2 id="direction">Direction</h2>
+    <dl class="kvs">
     <dt>Président·e</dt><dd>[À compléter]</dd>
     <dt>Responsable de la publication</dt><dd>[À compléter]</dd>
-   </dl>
+    </dl>
 
-   <h2>Hébergement</h2>
-   <p>Le site duqque.fr est hébergé par&nbsp;:</p>
-   <dl class="kvs">
+    <h2 id="hebergement">Hébergement</h2>
+    <p>Le site duqque.fr est hébergé par&nbsp;:</p>
+    <dl class="kvs">
     <dt>Hébergeur</dt><dd>Hostinger International Ltd.</dd>
     <dt>Adresse</dt><dd>61 Lordou Vironos Street, 6023 Larnaca, Chypre</dd>
     <dt>Localisation des données</dt><dd>Allemagne</dd>
     <dt>Site</dt><dd><a href="https://www.hostinger.fr" target="_blank" rel="noopener">www.hostinger.fr</a></dd>
-   </dl>
+    </dl>
 
-   <h2>Propriété intellectuelle</h2>
-   <p>L'ensemble du contenu présent sur ce site (textes, images, photographies, vidéos, logos, marques, identité visuelle, méthodologies, schémas, illustrations et code) est la propriété exclusive de Duqque Sports ou de ses partenaires, et est protégé par le droit français et international de la propriété intellectuelle.</p>
-   <p>Toute reproduction, représentation, modification, publication, adaptation ou exploitation de tout ou partie des éléments du site, par quelque procédé que ce soit et sur quelque support que ce soit, est interdite sans l'autorisation écrite préalable de Duqque Sports. Toute exploitation non autorisée du site ou de l'un quelconque de ses éléments est susceptible d'engager la responsabilité de l'utilisateur et de constituer une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
+    <h2 id="propriete">Propriété intellectuelle</h2>
+    <p>L'ensemble du contenu présent sur ce site (textes, images, photographies, vidéos, logos, marques, identité visuelle, méthodologies, schémas, illustrations et code) est la propriété exclusive de Duqque Sports ou de ses partenaires, et est protégé par le droit français et international de la propriété intellectuelle.</p>
+    <p>Toute reproduction, représentation, modification, publication, adaptation ou exploitation de tout ou partie des éléments du site, par quelque procédé que ce soit et sur quelque support que ce soit, est interdite sans l'autorisation écrite préalable de Duqque Sports. Toute exploitation non autorisée du site ou de l'un quelconque de ses éléments est susceptible d'engager la responsabilité de l'utilisateur et de constituer une contrefaçon sanctionnée par les articles L.335-2 et suivants du Code de la propriété intellectuelle.</p>
 
-   <h2>Crédits</h2>
-   <p>Conception, design et développement&nbsp;: Duqque Sports. Certaines photographies d'illustration proviennent de Unsplash et sont utilisées dans le respect de leurs licences respectives.</p>
+    <h2 id="credits">Crédits</h2>
+    <p>Conception, design et développement&nbsp;: Duqque Sports. Certaines photographies d'illustration proviennent de Unsplash et sont utilisées dans le respect de leurs licences respectives.</p>
 
-   <h2>Limitation de responsabilité</h2>
-   <p>Duqque Sports met tout en œuvre pour fournir aux utilisateurs des informations et outils disponibles et vérifiés, mais ne saurait être tenu responsable des erreurs, d'une absence de disponibilité des fonctionnalités ou de la présence de virus sur son site.</p>
-   <p>Les informations diffusées sur ce site sont présentées à titre indicatif et général sans valeur contractuelle. Elles ne sauraient engager la responsabilité de Duqque Sports.</p>
+    <h2 id="responsabilite">Limitation de responsabilité</h2>
+    <p>Duqque Sports met tout en œuvre pour fournir aux utilisateurs des informations et outils disponibles et vérifiés, mais ne saurait être tenu responsable des erreurs, d'une absence de disponibilité des fonctionnalités ou de la présence de virus sur son site.</p>
+    <p>Les informations diffusées sur ce site sont présentées à titre indicatif et général sans valeur contractuelle. Elles ne sauraient engager la responsabilité de Duqque Sports.</p>
 
-   <h2>Liens hypertextes</h2>
-   <p>Le site peut contenir des liens hypertextes vers d'autres sites internet. Duqque Sports n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu, leur fonctionnement, ou l'usage qui peut en être fait par les utilisateurs.</p>
+    <h2 id="liens">Liens hypertextes</h2>
+    <p>Le site peut contenir des liens hypertextes vers d'autres sites internet. Duqque Sports n'exerce aucun contrôle sur ces sites et décline toute responsabilité quant à leur contenu, leur fonctionnement, ou l'usage qui peut en être fait par les utilisateurs.</p>
 
-   <h2>Droit applicable</h2>
-   <p>Les présentes mentions légales sont régies par le droit français. En cas de litige, et à défaut de résolution amiable, les tribunaux français seront seuls compétents.</p>
+    <h2 id="droit">Droit applicable</h2>
+    <p>Les présentes mentions légales sont régies par le droit français. En cas de litige, et à défaut de résolution amiable, les tribunaux français seront seuls compétents.</p>
 
-   <p style="margin-top: 40px; font-size: 13px; color: var(--ink-muted);">Dernière mise à jour&nbsp;: juin 2026.</p>
+    <p style="margin-top: 44px; font-size: 13px; color: var(--ink-muted);">Dernière mise à jour&nbsp;: août 2026.</p>
+   </div>
+
   </div>
  </div>
 </section>
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260908"></script>
+<script src="js/main.js?v=20260913"></script>
 </body>
 </html>

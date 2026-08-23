@@ -1788,6 +1788,15 @@ body.theme-business .footer-card { --halo-color: 119, 16, 252; }
   flex-shrink: 0; width: 26px; height: 26px; border-radius: 7px;
   display: inline-flex; align-items: center; justify-content: center;
 }
+/* Un titre d'article tient rarement sur une ligne : le lien passe en colonne, avec la
+   rubrique en surtitre. align-items: center, herite de .f2-col a, centrerait le bloc au
+   lieu de le caler a gauche. */
+.f2-col a.f2-art { flex-direction: column; align-items: flex-start; gap: 5px; padding: 13px 2px; }
+.f2-art-axe {
+  font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase;
+  font-weight: 700; color: var(--accent-ink);
+}
+.f2-art-titre { font-size: 14.5px; font-weight: 500; line-height: 1.35; text-wrap: pretty; }
 .f2-more { color: var(--ink-muted) !important; font-size: 13.5px !important; }
 .f2-more:hover { color: var(--accent) !important; }
 
