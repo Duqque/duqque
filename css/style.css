@@ -375,7 +375,7 @@ font[style*="background-color"] { background-color: transparent !important; box-
 .nav-wa {
   display: inline-flex; align-items: center; justify-content: center;
   width: 42px;
-  background: linear-gradient(160deg, #2ee06f 0%, #1eb454 100%);
+  background: linear-gradient(160deg, #25d366 0%, #1aa851 100%);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.14);
   transition: filter .3s var(--ease), box-shadow .3s var(--ease);
@@ -392,7 +392,7 @@ font[style*="background-color"] { background-color: transparent !important; box-
   display: inline-flex; align-items: center; justify-content: center;
   gap: 10px;
   padding: 0 20px;
-  background: linear-gradient(160deg, #6b3ff0 0%, var(--accent-ink) 100%);
+  background: linear-gradient(160deg, var(--accent) 0%, var(--accent-ink) 100%);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.14);
   font-size: 13px; letter-spacing: 0.04em; font-weight: 600;
