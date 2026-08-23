@@ -54,7 +54,9 @@ a { color: inherit; }
 /* --- Bandeau --- */
 .tete { padding: 30px 0 0; }
 .tete .zone { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-.marque { font-family: var(--display); font-weight: 900; font-size: 26px; letter-spacing: -0.02em; }
+/* Le logo est en Gilroy SemiBold, pas dans la police d'affichage : c'est ce que
+   fait .nav-logo sur le reste du site. */
+.marque { font-family: var(--sans); font-weight: 600; font-size: 25px; letter-spacing: -0.02em; }
 .etat {
   display: inline-flex; align-items: center; gap: 9px;
   font-size: 10.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600;
