@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cotisations et accompagnements · Duqque Sports</title>
 <meta name="description" content="Les formules d'accompagnement de Duqque Sports : gratuit pour les moins de 18 ans, 60 € par an pour les athlètes majeurs, 120 € après une sélection internationale. Aucune commission sur les contrats négociés." />
-<link rel="stylesheet" href="css/style.css?v=20260945" />
+<link rel="stylesheet" href="css/style.css?v=20260949" />
 <style>
  /* =====================================================================
     COTISATIONS
@@ -120,9 +120,13 @@
   background: #101400; color: #d9ff3d;
   font-family: var(--display); font-weight: 900; font-size: 12.5px; letter-spacing: 0.02em;
  }
- .co-table tbody tr:not(.co-sec):hover td,
- .co-table tbody tr:not(.co-sec):hover th { background-color: rgba(90, 47, 230, 0.05); }
- .co-table tbody tr:not(.co-sec):hover td:nth-child(2) { background-color: rgba(217, 255, 61, 0.34); }
+ /* Uniquement là où un vrai pointeur existe : au doigt, :hover reste actif après
+    l'appui et laisse des bandes de couleur derrière lui. */
+ @media (hover: hover) and (pointer: fine) {
+  .co-table tbody tr:not(.co-sec):hover td,
+  .co-table tbody tr:not(.co-sec):hover th { background-color: rgba(90, 47, 230, 0.05); }
+  .co-table tbody tr:not(.co-sec):hover td:nth-child(2) { background-color: rgba(217, 255, 61, 0.34); }
+ }
  /* Pictogramme et libelle dans une ligne flex centree. Le pictogramme etait auparavant
     cale avec un vertical-align: -6px : la police d'affichage ayant un jambage superieur
     important, le libelle se retrouvait 3px au-dessus du centre de la bande et 4px au-dessus
@@ -154,17 +158,64 @@
 
  @media (max-width: 900px) { .co-grid { grid-template-columns: 1fr; } }
  @media (max-width: 800px) {
-  /* Le tableau devient une liste par ligne, chaque cellule portant son intitule de colonne */
+  /* Trois colonnes ne tiennent pas sur un téléphone. Chaque prestation devient
+     une carte : son intitulé en tête, puis les trois formules l'une sous l'autre.
+     Le rappel de colonne passe du fond coloré à une étiquette : un aplat citron
+     sur toute la cellule volait la vedette au contenu, et se cumulait au survol. */
   .co-table, .co-table tbody, .co-table tr, .co-table th, .co-table td { display: block; width: auto; }
   .co-table thead { display: none; }
-  .co-table tr { border-bottom: 1px solid var(--line); padding: 16px 0; }
-  .co-table th, .co-table td { border: 0; padding: 0 0 8px; }
-  .co-table td::before {
-   content: attr(data-col); display: block;
-   font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
-   color: var(--ink-muted); margin-bottom: 4px;
+  .co-table caption { padding-bottom: 14px; }
+
+  .co-table tbody tr:not(.co-sec) {
+   background: #fff; border: 1px solid var(--line); border-radius: 14px;
+   padding: 18px 18px 8px; margin-bottom: 10px;
   }
-  .co-sec th { background: none; padding: 24px 0 6px; }
+  .co-table tbody tr:not(.co-sec) th {
+   background: none; padding: 0 0 13px; margin-bottom: 4px;
+   border-bottom: 1px solid var(--line);
+   font-size: 16px; line-height: 1.3;
+  }
+  .co-table tbody tr:not(.co-sec) th small { margin-top: 5px; }
+
+  /* Étiquette à largeur fixe, valeur alignée à côté. Indentation suspendue
+     plutôt que grille : en grille, la pastille « oui » et le mot qui la suit
+     deviennent deux éléments distincts et se retrouvent sur deux lignes. En
+     flux inline, ils restent côte à côte, et une valeur longue revient à la
+     ligne sous elle-même grâce au retrait négatif. */
+  .co-table tbody td {
+   display: block; border: 0; background: none;
+   padding: 10px 0 10px 104px; text-indent: -104px;
+   font-size: 14.5px; line-height: 1.45;
+  }
+  .co-table tbody td + td { border-top: 1px solid var(--line); }
+  .co-table tbody td::before {
+   content: attr(data-col);
+   display: inline-block; width: 92px; margin-right: 12px; text-indent: 0;
+   vertical-align: middle; box-sizing: border-box;
+   font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700;
+   color: var(--ink-muted); background: rgba(11,11,11,0.06);
+   padding: 5px 8px; border-radius: 100px; text-align: center;
+  }
+  /* text-indent s'hérite. Un enfant en inline-block, comme la pastille « 0 % »,
+     rouvre un contexte inline et décale son propre texte de 104 px vers la
+     gauche, hors de son fond. On le remet à zéro sur tous les enfants. */
+  .co-table tbody td > * { text-indent: 0; }
+  .co-table tbody td .co-val { vertical-align: middle; margin-right: 7px; }
+  .co-table tbody td strong { vertical-align: middle; }
+  /* La formule mise en avant garde son citron, réduit à son étiquette. Le fond
+     de cellule doit être annulé au même niveau de spécificité que la règle du
+     bureau, sinon l'aplat traverse le média. */
+  .co-table tbody td:nth-child(2) { background: none; }
+  .co-table tbody td:nth-child(2)::before { background: var(--lime, #d9ff3d); color: #101400; }
+
+  /* Les intertitres deviennent de vrais titres de section, pas des bandeaux
+     pleine largeur en concurrence avec les cartes. */
+  .co-table tbody tr.co-sec { padding: 0; margin: 30px 0 12px; background: none; border: 0; }
+  .co-table tbody tr.co-sec:first-child { margin-top: 0; }
+  .co-table tbody tr.co-sec th {
+   display: inline-block; border-radius: 100px; padding: 8px 15px; border: 0; margin: 0;
+   font-size: 11px;
+  }
  }
 
  /* --- Comment se règle la cotisation ---------------------------------------
@@ -459,6 +510,6 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260945"></script>
+<script src="js/main.js?v=20260949"></script>
 </body>
 </html>
