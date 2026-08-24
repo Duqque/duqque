@@ -208,6 +208,7 @@ button:focus-visible { outline: 3px solid var(--violet-clair); outline-offset: 3
       elle suffit a masquer un site en preparation, pas a garder des donnees.
       Si le PHP est absent, l'apercu du site fonctionne quand meme et la page
       resultats le dira clairement plutot que d'echouer sans explication. */
+   var soucis = '';
    try {
     var rep = await fetch('/api/session.php', {
      method: 'POST', credentials: 'same-origin',
@@ -216,7 +217,19 @@ button:focus-visible { outline: 3px solid var(--violet-clair); outline-offset: 3
     });
     var j = await rep.json();
     if (j && j.ok) document.cookie = 'duqque_admin_ui=1; Max-Age=2592000; Path=/; SameSite=Lax';
-   } catch (e) { /* apercu seul : sans serveur, pas d'espace resultats */ }
+    else soucis = (j && j.erreur) ? j.erreur : 'réponse inattendue du serveur';
+   } catch (e) { soucis = 'serveur injoignable'; }
+
+   /* L'apercu du site s'ouvre quand meme, mais taire l'echec de la session
+      serveur laisserait chercher pourquoi l'espace administrateur n'apparait
+      nulle part. On le dit, et on laisse le temps de le lire. */
+   if (soucis) {
+    msg.className = 'message ko';
+    msg.innerHTML = "Site ouvert, mais l'espace administrateur reste fermé&nbsp;: " + soucis +
+     '.<br/><a href="/api/etat.php" style="color:#d9ff3d">Vérifier l\'état du dispositif</a>';
+    setTimeout(function () { location.href = '/home.html'; }, 6000);
+    return;
+   }
 
    msg.className = 'message ok';
    msg.textContent = 'Accès ouvert. Redirection…';

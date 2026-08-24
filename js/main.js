@@ -573,6 +573,45 @@ function estAdmin() {
  return document.cookie.indexOf('duqque_admin_ui=1') !== -1;
 }
 
+/* Sur telephone, la barre de navigation est en bas de l'ecran : c'est la que se
+   trouve le pouce. Les deux actions viennent donc l'encadrer, resultats a gauche
+   et sortie a droite, tandis que l'identite reste dans le coin haut droit.
+   Sur ordinateur elles reprennent leur place sous le nom.
+
+   Le deplacement se fait au franchissement du seuil et nulle part ailleurs : un
+   ecouteur de redimensionnement qui deplacerait des noeuds a chaque pixel
+   couterait cher et casserait le focus en cours. */
+function placerActionsAdmin(bas) {
+ const nav = document.querySelector('.nav');
+ const cta = document.querySelector('.nav-cta--admin');
+ if (!nav || !cta || !bas) return;
+ const seuil = window.matchMedia('(max-width: 768px)');
+
+ const gauche = bas.querySelector('.nav-admin');
+ const droite = bas.querySelector('.nav-sortie');
+ const pilule = nav.querySelector('.nav-pill');
+
+ function placer(mobile) {
+  if (mobile) {
+   nav.classList.add('nav--admin');
+   cta.classList.add('nav-cta--compact');
+   if (pilule) { nav.insertBefore(gauche, pilule); nav.appendChild(droite); }
+   bas.hidden = true;
+  } else {
+   nav.classList.remove('nav--admin');
+   cta.classList.remove('nav-cta--compact');
+   bas.hidden = false;
+   bas.appendChild(gauche);
+   bas.appendChild(droite);
+  }
+ }
+
+ placer(seuil.matches);
+ // addEventListener sur MediaQueryList n'existe pas sur les Safari anciens.
+ if (seuil.addEventListener) seuil.addEventListener('change', (e) => placer(e.matches));
+ else if (seuil.addListener) seuil.addListener((e) => placer(e.matches));
+}
+
 /* Deconnexion complete, pas seulement de l'espace resultats : la session serveur
    est fermee, le repere d'affichage efface, et le cookie d'apercu revoque par le
    serveur via ?apercu=stop, la regle qui existe deja dans le .htaccess. On
@@ -595,8 +634,6 @@ function verifieSessionAdmin() {
   .then((j) => {
    if (j && j.ok && j.connecte) return;
    document.cookie = 'duqque_admin_ui=; Max-Age=0; Path=/';
-   const l = document.querySelector('.menu-list a[href="resultats.html"]');
-   if (l) l.closest('li').remove();
    // Le conteneur est reconstruit plutot que rafistole : c'est le meme code qui
    // sert au visiteur ordinaire, il n'y a donc qu'une seule version a maintenir.
    const cta = document.querySelector('.nav-cta');
@@ -605,11 +642,10 @@ function verifieSessionAdmin() {
   .catch(function () { /* serveur injoignable : on laisse le bouton, la page resultats tranchera */ });
 }
 
-function liensMenu() {
- return estAdmin()
-  ? MENU_LINKS.concat([{ href: 'resultats.html', label: 'Résultats de l\'étude', halo: 'sport', dots: false, admin: true }])
-  : MENU_LINKS;
-}
+/* Le menu ne porte que la navigation publique. L'acces aux resultats a son
+   bouton dedie, visible en permanence : l'ajouter ici en ferait un doublon, et
+   melangerait une commande d'administration aux pages du site. */
+function liensMenu() { return MENU_LINKS; }
 
 function buildMenu() {
  const menu = document.querySelector('.menu');
@@ -942,10 +978,18 @@ function construitActionsFlottantes() {
   sortie.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 17l5-5-5-5M20 12H9M11 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5"/></svg>';
   sortie.addEventListener('click', deconnecter);
 
+  // Deux rangées sur ordinateur : qui l'on est, puis ce que l'on peut faire. Sur
+  // une seule ligne le bloc atteignait presque cinq cents pixels.
+  const bas = document.createElement('div');
+  bas.className = 'nav-admin-bas';
+  bas.appendChild(res);
+  bas.appendChild(sortie);
+
   cta.appendChild(moi);
-  cta.appendChild(res);
-  cta.appendChild(sortie);
+  cta.appendChild(bas);
   document.body.appendChild(cta);
+
+  placerActionsAdmin(bas);
   return;
  }
 

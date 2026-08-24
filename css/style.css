@@ -306,6 +306,23 @@ body.menu-open .bottom-nav { opacity: 0; pointer-events: none; transition: opaci
    connecte, l'acces aux resultats, la sortie. La grammaire est celle du bloc
    public, definie plus haut : enfants de 42 px, rayon 4 px, ecart de 8 px. */
 
+/* En session ouverte, le boitier s'empile : identite au-dessus, actions en
+   dessous. La regle .nav-cta > * plus haut impose 42 px de haut a chaque enfant
+   direct ; ici les enfants sont deux rangees, dont la seconde contient les
+   boutons, qui gardent donc leur hauteur. */
+/* Specificite (0,2,0) : .nav-cta impose align-items: center et gagnerait a
+   egalite. Sans cela l'identite ne s'etirait pas et restait plus etroite que la
+   rangee du dessous. */
+.nav-cta.nav-cta--admin { flex-direction: column; align-items: stretch; gap: 7px; }
+.nav-cta.nav-cta--admin > * { height: auto; width: 100%; }
+.nav-admin-bas { display: flex; align-items: stretch; gap: 7px; }
+/* L'attribut hidden vient de la feuille du navigateur : une regle de classe le
+   bat. Sans ce rappel, la rangee masquee comptait encore son ecart et le cadre
+   des initiales gagnait sept pixels en hauteur. */
+.nav-admin-bas[hidden] { display: none; }
+.nav-admin-bas > * { height: 42px; border-radius: 4px; flex: 0 0 auto; }
+.nav-admin-bas .nav-admin { flex: 1 1 auto; }
+
 /* Identite. Bloc muet : ni lien ni bouton, il repond a « ou suis-je ». */
 .nav-moi {
   display: inline-flex; align-items: center; gap: 10px;
@@ -364,13 +381,36 @@ body.menu-open .bottom-nav { opacity: 0; pointer-events: none; transition: opaci
 
 /* Trois occupants au lieu de deux : le boitier serre d'abord le nom, puis le
    libelle du bouton. Les deux pictogrammes et la sortie restent toujours la. */
-@media (max-width: 1080px) {
-  .nav-moi-txt { display: none; }
-  .nav-moi { padding: 0 8px; }
+.nav-cta.nav-cta--admin .nav-moi { height: 44px; padding: 0 14px 0 8px; }
+
+/* Telephone : le boitier du haut ne garde que l'identite, reduite a la pastille
+   d'initiales. Les deux actions descendent encadrer la barre de navigation. */
+.nav-cta.nav-cta--compact { padding: 6px; }
+/* Carre net : sans hauteur imposee, la ligne de base du texte masque ajoutait
+   quelques pixels et le cadre penchait vers le rectangle. */
+.nav-cta.nav-cta--compact .nav-moi {
+  padding: 0; background: none; border: 0;
+  height: 42px; width: 42px; min-height: 42px;
+  justify-content: center; align-items: center; gap: 0;
 }
-@media (max-width: 860px) {
-  .nav-admin-label { display: none; }
-  .nav-admin { padding: 0 14px; }
+.nav-cta.nav-cta--compact .nav-moi-txt { display: none; }
+.nav-cta.nav-cta--compact .nav-moi-pastille { width: 42px; height: 42px; font-size: 13px; }
+
+.nav--admin { gap: 8px; padding: 0 12px; }
+.nav--admin .nav-admin,
+.nav--admin .nav-sortie {
+  height: 46px; border-radius: 6px; flex: 0 0 auto;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+.nav--admin .nav-admin { padding: 0 14px; }
+.nav--admin .nav-admin-label { display: none; }
+.nav--admin .nav-admin-arrow { display: none; }
+.nav--admin .nav-sortie { width: 46px; background: #050505; border-color: rgba(255,255,255,0.10); }
+
+@media (max-width: 620px) { .nav-moi-nom { font-size: 12px; } }
+@media (max-width: 460px) {
+  .nav-cta.nav-cta--admin .nav-admin-label { display: none; }
+  .nav-cta.nav-cta--admin .nav-admin { padding: 0 14px; }
 }
 .lang-switch { position: relative; }
 .lang-current {
