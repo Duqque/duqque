@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Team Espoirs · Duqque Sports</title>
 <meta name="description" content="La Team Espoirs Duqque soutient les meilleurs talents de moins de 18 ans : sponsoring négocié, équipement, accompagnement. Sans commission. Première promotion : judo, France & Portugal." />
-<link rel="stylesheet" href="css/style.css?v=20260924" />
+<link rel="stylesheet" href="css/style.css?v=20260925" />
 <style>
  /* ===== TEAM ESPOIRS — grille standard, minimalisme illustré ===== */
 
@@ -188,50 +188,6 @@
  .te-partners a:hover { color: var(--accent-ink); }
 
  /* ===== MODALE (inchangée, claire) ===== */
- .te-modal { position: fixed; inset: 0; z-index: 200; display: none; }
- .te-modal.open { display: block; }
- .te-modal-backdrop { position: absolute; inset: 0; background: rgba(240,240,240,0.75); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
- .te-modal-panel {
-  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: min(1140px, calc(100vw - 40px));
-  max-height: calc(100vh - 48px); overflow-y: auto;
-  background: #ffffff; color: var(--ink);
-  border: 1px solid rgba(0,0,0,0.08); border-radius: 14px;
-  padding: clamp(28px, 4vw, 56px);
-  box-shadow: 0 40px 120px rgba(0,0,0,0.18);
- }
- .te-modal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; margin-bottom: 22px; }
- .te-progress {
-  position: sticky; top: calc(-1 * clamp(28px, 4vw, 56px));
-  z-index: 5;
-  display: flex; align-items: center; gap: 14px;
-  padding: 12px 0; margin-bottom: 22px;
-  background: #ffffff;
- }
- .te-progress-bar {
-  flex: 1; height: 8px; border-radius: 100px;
-  background: rgba(0,0,0,0.08); overflow: hidden;
- }
- .te-progress-fill {
-  height: 100%; width: 100%;
-  background: var(--accent); border-radius: 100px;
-  transform: scaleX(0); transform-origin: left center;
-  transition: transform .35s var(--ease);
- }
- .te-progress-pct {
-  font-family: var(--sans); font-size: 13px; font-weight: 700;
-  color: var(--accent-ink); min-width: 44px; text-align: right;
-  font-variant-numeric: tabular-nums;
- }
- .te-modal-kick { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; font-weight: 600; color: var(--ink-muted); margin-bottom: 10px; }
- .te-modal-head h3 { font-size: clamp(24px, 2.6vw, 34px); line-height: 1.05; letter-spacing: -0.02em; }
- .te-modal-close {
-  flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.15); background: transparent;
-  color: var(--ink); font-size: 20px; line-height: 1; cursor: pointer;
-  transition: background .25s, color .25s;
- }
- .te-modal-close:hover { background: #111; color: #fff; }
  .te-form { display: grid; gap: 14px; }
  .te-form fieldset { border: none; border-top: 1px solid rgba(0,0,0,0.1); padding: 26px 0 10px; margin: 0; display: grid; gap: 16px; }
  .te-form legend { padding-right: 14px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 700; color: var(--accent-ink); }
@@ -273,54 +229,7 @@
  }
  .te-submit button:hover { background: var(--accent); transform: translateY(-2px); }
  .te-msg { font-size: 13px; color: var(--accent-ink); min-height: 18px; }
- /* ---- Dossier de candidature sur telephone ----
-    Le formulaire compte 42 champs. Sur un ecran de poche, la carte flottante, les
-    espacements du bureau et un bouton d'envoi tout en bas en faisaient un tunnel. */
- @media (max-width: 700px) {
-  .te-row, .te-row-3 { grid-template-columns: 1fr; }
-
-  /* Plein ecran. 100dvh et non 100vh : sous iOS, 100vh depasse la zone visible et
-     le bas du panneau se retrouvait sous la barre d'adresse. */
-  .te-modal-panel {
-   top: 0; left: 0; transform: none;
-   width: 100%; max-width: none;
-   height: 100dvh; max-height: 100dvh;
-   border: none; border-radius: 0;
-   padding: 16px 18px calc(94px + env(safe-area-inset-bottom));
-   box-shadow: none;
-  }
-  .te-modal-head { margin-bottom: 12px; gap: 12px; }
-  .te-modal-head h3 { font-size: 21px; }
-  .te-modal-kick { letter-spacing: 0.22em; margin-bottom: 6px; }
-  .te-progress { top: -16px; padding: 9px 0; margin-bottom: 12px; gap: 10px; }
-
-  /* Densite : chaque champ perdait une quinzaine de pixels en interlignage et en
-     marges, ce qui faisait pres de 600px sur l'ensemble du dossier. */
-  .te-form { gap: 10px; }
-  .te-form fieldset { padding: 18px 0 2px; gap: 12px; }
-  .te-form legend { letter-spacing: 0.22em; }
-  .te-row, .te-row-3 { gap: 12px; }
-  .te-field { gap: 4px; }
-  .te-field label { font-size: 9.5px; letter-spacing: 0.14em; }
-  /* 16px au minimum : en dessous, Safari iOS agrandit la page a chaque fois qu'un
-     champ prend le focus, et il faut repincer pour lire la suite. C'est la cause
-     principale de l'inconfort ressenti. */
-  .te-field input, .te-field select, .te-field textarea {
-   font-size: 16px; line-height: 1.25; padding: 8px 0;
-  }
-  .te-field textarea { min-height: 70px; }
-
-  /* Le bouton suit : sans cela il fallait traverser les 42 champs pour le retrouver. */
-  .te-submit {
-   position: fixed; left: 0; right: 0; bottom: 0; z-index: 6;
-   margin: 0; padding: 10px 18px calc(10px + env(safe-area-inset-bottom));
-   background: rgba(255,255,255,0.96);
-   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-   border-top: 1px solid rgba(0,0,0,0.1);
-  }
-  .te-submit button { width: 100%; justify-content: center; padding: 15px 24px; font-size: 14px; }
-  .te-msg { position: fixed; left: 18px; right: 18px; bottom: calc(72px + env(safe-area-inset-bottom)); z-index: 6; }
- }
+ @media (max-width: 700px){ .te-row, .te-row-3 { grid-template-columns: 1fr; } }
 
  /* === PARCOURS ANIMÉ : une saison dans la Team === */
  .tj { position: relative; }
@@ -623,10 +532,10 @@
    <span>Paris · Lisbonne</span>
    <span>Promo 01 · Judo</span>
   </div>
-  <button type="button" class="te-cta reveal" data-te-open>
+  <a href="candidater.html" class="te-cta reveal">
    Candidater à la Team
    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
-  </button>
+  </a>
  </div>
 </section>
 
@@ -638,10 +547,10 @@
     <h2 class="serif">Ce parcours, <em>c'est le tien&nbsp;?</em></h2>
     <p class="tj-cta-desc">Candidature gratuite, quinze minutes, aucune commission. Réponse à toutes les candidatures sous quarante-huit heures.</p>
    </div>
-   <button type="button" class="tj-cta-btn" data-te-open>
-    Ouvrir le dossier de candidature
-    <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.7"/></svg>
-   </button>
+   <a href="candidater.html" class="tj-cta-btn">
+   Candidater à la Team
+   <svg width="15" height="15" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.7"/></svg>
+   </a>
   </div>
  </div>
 </section>
@@ -696,10 +605,10 @@
    <div class="te-prog-card te-prog-cta">
     <h3>Prêt à écrire <em>la suite&nbsp;?</em></h3>
     <p>La promo 01 recrute ses judokas en France et au Portugal. Quinze minutes pour candidater, trois semaines pour une réponse. Toujours.</p>
-    <button type="button" class="te-prog-btn" data-te-open>
-     Candidater à la Team
-     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
-    </button>
+    <a href="candidater.html" class="te-prog-btn">
+   Candidater à la Team
+   <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+    </a>
    </div>
   </div>
  </div>
@@ -1030,10 +939,10 @@
  <div class="container">
   <h2 class="serif reveal" style="max-width: 22ch;">Prêt à rejoindre <em class="accent">la Team&nbsp;?</em></h2>
   <p class="reveal" style="max-width: 56ch; font-size: 15px; line-height: 1.65; color: var(--ink-soft); margin: 20px 0 36px;">Judoka U15 ou U18, licencié en France ou au Portugal, filles et garçons. Prépare tes résultats, tes réseaux et ton projet&nbsp;: on regarde tout. Si tu es mineur, tes parents doivent être informés.</p>
-  <button type="button" class="te-cta reveal" data-te-open>
-   Ouvrir le dossier de candidature
+  <a href="candidater.html" class="te-cta reveal">
+   Candidater à la Team
    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
-  </button>
+  </a>
  </div>
 </section>
 
@@ -1047,216 +956,6 @@
 
 <footer class="footer"></footer>
 
-<!-- MODALE CANDIDATURE -->
-<div class="te-modal" id="teModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Dossier de candidature Team Espoirs">
- <div class="te-modal-backdrop" data-te-close></div>
- <div class="te-modal-panel">
-  <div class="te-modal-head">
-   <div>
-    <div class="te-modal-kick">Team Espoirs · Promo 01 Judo</div>
-    <h3 class="serif">Dossier de candidature.</h3>
-   </div>
-   <button type="button" class="te-modal-close" data-te-close aria-label="Fermer">×</button>
-  </div>
-
-  <div class="te-progress" aria-hidden="true">
-   <div class="te-progress-bar"><div class="te-progress-fill" id="teProgressFill"></div></div>
-   <span class="te-progress-pct" id="teProgressPct">0&nbsp;%</span>
-  </div>
-
-  <form class="te-form" onsubmit="event.preventDefault(); this.querySelector('.te-msg').textContent='Dossier envoyé. Réponse sous 3 semaines, promis.'; this.reset();">
-
-   <fieldset>
-    <legend>01 · Ton identité</legend>
-    <div class="te-row">
-     <div class="te-field"><label>Prénom</label><input type="text" required /></div>
-     <div class="te-field"><label>Nom</label><input type="text" required /></div>
-    </div>
-    <div class="te-row">
-     <div class="te-field"><label>Date de naissance</label><input type="date" required /></div>
-     <div class="te-field"><label>Pays</label>
-      <select required><option value="">Choisir</option><option>France</option><option>Portugal</option></select>
-     </div>
-    </div>
-    <div class="te-row">
-     <div class="te-field"><label>Ville</label><input type="text" required /></div>
-     <div class="te-field"><label>Catégorie</label>
-      <select required><option value="">Choisir</option><option>U15 (minimes)</option><option>U18 (cadets)</option></select>
-     </div>
-    </div>
-    <div class="te-row">
-     <div class="te-field"><label>Club</label><input type="text" required /></div>
-     <div class="te-field"><label>Nom de ton coach</label><input type="text" required /></div>
-    </div>
-    <div class="te-row">
-     <div class="te-field"><label>Email (parent si mineur)</label><input type="email" required /></div>
-     <div class="te-field"><label>Téléphone (parent si mineur)</label><input type="tel" required /></div>
-    </div>
-   </fieldset>
-
-   <fieldset>
-    <legend>02 · Tes résultats sportifs</legend>
-    <div class="te-row">
-     <div class="te-field"><label>Classement national actuel</label><input type="text" placeholder="Ex : n°3 français U18 -73 kg" required /></div>
-     <div class="te-field"><label>Sélections (pôle, équipe nationale...)</label><input type="text" placeholder="Ex : Pôle espoirs, équipe de France cadets" /></div>
-    </div>
-    <div class="te-field"><label>Tes 5 meilleurs résultats (avec l'année)</label><textarea rows="3" placeholder="Ex : Champion de France cadets 2025, 3e Coupe d'Europe cadets 2025..." required></textarea></div>
-    <div class="te-field"><label>Objectifs sportifs cette saison</label><textarea rows="2" placeholder="Ex : podium aux Championnats de France, sélection en Coupe d'Europe" required></textarea></div>
-    <div class="te-field"><label>Liens vidéos de tes combats (YouTube, Drive...)</label><textarea rows="2" placeholder="Un lien par ligne"></textarea></div>
-   </fieldset>
-
-   <fieldset>
-    <legend>03 · Ta communication & tes réseaux</legend>
-    <div class="te-row">
-     <div class="te-field"><label>Instagram (@)</label><input type="text" placeholder="@toncompte" /></div>
-     <div class="te-field"><label>Abonnés Instagram</label><input type="number" min="0" placeholder="Ex : 1200" /></div>
-    </div>
-    <div class="te-row">
-     <div class="te-field"><label>TikTok (@)</label><input type="text" placeholder="@toncompte" /></div>
-     <div class="te-field"><label>Abonnés TikTok</label><input type="number" min="0" placeholder="Ex : 4500" /></div>
-    </div>
-    <div class="te-row">
-     <div class="te-field"><label>YouTube / autre plateforme</label><input type="text" placeholder="Lien de ta chaîne ou autre réseau" /></div>
-     <div class="te-field"><label>Fréquence de publication</label>
-      <select><option value="">Choisir</option><option>Tous les jours</option><option>Plusieurs fois par semaine</option><option>Une fois par semaine</option><option>De temps en temps</option><option>Jamais, je débute</option></select>
-     </div>
-    </div>
-    <div class="te-row">
-     <div class="te-field"><label>À l'aise devant la caméra ?</label>
-      <select><option value="">Choisir</option><option>Oui, j'adore ça</option><option>Ça va, avec un peu de préparation</option><option>Pas trop, mais je veux apprendre</option></select>
-     </div>
-     <div class="te-field"><label>Meilleure performance de contenu</label><input type="text" placeholder="Ex : un reel à 40 000 vues" /></div>
-    </div>
-    <div class="te-field"><label>Comment parles-tu de ton sport en ligne aujourd'hui ?</label><textarea rows="2" placeholder="Ce que tu publies, ce qui marche, ce que tu aimerais faire..."></textarea></div>
-   </fieldset>
-
-   <fieldset>
-    <legend>04 · Ton projet & tes besoins</legend>
-    <div class="te-field"><label>Ton objectif à 3 ans</label><textarea rows="2" placeholder="Ex : intégrer l'équipe de France juniors, viser les JO 2032..." required></textarea></div>
-    <div class="te-field"><label>Études / formation en cours</label><input type="text" placeholder="Ex : Seconde générale, sport-études..." required /></div>
-    <div class="te-field"><label>De quoi as-tu le plus besoin ?</label>
-     <select required>
-      <option value="">Choisir</option>
-      <option>Équipement et matériel</option>
-      <option>Financement des déplacements et compétitions</option>
-      <option>Sponsors et partenaires</option>
-      <option>Aide sur ma communication</option>
-      <option>Un peu de tout</option>
-     </select>
-    </div>
-    <div class="te-field"><label>Pourquoi toi ? Raconte-nous.</label><textarea rows="3" placeholder="Ton histoire, ta motivation, ce qui te rend différent des autres." required></textarea></div>
-   </fieldset>
-
-   <fieldset>
-    <legend>05 · Ta marque & tes convictions</legend>
-    <div class="te-field">
-     <label>As-tu déjà une idée de ta marque personnelle ?</label>
-     <textarea rows="3" placeholder="Comment tu te vois, comment tu veux qu'on parle de toi, l'image que tu veux renvoyer. Même floue, ton idée nous intéresse." required></textarea>
-    </div>
-    <div class="te-field">
-     <label>Tes valeurs et tes convictions</label>
-     <textarea rows="3" placeholder="Ce qui compte pour toi : le respect, la famille, l'école, une cause, une religion, un engagement... Ce qui te guide." required></textarea>
-    </div>
-    <div class="te-row">
-     <div class="te-field"><label>Les athlètes ou marques qui t'inspirent</label><input type="text" placeholder="Ex : Teddy Riner, Clarisse Agbegnenou, Nike..." /></div>
-     <div class="te-field"><label>Une cause qui te tient à cœur</label><input type="text" placeholder="Ex : le sport pour tous, l'environnement, l'école..." /></div>
-    </div>
-    <div class="te-row">
-     <div class="te-field"><label>As-tu déjà un surnom, un logo, une identité ?</label><input type="text" placeholder="Ex : un surnom sur les tatamis, un logo, des couleurs..." /></div>
-     <div class="te-field"><label>Un mot qui te définit</label><input type="text" placeholder="Ex : combatif, discret, spectaculaire..." /></div>
-    </div>
-   </fieldset>
-
-   <fieldset>
-    <legend>06 · Tes attentes & tes questions</legend>
-    <div class="te-field">
-     <label>Qu'attends-tu de ce partenariat avec Duqque ?</label>
-     <textarea rows="3" placeholder="Sois honnête : ce que tu espères vraiment (sponsors, matériel, conseils, visibilité, cadre...), et ce qui compte le plus pour toi." required></textarea>
-    </div>
-    <div class="te-field">
-     <label>Qu'est-ce qui t'inquiète ou te freine, s'il y a quelque chose ?</label>
-     <textarea rows="2" placeholder="Le temps que ça prend, l'école, l'avis de tes parents, la peur de t'engager... Tout se dit."></textarea>
-    </div>
-    <div class="te-field">
-     <label>Toutes tes questions, en bonus</label>
-     <textarea rows="4" placeholder="Pose-nous toutes les questions que tu veux : sur la Team, sur les sponsors, sur nous, sur la suite. On répond à tout, dans notre réponse sous 3 semaines."></textarea>
-    </div>
-    <div class="te-field">
-     <label>Comment as-tu connu la Team Espoirs ?</label>
-     <select>
-      <option value="">Choisir</option>
-      <option>Mon club ou mon coach</option>
-      <option>Les réseaux sociaux</option>
-      <option>Un autre athlète</option>
-      <option>Ma fédération</option>
-      <option>La presse</option>
-      <option>Autre</option>
-     </select>
-    </div>
-   </fieldset>
-
-   <fieldset>
-    <legend>07 · Tes documents</legend>
-    <div class="te-row">
-     <div class="te-field te-file">
-      <label>Ta photo (portrait ou en action)</label>
-      <input type="file" accept="image/*" required />
-      <small>JPG ou PNG, 10 Mo max.</small>
-     </div>
-     <div class="te-field te-file">
-      <label>Ton palmarès ou CV sportif</label>
-      <input type="file" accept=".pdf,.doc,.docx" />
-      <small>PDF de préférence, 10 Mo max.</small>
-     </div>
-    </div>
-    <div class="te-field te-file">
-     <label>Tout autre document utile</label>
-     <input type="file" multiple />
-     <small>Vidéos, articles de presse, lettres de recommandation, dossiers de ton club... Plusieurs fichiers possibles, 25 Mo max au total.</small>
-    </div>
-    <label class="te-consent">
-     <input type="checkbox" required />
-     <span>Mes parents (ou représentants légaux) sont informés de cette candidature et l'approuvent. Les données et documents envoyés ne servent qu'à l'étude de mon dossier.</span>
-    </label>
-   </fieldset>
-
-   <div class="te-submit">
-    <button type="submit">Envoyer mon dossier
-     <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg>
-    </button>
-   </div>
-   <div class="te-msg" role="status"></div>
-  </form>
- </div>
-</div>
-
-<script>
-(function(){
- const modal = document.getElementById('teModal');
- if (!modal) return;
-
- // Barre de progression : % de champs obligatoires correctement remplis
- const form = modal.querySelector('.te-form');
- const fill = document.getElementById('teProgressFill');
- const pct = document.getElementById('teProgressPct');
- function updateProgress() {
-  const req = [...form.querySelectorAll('[required]')];
-  if (!req.length) return;
-  const done = req.filter(el => el.type === 'checkbox' ? el.checked : el.checkValidity() && String(el.value).trim() !== '').length;
-  const p = Math.round((done / req.length) * 100);
-  fill.style.transform = 'scaleX(' + (p / 100) + ')';
-  pct.innerHTML = p + '&nbsp;%';
- }
- form.addEventListener('input', updateProgress);
- form.addEventListener('change', updateProgress);
- updateProgress();
- const open = () => { modal.classList.add('open'); document.body.style.overflow = 'hidden'; modal.setAttribute('aria-hidden','false'); };
- const close = () => { modal.classList.remove('open'); document.body.style.overflow = ''; modal.setAttribute('aria-hidden','true'); };
- document.querySelectorAll('[data-te-open]').forEach(b => b.addEventListener('click', open));
- modal.querySelectorAll('[data-te-close]').forEach(b => b.addEventListener('click', close));
- document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-})();
-</script>
 
 <script>
 (function(){
@@ -1503,6 +1202,6 @@
 })();
 </script>
 
-<script src="js/main.js?v=20260924"></script>
+<script src="js/main.js?v=20260925"></script>
 </body>
 </html>

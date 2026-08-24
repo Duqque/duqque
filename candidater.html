@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Candidater à la Team Espoirs · Duqque Sports</title>
+<meta name="description" content="Tu as entre 14 et 17 ans, tu combats en club et tu vises le haut niveau. Quatre informations, un seul message, une réponse sous trois semaines." />
+<link rel="canonical" href="https://duqque.fr/candidater.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Candidater à la Team Espoirs · Duqque Sports" />
+<meta property="og:description" content="Quatre informations, un seul message, une réponse sous trois semaines." />
+<meta property="og:locale" content="fr_FR" />
+<link rel="stylesheet" href="css/style.css?v=20260925" />
+<style>
+ /* =========================================================
+    CANDIDATER
+    Le dossier passait par une fenetre modale de 42 champs, impraticable sur
+    telephone. Une page dediee, une colonne, quelques paliers, un bouton toujours
+    atteignable. Le detail se demandera plus tard, quand la candidature est reelle.
+    ========================================================= */
+ .cd-hero { padding-top: calc(var(--nav-bas, 76px) + 48px); padding-bottom: clamp(30px, 5vw, 50px); }
+ .cd-hero h1 { max-width: 16ch; }
+ .cd-lede { font-size: clamp(16px, 1.7vw, 19px); line-height: 1.6; color: var(--ink-soft); max-width: 46ch; margin: 22px 0 30px; }
+
+ .cd-cta {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  background: var(--accent-ink); color: #fff; text-decoration: none;
+  border-radius: 100px; padding: 17px 30px;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.04em;
+  transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+ }
+ .cd-cta:hover { background: var(--lime, #d9ff3d); color: #0b0b0b; transform: translateY(-2px); }
+ .cd-cta svg { transition: transform .3s var(--ease); }
+ .cd-cta:hover svg { transform: translateX(4px); }
+ .cd-note { font-size: 13px; line-height: 1.55; color: var(--ink-muted); margin: 14px 0 0; max-width: 44ch; }
+
+ /* Une entree par ligne : deux colonnes sur telephone forcent des lignes de cinq
+    mots et doublent la hauteur percue. */
+ .cd-liste { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 12px; }
+ .cd-liste li {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: start;
+  background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px;
+ }
+ .cd-liste .n {
+  font-family: var(--display); font-weight: 900; font-size: 19px; line-height: 1.1;
+  color: var(--accent-ink); letter-spacing: -0.02em;
+ }
+ .cd-liste b { display: block; font-size: 16px; line-height: 1.25; margin-bottom: 5px; }
+ .cd-liste small { display: block; font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); }
+
+ .cd-sombre { background: #0b0b0b; }
+ .cd-sombre h2 { color: #f5f3ef; }
+ .cd-sombre .cd-liste li { background: rgba(245,243,239,0.06); border-color: rgba(255,255,255,0.12); }
+ .cd-sombre .cd-liste .n { color: var(--accent-soft); }
+ .cd-sombre .cd-liste b { color: #f5f3ef; }
+ .cd-sombre .cd-liste small { color: rgba(245,243,239,0.84); }
+
+ .cd-avert { font-size: 13.5px; line-height: 1.6; color: var(--ink-muted); margin: 26px 0 0; max-width: 56ch; }
+ .cd-liens { display: grid; gap: 10px; margin-top: 26px; }
+ .cd-liens a {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  border: 1px solid var(--line-strong); border-radius: 100px; padding: 15px 26px;
+  font-size: 13.5px; font-weight: 600; color: var(--ink); text-decoration: none;
+  transition: background .3s var(--ease), border-color .3s var(--ease);
+ }
+ .cd-liens a:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+ /* Barre fixe : la page fait plusieurs ecrans sur telephone, le bouton doit suivre. */
+ .cd-barre { display: none; }
+ @media (max-width: 900px) {
+  .cd-cta { width: 100%; }
+  .cd-barre {
+   display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+   padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+   background: rgba(240,240,240,0.95);
+   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+   border-top: 1px solid var(--line);
+  }
+  .cd-barre .cd-cta { width: 100%; }
+  body { padding-bottom: 92px; }
+ }
+ @media (min-width: 901px) { .cd-liens { grid-auto-flow: column; justify-content: start; } }
+</style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<section class="page-hero cd-hero" style="min-height: 0;">
+ <div class="container">
+  <div class="breadcrumb"><a href="team-espoirs.html">Team Espoirs</a><span class="sep" aria-hidden="true">›</span><span>Candidater</span></div>
+  <h1 class="serif">Rejoins <em class="accent">la Team.</em></h1>
+  <p class="lead">Un seul message, quatre informations. Nous répondons à tout le monde, sous trois semaines.</p>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="kicker reveal"><span class="line"></span> Ce qu'il faut envoyer</div>
+  <h2 class="serif reveal" style="max-width: 20ch; margin-bottom: 6px;">Quatre choses, <em class="accent">pas une de plus.</em></h2>
+  <p class="cd-lede reveal">Le reste, nous te le demanderons plus tard, et seulement si ta candidature avance. Inutile de préparer un dossier complet aujourd'hui.</p>
+
+  <a class="cd-cta reveal" id="lienHaut" href="#">
+   Écrire ma candidature
+   <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+  </a>
+  <p class="cd-note reveal">Le message s'ouvre déjà rédigé dans ta messagerie. Tu n'as qu'à compléter les quatre rubriques.</p>
+
+  <ol class="cd-liste reveal">
+   <li><span class="n">01</span><span><b>Qui tu es</b><small>Prénom, nom, âge, catégorie de poids, et ton club actuel.</small></span></li>
+   <li><span class="n">02</span><span><b>Tes trois meilleurs résultats</b><small>Avec l'année. Pas besoin de tout lister, les trois qui comptent suffisent.</small></span></li>
+   <li><span class="n">03</span><span><b>Ton entraîneur</b><small>Son nom et son numéro. Nous l'appellerons avant toute décision, jamais dans ton dos.</small></span></li>
+   <li><span class="n">04</span><span><b>L'accord de tes parents</b><small>Une phrase écrite de tes deux parents ou représentants légaux. La formule est déjà dans le message.</small></span></li>
+  </ol>
+
+  <p class="cd-avert reveal">N'envoie pas de vidéo dans ce premier message&nbsp;: si nous en voulons une, nous te dirons comment nous la transmettre. Ce que nous faisons de tes données est écrit dans notre <a href="confidentialite.html">politique de confidentialité</a>.</p>
+ </div>
+</section>
+
+<section class="cd-sombre">
+ <div class="container">
+  <div class="kicker reveal" style="color: var(--accent-soft);"><span class="line" style="background: var(--accent-soft);"></span> Ensuite</div>
+  <h2 class="serif reveal" style="max-width: 20ch;">Ce qui se passe après ton message.</h2>
+  <ol class="cd-liste reveal">
+   <li><span class="n">01</span><span><b>Nous te répondons sous trois semaines</b><small>À tout le monde, même quand c'est non, et en te disant pourquoi.</small></span></li>
+   <li><span class="n">02</span><span><b>Nous appelons ton entraîneur</b><small>Avec ton accord. Le club reste au centre du projet sportif.</small></span></li>
+   <li><span class="n">03</span><span><b>Nous nous parlons trente minutes</b><small>Avec toi et tes parents. Gratuit, et sans aucun engagement derrière.</small></span></li>
+  </ol>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="kicker reveal"><span class="line"></span> Une question</div>
+  <h2 class="serif reveal" style="max-width: 22ch;">Avant d'écrire, <em class="accent">tu peux demander.</em></h2>
+  <p class="cd-lede reveal">Tes parents, ton entraîneur ou toi&nbsp;: écrivez-nous, on répond à tout le monde.</p>
+  <div class="cd-liens reveal">
+   <a href="mailto:contact@duqque.fr">contact@duqque.fr</a>
+   <a href="https://wa.me/351932011866" target="_blank" rel="noopener">WhatsApp</a>
+   <a href="tel:+351932011866">+351 932 011 866</a>
+  </div>
+  <p class="cd-avert reveal">Vous êtes une entreprise&nbsp;? <a href="contact.html">Devenir partenaire de la Team Espoirs</a></p>
+ </div>
+</section>
+
+<div class="cd-barre">
+ <a class="cd-cta" id="lienBas" href="#">
+  Écrire ma candidature
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+ </a>
+</div>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260925"></script>
+<script>
+/* Le site est statique : le message est composé dans la messagerie de la personne,
+   qui garde la main sur l'envoi. Le corps est construit en JS plutôt qu'écrit dans
+   le href, pour rester lisible et modifiable. */
+(function () {
+ var corps = [
+  'Bonjour,',
+  '',
+  '01 — Qui je suis',
+  'Prénom et nom :',
+  'Âge :',
+  'Catégorie de poids :',
+  'Club :',
+  'Ville et pays :',
+  '',
+  '02 — Mes trois meilleurs résultats',
+  '-',
+  '-',
+  '-',
+  '',
+  '03 — Mon entraîneur',
+  'Nom :',
+  'Téléphone :',
+  '',
+  '04 — Accord de mes représentants légaux',
+  '(à recopier et à signer par les deux parents)',
+  'Nous, soussignés, autorisons notre enfant à candidater à la Team Espoirs Duqque.',
+  'Noms, prénoms et date :',
+  '',
+  'Merci,'
+ ].join('\n');
+
+ var url = 'mailto:contact@duqque.fr'
+  + '?subject=' + encodeURIComponent('Candidature Team Espoirs')
+  + '&body=' + encodeURIComponent(corps);
+
+ ['lienHaut', 'lienBas'].forEach(function (id) {
+  var a = document.getElementById(id);
+  if (a) a.href = url;
+ });
+})();
+</script>
+</body>
+</html>

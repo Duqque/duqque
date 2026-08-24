@@ -782,6 +782,7 @@ function buildNav() {
  'methode.html': 'Notre approche', 'team-espoirs.html': 'Programme Espoirs',
  'success-stories.html': 'Résultats', 'media.html': 'Blog',
  'actualites.html': 'Blog', 'cotisations.html': 'Cotisations',
+ 'candidater.html': 'Candidater',
  'art-carriere-14-15-16-ans.html': 'Gestion de carrière',
  'art-reseaux-sociaux-jeune-athlete.html': 'Communication',
  'art-changer-de-club.html': 'Gestion de carrière',
