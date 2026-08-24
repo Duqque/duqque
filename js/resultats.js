@@ -286,6 +286,7 @@
 
  function etiquetteType(t) {
   return { choix: 'choix unique', multi: 'choix multiple', liste: 'liste déroulante',
+   departement: 'département',
    echelle: 'échelle de 1 à 5', nombre: 'valeur chiffrée', long: 'réponse libre',
    texte: 'texte court', email: 'adresse', tel: 'téléphone' }[t] || t;
  }
