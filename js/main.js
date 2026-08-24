@@ -547,6 +547,7 @@ const MENU_LINKS = [
  { href: 'athletes.html', label: 'Athlètes & Team', halo: 'sport', dots: false },
  { href: 'team-espoirs.html', label: '<span class="notranslate">Programme Espoirs</span>', halo: 'sport', dots: false },
  { href: 'about.html', label: 'À propos', halo: 'sport', dots: false },
+ { href: 'observatoire.html', label: 'Observatoire', halo: 'sport', dots: false },
  { href: 'actualites.html', label: 'Blog', halo: 'sport', dots: false },
  { href: 'cotisations.html', label: 'Cotisations', halo: 'sport', dots: false },
  { href: 'contact.html', label: 'Contact', halo: 'sport', dots: false },
@@ -581,11 +582,6 @@ function buildMenu() {
  </a>
  ${l.href === 'sport.html' ? `
  <div class="ml-services">
- <a href="service-carriere.html" class="mls-card">
- <span class="mls-ico" style="background: var(--accent);color:#fff;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20L14 6l4 6 4-8"/></svg></span>
- <span class="mls-body"><strong>Gestion de carrière</strong><small>Contrats, trajectoire, reconversion</small></span>
- <span class="mls-arr">↗</span>
- </a>
  <a href="service-image.html" class="mls-card">
  <span class="mls-ico" style="background:#f5f3ef;color:#050505;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg></span>
  <span class="mls-body"><strong>Gestion d'image</strong><small>Marque personnelle, droit à l'image</small></span>
@@ -644,7 +640,6 @@ function buildFooter() {
  <div class="f2-col">
  <h5>Services</h5>
  <ul>
- <li><a href="service-carriere.html"><span class="f2-ico" style="background: var(--accent);"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4"><path d="M4 20L14 6l4 6 4-8"/></svg></span>Gestion de carrière</a></li>
  <li><a href="service-image.html"><span class="f2-ico" style="background:#f5f3ef;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#050505" stroke-width="2.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5"/></svg></span>Gestion d'image</a></li>
  <li><a href="service-communication.html"><span class="f2-ico" style="background:#b8a4f0;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1a1033" stroke-width="2.4"><path d="M3 11l18-7-7 18-2.5-7.5L3 11z"/></svg></span>Communication</a></li>
  <li><a href="service-sponsoring.html"><span class="f2-ico" style="background:#d9ff3d;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#101400" stroke-width="2.4"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5L12 2z"/></svg></span>Sponsoring</a></li>
@@ -656,6 +651,7 @@ function buildFooter() {
  <ul>
  <li><a href="about.html">À propos</a></li>
  <li><a href="cotisations.html">Cotisations</a></li>
+ <li><a href="observatoire.html">Observatoire</a></li>
  <li><a href="actualites.html">Blog</a></li>
  <li><a href="contact.html">Contact</a></li>
  <li><a href="https://www.instagram.com/duqque/" target="_blank" rel="noopener">Instagram</a></li>
@@ -775,21 +771,21 @@ function buildNav() {
  const PAGE_TITLES = {
  'index.html': 'Accueil', 'home.html': 'Accueil',
  'sport.html': 'Nos services',
- 'service-carriere.html': 'Gestion de carrière',
  'service-image.html': "Gestion d'image",
  'service-communication.html': 'Communication',
  'service-sponsoring.html': 'Sponsoring',
  'methode.html': 'Notre approche', 'team-espoirs.html': 'Programme Espoirs',
  'success-stories.html': 'Résultats', 'media.html': 'Blog',
+ 'observatoire.html': 'Observatoire',
  'actualites.html': 'Blog', 'cotisations.html': 'Cotisations',
  'candidater.html': 'Candidater',
- 'art-carriere-14-15-16-ans.html': 'Gestion de carrière',
+ 'art-carriere-14-15-16-ans.html': 'Trajectoire',
  'art-reseaux-sociaux-jeune-athlete.html': 'Communication',
- 'art-changer-de-club.html': 'Gestion de carrière',
+ 'art-changer-de-club.html': 'Trajectoire',
  'art-droit-a-l-image-athlete.html': 'Image de marque',
  'art-dossier-de-partenariat.html': 'Sponsoring',
  'art-premiere-interview.html': 'Communication',
- 'art-blessure-longue-carriere.html': 'Gestion de carrière',
+ 'art-blessure-longue-carriere.html': 'Trajectoire',
  'art-propriete-intellectuelle-sport.html': 'Image de marque',
  'art-sponsor-a-15-ans.html': 'Sponsoring', 'about.html': 'À propos',
  'contact.html': 'Contact', 'rdv.html': 'Prendre RDV', 'athletes.html': 'Athlètes & Team',
@@ -1375,13 +1371,13 @@ function initPartage() {
    collantes : elles suivent la lecture sans bouger d'elles-memes. Tout est genere ici pour
    que les articles suivants n'aient rien a dupliquer. */
 const ARTICLES = [
- { url: 'art-carriere-14-15-16-ans.html', axe: 'Gestion de carrière',
+ { url: 'art-carriere-14-15-16-ans.html', axe: 'Trajectoire',
    titre: "Faut-il déjà penser à sa carrière à 14, 15 ou 16 ans ?" },
  { url: 'art-sponsor-a-15-ans.html', axe: 'Sponsoring',
    titre: "À 15 ans, peut-on déjà intéresser un sponsor ?" },
  { url: 'art-reseaux-sociaux-jeune-athlete.html', axe: 'Communication',
    titre: "Réseaux sociaux : que publier quand on est un jeune athlète ?" },
- { url: 'art-changer-de-club.html', axe: 'Gestion de carrière',
+ { url: 'art-changer-de-club.html', axe: 'Trajectoire',
    titre: "Changer de club : les questions à se poser avant de signer" },
  { url: 'art-droit-a-l-image-athlete.html', axe: 'Image de marque',
    titre: "Droit à l'image : ce que vous signez sans le lire" },
@@ -1389,13 +1385,13 @@ const ARTICLES = [
    titre: "Construire un dossier de partenariat qui obtient une réponse" },
  { url: 'art-premiere-interview.html', axe: 'Communication',
    titre: "Première interview : ce qu'il faut savoir avant de répondre" },
- { url: 'art-blessure-longue-carriere.html', axe: 'Gestion de carrière',
+ { url: 'art-blessure-longue-carriere.html', axe: 'Trajectoire',
    titre: "Blessure longue : ne pas perdre une saison de carrière" },
  { url: 'art-propriete-intellectuelle-sport.html', axe: 'Image de marque',
    titre: "On vous a copié : protéger l'identité d'un club et l'image d'un athlète" }
 ];
 const SERVICES = {
- 'Gestion de carrière': { url: 'service-carriere.html', txt: "Contrats, trajectoire, reconversion : nous pilotons la carrière au-delà des résultats." },
+ 'Trajectoire':         { url: 'team-espoirs.html', txt: "Le collectif qui entoure les jeunes athlètes : image, partenariats, double projet." },
  'Sponsoring':          { url: 'service-sponsoring.html', txt: "Nous construisons le dossier, démarchons et négocions les partenariats à votre place." },
  'Communication':       { url: 'service-communication.html', txt: "Réseaux, presse, media training : une parole tenue à l'année, pas au coup par coup." },
  'Image de marque':     { url: 'service-image.html', txt: "Identité, réputation, droit à l'image : ce qui fait la valeur d'un nom." }
@@ -1410,7 +1406,7 @@ function initColonnesArticle() {
  document.querySelectorAll('script[type="application/ld+json"]').forEach(sc => {
   try { const d = JSON.parse(sc.textContent); if (d.articleSection) axe = d.articleSection; } catch (e) {}
  });
- const service = SERVICES[axe] || SERVICES['Gestion de carrière'];
+ const service = SERVICES[axe] || SERVICES['Trajectoire'];
  const ici = location.pathname.split('/').pop();
 
  const fleche = '<span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span>';

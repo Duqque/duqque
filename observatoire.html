@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Observatoire du sport et de l'économie sportive · Duqque Sports</title>
+<meta name="description" content="Comprendre comment fonctionnent réellement les clubs, les parcours et les transferts, chez les cadets et les juniors comme chez les professionnels. Première étude : le judo français et portugais." />
+<link rel="canonical" href="https://duqque.fr/observatoire.html" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Observatoire du sport et de l'économie sportive" />
+<meta property="og:description" content="Des études sur les clubs, les parcours et les transferts, des cadets aux professionnels. Première étude : le judo." />
+<meta property="og:locale" content="fr_FR" />
+<link rel="stylesheet" href="css/style.css?v=20260927" />
+<style>
+ /* =========================================================
+    OBSERVATOIRE
+    Une rubrique de recherche, pas une offre de service : le ton est descriptif,
+    les chiffres annonces sont des objectifs de collecte et non des resultats.
+    Tant qu'aucune etude n'est publiee, la page dit ce qui est en cours.
+    ========================================================= */
+ .ob-lede { font-size: clamp(16px, 1.7vw, 19px); line-height: 1.6; color: var(--ink-soft); max-width: 58ch; margin: 0 0 6px; }
+
+ /* Axes de recherche */
+ .ob-axes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 44px; }
+ .ob-axe {
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  padding: clamp(22px, 2.6vw, 32px);
+ }
+ .ob-axe .ico {
+  display: inline-flex; width: 42px; height: 42px; border-radius: 12px;
+  align-items: center; justify-content: center; margin-bottom: 18px;
+  background: rgba(90,47,230,0.10); color: var(--accent-ink);
+ }
+ .ob-axe .ico svg { width: 21px; height: 21px; }
+ .ob-axe h3 { font-family: var(--display); font-weight: 900; font-size: 19px; line-height: 1.15; margin: 0 0 10px; }
+ .ob-axe p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+ /* Étude en cours */
+ .ob-etude {
+  background: #0b0b0b; color: #f5f3ef; border-radius: 20px;
+  padding: clamp(28px, 4vw, 52px); margin-top: 12px;
+ }
+ .ob-etat {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+  color: #101400; background: var(--lime, #d9ff3d);
+  padding: 6px 12px; border-radius: 100px; margin-bottom: 20px;
+ }
+ .ob-etude h2 { color: #f5f3ef; max-width: 20ch; margin: 0 0 16px; }
+ .ob-etude > p { font-size: 15.5px; line-height: 1.65; color: rgba(245,243,239,0.9); max-width: 60ch; margin: 0 0 14px; }
+ .ob-questions { list-style: none; margin: 30px 0 0; padding: 0; display: grid; gap: 10px; }
+ .ob-questions li {
+  display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; align-items: start;
+  background: rgba(245,243,239,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px; padding: 18px 20px;
+ }
+ .ob-questions .n { font-family: var(--display); font-weight: 900; font-size: 19px; line-height: 1.1; color: var(--accent-soft); }
+ .ob-questions b { display: block; font-size: 15.5px; line-height: 1.3; color: #f5f3ef; margin-bottom: 5px; }
+ .ob-questions small { display: block; font-size: 13.5px; line-height: 1.55; color: rgba(245,243,239,0.84); }
+
+ /* Méthode */
+ .ob-methode { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 44px; }
+ .ob-etape { border-top: 2px solid var(--ink); padding-top: 16px; }
+ .ob-etape .n {
+  display: block; font-family: var(--display); font-weight: 900;
+  font-size: clamp(32px, 3.2vw, 46px); line-height: 1; letter-spacing: -0.04em;
+  color: var(--accent-ink); margin-bottom: 12px;
+ }
+ .ob-etape b { display: block; font-size: 15.5px; line-height: 1.25; margin-bottom: 6px; }
+ .ob-etape p { font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); margin: 0; max-width: 30ch; }
+
+ /* Contribuer */
+ .ob-appel { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; border-radius: 16px; overflow: hidden; background: var(--line); margin-top: 12px; }
+ .ob-qui { background: #fff; padding: clamp(22px, 2.6vw, 32px); }
+ .ob-qui b { display: block; font-family: var(--display); font-weight: 900; font-size: 17px; margin-bottom: 8px; }
+ .ob-qui p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+
+ .ob-note { font-size: 13.5px; line-height: 1.6; color: var(--ink-muted); margin: 30px 0 0; max-width: 62ch; }
+
+ @media (max-width: 900px) {
+  .ob-axes, .ob-appel { grid-template-columns: 1fr; }
+  .ob-methode { grid-template-columns: 1fr 1fr; }
+ }
+ @media (max-width: 600px) { .ob-methode { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<section class="page-hero">
+ <div class="container">
+  <div class="breadcrumb"><span>Observatoire</span></div>
+  <h1 class="serif">Observatoire du sport et de <em class="accent">l'économie sportive.</em></h1>
+  <p class="lead">Comment fonctionnent réellement les clubs, les parcours et les transferts&nbsp;? Nous produisons les chiffres qui manquent, en commençant par les catégories dont personne ne parle.</p>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="kicker reveal"><span class="line"></span> Pourquoi</div>
+  <h2 class="serif reveal" style="max-width: 24ch; margin-bottom: 22px;">Sur les jeunes, <em class="accent">tout le monde suppose.</em></h2>
+  <p class="ob-lede reveal">On sait ce que coûte un transfert en Ligue 1. On ne sait pas ce que coûte une saison de cadet en judo, ni combien de familles arrêtent pour des raisons financières, ni ce qu'un club de province retire réellement de la formation d'un futur international.</p>
+  <p class="ob-lede reveal">Les décisions qui engagent une carrière se prennent pourtant à cet âge-là, et elles se prennent à l'aveugle&nbsp;: par les familles, par les clubs, par les fédérations. Notre travail d'accompagnement nous met en contact avec ces situations tous les jours. Autant en tirer des chiffres publics plutôt que des impressions privées.</p>
+
+  <div class="ob-axes">
+   <article class="ob-axe reveal">
+    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-5 9 5-9 5-9-5z"/><path d="M7 11.5V17c0 1.6 2.2 3 5 3s5-1.4 5-3v-5.5"/></svg></span>
+    <h3>Les parcours</h3>
+    <p>Qui commence, qui continue, qui arrête et à quel âge. Les points de rupture entre cadets, juniors et seniors, et ce qui les provoque.</p>
+   </article>
+   <article class="ob-axe reveal">
+    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l4-4 5 3 5-3 4 4-5 6H8z"/></svg></span>
+    <h3>Les clubs</h3>
+    <p>Budgets, ressources, dépendance aux subventions et au bénévolat. Ce que la formation coûte à une structure, et ce qu'elle lui rapporte.</p>
+   </article>
+   <article class="ob-axe reveal">
+    <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/><path d="M17 15l3 2-3 2"/></svg></span>
+    <h3>Les mouvements</h3>
+    <p>Changements de club, entrées en pôle, départs à l'étranger. Les flux, leurs motifs déclarés et leurs motifs réels.</p>
+   </article>
+  </div>
+ </div>
+</section>
+
+<section style="background: var(--bg-soft);">
+ <div class="container">
+  <div class="kicker reveal"><span class="line"></span> Première étude</div>
+
+  <div class="ob-etude reveal">
+   <span class="ob-etat">Collecte en préparation · 2026–2027</span>
+   <h2 class="serif">Le judo, des cadets aux seniors.</h2>
+   <p>Nous commençons par le judo parce que c'est la discipline que l'association accompagnera principalement, et parce que nous en connaissons les clubs et les entraîneurs en France comme au Portugal. Deux pays, deux organisations, un même sport&nbsp;: la comparaison est instructive en soi.</p>
+   <p>L'étude portera sur les catégories U15 à U21, avec un volet senior et professionnel pour situer la suite du parcours. Elle sera publiée intégralement, gratuitement, données brutes comprises.</p>
+
+   <ol class="ob-questions">
+    <li><span class="n">01</span><span><b>Que coûte une saison&nbsp;?</b><small>Licence, équipement, déplacements, stages, et la part réellement supportée par les familles.</small></span></li>
+    <li><span class="n">02</span><span><b>Qui arrête, et pourquoi&nbsp;?</b><small>Le décrochage entre cadets et juniors, ses motifs sportifs, scolaires et financiers.</small></span></li>
+    <li><span class="n">03</span><span><b>Comment se décide un changement de club&nbsp;?</b><small>Qui propose, qui décide, ce qui est promis et ce qui est tenu.</small></span></li>
+    <li><span class="n">04</span><span><b>Que gagne un club formateur&nbsp;?</b><small>Ce que la formation lui coûte, ce qu'il en retire, et ce qu'il perd au départ d'un athlète.</small></span></li>
+    <li><span class="n">05</span><span><b>Quelle place pour le partenariat&nbsp;?</b><small>Combien de jeunes sont soutenus par une entreprise, à quelle hauteur, et sous quelle forme.</small></span></li>
+   </ol>
+  </div>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="kicker reveal"><span class="line"></span> La méthode</div>
+  <h2 class="serif reveal" style="max-width: 22ch; margin-bottom: 10px;">Des chiffres <em class="accent">vérifiables, ou rien.</em></h2>
+  <p class="ob-lede reveal">Un observatoire qui publie des estimations invérifiables ne vaut pas mieux que les impressions qu'il prétend remplacer.</p>
+
+  <div class="ob-methode">
+   <div class="ob-etape reveal">
+    <span class="n">01</span>
+    <b>Questionnaires</b>
+    <p>Auprès des athlètes, des familles, des entraîneurs et des dirigeants de club, séparément.</p>
+   </div>
+   <div class="ob-etape reveal">
+    <span class="n">02</span>
+    <b>Sources publiques</b>
+    <p>Résultats fédéraux, comptes d'associations, rapports d'activité, presse spécialisée.</p>
+   </div>
+   <div class="ob-etape reveal">
+    <span class="n">03</span>
+    <b>Entretiens</b>
+    <p>Une trentaine d'entretiens qualitatifs pour comprendre ce que les chiffres ne disent pas.</p>
+   </div>
+   <div class="ob-etape reveal">
+    <span class="n">04</span>
+    <b>Publication ouverte</b>
+    <p>Méthodologie, échantillon, limites et données brutes publiés avec les résultats.</p>
+   </div>
+  </div>
+
+  <p class="ob-note reveal">Les réponses sont anonymisées avant traitement, et aucune donnée nominative d'un mineur n'est conservée au-delà de la collecte. Le détail figure dans notre <a href="confidentialite.html">politique de confidentialité</a>.</p>
+ </div>
+</section>
+
+<section style="padding-top: 0;">
+ <div class="container">
+  <div class="kicker reveal"><span class="line"></span> Contribuer</div>
+  <h2 class="serif reveal" style="max-width: 24ch; margin-bottom: 22px;">L'étude vaudra ce que vaudra <em class="accent">l'échantillon.</em></h2>
+
+  <div class="ob-appel reveal">
+   <div class="ob-qui">
+    <b>Clubs et fédérations</b>
+    <p>Vos chiffres d'effectifs, de budget et de mouvements. Anonymisés, agrégés, jamais publiés isolément.</p>
+   </div>
+   <div class="ob-qui">
+    <b>Athlètes et familles</b>
+    <p>Votre saison telle qu'elle est&nbsp;: ce qu'elle coûte, ce qu'elle demande, ce qui vous a fait hésiter.</p>
+   </div>
+   <div class="ob-qui">
+    <b>Chercheurs et journalistes</b>
+    <p>Un regard critique sur la méthode avant publication, et l'accès aux données brutes après.</p>
+   </div>
+  </div>
+
+  <p class="ob-note reveal">Écrivez à <a href="mailto:contact@duqque.fr?subject=Observatoire%20Duqque">contact@duqque.fr</a> en précisant à quel titre vous contribuez. Nous répondons à tout le monde.</p>
+
+  <div style="margin-top: 34px;">
+   <a href="contact.html" class="btn btn-primary">Participer à l'étude <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+  </div>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260927"></script>
+</body>
+</html>

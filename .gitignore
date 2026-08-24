@@ -25,3 +25,6 @@ OUVRIR-LE-SITE.command
 
 # Cle d'acces administrateur : ne doit jamais entrer dans un depot public
 acces-cle.js
+
+# Pages mises de cote, a remettre plus tard
+_reporte/
