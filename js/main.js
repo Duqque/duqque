@@ -566,8 +566,21 @@ const MENU_LINKS = [
    la page resultats redemanderait le mot de passe et api/resultats.php refuserait
    de servir la moindre ligne : le jeton qui fait autorite est pose par le
    serveur, signe et HttpOnly, hors de portee de ce script. */
+const ADMIN_NOM = 'Quentin Duquenne';
+
 function estAdmin() {
  return document.cookie.indexOf('duqque_admin_ui=1') !== -1;
+}
+
+/* Deconnexion complete, pas seulement de l'espace resultats : la session serveur
+   est fermee, le repere d'affichage efface, et le cookie d'apercu revoque par le
+   serveur via ?apercu=stop, la regle qui existe deja dans le .htaccess. On
+   ressort donc en visiteur ordinaire, ce que « se deconnecter » veut dire. */
+async function deconnecter() {
+ try { await fetch('/api/session.php?stop=1', { credentials: 'same-origin', cache: 'no-store' }); }
+ catch (e) { /* serveur injoignable : les cookies partent quand meme */ }
+ document.cookie = 'duqque_admin_ui=; Max-Age=0; Path=/';
+ location.href = '/?apercu=stop';
 }
 
 /* Le cookie d'affichage vit trente jours, la session serveur peut tomber avant
@@ -895,17 +908,42 @@ function construitActionsFlottantes() {
  cta.className = 'nav-cta';
 
  if (estAdmin()) {
+  cta.classList.add('nav-cta--admin');
+
+  // Qui est connecte. Bloc muet, sans action : il ne sert qu'a dire ou l'on est.
+  const moi = document.createElement('div');
+  moi.className = 'nav-moi';
+  const initiales = ADMIN_NOM.split(' ').map(function (m) { return m.charAt(0); }).join('').slice(0, 2);
+  moi.innerHTML = `
+  <span class="nav-moi-pastille" aria-hidden="true">${initiales}</span>
+  <span class="nav-moi-txt">
+   <span class="nav-moi-role">Espace administrateur</span>
+   <span class="nav-moi-nom">${ADMIN_NOM}</span>
+  </span>`;
+
+  // L'action principale de cet espace.
   const res = document.createElement('a');
   res.href = 'resultats.html';
   res.className = 'nav-admin';
   // Le libelle disparait sur petit ecran : sans intitule porte par le lien
   // lui-meme, le bouton n'aurait plus de nom pour un lecteur d'ecran.
-  res.setAttribute('aria-label', 'Résultats des études, espace administrateur');
+  res.setAttribute('aria-label', "Résultats des questionnaires d'études");
   res.innerHTML = `
   <span class="nav-admin-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
   <span class="nav-admin-label">Résultats des études</span>
   <span class="nav-admin-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span>`;
+
+  const sortie = document.createElement('button');
+  sortie.type = 'button';
+  sortie.className = 'nav-sortie';
+  sortie.setAttribute('aria-label', 'Se déconnecter de l’espace administrateur');
+  sortie.title = 'Se déconnecter';
+  sortie.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 17l5-5-5-5M20 12H9M11 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5"/></svg>';
+  sortie.addEventListener('click', deconnecter);
+
+  cta.appendChild(moi);
   cta.appendChild(res);
+  cta.appendChild(sortie);
   document.body.appendChild(cta);
   return;
  }

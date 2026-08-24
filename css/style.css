@@ -301,26 +301,76 @@ body.menu-open .bottom-nav { opacity: 0; pointer-events: none; transition: opaci
 /* === Language switcher === */
 .nav-actions { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; padding-left: 16px; }
 
-/* Acces administrateur. Il occupe la place de WhatsApp et de la prise de
-   rendez-vous, il en reprend donc la forme exactement : meme hauteur, meme
-   arrondi, meme graisse. Seule la couleur change, le citron de la maison, pour
-   dire que ce bouton n'est pas destine aux visiteurs. */
-.nav-admin {
+/* ESPACE ADMINISTRATEUR
+   Le meme boitier que WhatsApp + Prendre RDV, avec trois occupants : qui est
+   connecte, l'acces aux resultats, la sortie. La grammaire est celle du bloc
+   public, definie plus haut : enfants de 42 px, rayon 4 px, ecart de 8 px. */
+
+/* Identite. Bloc muet : ni lien ni bouton, il repond a « ou suis-je ». */
+.nav-moi {
   display: inline-flex; align-items: center; gap: 10px;
-  padding: 13px 18px; border-radius: 100px;
-  background: var(--lime, #d9ff3d); color: #101400; text-decoration: none;
-  font-size: 13px; font-weight: 600; letter-spacing: 0.01em; white-space: nowrap;
-  transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+  padding: 0 14px 0 8px;
+  background: rgba(245,243,239,0.07);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+.nav-moi-pastille {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--lime, #d9ff3d); color: #101400;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.02em;
+}
+.nav-moi-txt { display: flex; flex-direction: column; gap: 1px; line-height: 1.15; }
+.nav-moi-role {
+  font-size: 9.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700;
+  color: var(--lime, #d9ff3d);
+}
+.nav-moi-nom { font-size: 12.5px; font-weight: 600; color: #f5f3ef; white-space: nowrap; }
+
+/* Acces aux resultats : la place et l'allure de Prendre RDV, l'action principale
+   de cet espace. */
+.nav-admin {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 0 18px;
+  background: linear-gradient(160deg, var(--accent) 0%, var(--accent-ink) 100%);
+  color: #fff; text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.14);
+  font-size: 13px; font-weight: 600; letter-spacing: 0.04em; white-space: nowrap;
+  transition: background .35s var(--ease), color .35s var(--ease), box-shadow .35s var(--ease);
 }
 .nav-admin-ico { display: inline-flex; }
-.nav-admin-ico svg { width: 15px; height: 15px; }
-.nav-admin-arrow { display: inline-flex; transition: transform .3s var(--ease); }
-.nav-admin:hover { background: #0b0b0b; color: var(--lime, #d9ff3d); transform: translateY(-2px); }
-.nav-admin:hover .nav-admin-arrow { transform: translateX(3px); }
-@media (max-width: 620px) {
-  /* 44 px de haut : la cible tactile recommandee, meme sans le libelle. */
-  .nav-admin { padding: 0 16px; min-height: 44px; font-size: 12px; gap: 8px; }
+.nav-admin-ico svg { width: 15px; height: 15px; display: block; flex: 0 0 auto; }
+.nav-admin-arrow { display: inline-flex; transition: transform .35s var(--ease); }
+.nav-admin:hover, .nav-admin:focus-visible {
+  background: linear-gradient(160deg, #e4ff5c 0%, var(--lime, #d9ff3d) 100%);
+  color: #0b0b0b;
+  box-shadow: 0 6px 22px rgba(217, 255, 61, 0.4);
+}
+.nav-admin:hover .nav-admin-arrow { transform: translateX(4px); }
+.nav-admin:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+/* Sortie. Carre de 42 px comme la pastille WhatsApp, discret au repos : c'est une
+   action que l'on ne doit pas declencher en visant le bouton d'a cote. */
+.nav-sortie {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; cursor: pointer;
+  background: rgba(245,243,239,0.07);
+  border: 1px solid rgba(255,255,255,0.10);
+  color: rgba(245,243,239,0.82);
+  transition: background .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease);
+}
+.nav-sortie svg { width: 18px; height: 18px; display: block; flex: 0 0 auto; }
+.nav-sortie:hover { background: #ff6b6b; border-color: #ff6b6b; color: #1a0505; }
+.nav-sortie:focus-visible { outline: 3px solid var(--accent-soft); outline-offset: 3px; }
+
+/* Trois occupants au lieu de deux : le boitier serre d'abord le nom, puis le
+   libelle du bouton. Les deux pictogrammes et la sortie restent toujours la. */
+@media (max-width: 1080px) {
+  .nav-moi-txt { display: none; }
+  .nav-moi { padding: 0 8px; }
+}
+@media (max-width: 860px) {
   .nav-admin-label { display: none; }
+  .nav-admin { padding: 0 14px; }
 }
 .lang-switch { position: relative; }
 .lang-current {
