@@ -6,7 +6,7 @@
 <title>Résultats de l'étude · Administration · Duqque Sports</title>
 <meta name="description" content="Espace réservé : indicateurs, infographies et réponses des questionnaires de l'Observatoire." />
 <meta name="robots" content="noindex, nofollow" />
-<link rel="stylesheet" href="css/style.css?v=20260953" />
+<link rel="stylesheet" href="css/style.css?v=20260954" />
 <style>
  /* =========================================================
     RÉSULTATS — ESPACE ADMINISTRATION
@@ -202,8 +202,16 @@
   .rs-env-d, .rs-env-x { grid-column: 2 / -1; }
  }
  @media (max-width: 760px) {
-  .rs-filtres { flex-direction: column; align-items: stretch; }
-  .rs-onglets { overflow-x: auto; flex-wrap: nowrap; }
+  /* flex-wrap: nowrap est indispensable ici. La règle de base pose wrap ; en
+     passant en colonne, l'axe transversal devient horizontal et chaque ligne se
+     dimensionne sur son contenu, si bien qu'align-items: stretch n'étire plus
+     rien : la liste déroulante et les onglets gardaient leur largeur naturelle
+     de près de sept cents pixels et faisaient défiler toute la page. */
+  .rs-filtres { flex-direction: column; align-items: stretch; flex-wrap: nowrap; }
+  .rs-filtres > * { max-width: 100%; }
+  /* min-width: 0 laisse la barre d'onglets se réduire pour que son propre
+     overflow-x puisse enfin faire son travail. */
+  .rs-onglets { overflow-x: auto; flex-wrap: nowrap; min-width: 0; -webkit-overflow-scrolling: touch; }
   .rs-onglets button { white-space: nowrap; }
   .rs-echelle, .rs-stats { grid-template-columns: 1fr; }
   .rs-echelle { gap: 20px; }
@@ -235,7 +243,7 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260953"></script>
-<script src="js/resultats.js?v=20260953"></script>
+<script src="js/main.js?v=20260954"></script>
+<script src="js/resultats.js?v=20260954"></script>
 </body>
 </html>
