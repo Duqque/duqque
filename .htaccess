@@ -27,7 +27,7 @@ ErrorDocument 404 /404.html
   RewriteRule ^ - [L]
 
   # La page d'acces elle-meme reste evidemment joignable
-  RewriteCond %{REQUEST_URI} ^/(acces\.html|acces-cle\.js)$ [NC]
+  RewriteCond %{REQUEST_URI} ^/(acces\.html|acces-cle\.js|resultats\.html)$ [NC]
   RewriteRule ^ - [L]
 
   # Les points d'entree du serveur restent servis meme en mode attente : sans eux

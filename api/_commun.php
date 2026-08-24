@@ -70,6 +70,31 @@ function ajouterLigne(string $fichier, array $enr): void {
   fclose($fp);
 }
 
+/* Numerotation et ecriture sous le meme verrou. En deux temps (compter, puis
+   ecrire), deux envois simultanes lisent le meme total et repartent avec la meme
+   reference : rare, mais silencieux, et deux reponses melangees ne se rattrapent
+   pas apres coup. */
+function ajouterReponse(array $enr): string {
+  dossierPret();
+  $fp = fopen(F_REPONSES, 'c+');
+  if ($fp === false) repondre(['ok' => false, 'erreur' => "écriture impossible dans donnees/"], 500);
+  flock($fp, LOCK_EX);
+
+  $n = 0;
+  rewind($fp);
+  while (($l = fgets($fp)) !== false) { if (trim($l) !== '') $n++; }
+
+  $ref = 'R-' . str_pad((string)($n + 1), 4, '0', STR_PAD_LEFT);
+  $enr = ['ref' => $ref] + $enr;
+
+  fseek($fp, 0, SEEK_END);
+  fwrite($fp, json_encode($enr, JSON_UNESCAPED_UNICODE) . "\n");
+  fflush($fp);
+  flock($fp, LOCK_UN);
+  fclose($fp);
+  return $ref;
+}
+
 function lireLignes(string $fichier): array {
   if (!is_file($fichier)) return [];
   $out = [];

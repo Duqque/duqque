@@ -57,12 +57,9 @@ foreach ($brut as $r) {
 }
 if (count($reponses) === 0) repondre(['ok' => false, 'erreur' => 'aucune réponse exploitable'], 400);
 
-dossierPret();
-$ref = 'R-' . str_pad((string)(count(lireLignes(F_REPONSES)) + 1), 4, '0', STR_PAD_LEFT);
 $recu = gmdate('c');
 
-ajouterLigne(F_REPONSES, [
-  'ref'           => $ref,
+$ref = ajouterReponse([
   'questionnaire' => $q,
   'titre'         => $texte($d['titre'] ?? '', 200),
   'cible'         => $texte($d['cible'] ?? '', 60),

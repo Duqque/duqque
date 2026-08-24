@@ -34,6 +34,24 @@ $v[] = ['Dossier donnees/ inscriptible', $ecrit, $ecrit ? realpath($dos) : "cré
 $protege = is_file($dos . '/.htaccess');
 $v[] = ['donnees/.htaccess en place', $protege, $protege ? 'réponses non téléchargeables directement' : 'déposez donnees/.htaccess'];
 
+/* Analyse syntaxique reelle de chaque fichier, sans l'executer : le tokeniseur
+   leve une ParseError sur une erreur de syntaxe. C'est le seul moyen de verifier
+   ici un code qui n'a pas pu tourner ailleurs avant d'arriver sur ce serveur. */
+$fichiers = ['_commun.php', 'session.php', 'reponses.php', 'resultats.php', 'export.php'];
+$fautifs = [];
+$analysable = function_exists('token_get_all') && defined('TOKEN_PARSE');
+foreach ($fichiers as $f) {
+  $chemin = __DIR__ . '/' . $f;
+  if (!is_file($chemin)) { $fautifs[] = $f . ' (absent)'; continue; }
+  if (!$analysable) continue;
+  try { token_get_all((string)file_get_contents($chemin), TOKEN_PARSE); }
+  catch (Throwable $e) { $fautifs[] = $f . ' (' . $e->getMessage() . ')'; }
+}
+$v[] = ['Fichiers du dossier api/ valides', count($fautifs) === 0,
+        count($fautifs) ? implode(' · ', $fautifs)
+        : ($analysable ? count($fichiers) . ' fichiers analysés, aucune erreur de syntaxe'
+                       : count($fichiers) . ' fichiers présents (analyse indisponible sur cet hébergement)')];
+
 $tout = array_reduce($v, fn($a, $x) => $a && $x[1], true);
 ?><!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>État du dispositif · Duqque</title>
