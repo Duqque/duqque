@@ -167,10 +167,15 @@
     { id: 'a_fonction', type: 'texte', requis: true, libelle: 'Fonction dans la structure' }
    ] : [],
    [
-    { id: 'a_adresse', type: 'adresse', requis: true, libelle: 'Adresse' },
-    { id: 'a_cp', type: 'texte', requis: true, libelle: 'Code postal' },
-    { id: 'a_ville', type: 'texte', requis: true, libelle: 'Ville' },
+    /* Pays, puis commune, puis rue. Cet ordre n'est pas cosmétique : une fois la
+       commune connue, la recherche de rue porte sur quelques milliers d'adresses
+       au lieu des vingt-cinq millions du pays, et les propositions deviennent
+       justes dès les premières lettres. */
     { id: 'a_pays', type: 'pays', requis: true, libelle: 'Pays' },
+    { id: 'a_ville', type: 'ville', requis: true, libelle: 'Ville' },
+    { id: 'a_cp', type: 'texte', requis: true, libelle: 'Code postal',
+      aide: "Rempli automatiquement avec la commune, corrigez-le si besoin." },
+    { id: 'a_adresse', type: 'adresse', requis: true, libelle: 'Adresse' },
     { id: 'a_email', type: 'email', requis: true, libelle: 'Adresse email',
       aide: "La confirmation d'inscription y sera envoyée." + (m ? " Pour un mineur, indiquez celle d'un représentant légal." : "") },
     { id: 'a_tel', type: 'telephone', requis: true, libelle: 'Téléphone' }
@@ -269,7 +274,7 @@
   } else if (q.type === 'telephone') {
    corps = '<div class="ch-hote" id="' + q.id + '"></div>';
 
-  } else if (q.type === 'adresse') {
+  } else if (q.type === 'adresse' || q.type === 'ville') {
    corps = '<div class="ch-hote" id="' + q.id + '"></div>';
 
   } else if (q.type === 'naissance') {
@@ -392,11 +397,13 @@
     et l'adresse remplit code postal et ville quand on choisit une proposition. */
  let telephones = [];
  let champAdresse = null;
+ let champVille = null;
 
  function monterChampsRiches() {
   if (!window.CHAMPS || !window.PAYS) return;   // sans ces fichiers, champs texte ordinaires
   telephones = [];
   champAdresse = null;
+  champVille = null;
 
   racine.querySelectorAll('.eq-q[data-q]').forEach(function (bloc) {
    const hote = bloc.querySelector('.ch-hote');
@@ -415,24 +422,36 @@
       if (id === 'a_pays') {
        telephones.forEach(function (t) { t.suivrePays(pays.code); });
        if (champAdresse) champAdresse.changerPays(pays.code);
+       if (champVille) champVille.changerPays(pays.code);
       }
      }
     });
     if (codeInitial) { rep[id] = window.PAYS.parCode[codeInitial].nom; rep[id + '_code'] = codeInitial; }
 
+   } else if (id === 'a_ville') {
+    champVille = window.CHAMPS.ville(hote, {
+     valeur: rep[id] || '', pays: rep.a_pays_code || 'FR',
+     onSaisie: function (v) { rep[id] = v; rep.a_ville_insee = ''; ecrire(); },
+     onChoix: function (v) {
+      rep[id] = v.ville;
+      rep.a_ville_insee = v.insee;
+      // Le code postal se remplit tout seul ; il reste modifiable, une grande
+      // commune en ayant plusieurs.
+      if (v.cp) { rep.a_cp = v.cp; const cp = D.getElementById('a_cp'); if (cp) cp.value = v.cp; }
+      ecrire();
+      if (champAdresse) champAdresse.changerCommune(v.insee);
+     }
+    });
+
    } else if (id === 'a_adresse') {
     champAdresse = window.CHAMPS.adresse(hote, {
-     valeur: rep[id] || '', pays: rep.a_pays_code || 'FR',
+     valeur: rep[id] || '', pays: rep.a_pays_code || 'FR', insee: rep.a_ville_insee || '',
      onSaisie: function (v) { rep[id] = v; ecrire(); },
      onChoix: function (a) {
       rep[id] = a.rue;
-      if (a.cp) rep.a_cp = a.cp;
-      if (a.ville) rep.a_ville = a.ville;
+      // L'adresse precise le code postal : une commune peut en avoir plusieurs.
+      if (a.cp) { rep.a_cp = a.cp; const cp = D.getElementById('a_cp'); if (cp) cp.value = a.cp; }
       ecrire();
-      // Les deux champs suivants sont déjà à l'écran : on les remplit sur place.
-      const cp = D.getElementById('a_cp'), v = D.getElementById('a_ville');
-      if (cp && a.cp) cp.value = a.cp;
-      if (v && a.ville) v.value = a.ville;
      }
     });
 
@@ -578,7 +597,8 @@
     '<h2 class="serif">Votre demande est enregistrée.</h2>' +
     '<p class="ad-ref">Référence <b>' + j.ref + '</b></p>' +
     courriers +
-    '<p>Nous examinons chaque dossier et répondons sous trois semaines, même quand la réponse est non.</p>' +
+    '<p>Nous prenons le temps de lire chaque dossier en entier. Tout le monde reçoit une réponse, même quand elle est négative, et nous disons pourquoi.</p>' +
+    '<p class="ad-fin-note">Si votre dossier est retenu, le lien de règlement de la cotisation vous parviendra par email. <b>Rien n\'est à payer maintenant.</b></p>' +
     '<div class="eq-fin-liens">' +
      '<a href="home.html" class="btn btn-primary">Retour à l\'accueil <span class="arrow">' +
       '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>' +

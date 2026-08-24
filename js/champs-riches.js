@@ -153,6 +153,80 @@
   };
  }
 
+ /* --- Commune ---------------------------------------------------------------
+    Demandee avant l'adresse : une fois la commune connue, la recherche de rue
+    porte sur quelques milliers d'adresses au lieu de vingt-cinq millions. Les
+    propositions deviennent justes des les premieres lettres, et « 12 rue de
+    Rivoli » ne renvoie plus quatre villes differentes. */
+ function ville(hote, opts) {
+  hote.innerHTML =
+   '<div class="ch-combo">' +
+    '<input type="text" class="ch-saisie ch-vil" id="' + hote.id + '_saisie" autocomplete="address-level2"' +
+     ' role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="' + hote.id + '_liste"' +
+     ' placeholder="Commencez à taper le nom de la commune" />' +
+    '<ul class="ch-liste" id="' + hote.id + '_liste" role="listbox" hidden></ul>' +
+    '<p class="ch-aide-adr" hidden>Service indisponible, saisissez librement.</p>' +
+   '</div>';
+
+  const saisie = hote.querySelector('.ch-saisie');
+  const ul = hote.querySelector('.ch-liste');
+  const avis = hote.querySelector('.ch-aide-adr');
+  let liste = [], actif = -1, minuteur = null, pays = opts.pays || 'FR';
+
+  if (opts.valeur) saisie.value = opts.valeur;
+
+  function fermer() { ul.hidden = true; actif = -1; saisie.setAttribute('aria-expanded', 'false'); }
+
+  function dessiner() {
+   if (!liste.length) { fermer(); return; }
+   ul.innerHTML = liste.map(function (f, i) {
+    const p = f.properties;
+    return '<li role="option" data-i="' + i + '"' + (i === actif ? ' class="on" aria-selected="true"' : ' aria-selected="false"') + '>' +
+     '<span class="ch-nom">' + echapper(p.city || p.name) + '</span>' +
+     '<span class="ch-ville">' + echapper(p.postcode || '') + '</span></li>';
+   }).join('');
+   ul.hidden = false; saisie.setAttribute('aria-expanded', 'true');
+  }
+
+  function chercher(q) {
+   if (pays !== 'FR' || q.trim().length < 2) { liste = []; fermer(); return; }
+   fetch('https://api-adresse.data.gouv.fr/search/?type=municipality&limit=7&q=' + encodeURIComponent(q))
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (j) { avis.hidden = true; liste = j.features || []; dessiner(); })
+    .catch(function () { avis.hidden = false; liste = []; fermer(); });
+  }
+
+  function choisir(f) {
+   if (!f) return;
+   const p = f.properties;
+   saisie.value = p.city || p.name;
+   fermer();
+   if (opts.onChoix) opts.onChoix({ ville: p.city || p.name, cp: p.postcode || '', insee: p.citycode || '' });
+  }
+
+  saisie.addEventListener('input', function () {
+   if (opts.onSaisie) opts.onSaisie(saisie.value);
+   clearTimeout(minuteur);
+   minuteur = setTimeout(function () { chercher(saisie.value); }, 260);
+  });
+  saisie.addEventListener('blur', function () { setTimeout(fermer, 160); });
+  saisie.addEventListener('keydown', function (e) {
+   if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    if (!liste.length) return;
+    e.preventDefault();
+    actif = e.key === 'ArrowDown' ? Math.min(actif + 1, liste.length - 1) : Math.max(actif - 1, 0);
+    dessiner();
+   } else if (e.key === 'Enter' && !ul.hidden) { e.preventDefault(); choisir(liste[actif >= 0 ? actif : 0]); }
+   else if (e.key === 'Escape') fermer();
+  });
+  ul.addEventListener('mousedown', function (e) {
+   const li = e.target.closest('li'); if (!li) return;
+   e.preventDefault(); choisir(liste[+li.dataset.i]);
+  });
+
+  return { changerPays: function (c) { pays = c; if (c !== 'FR') { liste = []; fermer(); } } };
+ }
+
  /* --- Adresse ---------------------------------------------------------------
     Complétée par la Base Adresse Nationale, le service public d'adresses de
     l'État. Aucune clé, aucun compte, aucun traceur : la saisie part vers
@@ -172,6 +246,7 @@
   const ul = hote.querySelector('.ch-liste');
   const avis = hote.querySelector('.ch-aide-adr');
   let liste = [], actif = -1, minuteur = null, actif_pays = opts.pays || 'FR';
+  let insee = opts.insee || '';
 
   if (opts.valeur) saisie.value = opts.valeur;
 
@@ -189,8 +264,12 @@
   }
 
   function chercher(q) {
-   if (actif_pays !== 'FR' || q.trim().length < 4) { liste = []; fermer(); return; }
-   fetch('https://api-adresse.data.gouv.fr/search/?limit=6&autocomplete=1&q=' + encodeURIComponent(q))
+   if (actif_pays !== 'FR' || q.trim().length < 3) { liste = []; fermer(); return; }
+   // citycode restreint la recherche a la commune deja choisie : c'est ce qui
+   // evite de proposer la meme rue dans quatre villes.
+   fetch('https://api-adresse.data.gouv.fr/search/?limit=6&autocomplete=1' +
+         (insee ? '&citycode=' + encodeURIComponent(insee) : '') +
+         '&q=' + encodeURIComponent(q))
     .then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then((j) => { avis.hidden = true; liste = j.features || []; dessiner(); })
     .catch(() => { avis.hidden = false; liste = []; fermer(); });
@@ -225,8 +304,12 @@
    e.preventDefault(); choisir(liste[+li.dataset.i]);
   });
 
-  return { saisie: saisie, changerPays: (c) => { actif_pays = c; if (c !== 'FR') { liste = []; fermer(); } } };
+  return {
+   saisie: saisie,
+   changerPays: function (c) { actif_pays = c; if (c !== 'FR') { liste = []; fermer(); } },
+   changerCommune: function (code) { insee = code || ''; }
+  };
  }
 
- window.CHAMPS = { combo: combo, telephone: telephone, adresse: adresse };
+ window.CHAMPS = { combo: combo, telephone: telephone, adresse: adresse, ville: ville };
 })();

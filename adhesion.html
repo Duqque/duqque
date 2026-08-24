@@ -10,8 +10,8 @@
 <meta property="og:title" content="Adhérer à Duqque Sports" />
 <meta property="og:description" content="Le dossier complet en six étapes. Confirmation par email." />
 <meta property="og:locale" content="fr_FR" />
-<link rel="stylesheet" href="css/style.css?v=20260940" />
-<link rel="stylesheet" href="css/enquete.css?v=20260940" />
+<link rel="stylesheet" href="css/style.css?v=20260941" />
+<link rel="stylesheet" href="css/enquete.css?v=20260941" />
 <style>
  /* =========================================================
     ADHÉSION
@@ -131,6 +131,25 @@
  .ch-tel-pop { position: absolute; z-index: 45; left: 0; top: calc(100% + 6px); width: min(340px, 100%); }
  .ch-tel-pop .ch-liste { position: static; top: auto; }
 
+ /* Ce qui se passe après l'envoi. Placé avant le formulaire : une personne doit
+    savoir à quoi elle s'engage, et ce qu'elle ne s'engage pas à payer, avant de
+    remplir trente champs. */
+ .ad-suite { background: #0b0b0b; color: #f5f3ef; border-radius: 20px; padding: clamp(26px, 3.6vw, 44px); }
+ .ad-suite h2 { color: #f5f3ef; font-size: clamp(21px, 2.6vw, 30px); margin: 0 0 26px; max-width: 24ch; }
+ .ad-suite-grille { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.6vw, 34px); }
+ .ad-suite .n {
+  display: block; font-family: var(--display); font-weight: 900; font-size: 30px; line-height: 1;
+  letter-spacing: -0.03em; color: var(--lime, #d9ff3d); margin-bottom: 12px;
+ }
+ .ad-suite b { display: block; font-size: 16px; line-height: 1.3; margin-bottom: 8px; color: #f5f3ef; }
+ .ad-suite p { font-size: 14px; line-height: 1.65; color: rgba(245,243,239,0.86); margin: 0; }
+ .ad-suite p b { display: inline; font-size: inherit; color: var(--lime, #d9ff3d); }
+ @media (max-width: 880px) { .ad-suite-grille { grid-template-columns: 1fr; gap: 24px; } }
+
+ .ad-fin-note {
+  background: rgba(90,47,230,0.06); border-left: 2px solid var(--accent-ink);
+  border-radius: 0 10px 10px 0; padding: 13px 16px; font-size: 14.5px; line-height: 1.6;
+ }
  .ad-ref { font-size: 15px; color: var(--ink-soft); margin: 0 0 14px; }
  .ad-ref b { font-family: var(--display); font-weight: 900; font-size: 19px; color: var(--accent-ink); letter-spacing: 0.02em; }
 
@@ -154,9 +173,34 @@
 <section style="padding-top: 0;">
  <div class="container">
   <div class="ad-avant reveal">
-   <div class="ad-pt"><b>Vous pouvez interrompre</b><p>Le dossier reste sur votre appareil tant qu'il n'est pas envoyé. Revenez quand vous voulez, vous reprendrez où vous en étiez.</p></div>
+   <div class="ad-pt"><b>Vous pouvez interrompre</b><p>Le dossier est gardé dans ce navigateur, sur cet appareil, tant qu'il n'est pas envoyé. Il ne suit pas ailleurs, et un nettoyage des données de navigation l'efface.</p></div>
    <div class="ad-pt"><b>Autorisations séparées</b><p>Pour un mineur, chaque autorisation se donne une par une. Trois sont nécessaires, les autres sont libres et se retirent à tout moment.</p></div>
-   <div class="ad-pt"><b>Confirmation immédiate</b><p>Une copie de votre dossier part vers votre adresse email dès l'envoi, avec sa référence.</p></div>
+   <div class="ad-pt"><b>Copie par email</b><p>Une copie de votre dossier part vers votre adresse dès l'envoi, avec sa référence.</p></div>
+  </div>
+ </div>
+</section>
+
+<section style="padding-top: clamp(26px, 3vw, 36px);">
+ <div class="container">
+  <div class="ad-suite reveal">
+   <h2 class="serif">Ce qui se passe après l'envoi.</h2>
+   <div class="ad-suite-grille">
+    <div>
+     <span class="n">01</span>
+     <b>Nous prenons le temps de lire</b>
+     <p>Chaque dossier est lu en entier, sans tri automatique. Nous ne fixons pas de délai que nous ne pourrions pas tenir&nbsp;: nous préférons répondre bien que répondre vite. Tout le monde reçoit une réponse.</p>
+    </div>
+    <div>
+     <span class="n">02</span>
+     <b>Nous regardons si nos programmes vous servent</b>
+     <p>Ils sont taillés pour un certain niveau de pratique et un certain moment de parcours. Accompagner quelqu'un à qui cela n'apporterait rien encore, ce serait lui faire perdre du temps et de l'argent. Quand c'est le cas, nous le disons, et nous indiquons ce qui nous ferait dire oui plus tard. Une adhésion n'est donc pas automatique, et l'association se réserve le droit de ne pas y donner suite, notamment si les informations transmises ne correspondent pas à la réalité.</p>
+    </div>
+    <div>
+     <span class="n">03</span>
+     <b>Si le dossier est retenu, le paiement arrive par email</b>
+     <p>Vous recevez alors le lien de règlement de la cotisation à l'adresse indiquée dans le dossier. <b>Rien n'est à payer maintenant</b>, et rien ne vous sera demandé sur cette page.</p>
+    </div>
+   </div>
   </div>
  </div>
 </section>
@@ -171,9 +215,9 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260940"></script>
-<script src="js/pays.js?v=20260940"></script>
-<script src="js/champs-riches.js?v=20260940"></script>
-<script src="js/adhesion.js?v=20260940"></script>
+<script src="js/main.js?v=20260941"></script>
+<script src="js/pays.js?v=20260941"></script>
+<script src="js/champs-riches.js?v=20260941"></script>
+<script src="js/adhesion.js?v=20260941"></script>
 </body>
 </html>
