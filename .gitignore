@@ -28,3 +28,12 @@ acces-cle.js
 
 # Pages mises de cote, a remettre plus tard
 _reporte/
+
+# Secrets serveur : ne doivent jamais entrer dans un depot public
+api/config.php
+
+# Donnees des questionnaires : elles vivent sur le serveur, pas dans git.
+# Le .htaccess du dossier reste versionne : c'est lui qui interdit de telecharger
+# les reponses, il doit partir avec le site.
+donnees/*
+!donnees/.htaccess

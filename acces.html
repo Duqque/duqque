@@ -202,6 +202,22 @@ button:focus-visible { outline: 3px solid var(--violet-clair); outline-offset: 3
    // 30 jours, tout le site. SameSite=Lax pour que le cookie suive la navigation.
    document.cookie = 'duqque_apercu=' + window.DUQQUE_ACCES.jeton +
     '; Max-Age=2592000; Path=/; SameSite=Lax' + (location.protocol === 'https:' ? '; Secure' : '');
+
+   /* Ouverture de la session serveur, qui commande l'acces aux reponses des
+      questionnaires. La verification faite ci-dessus vit dans le navigateur :
+      elle suffit a masquer un site en preparation, pas a garder des donnees.
+      Si le PHP est absent, l'apercu du site fonctionne quand meme et la page
+      resultats le dira clairement plutot que d'echouer sans explication. */
+   try {
+    var rep = await fetch('/api/session.php', {
+     method: 'POST', credentials: 'same-origin',
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify({ mdp: document.getElementById('mp').value })
+    });
+    var j = await rep.json();
+    if (j && j.ok) document.cookie = 'duqque_admin_ui=1; Max-Age=2592000; Path=/; SameSite=Lax';
+   } catch (e) { /* apercu seul : sans serveur, pas d'espace resultats */ }
+
    msg.className = 'message ok';
    msg.textContent = 'Accès ouvert. Redirection…';
    setTimeout(function () { location.href = '/home.html'; }, 500);

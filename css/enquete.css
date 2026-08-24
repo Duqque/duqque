@@ -135,3 +135,6 @@
   .eq-retour { text-align: center; }
   .eq-fin-liens { flex-direction: column; align-items: flex-start; }
 }
+
+/* Champ piege : hors ecran et hors du parcours clavier. */
+.eq-piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }

@@ -24,8 +24,18 @@
  if (!racine) return;
 
  const CLE = 'duqque_enq_' + spec.id;
+ const DEPART = Date.now();
  let etape = 0;
  let reponses = lire();
+
+ /* Les libelles portent du balisage et des entites (&nbsp; devant les points
+    d'interrogation). Les envoyer tels quels afficherait « &nbsp; » en clair dans
+    la page resultats : on les ramene a du texte une bonne fois. */
+ function texteBrut(html) {
+  const d = D.createElement('div');
+  d.innerHTML = String(html == null ? '' : html);
+  return (d.textContent || '').replace(/\u00a0/g, ' ').trim();
+ }
 
  function lire() {
   try { return JSON.parse(localStorage.getItem(CLE)) || {}; } catch (e) { return {}; }
@@ -113,6 +123,10 @@
 
    <form class="eq-form" novalidate>
     ${s.questions.map(champ).join('')}
+    <div class="eq-piege" aria-hidden="true">
+     <label for="eqSociete">Ne remplissez pas ce champ</label>
+     <input id="eqSociete" name="societe" type="text" tabindex="-1" autocomplete="off" />
+    </div>
     <div class="eq-nav">
      ${etape > 0 ? '<button type="button" class="eq-retour" data-prec>Retour</button>' : '<span></span>'}
      <button type="submit" class="eq-suivant">${dernier ? 'Envoyer mes réponses' : 'Continuer'}
@@ -182,19 +196,6 @@
  }
 
  /* --- Envoi ------------------------------------------------------------------ */
- function corpsLisible() {
-  const l = ['Questionnaire : ' + spec.titre, 'Cible : ' + spec.cible, ''];
-  spec.sections.forEach((s) => {
-   l.push('— ' + s.titre.replace(/<[^>]+>/g, ''));
-   s.questions.forEach((q) => {
-    const v = reponses[q.id];
-    l.push(q.libelle.replace(/<[^>]+>/g, '') + ' : ' + (Array.isArray(v) ? v.join(', ') : (v || '—')));
-   });
-   l.push('');
-  });
-  return l.join('\n');
- }
-
  function envoyer() {
   const f = racine.querySelector('.eq-form');
   const msg = racine.querySelector('.eq-msg');
@@ -203,26 +204,37 @@
   msg.className = 'eq-msg';
   msg.textContent = 'Envoi en cours…';
 
+  /* Les libelles voyagent avec les valeurs. La page resultats n'a ainsi aucune
+     specification a connaitre : elle affiche ce qui lui arrive, et une question
+     reformulee en cours d'etude reste lisible sur les reponses deja recues. */
+  const plates = [];
+  spec.sections.forEach(function (sec) {
+   sec.questions.forEach(function (q) {
+    const v = reponses[q.id];
+    if (v === undefined || v === null || v === '' || (Array.isArray(v) && v.length === 0)) return;
+    plates.push({
+     id: q.id,
+     libelle: texteBrut(q.libelle),
+     type: q.type,
+     section: texteBrut(sec.titre),
+     valeur: v
+    });
+   });
+  });
+
+  const piege = racine.querySelector('.eq-piege input');
   const charge = {
    questionnaire: spec.id,
    titre: spec.titre,
    cible: spec.cible,
    envoye_le: new Date().toISOString(),
-   reponses: reponses
+   duree_s: Math.round((Date.now() - DEPART) / 1000),
+   piege: piege ? piege.value : '',
+   reponses: plates
   };
 
-  if (!window.ENQUETE_ENDPOINT) {
-   // Repli honnete : sans point d'entree, on compose le message dans la messagerie
-   // plutot que d'afficher un faux accuse de reception.
-   location.href = 'mailto:contact@duqque.fr?subject=' +
-    encodeURIComponent('Observatoire · ' + spec.titre + ' (' + spec.cible + ')') +
-    '&body=' + encodeURIComponent(corpsLisible());
-   fin(true);
-   return;
-  }
+  if (!window.ENQUETE_ENDPOINT) { echec(); return; }
 
-  // text/plain evite le prevol CORS : Apps Script ne repond pas aux requetes
-  // OPTIONS, un en-tete application/json ferait echouer l'envoi avant de partir.
   fetch(window.ENQUETE_ENDPOINT, {
    method: 'POST',
    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
@@ -239,19 +251,15 @@
    })
    .catch(echec);
 
+  // Declaration remontee : elle est appelee plus haut, avant sa definition.
   function echec() {
-   // Les reponses restent en memoire locale : la page rechargee les retrouve.
+   /* Aucune voie de secours par message : une reponse arrivee par email ne serait
+      ni comptee ni comparable aux autres. Les reponses restent en memoire locale,
+      la page rechargee les retrouve intactes, meme plusieurs jours plus tard. */
    bouton.disabled = false;
    msg.className = 'eq-msg ko';
-   msg.innerHTML = "L'envoi a échoué. Vos réponses sont conservées sur cet appareil&nbsp;: " +
-    "réessayez, ou <a href=\"#\" id=\"eqSecours\">envoyez-les par email</a>.";
-   var s = document.getElementById('eqSecours');
-   if (s) s.addEventListener('click', function (ev) {
-    ev.preventDefault();
-    location.href = 'mailto:contact@duqque.fr?subject=' +
-     encodeURIComponent('Observatoire · ' + spec.titre + ' (' + spec.cible + ')') +
-     '&body=' + encodeURIComponent(corpsLisible());
-   });
+   msg.textContent = "L'envoi n'a pas abouti. Vos réponses sont conservées sur cet appareil : " +
+    "réessayez maintenant, ou revenez plus tard sur cette page, vous reprendrez où vous en êtes.";
   }
  }
 

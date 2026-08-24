@@ -30,6 +30,12 @@ ErrorDocument 404 /404.html
   RewriteCond %{REQUEST_URI} ^/(acces\.html|acces-cle\.js)$ [NC]
   RewriteRule ^ - [L]
 
+  # Les points d'entree du serveur restent servis meme en mode attente : sans eux
+  # un participant ne pourrait pas envoyer son questionnaire, et l'administration
+  # ne pourrait pas se connecter.
+  RewriteCond %{REQUEST_URI} ^/api/ [NC]
+  RewriteRule ^ - [L]
+
   # L'habillage reste servi : polices, images, feuille de style, script
   RewriteCond %{REQUEST_URI} !^/(assets|css|js)/ [NC]
   # Ces pages restent accessibles, les mentions legales etant obligatoires

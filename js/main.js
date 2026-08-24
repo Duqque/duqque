@@ -553,6 +553,21 @@ const MENU_LINKS = [
  { href: 'contact.html', label: 'Contact', halo: 'sport', dots: false },
 ];
 
+/* Onglet d'administration : il n'apparait que pour une session ouverte.
+   Le repere lu ici n'est pas un droit d'acces, seulement un affichage. Le vrai
+   jeton est pose par le serveur, en HttpOnly, hors de portee de ce script :
+   fabriquer ce cookie a la main ferait apparaitre le lien, la page resultats
+   refuserait quand meme de servir la moindre donnee. */
+function estAdmin() {
+ return document.cookie.split('; ').indexOf('duqque_admin_ui=1') !== -1;
+}
+
+function liensMenu() {
+ return estAdmin()
+  ? MENU_LINKS.concat([{ href: 'resultats.html', label: 'Résultats de l\'étude', halo: 'sport', dots: false, admin: true }])
+  : MENU_LINKS;
+}
+
 function buildMenu() {
  const menu = document.querySelector('.menu');
  if (!menu) return null;
@@ -574,7 +589,7 @@ function buildMenu() {
 
  <div class="menu-modal">
  <ul class="menu-list">
- ${MENU_LINKS.map(l => `
+ ${liensMenu().map(l => `
  <li data-halo="${l.halo}">
  <a href="${l.href}">
  <span>${l.label}</span>
@@ -1490,14 +1505,19 @@ function initColonnesArticle() {
 
 /* --- Init --- */
 document.addEventListener('DOMContentLoaded', () => {
- showLoader();
+ /* Une page de travail n'est pas une vitrine : l'ecran de chargement, le bandeau
+    RGPD et les cartes de chiffres y sont du bruit, et le bandeau recouvrait le
+    bouton de connexion sur telephone. */
+ const outil = document.body.hasAttribute('data-outil');
+
+ if (!outil) showLoader();
  initMenu();
  buildFooter();
- buildBandeauRGPD();
+ if (!outil) buildBandeauRGPD();
  initNavScroll();
  initReveal();
  initProfileChips();
- initLiveFacts();
+ if (!outil) initLiveFacts();
  initLazyVideo();
  initLangSwitcher();
  initIconTiles();
