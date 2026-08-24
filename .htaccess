@@ -67,10 +67,27 @@ ErrorDocument 404 /404.html
   ExpiresByType image/webp "access plus 1 year"
   ExpiresByType image/jpeg "access plus 1 year"
   ExpiresByType image/png "access plus 1 year"
-  ExpiresByType text/html "access plus 1 hour"
+  # Le HTML ne se met JAMAIS en cache.
+  # Il etait garde une heure : apres chaque mise en ligne, le site continuait
+  # d'afficher la version precedente pendant soixante minutes, navigateur et CDN
+  # confondus. Et comme l'ancien HTML pointe vers les anciens ?v=, la feuille de
+  # style et le script restaient vieux avec lui : c'est toute la mecanique de
+  # cache-busting qui tombait. Les fichiers versionnes gardent leur annee, eux.
+  ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 <IfModule mod_headers.c>
   <FilesMatch "\.(css|js|woff2|ttf|otf|svg|webp|jpg|png)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # no-cache ne veut pas dire « ne stocke pas » mais « revalide avant d'afficher » :
+  # le navigateur garde la page et le serveur repond 304 si rien n'a bouge. Le cout
+  # est d'un aller-retour, le gain est qu'une mise en ligne se voit tout de suite.
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  # Rien de ce que rend le PHP ne doit etre garde : ni une session, ni des reponses.
+  <FilesMatch "\.php$">
+    Header set Cache-Control "no-store, max-age=0"
   </FilesMatch>
 </IfModule>
