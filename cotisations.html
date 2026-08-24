@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cotisations et accompagnements · Duqque Sports</title>
 <meta name="description" content="Les formules d'accompagnement de Duqque Sports : gratuit pour les moins de 18 ans, 60 € par an pour les athlètes majeurs, 120 € après une sélection internationale. Aucune commission sur les contrats négociés." />
-<link rel="stylesheet" href="css/style.css?v=20260943" />
+<link rel="stylesheet" href="css/style.css?v=20260945" />
 <style>
  /* =====================================================================
     COTISATIONS
@@ -165,6 +165,41 @@
    color: var(--ink-muted); margin-bottom: 4px;
   }
   .co-sec th { background: none; padding: 24px 0 6px; }
+ }
+
+ /* --- Comment se règle la cotisation ---------------------------------------
+    Placée après les formules : on répond à « combien » avant de répondre à
+    « comment ». Le passage sur ce que nous ne ferons jamais n'est pas de la
+    précaution rhétorique : l'arnaque au faux RIB vise précisément les familles
+    qui viennent d'engager une démarche. */
+ .co-lede { font-size: clamp(16px, 1.7vw, 19px); line-height: 1.6; color: var(--ink-soft); max-width: 56ch; margin: 0 0 34px; }
+
+ .co-reglement { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--line); border-radius: 16px; overflow: hidden; }
+ .co-reglement li {
+  display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 20px; align-items: start;
+  background: #fff; padding: clamp(20px, 2.4vw, 28px);
+ }
+ .co-reglement .n {
+  font-family: var(--display); font-weight: 900; font-size: 27px; line-height: 1;
+  letter-spacing: -0.03em; color: var(--accent-ink);
+ }
+ .co-reglement b { display: block; font-size: 17px; line-height: 1.28; margin-bottom: 7px; }
+ .co-reglement p { font-size: 14.5px; line-height: 1.65; color: var(--ink-soft); margin: 0; max-width: 66ch; }
+ .co-reglement a { color: var(--accent-ink); }
+
+ .co-garde { display: grid; grid-template-columns: 1.25fr 1fr 1fr; gap: 16px; margin-top: 16px; }
+ .co-garde > div { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: clamp(20px, 2.4vw, 26px); }
+ .co-garde > div:first-child { border-color: var(--accent-ink); border-width: 1.5px; }
+ .co-garde b { display: block; font-family: var(--display); font-weight: 900; font-size: 16px; margin-bottom: 9px; }
+ .co-garde > div:first-child b { color: var(--accent-ink); }
+ .co-garde p { font-size: 13.5px; line-height: 1.65; color: var(--ink-soft); margin: 0; }
+
+ .co-note { font-size: 13.5px; line-height: 1.65; color: var(--ink-muted); margin: 26px 0 0; max-width: 70ch; }
+
+ @media (max-width: 900px) {
+  .co-garde { grid-template-columns: 1fr; }
+  .co-reglement li { grid-template-columns: 42px minmax(0, 1fr); gap: 14px; }
+  .co-reglement .n { font-size: 23px; }
  }
 </style>
 </head>
@@ -364,6 +399,56 @@
  </div>
 </section>
 
+<!-- COMMENT SE RÈGLE LA COTISATION -->
+<section style="background: var(--bg-soft);">
+ <div class="container">
+  <div class="kicker reveal"><span class="line"></span> Le règlement</div>
+  <h2 class="serif reveal" style="max-width: 22ch; margin-bottom: 10px;">On ne paie <em class="accent">qu'une fois retenu.</em></h2>
+  <p class="co-lede reveal">Aucune formule ne se règle en ligne au moment de la demande. Le dossier passe d'abord, le paiement ensuite.</p>
+
+  <ol class="co-reglement reveal">
+   <li>
+    <span class="n" aria-hidden="true">01</span>
+    <div>
+     <b>Vous envoyez votre dossier</b>
+     <p>Depuis la <a href="adhesion.html">page d'adhésion</a>. Rien n'est demandé à cette étape&nbsp;: ni carte, ni coordonnées bancaires, ni engagement.</p>
+    </div>
+   </li>
+   <li>
+    <span class="n" aria-hidden="true">02</span>
+    <div>
+     <b>Nous prenons le temps de le lire</b>
+     <p>Tout le monde reçoit une réponse. Si nos programmes ne vous servent pas encore, nous le disons et nous indiquons ce qui nous ferait dire oui plus tard.</p>
+    </div>
+   </li>
+   <li>
+    <span class="n" aria-hidden="true">03</span>
+    <div>
+     <b>Si le dossier est retenu, le lien arrive par email</b>
+     <p>Un lien de paiement sécurisé, à l'adresse indiquée dans votre dossier. Le règlement se fait par carte, en une fois, pour l'année.</p>
+    </div>
+   </li>
+  </ol>
+
+  <div class="co-garde reveal">
+   <div>
+    <b>Ce que nous ne ferons jamais</b>
+    <p>Vous demander vos coordonnées bancaires par téléphone, par message ou par email. Nous ne vous enverrons jamais un RIB en vous demandant un virement urgent. Le seul canal est le lien envoyé après validation, depuis notre adresse <span class="notranslate">contact@duqque.fr</span>. Au moindre doute, écrivez-nous avant de payer.</p>
+   </div>
+   <div>
+    <b>Clubs et structures</b>
+    <p>La Convention ne se règle pas par carte. Vous recevez un devis, puis une facture avec nos coordonnées, réglable par virement. Les structures publiques peuvent régler par mandat administratif.</p>
+   </div>
+   <div>
+    <b>Moins de 18 ans</b>
+    <p>Le Programme Espoirs est gratuit. Il n'y a ni cotisation, ni frais de dossier, ni commission, et aucun lien de paiement ne vous sera envoyé.</p>
+   </div>
+  </div>
+
+  <p class="co-note reveal">La cotisation couvre l'année d'adhésion et ne se renouvelle pas toute seule&nbsp;: aucun prélèvement automatique n'est mis en place. Nous vous écrivons à l'échéance, et vous décidez.</p>
+ </div>
+</section>
+
 <section>
  <div class="container" style="text-align:center;">
   <h2 class="serif" style="max-width: 22ch; margin: 0 auto 20px;">Une question sur <em class="accent">la formule adaptée&nbsp;?</em></h2>
@@ -374,6 +459,6 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260943"></script>
+<script src="js/main.js?v=20260945"></script>
 </body>
 </html>

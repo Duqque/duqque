@@ -143,23 +143,24 @@
    </div>
 
    <div class="rs-filtres">
-    <select id="rsFiltre" aria-label="Filtrer par questionnaire">
+    <select id="rsFiltre" aria-label="Filtrer par questionnaire"${vue === 'adhesions' ? ' disabled' : ''}>
      <option value="">Tous les questionnaires</option>
      ${Object.keys(TITRES).map((k) => `<option value="${k}"${filtre === k ? ' selected' : ''}>${esc(TITRES[k])}</option>`).join('')}
     </select>
     <nav class="rs-onglets" role="tablist">
      ${[['ensemble', "Vue d'ensemble"], ['questions', 'Question par question'],
-        ['reponses', 'Réponse par réponse'], ['contacts', 'Coordonnées']]
+        ['reponses', 'Réponse par réponse'], ['contacts', 'Coordonnées'], ['adhesions', 'Adhésions']]
        .map(([k, l]) => `<button role="tab" aria-selected="${vue === k}" data-vue="${k}">${l}</button>`).join('')}
     </nav>
    </div>
 
    <div class="rs-corps">${
-    lignes.length === 0 && vue !== 'contacts'
+    lignes.length === 0 && vue !== 'contacts' && vue !== 'adhesions'
      ? `<div class="rs-vide"><h3>Aucune réponse pour l'instant</h3>
         <p>Dès qu'un participant valide un questionnaire, sa réponse apparaît ici, et les indicateurs se recalculent.</p>
         <a class="rs-bt" href="observatoire.html">Voir les questionnaires publiés</a></div>`
-     : ({ ensemble: vueEnsemble, questions: vueQuestions, reponses: vueReponses, contacts: vueContacts }[vue])(lignes)
+     : ({ ensemble: vueEnsemble, questions: vueQuestions, reponses: vueReponses,
+          contacts: vueContacts, adhesions: vueAdhesions }[vue])(lignes)
    }</div>`;
 
   racine.querySelectorAll('[data-vue]').forEach((b) =>
@@ -170,6 +171,7 @@
    document.cookie = 'duqque_admin_ui=; Max-Age=0; Path=/';
    ecranConnexion('Vous êtes déconnecté.');
   });
+  brancherStatuts();
   racine.querySelectorAll('[data-detail]').forEach((b) =>
    b.addEventListener('click', () => {
     const c = D.getElementById('d-' + b.dataset.detail);
@@ -392,6 +394,98 @@
        </div>`).join('')}
      </div>
     </article>`).join('')}</div>`;
+ }
+
+ /* --- Adhésions -------------------------------------------------------------
+    Chargées à part des questionnaires : ce sont des dossiers nominatifs, pas des
+    réponses anonymes, et rien ne justifie de les transporter tant que personne
+    n'a ouvert cet onglet. */
+ let adhesions = null;
+
+ const ETIQ = {
+  recue:   { texte: 'Reçue',   classe: 'rs-st-recue' },
+  validee: { texte: 'Validée', classe: 'rs-st-validee' },
+  payee:   { texte: 'Payée',   classe: 'rs-st-payee' },
+  refusee: { texte: 'Refusée', classe: 'rs-st-refusee' }
+ };
+
+ function vueAdhesions() {
+  if (adhesions === null) {
+   fetch(API + '/adhesions.php', { credentials: 'same-origin', cache: 'no-store' })
+    .then((r) => r.json())
+    .then((j) => { adhesions = j.ok ? j.dossiers : []; rendre(); })
+    .catch(() => { adhesions = []; rendre(); });
+   return '<p class="rs-attente-txt">Chargement des dossiers…</p>';
+  }
+
+  if (!adhesions.length) return `<div class="rs-vide"><h3>Aucune demande d'adhésion</h3>
+   <p>Les dossiers envoyés depuis la page d'adhésion apparaîtront ici, avec leur avancement.</p>
+   <a class="rs-bt" href="adhesion.html">Voir le formulaire d'adhésion</a></div>`;
+
+  const compte = { recue: 0, validee: 0, payee: 0, refusee: 0 };
+  adhesions.forEach((d) => { compte[d.statut] = (compte[d.statut] || 0) + 1; });
+
+  const tri = adhesions.slice().sort((a, b) => String(b.recu_le).localeCompare(String(a.recu_le)));
+
+  return `
+   <div class="rs-kpis">
+    ${Object.keys(ETIQ).map((k) => `<div class="rs-kpi">
+      <span class="l">${esc(ETIQ[k].texte)}</span><span class="v">${compte[k] || 0}</span>
+      <small>${k === 'payee' ? 'cotisation encaissée' : k === 'validee' ? 'lien de paiement à envoyer' : k === 'recue' ? 'à examiner' : 'sans suite'}</small>
+     </div>`).join('')}
+   </div>
+
+   <p class="rs-avis">Le statut sert au suivi interne. Il ne modifie jamais le dossier signé par la personne,
+    qui est conservé tel quel. Passer un dossier à « validée » n'envoie rien&nbsp;: le lien de paiement se
+    transmet depuis votre outil d'encaissement.</p>
+
+   <div class="rs-table">${tri.map((d) => `
+    <article class="rs-env">
+     <button class="rs-env-tete rs-env-tete--adh" data-detail="${esc(d.ref)}" aria-expanded="false" aria-controls="d-${esc(d.ref)}">
+      <span class="rs-chev" aria-hidden="true">›</span>
+      <span class="rs-ref">${esc(d.ref)}</span>
+      <span class="rs-env-q">${esc(d.nom)}${d.mineur ? ' <em class="rs-mineur">mineur</em>' : ''}</span>
+      <span class="rs-env-d">${esc(dateFr(d.recu_le))}</span>
+      <span class="rs-etat ${ETIQ[d.statut] ? ETIQ[d.statut].classe : ''}">${ETIQ[d.statut] ? ETIQ[d.statut].texte : esc(d.statut)}</span>
+     </button>
+     <div class="rs-env-corps" id="d-${esc(d.ref)}" hidden>
+      <div class="rs-actions rs-actions--statut">
+       ${Object.keys(ETIQ).map((k) => `<button class="rs-bt rs-bt-nu${d.statut === k ? ' on' : ''}"
+         data-statut="${k}" data-ref="${esc(d.ref)}">${ETIQ[k].texte}</button>`).join('')}
+       <a class="rs-bt" href="mailto:${esc(d.email)}?subject=${encodeURIComponent('Votre adhésion ' + d.ref + ' · Duqque Sports')}">Écrire à ${esc(d.email)}</a>
+      </div>
+      ${(d.champs || []).map((c) => `<div class="rs-paire">
+        <span class="q">${esc(c.libelle || c.id)}</span>
+        <span class="r">${esc(Array.isArray(c.valeur) ? c.valeur.join(' · ') : c.valeur)}</span>
+       </div>`).join('')}
+     </div>
+    </article>`).join('')}</div>`;
+ }
+
+ function brancherStatuts() {
+  racine.querySelectorAll('[data-statut]').forEach((b) => b.addEventListener('click', async (e) => {
+   e.stopPropagation();
+   const ref = b.dataset.ref, statut = b.dataset.statut;
+   b.disabled = true;
+   try {
+    const r = await fetch(API + '/adhesions.php', {
+     method: 'POST', credentials: 'same-origin',
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify({ ref: ref, statut: statut })
+    });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.erreur || 'refus du serveur');
+    const d = adhesions.filter((x) => x.ref === ref)[0];
+    if (d) { d.statut = statut; d.statut_maj = j.maj; }
+    rendre();
+    // On rouvre le dossier qu'on vient de modifier : sinon il se referme sous les doigts.
+    const t = racine.querySelector('[data-detail="' + ref + '"]');
+    if (t) t.click();
+   } catch (err) {
+    b.disabled = false;
+    alert("Le statut n'a pas pu être enregistré : " + err.message);
+   }
+  }));
  }
 
  /* --- Démarrage ------------------------------------------------------------ */

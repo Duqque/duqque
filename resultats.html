@@ -6,7 +6,7 @@
 <title>Résultats de l'étude · Administration · Duqque Sports</title>
 <meta name="description" content="Espace réservé : indicateurs, infographies et réponses des questionnaires de l'Observatoire." />
 <meta name="robots" content="noindex, nofollow" />
-<link rel="stylesheet" href="css/style.css?v=20260943" />
+<link rel="stylesheet" href="css/style.css?v=20260945" />
 <style>
  /* =========================================================
     RÉSULTATS — ESPACE ADMINISTRATION
@@ -165,6 +165,32 @@
  .rs-paire .q { font-size: 13px; color: var(--ink-muted); line-height: 1.5; }
  .rs-paire .r { font-size: 14px; color: var(--ink); line-height: 1.5; overflow-wrap: anywhere; }
 
+ /* Adhésions : le statut se lit d'un coup d'œil dans la ligne repliée, sans
+    avoir à ouvrir chaque dossier. */
+ .rs-env-tete--adh { grid-template-columns: 18px 74px minmax(0, 1fr) 190px 108px; }
+ .rs-etat {
+  justify-self: end; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  font-weight: 700; padding: 5px 11px; border-radius: 100px; white-space: nowrap;
+ }
+ .rs-st-recue   { background: rgba(11,11,11,0.07); color: var(--ink-muted); }
+ .rs-st-validee { background: rgba(90,47,230,0.12); color: var(--accent-ink); }
+ .rs-st-payee   { background: #1c5c30; color: #eafff0; }
+ .rs-st-refusee { background: rgba(138,43,43,0.10); color: #8a2b2b; }
+ .rs-mineur {
+  font-style: normal; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 700; color: #8a2b2b; background: rgba(138,43,43,0.10);
+  padding: 3px 8px; border-radius: 100px; margin-left: 8px; vertical-align: 1px;
+ }
+ .rs-actions--statut {
+  gap: 8px; padding: 14px 0 16px; margin-bottom: 4px; border-bottom: 1px solid var(--line);
+ }
+ .rs-actions--statut .rs-bt { padding: 9px 16px; font-size: 12.5px; }
+ .rs-actions--statut .rs-bt.on { background: var(--accent-ink); border-color: var(--accent-ink); color: #fff; }
+ @media (max-width: 1000px) {
+  .rs-env-tete--adh { grid-template-columns: 18px 66px minmax(0, 1fr); }
+  .rs-etat { justify-self: start; grid-column: 2 / -1; }
+ }
+
  .rs-vide { text-align: center; padding: clamp(40px, 8vw, 80px) 20px; background: #fff; border: 1px solid var(--line); border-radius: 18px; }
  .rs-vide h3 { font-family: var(--display); font-weight: 900; font-size: 21px; margin: 0 0 10px; }
  .rs-vide p { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); max-width: 46ch; margin: 0 auto 22px; }
@@ -209,7 +235,7 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260943"></script>
-<script src="js/resultats.js?v=20260943"></script>
+<script src="js/main.js?v=20260945"></script>
+<script src="js/resultats.js?v=20260945"></script>
 </body>
 </html>
