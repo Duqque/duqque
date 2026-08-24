@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sponsoring · athlètes · Observatoire Duqque</title>
+<meta name="description" content="Ce questionnaire s'adresse aux judokas de niveau national et international. Il cherche à établir ce que le sponsoring représente réellement dans le judo français : qui en bénéficie, à quelle hauteur, et à quelles conditions." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://duqque.fr/enquete-sponsoring-athletes.html" />
+<link rel="stylesheet" href="css/style.css?v=20260929" />
+<link rel="stylesheet" href="css/enquete.css?v=20260929" />
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<section class="page-hero" style="min-height: 0; padding-bottom: clamp(30px, 4vw, 50px);">
+ <div class="container">
+  <div class="breadcrumb"><a href="observatoire.html">Observatoire</a><span class="sep" aria-hidden="true">›</span><span>Athlète</span></div>
+  <h1 class="serif">Sponsoring&nbsp;: <em class="accent">la parole aux athlètes.</em></h1>
+  <p class="lead">Ce questionnaire s'adresse aux judokas de niveau national et international. Il cherche à établir ce que le sponsoring représente réellement dans le judo français : qui en bénéficie, à quelle hauteur, et à quelles conditions.</p>
+  <p style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--accent-soft); margin-top: 22px;">
+   Anonyme · 10 à 12 minutes · 6 sections
+  </p>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="eq-enveloppe" id="enquete"></div>
+
+  <div class="eq-rgpd">
+   <b>Ce que nous faisons de vos réponses</b>
+   <p>Le questionnaire est <strong>anonyme</strong>&nbsp;: aucune donnée d'identification n'est demandée, et rien ne permet de vous reconnaître à partir de vos réponses. Les résultats ne sont publiés qu'agrégés, jamais individuellement.</p>
+   <p>La dernière section, entièrement facultative, permet de laisser des coordonnées pour recevoir l'étude ou approfondir. Elles sont conservées séparément des réponses et supprimées douze mois après la publication.</p>
+   <p>Responsable du traitement&nbsp;: Duqque Sports. Base légale&nbsp;: votre consentement, donné en envoyant le formulaire. Vous pouvez demander l'effacement à tout moment à <a href="mailto:contact@duqque.fr">contact@duqque.fr</a>. Détail dans notre <a href="confidentialite.html">politique de confidentialité</a>.</p>
+  </div>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260929"></script>
+<script src="js/enquete-config.js?v=20260929"></script>
+<script>
+window.ENQUETE = {
+ "id": "sponsoring-athletes",
+ "titre": "Sponsoring · athlètes",
+ "cible": "Athlète",
+ "duree": "10 à 12 minutes",
+ "intro": "Ce questionnaire s'adresse aux judokas de niveau national et international. Il cherche à établir ce que le sponsoring représente réellement dans le judo français : qui en bénéficie, à quelle hauteur, et à quelles conditions.",
+ "sections": [
+  {
+   "titre": "Votre profil",
+   "intro": "Aucune de ces informations ne permet de vous identifier.",
+   "questions": [
+    {
+     "id": "a_cat",
+     "type": "liste",
+     "libelle": "Votre catégorie d'âge cette saison",
+     "requis": true,
+     "options": [
+      "U15 (minimes)",
+      "U18 (cadets)",
+      "U21 (juniors)",
+      "Senior",
+      "Vétéran"
+     ]
+    },
+    {
+     "id": "a_sexe",
+     "type": "choix",
+     "libelle": "Vous êtes",
+     "requis": false,
+     "options": [
+      "Une femme",
+      "Un homme",
+      "Je préfère ne pas répondre"
+     ]
+    },
+    {
+     "id": "a_region",
+     "type": "texte",
+     "libelle": "Votre région ou département",
+     "requis": true,
+     "exemple": "Île-de-France, 78…"
+    },
+    {
+     "id": "a_niveau",
+     "type": "liste",
+     "libelle": "Le niveau le plus élevé auquel vous avez combattu",
+     "requis": true,
+     "options": [
+      "Départemental",
+      "Régional",
+      "National (championnat de France)",
+      "International (circuit européen)",
+      "International (circuit mondial, Grand Slam, championnats du monde)"
+     ]
+    },
+    {
+     "id": "a_structure",
+     "type": "choix",
+     "libelle": "Êtes-vous en structure fédérale&nbsp;?",
+     "requis": true,
+     "options": [
+      "Non, uniquement en club",
+      "Section sportive scolaire",
+      "Pôle Espoirs",
+      "Pôle France ou INSEP",
+      "Autre structure"
+     ]
+    },
+    {
+     "id": "a_annees",
+     "type": "nombre",
+     "libelle": "Depuis combien d'années pratiquez-vous le judo&nbsp;?",
+     "requis": true
+    },
+    {
+     "id": "a_seances",
+     "type": "nombre",
+     "libelle": "Combien de séances de judo par semaine, en moyenne&nbsp;?",
+     "requis": true
+    }
+   ]
+  },
+  {
+   "titre": "Votre situation aujourd'hui",
+   "questions": [
+    {
+     "id": "s_actuel",
+     "type": "choix",
+     "libelle": "Avez-vous actuellement au moins un partenaire&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, un",
+      "Oui, plusieurs",
+      "Non, mais j'en ai déjà eu",
+      "Non, jamais"
+     ]
+    },
+    {
+     "id": "s_type",
+     "type": "multi",
+     "libelle": "Sous quelle forme&nbsp;?",
+     "requis": false,
+     "options": [
+      "Versement en argent",
+      "Équipement ou matériel",
+      "Prise en charge de déplacements",
+      "Hébergement ou stages",
+      "Emploi ou aménagement d'emploi",
+      "Aide en nature diverse"
+     ]
+    },
+    {
+     "id": "s_montant",
+     "type": "liste",
+     "libelle": "Valeur annuelle totale, argent et nature confondus",
+     "requis": false,
+     "options": [
+      "Moins de 500 €",
+      "500 à 2 000 €",
+      "2 000 à 5 000 €",
+      "5 000 à 15 000 €",
+      "15 000 à 50 000 €",
+      "Plus de 50 000 €",
+      "Je préfère ne pas répondre"
+     ]
+    },
+    {
+     "id": "s_qui",
+     "type": "multi",
+     "libelle": "Quel type d'entreprise&nbsp;?",
+     "requis": false,
+     "options": [
+      "Commerce local",
+      "PME régionale",
+      "Grande entreprise",
+      "Équipementier sportif",
+      "Collectivité",
+      "Entreprise d'un proche",
+      "Autre"
+     ]
+    },
+    {
+     "id": "s_part",
+     "type": "echelle",
+     "libelle": "Quelle part de votre budget sportif ces soutiens couvrent-ils&nbsp;?",
+     "requis": false,
+     "min": 1,
+     "max": 5,
+     "bas": "Presque rien",
+     "haut": "La quasi-totalité"
+    }
+   ]
+  },
+  {
+   "titre": "Chercher un partenaire",
+   "questions": [
+    {
+     "id": "d_cherche",
+     "type": "choix",
+     "libelle": "Avez-vous déjà démarché des entreprises&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, souvent",
+      "Oui, une ou deux fois",
+      "Non, jamais essayé",
+      "Non, quelqu'un le fait pour moi"
+     ]
+    },
+    {
+     "id": "d_comment",
+     "type": "multi",
+     "libelle": "Comment vous y êtes-vous pris&nbsp;?",
+     "requis": false,
+     "options": [
+      "Un dossier écrit",
+      "Un simple email",
+      "Par relation personnelle",
+      "Par le club",
+      "Par les réseaux sociaux",
+      "Par un intermédiaire",
+      "Sans objet"
+     ]
+    },
+    {
+     "id": "d_taux",
+     "type": "liste",
+     "libelle": "Sur dix entreprises contactées, combien répondent&nbsp;?",
+     "requis": false,
+     "options": [
+      "Aucune",
+      "1 à 2",
+      "3 à 5",
+      "Plus de 5",
+      "Je ne sais pas",
+      "Sans objet"
+     ]
+    },
+    {
+     "id": "d_obstacle",
+     "type": "multi",
+     "libelle": "Qu'est-ce qui vous bloque le plus&nbsp;?",
+     "requis": true,
+     "options": [
+      "Je ne sais pas à qui m'adresser",
+      "Je ne sais pas quoi proposer",
+      "Je ne sais pas quel prix demander",
+      "Je n'ai pas le temps",
+      "Je n'ose pas",
+      "Mon audience est trop petite",
+      "Mon club ne le permet pas",
+      "Rien, cela se passe bien"
+     ]
+    },
+    {
+     "id": "d_aide",
+     "type": "echelle",
+     "libelle": "Seriez-vous prêt à être représenté au sein d'un collectif plutôt que seul&nbsp;?",
+     "requis": true,
+     "min": 1,
+     "max": 5,
+     "bas": "Pas du tout",
+     "haut": "Tout à fait"
+    }
+   ]
+  },
+  {
+   "titre": "Contrats et droits",
+   "questions": [
+    {
+     "id": "c_signe",
+     "type": "choix",
+     "libelle": "Avez-vous déjà signé un contrat de partenariat&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, écrit et détaillé",
+      "Oui, un document sommaire",
+      "Non, accord oral seulement",
+      "Non, jamais"
+     ]
+    },
+    {
+     "id": "c_relu",
+     "type": "choix",
+     "libelle": "Quelqu'un l'a-t-il relu avant signature&nbsp;?",
+     "requis": false,
+     "options": [
+      "Un avocat",
+      "Un proche compétent",
+      "Mon club",
+      "Mes parents",
+      "Personne",
+      "Sans objet"
+     ]
+    },
+    {
+     "id": "c_image",
+     "type": "echelle",
+     "libelle": "Savez-vous précisément ce que vous avez cédé de votre image&nbsp;?",
+     "requis": true,
+     "min": 1,
+     "max": 5,
+     "bas": "Aucune idée",
+     "haut": "Très précisément"
+    },
+    {
+     "id": "c_club",
+     "type": "choix",
+     "libelle": "Votre club ou votre fédération limite-t-il vos partenariats&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, fortement",
+      "Oui, un peu",
+      "Non",
+      "Je ne sais pas"
+     ]
+    },
+    {
+     "id": "c_conflit",
+     "type": "choix",
+     "libelle": "Avez-vous déjà eu un désaccord avec un partenaire&nbsp;?",
+     "requis": false,
+     "options": [
+      "Oui, réglé à l'amiable",
+      "Oui, non réglé",
+      "Non",
+      "Sans objet"
+     ]
+    }
+   ]
+  },
+  {
+   "titre": "Ce que vous en attendez",
+   "questions": [
+    {
+     "id": "at_besoins",
+     "type": "multi",
+     "libelle": "Qu'attendriez-vous d'un accompagnement au sponsoring&nbsp;?",
+     "requis": true,
+     "options": [
+      "Construire mon dossier",
+      "Trouver les entreprises",
+      "Négocier à ma place",
+      "Relire mes contrats",
+      "Produire mes contenus",
+      "Me former à le faire moi-même",
+      "Rien"
+     ]
+    },
+    {
+     "id": "at_commission",
+     "type": "choix",
+     "libelle": "Accepteriez-vous qu'un intermédiaire prenne une commission&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, c'est normal",
+      "Oui, si elle est faible",
+      "Non, jamais",
+      "Je ne sais pas"
+     ]
+    },
+    {
+     "id": "at_libre",
+     "type": "long",
+     "libelle": "Qu'est-ce qui vous paraît le plus injuste dans le sponsoring sportif aujourd'hui&nbsp;?",
+     "requis": false
+    }
+   ]
+  },
+  {
+   "titre": "Rester en contact, si vous le souhaitez",
+   "intro": "Le questionnaire est anonyme. Cette dernière section est entièrement facultative&nbsp;: elle sert uniquement à vous envoyer l'étude et, si vous l'acceptez, à vous recontacter pour approfondir. Vos coordonnées sont conservées séparément de vos réponses.",
+   "questions": [
+    {
+     "id": "ct_suite",
+     "type": "choix",
+     "libelle": "Accepteriez-vous un entretien de trente minutes pour approfondir&nbsp;?",
+     "options": [
+      "Oui, volontiers",
+      "Peut-être, selon le moment",
+      "Non"
+     ],
+     "requis": false
+    },
+    {
+     "id": "ct_etude",
+     "type": "choix",
+     "libelle": "Souhaitez-vous recevoir l'étude à sa publication&nbsp;?",
+     "options": [
+      "Oui",
+      "Non"
+     ],
+     "requis": false
+    },
+    {
+     "id": "ct_nom",
+     "type": "texte",
+     "libelle": "Prénom, ou nom de la structure",
+     "requis": false,
+     "aide": "À ne remplir que si vous avez répondu oui à l'une des deux questions ci-dessus."
+    },
+    {
+     "id": "ct_mail",
+     "type": "email",
+     "libelle": "Adresse email",
+     "requis": false,
+     "exemple": "vous@exemple.fr"
+    },
+    {
+     "id": "ct_mot",
+     "type": "long",
+     "libelle": "Quelque chose à ajouter&nbsp;?",
+     "requis": false,
+     "exemple": "Un point que le questionnaire n'aborde pas, une nuance, un désaccord."
+    }
+   ]
+  }
+ ]
+};
+</script>
+<script src="js/enquete.js?v=20260929"></script>
+</body>
+</html>

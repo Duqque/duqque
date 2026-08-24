@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Transferts et accompagnement · clubs · Observatoire Duqque</title>
+<meta name="description" content="Ce questionnaire s'adresse aux dirigeants, entraîneurs et salariés des clubs et structures de judo. Il cherche à établir ce que les clubs apportent réellement à leurs compétiteurs, et comment se vivent les départs et les arrivées." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://duqque.fr/enquete-transferts-clubs.html" />
+<link rel="stylesheet" href="css/style.css?v=20260929" />
+<link rel="stylesheet" href="css/enquete.css?v=20260929" />
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<section class="page-hero" style="min-height: 0; padding-bottom: clamp(30px, 4vw, 50px);">
+ <div class="container">
+  <div class="breadcrumb"><a href="observatoire.html">Observatoire</a><span class="sep" aria-hidden="true">›</span><span>Club ou structure</span></div>
+  <h1 class="serif">Transferts et accompagnement&nbsp;: <em class="accent">la parole aux clubs.</em></h1>
+  <p class="lead">Ce questionnaire s'adresse aux dirigeants, entraîneurs et salariés des clubs et structures de judo. Il cherche à établir ce que les clubs apportent réellement à leurs compétiteurs, et comment se vivent les départs et les arrivées.</p>
+  <p style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--accent-soft); margin-top: 22px;">
+   Anonyme · 12 à 15 minutes · 5 sections
+  </p>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="eq-enveloppe" id="enquete"></div>
+
+  <div class="eq-rgpd">
+   <b>Ce que nous faisons de vos réponses</b>
+   <p>Le questionnaire est <strong>anonyme</strong>&nbsp;: aucune donnée d'identification n'est demandée, et rien ne permet de vous reconnaître à partir de vos réponses. Les résultats ne sont publiés qu'agrégés, jamais individuellement.</p>
+   <p>La dernière section, entièrement facultative, permet de laisser des coordonnées pour recevoir l'étude ou approfondir. Elles sont conservées séparément des réponses et supprimées douze mois après la publication.</p>
+   <p>Responsable du traitement&nbsp;: Duqque Sports. Base légale&nbsp;: votre consentement, donné en envoyant le formulaire. Vous pouvez demander l'effacement à tout moment à <a href="mailto:contact@duqque.fr">contact@duqque.fr</a>. Détail dans notre <a href="confidentialite.html">politique de confidentialité</a>.</p>
+  </div>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260929"></script>
+<script src="js/enquete-config.js?v=20260929"></script>
+<script>
+window.ENQUETE = {
+ "id": "transferts-clubs",
+ "titre": "Transferts et accompagnement · clubs",
+ "cible": "Club ou structure",
+ "duree": "12 à 15 minutes",
+ "intro": "Ce questionnaire s'adresse aux dirigeants, entraîneurs et salariés des clubs et structures de judo. Il cherche à établir ce que les clubs apportent réellement à leurs compétiteurs, et comment se vivent les départs et les arrivées.",
+ "sections": [
+  {
+   "titre": "Votre structure",
+   "intro": "Les réponses sont agrégées : aucun club ne sera cité isolément.",
+   "questions": [
+    {
+     "id": "c_type",
+     "type": "liste",
+     "libelle": "Votre structure est",
+     "requis": true,
+     "options": [
+      "Un club associatif",
+      "Une section d'un club omnisports",
+      "Un comité ou une ligue",
+      "Une structure fédérale (pôle, section sportive)",
+      "Autre"
+     ]
+    },
+    {
+     "id": "c_role",
+     "type": "liste",
+     "libelle": "Vous répondez en tant que",
+     "requis": true,
+     "options": [
+      "Président ou présidente",
+      "Membre du bureau",
+      "Entraîneur",
+      "Salarié administratif",
+      "Autre"
+     ]
+    },
+    {
+     "id": "c_region",
+     "type": "texte",
+     "libelle": "Région ou département",
+     "requis": true
+    },
+    {
+     "id": "c_licencies",
+     "type": "liste",
+     "libelle": "Nombre de licenciés",
+     "requis": true,
+     "options": [
+      "Moins de 50",
+      "50 à 100",
+      "100 à 200",
+      "200 à 400",
+      "Plus de 400"
+     ]
+    },
+    {
+     "id": "c_compet",
+     "type": "liste",
+     "libelle": "Combien de licenciés font de la compétition&nbsp;?",
+     "requis": true,
+     "options": [
+      "Moins de 10",
+      "10 à 25",
+      "25 à 50",
+      "50 à 100",
+      "Plus de 100"
+     ]
+    },
+    {
+     "id": "c_encadrants",
+     "type": "nombre",
+     "libelle": "Nombre d'encadrants techniques, bénévoles compris",
+     "requis": true
+    },
+    {
+     "id": "c_salaries",
+     "type": "nombre",
+     "libelle": "Parmi eux, combien sont salariés&nbsp;?",
+     "requis": true
+    }
+   ]
+  },
+  {
+   "titre": "Ce que vous proposez",
+   "questions": [
+    {
+     "id": "cp_prop",
+     "type": "multi",
+     "libelle": "Que proposez-vous à vos compétiteurs&nbsp;?",
+     "requis": true,
+     "options": [
+      "Entraînements compétiteurs séparés",
+      "Préparation physique encadrée",
+      "Préparation mentale",
+      "Suivi médical ou kiné",
+      "Prise en charge des déplacements",
+      "Prise en charge des stages",
+      "Aide sur la scolarité",
+      "Accompagnement administratif des familles",
+      "Recherche de partenaires"
+     ]
+    },
+    {
+     "id": "cp_plan",
+     "type": "choix",
+     "libelle": "Établissez-vous un plan de saison écrit par compétiteur&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, pour tous",
+      "Oui, pour les meilleurs seulement",
+      "Non, mais un projet oral",
+      "Non"
+     ]
+    },
+    {
+     "id": "cp_budget",
+     "type": "liste",
+     "libelle": "Budget annuel de la structure",
+     "requis": true,
+     "options": [
+      "Moins de 10 000 €",
+      "10 000 à 30 000 €",
+      "30 000 à 60 000 €",
+      "60 000 à 150 000 €",
+      "Plus de 150 000 €",
+      "Je préfère ne pas répondre"
+     ]
+    },
+    {
+     "id": "cp_part",
+     "type": "liste",
+     "libelle": "Part du budget consacrée à la compétition",
+     "requis": true,
+     "options": [
+      "Moins de 10 %",
+      "10 à 25 %",
+      "25 à 50 %",
+      "Plus de 50 %",
+      "Je ne sais pas"
+     ]
+    },
+    {
+     "id": "cp_ressources",
+     "type": "multi",
+     "libelle": "D'où viennent vos ressources&nbsp;?",
+     "requis": true,
+     "options": [
+      "Cotisations",
+      "Subventions communales",
+      "Subventions départementales ou régionales",
+      "Aides de l'État ou de l'ANS",
+      "Partenariats privés",
+      "Événements et buvette",
+      "Dons"
+     ]
+    },
+    {
+     "id": "cp_frein",
+     "type": "echelle",
+     "libelle": "Le manque de moyens vous empêche-t-il d'accompagner correctement vos jeunes&nbsp;?",
+     "requis": true,
+     "min": 1,
+     "max": 5,
+     "bas": "Pas du tout",
+     "haut": "Totalement"
+    }
+   ]
+  },
+  {
+   "titre": "Départs et arrivées",
+   "questions": [
+    {
+     "id": "cd_depart",
+     "type": "liste",
+     "libelle": "Combien de compétiteurs sont partis lors des trois dernières saisons&nbsp;?",
+     "requis": true,
+     "options": [
+      "Aucun",
+      "1 à 3",
+      "4 à 10",
+      "Plus de 10"
+     ]
+    },
+    {
+     "id": "cd_motifs",
+     "type": "multi",
+     "libelle": "Pour quelles raisons, à votre connaissance&nbsp;?",
+     "requis": true,
+     "options": [
+      "Entrée en structure fédérale",
+      "Déménagement",
+      "Recherche d'un meilleur niveau",
+      "Conflit avec l'encadrement",
+      "Sollicitation d'un autre club",
+      "Raisons financières",
+      "Arrêt du judo",
+      "Je ne sais pas"
+     ]
+    },
+    {
+     "id": "cd_prevenu",
+     "type": "choix",
+     "libelle": "Êtes-vous généralement prévenu avant la décision&nbsp;?",
+     "requis": true,
+     "options": [
+      "Toujours",
+      "Souvent",
+      "Rarement",
+      "Jamais"
+     ]
+    },
+    {
+     "id": "cd_solli",
+     "type": "choix",
+     "libelle": "Vos jeunes sont-ils sollicités par d'autres clubs&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, régulièrement",
+      "Oui, occasionnellement",
+      "Rarement",
+      "Jamais",
+      "Je ne sais pas"
+     ]
+    },
+    {
+     "id": "cd_conv",
+     "type": "choix",
+     "libelle": "Signez-vous une convention lors d'un départ ou d'une arrivée&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, systématiquement",
+      "Parfois",
+      "Jamais",
+      "Je ne savais pas que c'était possible"
+     ]
+    },
+    {
+     "id": "cd_indem",
+     "type": "choix",
+     "libelle": "Avez-vous déjà perçu ou versé une compensation lors d'un mouvement&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, perçue",
+      "Oui, versée",
+      "Les deux",
+      "Non, jamais"
+     ]
+    },
+    {
+     "id": "cd_juste",
+     "type": "echelle",
+     "libelle": "Trouvez-vous le système actuel équitable pour les clubs formateurs&nbsp;?",
+     "requis": true,
+     "min": 1,
+     "max": 5,
+     "bas": "Pas du tout",
+     "haut": "Tout à fait"
+    },
+    {
+     "id": "cd_libre",
+     "type": "long",
+     "libelle": "Racontez un départ qui vous a marqué, en bien ou en mal.",
+     "requis": false
+    }
+   ]
+  },
+  {
+   "titre": "Ce qui vous aiderait",
+   "questions": [
+    {
+     "id": "cb_besoins",
+     "type": "multi",
+     "libelle": "De quoi votre structure aurait-elle le plus besoin&nbsp;?",
+     "requis": true,
+     "options": [
+      "Des moyens financiers",
+      "Des encadrants supplémentaires",
+      "De la formation pour les encadrants",
+      "De l'aide administrative",
+      "De l'aide pour trouver des partenaires",
+      "Un cadre plus clair sur les mutations",
+      "De la visibilité",
+      "Rien de particulier"
+     ]
+    },
+    {
+     "id": "cb_collectif",
+     "type": "echelle",
+     "libelle": "Un collectif inter-clubs finançant l'accompagnement des jeunes vous intéresserait-il&nbsp;?",
+     "requis": true,
+     "min": 1,
+     "max": 5,
+     "bas": "Pas du tout",
+     "haut": "Beaucoup"
+    },
+    {
+     "id": "cb_libre",
+     "type": "long",
+     "libelle": "Si vous pouviez changer une seule règle du judo français, laquelle&nbsp;?",
+     "requis": false
+    }
+   ]
+  },
+  {
+   "titre": "Rester en contact, si vous le souhaitez",
+   "intro": "Le questionnaire est anonyme. Cette dernière section est entièrement facultative&nbsp;: elle sert uniquement à vous envoyer l'étude et, si vous l'acceptez, à vous recontacter pour approfondir. Vos coordonnées sont conservées séparément de vos réponses.",
+   "questions": [
+    {
+     "id": "ct_suite",
+     "type": "choix",
+     "libelle": "Accepteriez-vous un entretien de trente minutes pour approfondir&nbsp;?",
+     "options": [
+      "Oui, volontiers",
+      "Peut-être, selon le moment",
+      "Non"
+     ],
+     "requis": false
+    },
+    {
+     "id": "ct_etude",
+     "type": "choix",
+     "libelle": "Souhaitez-vous recevoir l'étude à sa publication&nbsp;?",
+     "options": [
+      "Oui",
+      "Non"
+     ],
+     "requis": false
+    },
+    {
+     "id": "ct_nom",
+     "type": "texte",
+     "libelle": "Prénom, ou nom de la structure",
+     "requis": false,
+     "aide": "À ne remplir que si vous avez répondu oui à l'une des deux questions ci-dessus."
+    },
+    {
+     "id": "ct_mail",
+     "type": "email",
+     "libelle": "Adresse email",
+     "requis": false,
+     "exemple": "vous@exemple.fr"
+    },
+    {
+     "id": "ct_mot",
+     "type": "long",
+     "libelle": "Quelque chose à ajouter&nbsp;?",
+     "requis": false,
+     "exemple": "Un point que le questionnaire n'aborde pas, une nuance, un désaccord."
+    }
+   ]
+  }
+ ]
+};
+</script>
+<script src="js/enquete.js?v=20260929"></script>
+</body>
+</html>

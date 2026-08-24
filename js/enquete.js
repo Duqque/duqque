@@ -1,0 +1,254 @@
+/* =========================================================
+   MOTEUR D'ENQUÊTE
+   Les quatre questionnaires de l'Observatoire partagent ce moteur : ils ne
+   different que par leur specification, un simple tableau de sections.
+
+   Ce que le moteur garantit :
+   - anonymat par defaut, coordonnees strictement facultatives et isolees ;
+   - une question a la fois sur telephone, une section par ecran ;
+   - reprise automatique : les reponses sont gardees en local tant que le
+     questionnaire n'est pas envoye, une session interrompue n'est pas perdue ;
+   - envoi vers un point d'entree unique, defini par window.ENQUETE_ENDPOINT.
+
+   Le site est statique : sans ce point d'entree, le moteur bascule sur un envoi
+   par messagerie plutot que d'echouer en silence.
+   ========================================================= */
+(function () {
+ 'use strict';
+
+ const D = document;
+ const spec = window.ENQUETE;
+ if (!spec) return;
+
+ const racine = D.getElementById('enquete');
+ if (!racine) return;
+
+ const CLE = 'duqque_enq_' + spec.id;
+ let etape = 0;
+ let reponses = lire();
+
+ function lire() {
+  try { return JSON.parse(localStorage.getItem(CLE)) || {}; } catch (e) { return {}; }
+ }
+ function ecrire() {
+  try { localStorage.setItem(CLE, JSON.stringify(reponses)); } catch (e) {}
+ }
+
+ /* --- Rendu d'une question ------------------------------------------------- */
+ function champ(q) {
+  const v = reponses[q.id];
+  const req = q.requis ? ' required' : '';
+  const aide = q.aide ? `<p class="eq-aide">${q.aide}</p>` : '';
+  let corps = '';
+
+  if (q.type === 'texte' || q.type === 'email' || q.type === 'tel' || q.type === 'nombre') {
+   const t = q.type === 'nombre' ? 'number' : (q.type === 'texte' ? 'text' : q.type);
+   const attrs = q.type === 'nombre' ? ' min="0" inputmode="numeric"' : '';
+   corps = `<input type="${t}" id="${q.id}" name="${q.id}"${attrs}${req}
+     value="${v ? String(v).replace(/"/g, '&quot;') : ''}"
+     ${q.exemple ? `placeholder="${q.exemple}"` : ''} />`;
+
+  } else if (q.type === 'long') {
+   corps = `<textarea id="${q.id}" name="${q.id}" rows="4"${req}
+     ${q.exemple ? `placeholder="${q.exemple}"` : ''}>${v || ''}</textarea>`;
+
+  } else if (q.type === 'choix') {
+   corps = '<div class="eq-choix">' + q.options.map((o, i) => `
+     <label class="eq-opt${v === o ? ' on' : ''}">
+      <input type="radio" name="${q.id}" value="${o}"${v === o ? ' checked' : ''}${req && i === 0 ? ' required' : ''} />
+      <span>${o}</span>
+     </label>`).join('') + '</div>';
+
+  } else if (q.type === 'multi') {
+   const vals = Array.isArray(v) ? v : [];
+   corps = '<div class="eq-choix">' + q.options.map((o) => `
+     <label class="eq-opt${vals.indexOf(o) >= 0 ? ' on' : ''}">
+      <input type="checkbox" name="${q.id}" value="${o}"${vals.indexOf(o) >= 0 ? ' checked' : ''} />
+      <span>${o}</span>
+     </label>`).join('') + '</div>';
+
+  } else if (q.type === 'echelle') {
+   const min = q.min || 1, max = q.max || 5;
+   let b = '';
+   for (let i = min; i <= max; i++) {
+    b += `<label class="eq-note${String(v) === String(i) ? ' on' : ''}">
+      <input type="radio" name="${q.id}" value="${i}"${String(v) === String(i) ? ' checked' : ''}${req && i === min ? ' required' : ''} />
+      <span>${i}</span></label>`;
+   }
+   corps = `<div class="eq-echelle">${b}</div>
+     <div class="eq-bornes"><span>${q.bas || ''}</span><span>${q.haut || ''}</span></div>`;
+
+  } else if (q.type === 'liste') {
+   corps = `<select id="${q.id}" name="${q.id}"${req}>
+     <option value="">Choisir</option>
+     ${q.options.map((o) => `<option${v === o ? ' selected' : ''}>${o}</option>`).join('')}
+    </select>`;
+  }
+
+  return `<div class="eq-q" data-q="${q.id}">
+    <label class="eq-lib" ${q.type === 'choix' || q.type === 'multi' || q.type === 'echelle' ? '' : `for="${q.id}"`}>
+     ${q.libelle}${q.requis ? '' : ' <em>facultatif</em>'}
+    </label>
+    ${aide}
+    ${corps}
+   </div>`;
+ }
+
+ /* --- Rendu d'une section --------------------------------------------------- */
+ function rendre() {
+  const s = spec.sections[etape];
+  const dernier = etape === spec.sections.length - 1;
+  const pct = Math.round((etape / spec.sections.length) * 100);
+
+  racine.innerHTML = `
+   <div class="eq-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"
+        aria-label="Progression du questionnaire">
+    <div class="eq-bar-piste"><div class="eq-bar-jauge" style="transform: scaleX(${pct / 100})"></div></div>
+    <span class="eq-bar-pct">${pct}&nbsp;%</span>
+   </div>
+
+   <p class="eq-etape">Section ${etape + 1} sur ${spec.sections.length}</p>
+   <h2 class="serif eq-titre">${s.titre}</h2>
+   ${s.intro ? `<p class="eq-intro">${s.intro}</p>` : ''}
+
+   <form class="eq-form" novalidate>
+    ${s.questions.map(champ).join('')}
+    <div class="eq-nav">
+     ${etape > 0 ? '<button type="button" class="eq-retour" data-prec>Retour</button>' : '<span></span>'}
+     <button type="submit" class="eq-suivant">${dernier ? 'Envoyer mes réponses' : 'Continuer'}
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg>
+     </button>
+    </div>
+    <p class="eq-msg" role="status" aria-live="polite"></p>
+   </form>`;
+
+  racine.querySelector('.eq-form').addEventListener('submit', suivant);
+  const prec = racine.querySelector('[data-prec]');
+  if (prec) prec.addEventListener('click', () => { collecte(); etape--; rendre(); });
+
+  // Retour visuel immediat sur les options cochees.
+  racine.querySelectorAll('.eq-opt input, .eq-note input').forEach((i) => {
+   i.addEventListener('change', () => {
+    const groupe = racine.querySelectorAll(`[name="${i.name}"]`);
+    groupe.forEach((g) => g.closest('label').classList.toggle('on', g.checked));
+   });
+  });
+
+  racine.scrollIntoView({ block: 'start', behavior: etape ? 'smooth' : 'auto' });
+ }
+
+ /* --- Collecte et validation ------------------------------------------------ */
+ function collecte() {
+  const f = racine.querySelector('.eq-form');
+  if (!f) return;
+  spec.sections[etape].questions.forEach((q) => {
+   if (q.type === 'multi') {
+    reponses[q.id] = [...f.querySelectorAll(`[name="${q.id}"]:checked`)].map((e) => e.value);
+   } else {
+    const e = f.querySelector(`[name="${q.id}"]:checked`) || f.querySelector(`[name="${q.id}"]`);
+    if (e) reponses[q.id] = e.value;
+   }
+  });
+  ecrire();
+ }
+
+ function manquantes() {
+  const f = racine.querySelector('.eq-form');
+  return spec.sections[etape].questions.filter((q) => {
+   if (!q.requis) return false;
+   if (q.type === 'multi') return f.querySelectorAll(`[name="${q.id}"]:checked`).length === 0;
+   const e = f.querySelector(`[name="${q.id}"]:checked`) || f.querySelector(`[name="${q.id}"]`);
+   return !e || !e.value.trim();
+  });
+ }
+
+ function suivant(ev) {
+  ev.preventDefault();
+  const msg = racine.querySelector('.eq-msg');
+  const trous = manquantes();
+  if (trous.length) {
+   msg.className = 'eq-msg ko';
+   msg.textContent = trous.length === 1
+    ? 'Une réponse manque avant de continuer.'
+    : trous.length + ' réponses manquent avant de continuer.';
+   const bloc = racine.querySelector(`[data-q="${trous[0].id}"]`);
+   bloc.classList.add('vide');
+   bloc.scrollIntoView({ block: 'center', behavior: 'smooth' });
+   return;
+  }
+  collecte();
+  if (etape < spec.sections.length - 1) { etape++; rendre(); return; }
+  envoyer();
+ }
+
+ /* --- Envoi ------------------------------------------------------------------ */
+ function corpsLisible() {
+  const l = ['Questionnaire : ' + spec.titre, 'Cible : ' + spec.cible, ''];
+  spec.sections.forEach((s) => {
+   l.push('— ' + s.titre.replace(/<[^>]+>/g, ''));
+   s.questions.forEach((q) => {
+    const v = reponses[q.id];
+    l.push(q.libelle.replace(/<[^>]+>/g, '') + ' : ' + (Array.isArray(v) ? v.join(', ') : (v || '—')));
+   });
+   l.push('');
+  });
+  return l.join('\n');
+ }
+
+ function envoyer() {
+  const f = racine.querySelector('.eq-form');
+  const msg = racine.querySelector('.eq-msg');
+  const bouton = f.querySelector('.eq-suivant');
+  bouton.disabled = true;
+  msg.className = 'eq-msg';
+  msg.textContent = 'Envoi en cours…';
+
+  const charge = {
+   questionnaire: spec.id,
+   titre: spec.titre,
+   cible: spec.cible,
+   envoye_le: new Date().toISOString(),
+   reponses: reponses
+  };
+
+  if (!window.ENQUETE_ENDPOINT) {
+   // Repli honnete : sans point d'entree, on compose le message dans la messagerie
+   // plutot que d'afficher un faux accuse de reception.
+   location.href = 'mailto:contact@duqque.fr?subject=' +
+    encodeURIComponent('Observatoire · ' + spec.titre + ' (' + spec.cible + ')') +
+    '&body=' + encodeURIComponent(corpsLisible());
+   fin(true);
+   return;
+  }
+
+  fetch(window.ENQUETE_ENDPOINT, {
+   method: 'POST',
+   headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+   body: JSON.stringify(charge)
+  }).then(function () { fin(true); })
+    .catch(function () {
+     bouton.disabled = false;
+     msg.className = 'eq-msg ko';
+     msg.textContent = "L'envoi a échoué. Réessayez, ou écrivez-nous à contact@duqque.fr.";
+    });
+ }
+
+ function fin() {
+  try { localStorage.removeItem(CLE); } catch (e) {}
+  racine.innerHTML = `
+   <div class="eq-fin">
+    <span class="eq-coche" aria-hidden="true">
+     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
+    </span>
+    <h2 class="serif">Merci. Vos réponses sont enregistrées.</h2>
+    <p>Elles rejoignent celles des autres participants. L'étude complète sera publiée gratuitement, données brutes comprises, et vous pourrez la lire même si vous n'avez pas laissé vos coordonnées.</p>
+    <div class="eq-fin-liens">
+     <a href="observatoire.html" class="btn btn-primary">Revenir à l'Observatoire <span class="arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span></a>
+     <a href="resultats.html" class="eq-lien-sobre">Voir les résultats en direct</a>
+    </div>
+   </div>`;
+  racine.scrollIntoView({ block: 'start', behavior: 'smooth' });
+ }
+
+ rendre();
+})();

@@ -10,7 +10,7 @@
 <meta property="og:title" content="Observatoire du sport et de l'économie sportive" />
 <meta property="og:description" content="Des études sur les clubs, les parcours et les transferts, des cadets aux professionnels. Première étude : le judo." />
 <meta property="og:locale" content="fr_FR" />
-<link rel="stylesheet" href="css/style.css?v=20260927" />
+<link rel="stylesheet" href="css/style.css?v=20260929" />
 <style>
  /* =========================================================
     OBSERVATOIRE
@@ -76,6 +76,24 @@
  .ob-qui p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
 
  .ob-note { font-size: 13.5px; line-height: 1.6; color: var(--ink-muted); margin: 30px 0 0; max-width: 62ch; }
+
+ /* Cartes des questionnaires */
+ .ob-enquetes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 36px; }
+ .ob-enq {
+  display: flex; flex-direction: column; gap: 10px; text-decoration: none;
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  padding: clamp(22px, 2.6vw, 30px); color: var(--ink);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+ }
+ .ob-enq:hover { transform: translateY(-3px); border-color: var(--accent-ink); box-shadow: 0 18px 44px rgba(10,10,14,0.10); }
+ .ob-enq .et { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--accent-ink); }
+ .ob-enq b { font-family: var(--display); font-weight: 900; font-size: 21px; line-height: 1.12; }
+ .ob-enq p { font-size: 14px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+ .ob-enq .fl { display: inline-flex; align-items: center; gap: 9px; margin-top: auto; padding-top: 14px;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--ink); }
+ .ob-enq .fl svg { transition: transform .3s var(--ease); }
+ .ob-enq:hover .fl svg { transform: translateX(4px); }
+ @media (max-width: 760px) { .ob-enquetes { grid-template-columns: 1fr; } }
 
  @media (max-width: 900px) {
   .ob-axes, .ob-appel { grid-template-columns: 1fr; }
@@ -145,6 +163,43 @@
  </div>
 </section>
 
+<section style="background: var(--bg-soft); padding-top: 0;">
+ <div class="container">
+  <div class="kicker reveal"><span class="line"></span> Participer</div>
+  <h2 class="serif reveal" style="max-width: 24ch; margin-bottom: 10px;">Quatre questionnaires, <em class="accent">selon qui vous êtes.</em></h2>
+  <p class="ob-lede reveal">Un athlète et un dirigeant ne vivent pas la même réalité et ne peuvent pas répondre aux mêmes questions. Chaque étude a donc deux versions. Comptez douze à quinze minutes, c'est anonyme, et vous pouvez laisser vos coordonnées à la fin si vous voulez aller plus loin.</p>
+
+  <div class="ob-enquetes">
+   <a href="enquete-transferts-athletes.html" class="ob-enq reveal">
+    <span class="et">Étude 01 · Transferts et accompagnement</span>
+    <b>Je suis judoka</b>
+    <p>Votre club, votre encadrement, ce que coûte votre saison, et les changements de club que vous avez vécus ou envisagés.</p>
+    <span class="fl">Répondre · 12 à 15 min <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+   </a>
+   <a href="enquete-transferts-clubs.html" class="ob-enq reveal">
+    <span class="et">Étude 01 · Transferts et accompagnement</span>
+    <b>Je représente un club</b>
+    <p>Vos moyens, ce que vous proposez à vos compétiteurs, les départs et les arrivées, et ce que la formation vous coûte.</p>
+    <span class="fl">Répondre · 12 à 15 min <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+   </a>
+   <a href="enquete-sponsoring-athletes.html" class="ob-enq reveal">
+    <span class="et">Étude 02 · Sponsoring</span>
+    <b>Je suis judoka</b>
+    <p>Vos partenaires actuels, vos démarches, ce que vous avez signé, et ce qui vous bloque le plus.</p>
+    <span class="fl">Répondre · 10 à 12 min <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+   </a>
+   <a href="enquete-sponsoring-clubs.html" class="ob-enq reveal">
+    <span class="et">Étude 02 · Sponsoring</span>
+    <b>Je représente un club</b>
+    <p>La place du partenariat privé dans votre budget, et la façon dont vous encadrez ceux de vos athlètes.</p>
+    <span class="fl">Répondre · 10 à 12 min <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.8"/></svg></span>
+   </a>
+  </div>
+
+  <p class="ob-note reveal">Les résultats sont consultables en direct, au fil des réponses&nbsp;: <a href="resultats.html">voir les résultats provisoires</a>.</p>
+ </div>
+</section>
+
 <section>
  <div class="container">
   <div class="kicker reveal"><span class="line"></span> La méthode</div>
@@ -208,6 +263,6 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260927"></script>
+<script src="js/main.js?v=20260929"></script>
 </body>
 </html>

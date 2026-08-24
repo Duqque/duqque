@@ -777,6 +777,11 @@ function buildNav() {
  'methode.html': 'Notre approche', 'team-espoirs.html': 'Programme Espoirs',
  'success-stories.html': 'Résultats', 'media.html': 'Blog',
  'observatoire.html': 'Observatoire',
+ 'resultats.html': 'Résultats',
+ 'enquete-transferts-athletes.html': 'Questionnaire',
+ 'enquete-transferts-clubs.html': 'Questionnaire',
+ 'enquete-sponsoring-athletes.html': 'Questionnaire',
+ 'enquete-sponsoring-clubs.html': 'Questionnaire',
  'actualites.html': 'Blog', 'cotisations.html': 'Cotisations',
  'candidater.html': 'Candidater',
  'art-carriere-14-15-16-ans.html': 'Trajectoire',
@@ -979,6 +984,37 @@ function initReveal() {
  els.forEach(el => io.observe(el));
  // Filet de securite : tout element encore masque au bout de 3 s est revele.
  setTimeout(() => els.forEach(el => el.classList.add('in')), 3000);
+}
+
+
+/* --- Bandeau donnees personnelles ---------------------------------------------
+   Pose sous la barre de menu, dans la meme forme de pastille que le selecteur de
+   langue, pour ne pas introduire un troisieme vocabulaire graphique.
+
+   Ce n'est volontairement pas une banniere de consentement : le site ne depose
+   aucun cookie de mesure ni de publicite, et une banniere de consentement pour
+   des cookies qui n'existent pas est au mieux inutile, au pire trompeuse. C'est
+   une information, affichee une fois, refermable, et memorisee. */
+function buildBandeauRGPD() {
+ const CLE = 'duqque_rgpd_vu';
+ try { if (localStorage.getItem(CLE)) return; } catch (e) {}
+ const nav = document.querySelector('.nav');
+ if (!nav) return;
+
+ const b = document.createElement('div');
+ b.className = 'rgpd-bandeau';
+ b.setAttribute('role', 'note');
+ b.innerHTML = `
+  <span class="rgpd-txt">Ce site ne dépose aucun cookie de mesure d'audience ni de publicité.
+   <a href="confidentialite.html">Vos données</a></span>
+  <button type="button" class="rgpd-fermer" aria-label="Fermer l'information sur les données">×</button>`;
+ nav.appendChild(b);
+
+ b.querySelector('.rgpd-fermer').addEventListener('click', () => {
+  b.classList.add('parti');
+  try { localStorage.setItem(CLE, '1'); } catch (e) {}
+  setTimeout(() => b.remove(), 320);
+ });
 }
 
 /* --- Contact form profile chips --- */
@@ -1457,6 +1493,7 @@ document.addEventListener('DOMContentLoaded', () => {
  showLoader();
  initMenu();
  buildFooter();
+ buildBandeauRGPD();
  initNavScroll();
  initReveal();
  initProfileChips();

@@ -2276,3 +2276,38 @@ body.menu-open .share, body.lang-open .share { opacity: 0; pointer-events: none;
   .art-rail-r { order: 2; border-left: 0; padding-left: 0; margin-top: clamp(28px, 4vw, 44px); }
   .art-body { order: 1; }
 }
+
+/* =========================================================
+   BANDEAU DONNÉES PERSONNELLES
+   Même pastille sombre que la barre de menu et le sélecteur de langue : trois
+   éléments de navigation, un seul vocabulaire graphique.
+   ========================================================= */
+.rgpd-bandeau {
+  position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%);
+  display: inline-flex; align-items: center; gap: 14px;
+  max-width: calc(100vw - 32px);
+  background: #050505; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 100px; padding: 9px 10px 9px 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  animation: rgpdEntre .45s var(--ease) .8s both;
+}
+@keyframes rgpdEntre { from { opacity: 0; transform: translate(-50%, -8px); } to { opacity: 1; transform: translate(-50%, 0); } }
+.rgpd-bandeau.parti { opacity: 0; transform: translate(-50%, -8px); transition: opacity .3s, transform .3s; }
+.rgpd-txt { font-size: 12px; line-height: 1.4; color: rgba(245,243,239,0.92); }
+.rgpd-txt a { color: #d9ff3d; text-decoration: none; border-bottom: 1px solid currentColor; white-space: nowrap; }
+.rgpd-txt a:hover { color: #fff; }
+.rgpd-fermer {
+  flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18); background: transparent;
+  color: #f5f3ef; font-size: 17px; line-height: 1; cursor: pointer;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.rgpd-fermer:hover { background: #f5f3ef; color: #0b0b0b; }
+.rgpd-fermer:focus-visible { outline: 2px solid #d9ff3d; outline-offset: 2px; }
+body.menu-open .rgpd-bandeau, body.lang-open .rgpd-bandeau { opacity: 0; pointer-events: none; transition: opacity .3s; }
+@media (max-width: 700px) {
+  .rgpd-bandeau { border-radius: 16px; padding: 11px 11px 11px 16px; align-items: flex-start; gap: 10px; }
+  .rgpd-txt { font-size: 11.5px; }
+  /* La barre de menu est en bas sur mobile : le bandeau se pose au-dessus. */
+  .rgpd-bandeau { top: auto; bottom: calc(100% + 10px); }
+}

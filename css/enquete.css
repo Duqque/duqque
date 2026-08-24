@@ -1,0 +1,137 @@
+/* =========================================================
+   ENQUÊTES DE L'OBSERVATOIRE
+   Feuille partagée par les quatre questionnaires. Chargée après style.css,
+   elle en reprend les variables : rien n'est redéfini en dur.
+   ========================================================= */
+
+.eq-enveloppe {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: clamp(24px, 4vw, 52px);
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* --- Progression -------------------------------------------------------- */
+.eq-bar { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; }
+.eq-bar-piste { flex: 1; height: 8px; border-radius: 100px; background: rgba(26,20,16,0.10); overflow: hidden; }
+.eq-bar-jauge {
+  height: 100%; width: 100%; border-radius: 100px;
+  background: var(--accent-ink);
+  transform-origin: left center;
+  transition: transform .4s var(--ease);
+}
+.eq-bar-pct {
+  font-size: 13px; font-weight: 700; color: var(--accent-ink);
+  min-width: 46px; text-align: right; font-variant-numeric: tabular-nums;
+}
+
+.eq-etape { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700; color: var(--ink-muted); margin: 0 0 10px; }
+.eq-titre { font-size: clamp(23px, 3vw, 32px); line-height: 1.1; margin: 0 0 12px; max-width: 22ch; }
+.eq-intro { font-size: 15px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 8px; max-width: 58ch; }
+
+/* --- Questions ---------------------------------------------------------- */
+.eq-form { display: grid; gap: 30px; margin-top: 30px; }
+.eq-q { display: grid; gap: 10px; }
+.eq-lib { font-size: 16px; line-height: 1.4; font-weight: 600; color: var(--ink); }
+.eq-lib em { font-style: normal; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--ink-muted); margin-left: 6px; }
+.eq-aide { font-size: 13.5px; line-height: 1.55; color: var(--ink-muted); margin: -4px 0 0; }
+
+/* 16px minimum : en dessous, Safari iOS agrandit la page à chaque focus. */
+.eq-q input[type="text"], .eq-q input[type="email"], .eq-q input[type="tel"],
+.eq-q input[type="number"], .eq-q textarea, .eq-q select {
+  width: 100%; background: transparent; border: none;
+  border-bottom: 1.5px solid var(--line-strong);
+  color: var(--ink); padding: 11px 0;
+  font-family: var(--sans); font-size: 16px; line-height: 1.4;
+  border-radius: 0;
+  transition: border-color .3s var(--ease);
+}
+.eq-q input:focus, .eq-q textarea:focus, .eq-q select:focus { outline: none; border-color: var(--accent-ink); }
+.eq-q textarea { resize: vertical; min-height: 92px; }
+.eq-q input::placeholder, .eq-q textarea::placeholder { color: var(--ink-muted); opacity: 0.7; }
+.eq-q.vide input, .eq-q.vide textarea, .eq-q.vide select { border-bottom-color: #8a2b2b; }
+
+/* Cases et boutons radio : la surface entière est cliquable, pas seulement la
+   pastille, ce qui change tout au pouce. */
+.eq-choix { display: grid; gap: 8px; }
+.eq-opt {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px;
+  cursor: pointer; background: #fff;
+  transition: border-color .22s var(--ease), background .22s var(--ease);
+}
+.eq-opt:hover { border-color: var(--ink); }
+.eq-opt.on { border-color: var(--accent-ink); background: rgba(90,47,230,0.06); }
+.eq-opt input { flex: 0 0 auto; margin: 2px 0 0; accent-color: var(--accent-ink); width: 18px; height: 18px; }
+.eq-opt span { font-size: 15px; line-height: 1.45; color: var(--ink); }
+
+/* Échelle : des cases larges, jamais un curseur, impossible à viser au pouce. */
+.eq-echelle { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+.eq-note {
+  display: grid; place-items: center; cursor: pointer;
+  min-height: 54px; border: 1px solid var(--line); border-radius: 12px;
+  background: #fff; transition: border-color .22s var(--ease), background .22s var(--ease);
+}
+.eq-note:hover { border-color: var(--ink); }
+.eq-note.on { border-color: var(--accent-ink); background: var(--accent-ink); }
+.eq-note.on span { color: #fff; }
+.eq-note input { position: absolute; opacity: 0; pointer-events: none; }
+.eq-note span { font-family: var(--display); font-weight: 900; font-size: 18px; color: var(--ink); }
+.eq-bornes { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--ink-muted); margin-top: 8px; }
+
+/* --- Navigation --------------------------------------------------------- */
+.eq-nav { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-top: 6px; }
+.eq-suivant {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  background: var(--accent-ink); color: #fff; border: none; border-radius: 100px;
+  padding: 16px 30px; cursor: pointer;
+  font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: 0.04em;
+  transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+}
+.eq-suivant:hover:not(:disabled) { background: var(--lime, #d9ff3d); color: #0b0b0b; transform: translateY(-2px); }
+.eq-suivant:disabled { opacity: 0.6; cursor: default; }
+.eq-suivant svg { transition: transform .3s var(--ease); }
+.eq-suivant:hover:not(:disabled) svg { transform: translateX(4px); }
+.eq-retour {
+  background: none; border: none; cursor: pointer;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 600; color: var(--ink-muted);
+  padding: 12px 4px; border-bottom: 1px solid var(--line-strong);
+}
+.eq-retour:hover { color: var(--ink); border-color: var(--ink); }
+.eq-msg { font-size: 13.5px; line-height: 1.5; margin: 0; min-height: 20px; color: var(--ink-muted); }
+.eq-msg.ko { color: #8a2b2b; }
+
+/* --- Fin ---------------------------------------------------------------- */
+.eq-fin { text-align: left; }
+.eq-coche {
+  display: inline-flex; width: 54px; height: 54px; border-radius: 50%;
+  align-items: center; justify-content: center; margin-bottom: 22px;
+  background: var(--lime, #d9ff3d); color: #101400;
+}
+.eq-coche svg { width: 26px; height: 26px; }
+.eq-fin h2 { font-size: clamp(23px, 3vw, 32px); line-height: 1.12; margin: 0 0 14px; max-width: 20ch; }
+.eq-fin p { font-size: 15.5px; line-height: 1.65; color: var(--ink-soft); max-width: 54ch; margin: 0 0 28px; }
+.eq-fin-liens { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+.eq-lien-sobre { font-size: 13.5px; font-weight: 600; color: var(--ink-muted); text-decoration: none; border-bottom: 1px solid var(--line-strong); }
+.eq-lien-sobre:hover { color: var(--accent-ink); border-color: var(--accent-ink); }
+
+/* --- Cartouche de confidentialité --------------------------------------- */
+.eq-rgpd {
+  max-width: 780px; margin: 26px auto 0;
+  border: 1px solid var(--line); border-radius: 14px;
+  padding: 20px 22px; background: var(--bg-soft);
+}
+.eq-rgpd b { display: block; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 10px; }
+.eq-rgpd p { font-size: 13.5px; line-height: 1.6; color: var(--ink-soft); margin: 0 0 8px; }
+.eq-rgpd p:last-child { margin-bottom: 0; }
+
+@media (max-width: 620px) {
+  .eq-echelle { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .eq-note { min-height: 50px; }
+  .eq-nav { flex-direction: column-reverse; align-items: stretch; }
+  .eq-suivant { width: 100%; }
+  .eq-retour { text-align: center; }
+  .eq-fin-liens { flex-direction: column; align-items: flex-start; }
+}

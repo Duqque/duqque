@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Transferts et accompagnement · athlètes · Observatoire Duqque</title>
+<meta name="description" content="Ce questionnaire s'adresse aux judokas compétiteurs, en club comme en structure fédérale. Il cherche à comprendre ce que les clubs proposent réellement aux jeunes, et comment se décident les changements de club." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://duqque.fr/enquete-transferts-athletes.html" />
+<link rel="stylesheet" href="css/style.css?v=20260929" />
+<link rel="stylesheet" href="css/enquete.css?v=20260929" />
+</head>
+<body>
+
+<nav class="nav"></nav>
+<div class="menu"></div>
+
+<section class="page-hero" style="min-height: 0; padding-bottom: clamp(30px, 4vw, 50px);">
+ <div class="container">
+  <div class="breadcrumb"><a href="observatoire.html">Observatoire</a><span class="sep" aria-hidden="true">›</span><span>Athlète</span></div>
+  <h1 class="serif">Transferts et accompagnement&nbsp;: <em class="accent">la parole aux athlètes.</em></h1>
+  <p class="lead">Ce questionnaire s'adresse aux judokas compétiteurs, en club comme en structure fédérale. Il cherche à comprendre ce que les clubs proposent réellement aux jeunes, et comment se décident les changements de club.</p>
+  <p style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--accent-soft); margin-top: 22px;">
+   Anonyme · 12 à 15 minutes · 5 sections
+  </p>
+ </div>
+</section>
+
+<section>
+ <div class="container">
+  <div class="eq-enveloppe" id="enquete"></div>
+
+  <div class="eq-rgpd">
+   <b>Ce que nous faisons de vos réponses</b>
+   <p>Le questionnaire est <strong>anonyme</strong>&nbsp;: aucune donnée d'identification n'est demandée, et rien ne permet de vous reconnaître à partir de vos réponses. Les résultats ne sont publiés qu'agrégés, jamais individuellement.</p>
+   <p>La dernière section, entièrement facultative, permet de laisser des coordonnées pour recevoir l'étude ou approfondir. Elles sont conservées séparément des réponses et supprimées douze mois après la publication.</p>
+   <p>Responsable du traitement&nbsp;: Duqque Sports. Base légale&nbsp;: votre consentement, donné en envoyant le formulaire. Vous pouvez demander l'effacement à tout moment à <a href="mailto:contact@duqque.fr">contact@duqque.fr</a>. Détail dans notre <a href="confidentialite.html">politique de confidentialité</a>.</p>
+  </div>
+ </div>
+</section>
+
+<footer class="footer"></footer>
+
+<script src="js/main.js?v=20260929"></script>
+<script src="js/enquete-config.js?v=20260929"></script>
+<script>
+window.ENQUETE = {
+ "id": "transferts-athletes",
+ "titre": "Transferts et accompagnement · athlètes",
+ "cible": "Athlète",
+ "duree": "12 à 15 minutes",
+ "intro": "Ce questionnaire s'adresse aux judokas compétiteurs, en club comme en structure fédérale. Il cherche à comprendre ce que les clubs proposent réellement aux jeunes, et comment se décident les changements de club.",
+ "sections": [
+  {
+   "titre": "Votre profil",
+   "intro": "Aucune de ces informations ne permet de vous identifier.",
+   "questions": [
+    {
+     "id": "a_cat",
+     "type": "liste",
+     "libelle": "Votre catégorie d'âge cette saison",
+     "requis": true,
+     "options": [
+      "U15 (minimes)",
+      "U18 (cadets)",
+      "U21 (juniors)",
+      "Senior",
+      "Vétéran"
+     ]
+    },
+    {
+     "id": "a_sexe",
+     "type": "choix",
+     "libelle": "Vous êtes",
+     "requis": false,
+     "options": [
+      "Une femme",
+      "Un homme",
+      "Je préfère ne pas répondre"
+     ]
+    },
+    {
+     "id": "a_region",
+     "type": "texte",
+     "libelle": "Votre région ou département",
+     "requis": true,
+     "exemple": "Île-de-France, 78…"
+    },
+    {
+     "id": "a_niveau",
+     "type": "liste",
+     "libelle": "Le niveau le plus élevé auquel vous avez combattu",
+     "requis": true,
+     "options": [
+      "Départemental",
+      "Régional",
+      "National (championnat de France)",
+      "International (circuit européen)",
+      "International (circuit mondial, Grand Slam, championnats du monde)"
+     ]
+    },
+    {
+     "id": "a_structure",
+     "type": "choix",
+     "libelle": "Êtes-vous en structure fédérale&nbsp;?",
+     "requis": true,
+     "options": [
+      "Non, uniquement en club",
+      "Section sportive scolaire",
+      "Pôle Espoirs",
+      "Pôle France ou INSEP",
+      "Autre structure"
+     ]
+    },
+    {
+     "id": "a_annees",
+     "type": "nombre",
+     "libelle": "Depuis combien d'années pratiquez-vous le judo&nbsp;?",
+     "requis": true
+    },
+    {
+     "id": "a_seances",
+     "type": "nombre",
+     "libelle": "Combien de séances de judo par semaine, en moyenne&nbsp;?",
+     "requis": true
+    }
+   ]
+  },
+  {
+   "titre": "Ce que votre club vous apporte",
+   "questions": [
+    {
+     "id": "a_prop",
+     "type": "multi",
+     "libelle": "Que propose votre club, concrètement&nbsp;?",
+     "requis": true,
+     "aide": "Cochez tout ce dont vous bénéficiez réellement, pas ce qui est annoncé.",
+     "options": [
+      "Entraînements compétiteurs séparés",
+      "Préparation physique encadrée",
+      "Préparation mentale",
+      "Suivi médical ou kiné",
+      "Prise en charge des déplacements",
+      "Prise en charge des stages",
+      "Aide sur la scolarité",
+      "Accompagnement administratif",
+      "Aucun de ces éléments"
+     ]
+    },
+    {
+     "id": "a_enc",
+     "type": "echelle",
+     "libelle": "Vous sentez-vous suivi individuellement par votre entraîneur&nbsp;?",
+     "requis": true,
+     "min": 1,
+     "max": 5,
+     "bas": "Pas du tout",
+     "haut": "Totalement"
+    },
+    {
+     "id": "a_plan",
+     "type": "choix",
+     "libelle": "Avez-vous un plan de saison écrit, avec des objectifs&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui, écrit et revu régulièrement",
+      "Oui, mais jamais revu",
+      "Non, seulement à l'oral",
+      "Non, rien du tout"
+     ]
+    },
+    {
+     "id": "a_cout",
+     "type": "liste",
+     "libelle": "Combien votre saison coûte-t-elle à votre famille, tout compris&nbsp;?",
+     "requis": true,
+     "aide": "Licence, cotisation, équipement, déplacements, stages, hébergement.",
+     "options": [
+      "Moins de 500 €",
+      "500 à 1 000 €",
+      "1 000 à 2 000 €",
+      "2 000 à 4 000 €",
+      "Plus de 4 000 €",
+      "Je ne sais pas"
+     ]
+    },
+    {
+     "id": "a_reste",
+     "type": "echelle",
+     "libelle": "Ce coût est-il un frein pour vous&nbsp;?",
+     "requis": true,
+     "min": 1,
+     "max": 5,
+     "bas": "Aucun frein",
+     "haut": "Frein majeur"
+    },
+    {
+     "id": "a_arret",
+     "type": "choix",
+     "libelle": "Avez-vous déjà envisagé d'arrêter pour des raisons financières&nbsp;?",
+     "requis": true,
+     "options": [
+      "Oui",
+      "Non",
+      "Je préfère ne pas répondre"
+     ]
+    }
+   ]
+  },
+  {
+   "titre": "Changer de club",
+   "intro": "Le cœur de l'étude. Répondez même si vous n'avez jamais changé.",
+   "questions": [
+    {
+     "id": "t_deja",
+     "type": "choix",
+     "libelle": "Avez-vous déjà changé de club&nbsp;?",
+     "requis": true,
+     "options": [
+      "Non, jamais",
+      "Une fois",
+      "Deux fois",
+      "Trois fois ou plus"
+     ]
+    },
+    {
+     "id": "t_age",
+     "type": "nombre",
+     "libelle": "À quel âge le premier changement&nbsp;?",
+     "requis": false
+    },
+    {
+     "id": "t_motifs",
+     "type": "multi",
+     "libelle": "Pour quelles raisons&nbsp;? Ou, si vous n'avez jamais changé, qu'est-ce qui vous ferait partir&nbsp;?",
+     "requis": true,
+     "options": [
+      "Niveau d'entraînement insuffisant",
+      "Conflit avec l'entraîneur",
+      "Déménagement",
+      "Entrée en structure fédérale",
+      "Meilleur encadrement ailleurs",
+      "Groupe de partenaires plus fort",
+      "Coût trop élevé",
+      "Promesse d'aide financière ou matérielle",
+      "Scolarité ou études",
+      "Autre"
+     ]
+    },
+    {
+     "id": "t_qui",
+     "type": "choix",
+     "libelle": "Qui a pris l'initiative du contact&nbsp;?",
+     "requis": false,
+     "options": [
+      "Moi ou ma famille",
+      "Le club d'accueil",
+      "Un entraîneur",
+      "Un intermédiaire",
+      "Sans objet"
+     ]
+    },
+    {
+     "id": "t_promesse",
+     "type": "multi",
+     "libelle": "Que vous a-t-on promis&nbsp;?",
+     "requis": false,
+     "options": [
+      "Rien de particulier",
+      "Un meilleur encadrement",
+      "Des déplacements pris en charge",
+      "Du matériel",
+      "Une aide financière",
+      "Une sélection ou une place en structure",
+      "Autre"
+     ]
+    },
+    {
+     "id": "t_tenu",
+     "type": "echelle",
+     "libelle": "Les promesses ont-elles été tenues&nbsp;?",
+     "requis": false,
+     "min": 1,
+     "max": 5,
+     "bas": "Pas du tout",
+     "haut": "Entièrement"
+    },
+    {
+     "id": "t_ecrit",
+     "type": "choix",
+     "libelle": "Quelque chose a-t-il été mis par écrit&nbsp;?",
+     "requis": false,
+     "options": [
+      "Oui, une convention signée",
+      "Oui, un simple courrier ou message",
+      "Non, uniquement à l'oral",
+      "Je ne sais pas",
+      "Sans objet"
+     ]
+    },
+    {
+     "id": "t_frein",
+     "type": "long",
+     "libelle": "Qu'est-ce qui a été le plus difficile dans ce changement&nbsp;?",
+     "requis": false,
+     "exemple": "Administratif, relationnel, sportif, financier…"
+    }
+   ]
+  },
+  {
+   "titre": "Ce qui manque",
+   "questions": [
+    {
+     "id": "m_besoins",
+     "type": "multi",
+     "libelle": "De quoi auriez-vous le plus besoin aujourd'hui&nbsp;?",
+     "requis": true,
+     "options": [
+      "Un accompagnement financier",
+      "Un conseil sur les choix de carrière",
+      "De l'aide sur l'image et la communication",
+      "De l'aide pour trouver des partenaires",
+      "Un soutien scolaire ou universitaire",
+      "Un accompagnement psychologique",
+      "Quelqu'un de neutre à qui parler",
+      "Rien de particulier"
+     ]
+    },
+    {
+     "id": "m_info",
+     "type": "echelle",
+     "libelle": "Vous sentez-vous bien informé sur vos droits&nbsp;?",
+     "requis": true,
+     "aide": "Droit à l'image, conventions, obligations envers le club.",
+     "min": 1,
+     "max": 5,
+     "bas": "Pas du tout",
+     "haut": "Très bien"
+    },
+    {
+     "id": "m_libre",
+     "type": "long",
+     "libelle": "Si vous pouviez changer une seule chose dans le judo français, laquelle&nbsp;?",
+     "requis": false
+    }
+   ]
+  },
+  {
+   "titre": "Rester en contact, si vous le souhaitez",
+   "intro": "Le questionnaire est anonyme. Cette dernière section est entièrement facultative&nbsp;: elle sert uniquement à vous envoyer l'étude et, si vous l'acceptez, à vous recontacter pour approfondir. Vos coordonnées sont conservées séparément de vos réponses.",
+   "questions": [
+    {
+     "id": "ct_suite",
+     "type": "choix",
+     "libelle": "Accepteriez-vous un entretien de trente minutes pour approfondir&nbsp;?",
+     "options": [
+      "Oui, volontiers",
+      "Peut-être, selon le moment",
+      "Non"
+     ],
+     "requis": false
+    },
+    {
+     "id": "ct_etude",
+     "type": "choix",
+     "libelle": "Souhaitez-vous recevoir l'étude à sa publication&nbsp;?",
+     "options": [
+      "Oui",
+      "Non"
+     ],
+     "requis": false
+    },
+    {
+     "id": "ct_nom",
+     "type": "texte",
+     "libelle": "Prénom, ou nom de la structure",
+     "requis": false,
+     "aide": "À ne remplir que si vous avez répondu oui à l'une des deux questions ci-dessus."
+    },
+    {
+     "id": "ct_mail",
+     "type": "email",
+     "libelle": "Adresse email",
+     "requis": false,
+     "exemple": "vous@exemple.fr"
+    },
+    {
+     "id": "ct_mot",
+     "type": "long",
+     "libelle": "Quelque chose à ajouter&nbsp;?",
+     "requis": false,
+     "exemple": "Un point que le questionnaire n'aborde pas, une nuance, un désaccord."
+    }
+   ]
+  }
+ ]
+};
+</script>
+<script src="js/enquete.js?v=20260929"></script>
+</body>
+</html>
