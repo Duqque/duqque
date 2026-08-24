@@ -10,8 +10,8 @@
 <meta property="og:title" content="Adhérer à Duqque Sports" />
 <meta property="og:description" content="Le dossier complet en six étapes. Confirmation par email." />
 <meta property="og:locale" content="fr_FR" />
-<link rel="stylesheet" href="css/style.css?v=20260941" />
-<link rel="stylesheet" href="css/enquete.css?v=20260941" />
+<link rel="stylesheet" href="css/style.css?v=20260943" />
+<link rel="stylesheet" href="css/enquete.css?v=20260943" />
 <style>
  /* =========================================================
     ADHÉSION
@@ -131,20 +131,53 @@
  .ch-tel-pop { position: absolute; z-index: 45; left: 0; top: calc(100% + 6px); width: min(340px, 100%); }
  .ch-tel-pop .ch-liste { position: static; top: auto; }
 
- /* Ce qui se passe après l'envoi. Placé avant le formulaire : une personne doit
-    savoir à quoi elle s'engage, et ce qu'elle ne s'engage pas à payer, avant de
-    remplir trente champs. */
- .ad-suite { background: #0b0b0b; color: #f5f3ef; border-radius: 20px; padding: clamp(26px, 3.6vw, 44px); }
- .ad-suite h2 { color: #f5f3ef; font-size: clamp(21px, 2.6vw, 30px); margin: 0 0 26px; max-width: 24ch; }
- .ad-suite-grille { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 2.6vw, 34px); }
- .ad-suite .n {
-  display: block; font-family: var(--display); font-weight: 900; font-size: 30px; line-height: 1;
-  letter-spacing: -0.03em; color: var(--lime, #d9ff3d); margin-bottom: 12px;
+ /* Ce qui se passe après l'envoi. En trois colonnes, les textes de longueurs
+    très inégales laissaient deux colonnes à moitié vides et un bas en escalier.
+    En lignes, la longueur ne se voit plus : chaque étape occupe la largeur dont
+    elle a besoin, et le titre tient sa propre colonne. */
+ .ad-suite {
+  background: #0b0b0b; color: #f5f3ef; border-radius: 20px;
+  padding: clamp(28px, 3.6vw, 52px);
+  display: grid; grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(26px, 4vw, 64px); align-items: start;
  }
- .ad-suite b { display: block; font-size: 16px; line-height: 1.3; margin-bottom: 8px; color: #f5f3ef; }
- .ad-suite p { font-size: 14px; line-height: 1.65; color: rgba(245,243,239,0.86); margin: 0; }
- .ad-suite p b { display: inline; font-size: inherit; color: var(--lime, #d9ff3d); }
- @media (max-width: 880px) { .ad-suite-grille { grid-template-columns: 1fr; gap: 24px; } }
+ .ad-suite-kick {
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 700;
+  color: var(--lime, #d9ff3d); margin: 0 0 14px;
+ }
+ .ad-suite h2 {
+  color: #f5f3ef; font-size: clamp(24px, 3vw, 38px); line-height: 1.08;
+  letter-spacing: -0.02em; margin: 0 0 16px; max-width: 14ch;
+ }
+ .ad-suite h2 em { font-style: italic; color: var(--accent-soft, #c4b3ff); }
+ .ad-suite-chapo { font-size: 14.5px; line-height: 1.6; color: rgba(245,243,239,0.78); margin: 0; max-width: 30ch; }
+
+ .ad-suite-liste { list-style: none; margin: 0; padding: 0; }
+ .ad-suite-liste li {
+  display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 20px; align-items: start;
+  padding: 22px 0; border-top: 1px solid rgba(255,255,255,0.14);
+ }
+ .ad-suite-liste li:first-child { padding-top: 0; border-top: none; }
+ .ad-suite-liste li:last-child { padding-bottom: 0; }
+ .ad-suite-liste .n {
+  font-family: var(--display); font-weight: 900; font-size: 26px; line-height: 1;
+  letter-spacing: -0.03em; color: var(--lime, #d9ff3d); padding-top: 2px;
+ }
+ .ad-suite-liste b { display: block; font-size: 16.5px; line-height: 1.3; margin-bottom: 8px; color: #f5f3ef; }
+ .ad-suite-liste p { font-size: 14.5px; line-height: 1.65; color: rgba(245,243,239,0.84); margin: 0; }
+ /* Sélecteur plus précis que « .ad-suite-liste b », sinon la mise en avant
+    héritait de la taille et de la couleur du titre d'étape. */
+ .ad-suite-liste p b.ad-souligne { display: inline; font-size: inherit; color: var(--lime, #d9ff3d); margin: 0; }
+
+ @media (max-width: 920px) {
+  .ad-suite { grid-template-columns: 1fr; gap: 26px; }
+  .ad-suite h2 { max-width: 20ch; }
+  .ad-suite-chapo { max-width: 46ch; }
+ }
+ @media (max-width: 520px) {
+  .ad-suite-liste li { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; }
+  .ad-suite-liste .n { font-size: 22px; }
+ }
 
  .ad-fin-note {
   background: rgba(90,47,230,0.06); border-left: 2px solid var(--accent-ink);
@@ -183,24 +216,35 @@
 <section style="padding-top: clamp(26px, 3vw, 36px);">
  <div class="container">
   <div class="ad-suite reveal">
-   <h2 class="serif">Ce qui se passe après l'envoi.</h2>
-   <div class="ad-suite-grille">
-    <div>
-     <span class="n">01</span>
-     <b>Nous prenons le temps de lire</b>
-     <p>Chaque dossier est lu en entier, sans tri automatique. Nous ne fixons pas de délai que nous ne pourrions pas tenir&nbsp;: nous préférons répondre bien que répondre vite. Tout le monde reçoit une réponse.</p>
-    </div>
-    <div>
-     <span class="n">02</span>
-     <b>Nous regardons si nos programmes vous servent</b>
-     <p>Ils sont taillés pour un certain niveau de pratique et un certain moment de parcours. Accompagner quelqu'un à qui cela n'apporterait rien encore, ce serait lui faire perdre du temps et de l'argent. Quand c'est le cas, nous le disons, et nous indiquons ce qui nous ferait dire oui plus tard. Une adhésion n'est donc pas automatique, et l'association se réserve le droit de ne pas y donner suite, notamment si les informations transmises ne correspondent pas à la réalité.</p>
-    </div>
-    <div>
-     <span class="n">03</span>
-     <b>Si le dossier est retenu, le paiement arrive par email</b>
-     <p>Vous recevez alors le lien de règlement de la cotisation à l'adresse indiquée dans le dossier. <b>Rien n'est à payer maintenant</b>, et rien ne vous sera demandé sur cette page.</p>
-    </div>
+   <div class="ad-suite-tete">
+    <p class="ad-suite-kick">Après l'envoi</p>
+    <h2 class="serif">Ce qui se passe <em>ensuite.</em></h2>
+    <p class="ad-suite-chapo">Trois étapes, et ce que nous ne vous demanderons jamais.</p>
    </div>
+
+   <ol class="ad-suite-liste">
+    <li>
+     <span class="n" aria-hidden="true">01</span>
+     <div>
+      <b>Nous prenons le temps de lire</b>
+      <p>Chaque dossier est lu en entier, sans tri automatique. Nous préférons répondre bien que répondre vite, et tout le monde reçoit une réponse.</p>
+     </div>
+    </li>
+    <li>
+     <span class="n" aria-hidden="true">02</span>
+     <div>
+      <b>Nous regardons si nos programmes vous servent</b>
+      <p>Ils visent un niveau de pratique et un moment de parcours précis. S'ils ne vous apportaient rien encore, nous vous le dirions, en indiquant ce qui nous ferait dire oui plus tard. L'adhésion n'est donc pas automatique, et l'association peut ne pas donner suite à une demande, notamment si les informations transmises ne correspondent pas à la réalité.</p>
+     </div>
+    </li>
+    <li>
+     <span class="n" aria-hidden="true">03</span>
+     <div>
+      <b>Si le dossier est retenu, le paiement arrive par email</b>
+      <p>Vous recevez le lien de règlement de la cotisation à l'adresse du dossier. <b class="ad-souligne">Rien n'est à payer maintenant</b>, et aucune coordonnée bancaire ne vous sera jamais demandée par téléphone ou par message.</p>
+     </div>
+    </li>
+   </ol>
   </div>
  </div>
 </section>
@@ -215,9 +259,9 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260941"></script>
-<script src="js/pays.js?v=20260941"></script>
-<script src="js/champs-riches.js?v=20260941"></script>
-<script src="js/adhesion.js?v=20260941"></script>
+<script src="js/main.js?v=20260943"></script>
+<script src="js/pays.js?v=20260943"></script>
+<script src="js/champs-riches.js?v=20260943"></script>
+<script src="js/adhesion.js?v=20260943"></script>
 </body>
 </html>
