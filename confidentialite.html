@@ -4,18 +4,66 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Politique de confidentialité · Duqque Sports</title>
-<meta name="description" content="Politique de confidentialité et protection des données personnelles de Duqque Sports." />
+<meta name="description" content="Comment Duqque Sports collecte, utilise et protège les données personnelles des visiteurs, des adhérents et des participants aux études." />
+<link rel="canonical" href="https://duqque.fr/confidentialite.html" />
 <link rel="stylesheet" href="css/style.css?v=20260936" />
 <style>
- .legal-wrap { max-width: 66ch; }
+ /* Sommaire epingle a gauche, contenu sur une seule colonne. Le sommaire suffit a
+    parcourir la page : decouper le texte en deux colonnes en plus n'aurait fait
+    qu'ajouter du bruit a de la prose juridique. */
+ .legal-layout {
+  display: grid; grid-template-columns: 268px minmax(0, 1fr);
+  gap: clamp(30px, 4vw, 72px); align-items: start;
+ }
+ .legal-som {
+  position: sticky; top: calc(var(--nav-bas, 76px) + 26px);
+  background: #fff; border: 1px solid var(--line); border-radius: 16px;
+  padding: 22px 18px 18px;
+  box-shadow: 0 16px 44px rgba(10,10,14,0.06);
+ }
+ .legal-som .t {
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  font-weight: 700; color: var(--ink-muted); margin: 0 0 14px; padding-left: 10px;
+ }
+ .legal-som ol { list-style: none; margin: 0; padding: 0; counter-reset: ls; display: grid; gap: 1px; }
+ .legal-som li { counter-increment: ls; }
+ .legal-som a {
+  display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 9px; align-items: baseline;
+  padding: 8px 10px; border-radius: 9px; border: none;
+  font-size: 13px; line-height: 1.35; color: var(--ink-soft); text-decoration: none;
+  transition: background .22s var(--ease), color .22s var(--ease);
+ }
+ .legal-som a::before {
+  content: counter(ls, decimal-leading-zero);
+  font-family: var(--display); font-weight: 900; font-size: 11px;
+  color: var(--accent-ink); letter-spacing: 0;
+ }
+ .legal-som a:hover { background: rgba(90, 47, 230, 0.08); color: var(--accent-ink); }
+ .legal-som a:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 1px; }
+
+ .legal-wrap { max-width: 74ch; }
  .legal-wrap h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; margin: 48px 0 18px; letter-spacing: -0.01em; }
  .legal-wrap h2:first-of-type { margin-top: 0; }
- .legal-wrap h3 { font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.25; margin: 24px 0 10px; }
+ .legal-wrap h3 { font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.25; margin: 26px 0 10px; }
+ .legal-wrap h2[id] { scroll-margin-top: calc(var(--nav-bas, 76px) + 24px); }
  .legal-wrap p, .legal-wrap li { font-size: 15.5px; line-height: 1.7; color: var(--ink); }
  .legal-wrap p { margin-bottom: 14px; }
  .legal-wrap ul { padding-left: 22px; margin-bottom: 14px; }
  .legal-wrap li { margin-bottom: 6px; }
+ .legal-wrap .kvs { display: grid; grid-template-columns: minmax(0, 210px) minmax(0, 1fr); gap: 10px 24px; margin-bottom: 14px; }
+ .legal-wrap .kvs dt { color: var(--ink-muted); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; padding-top: 4px; }
+ .legal-wrap .kvs dd { margin: 0; font-size: 15.5px; color: var(--ink); overflow-wrap: anywhere; }
  .legal-wrap a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+ @media (max-width: 980px) {
+  .legal-layout { grid-template-columns: 1fr; gap: 30px; }
+  .legal-som { position: static; }
+  .legal-som ol { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px 10px; }
+ }
+ @media (max-width: 560px) {
+  .legal-som ol { grid-template-columns: 1fr; }
+ }
+ @media (max-width: 700px) { .legal-wrap .kvs { grid-template-columns: 1fr; gap: 4px 0; } .legal-wrap .kvs dt { padding-top: 12px; } }
 </style>
 </head>
 <body>
@@ -33,97 +81,134 @@
 
 <section>
  <div class="container">
-  <div class="legal-wrap reveal">
+  <div class="legal-layout">
 
-   <h2>Préambule</h2>
-   <p>La présente politique de confidentialité décrit la manière dont DUQQUE SPORTS (ci-après «&nbsp;Duqque&nbsp;») collecte, utilise, conserve et protège les données personnelles des visiteurs de son site internet et de ses clients, conformément au Règlement (UE) 2016/679 du 27 avril 2016 (RGPD) et à la loi française n°78-17 du 6 janvier 1978 modifiée «&nbsp;Informatique et Libertés&nbsp;».</p>
+   <nav class="legal-som reveal" aria-label="Sommaire de la politique de confidentialité">
+    <p class="t">Sommaire</p>
+    <ol>
+     <li><a href="#preambule">Préambule</a></li>
+     <li><a href="#responsable">Responsable du traitement</a></li>
+     <li><a href="#donnees">Données collectées</a></li>
+     <li><a href="#finalites">Finalités du traitement</a></li>
+     <li><a href="#base-legale">Base légale</a></li>
+     <li><a href="#mineurs">Mineurs et autorisation parentale</a></li>
+     <li><a href="#conservation">Durée de conservation</a></li>
+     <li><a href="#destinataires">Destinataires des données</a></li>
+     <li><a href="#transferts">Transferts hors UE</a></li>
+     <li><a href="#droits">Vos droits</a></li>
+     <li><a href="#cookies">Cookies et stockage local</a></li>
+     <li><a href="#securite">Sécurité</a></li>
+     <li><a href="#modifications">Modifications</a></li>
+    </ol>
+   </nav>
 
-   <h2>Responsable du traitement</h2>
-   <p>Le responsable du traitement des données collectées via ce site est&nbsp;:</p>
-   <p>
-    DUQQUE SPORTS<br/>
-    Paris, France · Bureau secondaire : Lisbonne, Portugal<br/>
-    SIREN&nbsp;: [À compléter]<br/>
-    Représentée par son responsable de la publication [À compléter].<br/>
-    Email&nbsp;: <a href="mailto:contact@duqque.fr">contact@duqque.fr</a><br/>
-    Téléphone&nbsp;: <a href="tel:+351932011866">+351 932 011 866</a>
-   </p>
+   <div class="legal-wrap reveal">
 
-   <h2>Données collectées</h2>
+    <h2 id="preambule">Préambule</h2>
+    <p>La présente politique décrit la manière dont DUQQUE SPORTS (ci-après «&nbsp;Duqque&nbsp;») collecte, utilise, conserve et protège les données personnelles des visiteurs de son site, de ses adhérents et des participants à ses études, conformément au Règlement (UE) 2016/679 du 27 avril 2016 (RGPD) et à la loi française n°78-17 du 6 janvier 1978 modifiée «&nbsp;Informatique et Libertés&nbsp;».</p>
 
-   <h3>Données fournies directement</h3>
-   <p>Lorsque vous remplissez le formulaire de contact, vous nous communiquez&nbsp;:</p>
-   <ul>
-    <li>Vos nom et prénom</li>
-    <li>Votre adresse email</li>
-    <li>Votre numéro de téléphone (facultatif)</li>
-    <li>Votre profil (sportif, parent, club, entreprise, média)</li>
-    <li>Le contenu du message que vous nous adressez</li>
-   </ul>
+    <h2 id="responsable">Responsable du traitement</h2>
+    <dl class="kvs">
+    <dt>Dénomination</dt><dd>DUQQUE SPORTS</dd>
+    <dt>Siège social</dt><dd>Paris, France · Bureau secondaire&nbsp;: Lisbonne, Portugal</dd>
+    <dt>SIREN</dt><dd>[À compléter]</dd>
+    <dt>Responsable de publication</dt><dd>[À compléter]</dd>
+    <dt>Email</dt><dd><a href="mailto:contact@duqque.fr">contact@duqque.fr</a></dd>
+    <dt>Téléphone</dt><dd><a href="tel:+351932011866">+351 932 011 866</a></dd>
+    </dl>
+    <p>Aucun délégué à la protection des données n'a été désigné, l'association n'entrant dans aucun des cas où la désignation est obligatoire au titre de l'article 37 du RGPD.</p>
 
-   <h3>Données collectées automatiquement</h3>
-   <p>Lors de votre navigation, des informations techniques peuvent être collectées&nbsp;: adresse IP, type et version de navigateur, pages consultées, durée de visite, site référent. Ces données sont utilisées à des fins statistiques et de sécurité.</p>
+    <h2 id="donnees">Données collectées</h2>
 
-   <h2>Finalités du traitement</h2>
-   <p>Vos données sont collectées et traitées pour les finalités suivantes&nbsp;:</p>
-   <ul>
-    <li>Répondre à vos demandes de contact, devis ou collaboration</li>
-    <li>Assurer le suivi de la relation commerciale et contractuelle</li>
-    <li>Vous adresser, le cas échéant, des communications relatives à nos services</li>
-    <li>Établir des statistiques anonymisées de fréquentation</li>
-    <li>Assurer la sécurité du site et prévenir les utilisations frauduleuses</li>
-   </ul>
+    <h3>Formulaire de contact et demandes d'adhésion</h3>
+    <p>Vous nous communiquez directement&nbsp;: vos nom et prénom, votre adresse email, votre numéro de téléphone, votre date de naissance et votre catégorie d'âge le cas échéant, votre club ou votre structure, votre profil (sportif, parent, club, entreprise, média) et le contenu de votre message.</p>
 
-   <h2>Base légale</h2>
-   <p>Le traitement de vos données repose sur&nbsp;:</p>
-   <ul>
-    <li>Votre <strong>consentement</strong>, pour les demandes via le formulaire et l'envoi éventuel de communications&nbsp;;</li>
-    <li>L'exécution d'un <strong>contrat</strong> ou de mesures précontractuelles, dans le cadre de nos prestations&nbsp;;</li>
-    <li>Le respect d'<strong>obligations légales</strong> (comptabilité, facturation)&nbsp;;</li>
-    <li>L'<strong>intérêt légitime</strong> de Duqque à sécuriser son site et à mesurer son audience.</li>
-   </ul>
+    <h3>Questionnaires de l'Observatoire</h3>
+    <p>Les questionnaires de l'Observatoire du sport et de l'économie sportive sont <strong>anonymes</strong>&nbsp;: ils ne demandent aucune information permettant d'identifier le répondant. Une dernière section, entièrement facultative, permet à qui le souhaite de laisser un prénom et une adresse email pour recevoir l'étude ou être recontacté.</p>
+    <p>Ces coordonnées sont <strong>enregistrées dans un fichier distinct de celui des réponses</strong>. Une réponse et son auteur ne figurent jamais sur la même ligne. Seule une référence technique relie les deux, et elle n'est jamais publiée.</p>
 
-   <h2>Durée de conservation</h2>
-   <ul>
-    <li>Données issues du formulaire&nbsp;: 3 ans à compter du dernier contact en l'absence de relation contractuelle.</li>
-    <li>Données clients et prospects actifs&nbsp;: durée de la relation contractuelle plus 5 ans après le dernier échange.</li>
-    <li>Données comptables et factures&nbsp;: 10 ans, conformément à la législation française.</li>
-    <li>Logs techniques et données de navigation&nbsp;: 13 mois maximum.</li>
-   </ul>
+    <h3>Données techniques</h3>
+    <p>Le serveur conserve les journaux d'accès produits par l'hébergeur. Pour limiter le nombre d'envois abusifs sur les questionnaires et le nombre de tentatives sur la page d'administration, le site conserve une <strong>empreinte cryptographique</strong> de l'adresse IP, et non l'adresse elle-même. Cette empreinte est effacée après vingt-quatre heures et ne figure sur aucune réponse.</p>
 
-   <h2>Destinataires des données</h2>
-   <p>Vos données sont strictement destinées à Duqque Sports et à ses sous-traitants techniques agissant en son nom (hébergeur, prestataire d'envoi d'emails, outils de mesure d'audience). Aucune donnée n'est cédée, louée ou vendue à des tiers à des fins commerciales.</p>
-   <p>Les données sont hébergées dans des centres de données situés en Allemagne, au sein de l'Union Européenne.</p>
+    <h2 id="finalites">Finalités du traitement</h2>
+    <ul>
+    <li>Répondre à vos demandes de contact, de renseignement ou d'adhésion&nbsp;;</li>
+    <li>Gérer les adhésions à l'association et le suivi des personnes accompagnées&nbsp;;</li>
+    <li>Produire les études de l'Observatoire à partir de réponses agrégées&nbsp;;</li>
+    <li>Vous adresser l'étude ou vous recontacter, lorsque vous l'avez expressément demandé&nbsp;;</li>
+    <li>Assurer la sécurité du site et prévenir les envois automatisés.</li>
+    </ul>
+    <p>Le site ne réalise <strong>aucune mesure d'audience</strong> et n'établit aucune statistique de fréquentation.</p>
 
-   <h2>Transferts hors UE</h2>
-   <p>Certains outils techniques (par exemple Google Translate utilisé pour la traduction automatique) peuvent impliquer un transfert de données vers des pays situés en dehors de l'Union Européenne. Ces transferts s'effectuent sur la base des clauses contractuelles types adoptées par la Commission européenne ou de tout autre mécanisme approprié garantissant un niveau de protection adéquat.</p>
+    <h2 id="base-legale">Base légale</h2>
+    <ul>
+    <li>Votre <strong>consentement</strong>, pour les demandes envoyées via un formulaire, la participation aux questionnaires et la transmission de coordonnées facultatives&nbsp;;</li>
+    <li>L'exécution d'un <strong>contrat</strong> ou de mesures précontractuelles, dans le cadre de l'adhésion et de l'accompagnement&nbsp;;</li>
+    <li>Le respect d'<strong>obligations légales</strong>, notamment comptables&nbsp;;</li>
+    <li>L'<strong>intérêt légitime</strong> de l'association à protéger son site contre les usages automatisés.</li>
+    </ul>
 
-   <h2>Vos droits</h2>
-   <p>Conformément au RGPD, vous disposez à tout moment des droits suivants sur vos données&nbsp;:</p>
-   <ul>
+    <h2 id="mineurs">Mineurs et autorisation parentale</h2>
+    <p>L'association accompagne des sportives et des sportifs mineurs. Aucune donnée concernant une personne de moins de dix-huit ans n'est traitée sans l'<strong>autorisation écrite préalable de ses représentants légaux</strong>, recueillie lors de l'adhésion.</p>
+    <p>Cette autorisation est distincte selon son objet&nbsp;: accompagnement sportif, prise de contact avec des partenaires, utilisation de l'image et diffusion sur les réseaux sociaux. Elle peut être <strong>retirée à tout moment</strong>, sans avoir à se justifier et sans conséquence sur l'accompagnement sportif.</p>
+    <p>Aucune donnée nominative concernant un mineur n'est publiée, transmise à un partenaire ou utilisée à des fins de communication sans cette autorisation explicite et spécifique.</p>
+
+    <h2 id="conservation">Durée de conservation</h2>
+    <ul>
+    <li>Demandes de contact&nbsp;: 3 ans à compter du dernier échange, en l'absence de suite.</li>
+    <li>Dossiers d'adhésion et autorisations parentales&nbsp;: durée de l'adhésion, puis 5 ans.</li>
+    <li>Réponses aux questionnaires&nbsp;: conservées de façon anonyme sans limitation de durée, à des fins de recherche.</li>
+    <li>Coordonnées laissées volontairement dans un questionnaire&nbsp;: jusqu'à la publication de l'étude concernée, puis effacées.</li>
+    <li>Pièces comptables&nbsp;: 10 ans, conformément à la législation française.</li>
+    <li>Empreintes d'adresses IP&nbsp;: 24 heures.</li>
+    </ul>
+
+    <h2 id="destinataires">Destinataires des données</h2>
+    <p>Vos données sont strictement destinées à Duqque Sports. Elles ne sont ni cédées, ni louées, ni vendues.</p>
+    <p>Les réponses aux questionnaires et les dossiers d'adhésion sont <strong>hébergés sur le serveur du site lui-même</strong>, sans passer par un service tiers d'enquête ou de formulaire. Le seul sous-traitant technique est l'hébergeur du site.</p>
+    <p>Lorsqu'une démarche auprès d'un partenaire est engagée pour une personne accompagnée, seules les informations nécessaires à cette démarche sont transmises, et uniquement après son accord et, pour un mineur, celui de ses représentants légaux.</p>
+
+    <h2 id="transferts">Transferts hors UE</h2>
+    <p>Les données sont hébergées au sein de l'Union européenne.</p>
+    <p>La traduction automatique des pages, si vous l'activez depuis le sélecteur de langue, s'appuie sur un service tiers susceptible d'impliquer un transfert hors de l'Union européenne. Ce transfert s'effectue sur la base des clauses contractuelles types adoptées par la Commission européenne. Le service n'est sollicité que si vous demandez une traduction.</p>
+
+    <h2 id="droits">Vos droits</h2>
+    <p>Conformément au RGPD, vous disposez à tout moment des droits suivants&nbsp;:</p>
+    <ul>
     <li><strong>Droit d'accès</strong>&nbsp;: obtenir la confirmation que vos données sont traitées et en recevoir une copie.</li>
     <li><strong>Droit de rectification</strong>&nbsp;: faire corriger des données inexactes ou incomplètes.</li>
     <li><strong>Droit à l'effacement</strong>&nbsp;: demander la suppression de vos données dans les cas prévus par la loi.</li>
     <li><strong>Droit à la limitation</strong> du traitement.</li>
-    <li><strong>Droit d'opposition</strong> au traitement, notamment à des fins de prospection.</li>
+    <li><strong>Droit d'opposition</strong> au traitement.</li>
     <li><strong>Droit à la portabilité</strong> de vos données.</li>
     <li><strong>Droit de retirer votre consentement</strong> à tout moment, sans remettre en cause la licéité des traitements antérieurs.</li>
     <li><strong>Droit de définir des directives</strong> relatives au sort de vos données après votre décès.</li>
-   </ul>
-   <p>Pour exercer ces droits, vous pouvez écrire à&nbsp;: <a href="mailto:contact@duqque.fr">contact@duqque.fr</a> ou par courrier postal à l'adresse du siège social.</p>
-   <p>Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la <strong>CNIL</strong>&nbsp;: 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 – <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>.</p>
+    </ul>
+    <p>Pour exercer ces droits&nbsp;: <a href="mailto:contact@duqque.fr">contact@duqque.fr</a>, ou par courrier à l'adresse du siège social.</p>
+    <p>Une réserve honnête sur les questionnaires&nbsp;: une réponse anonyme n'étant rattachée à aucune identité, nous ne pouvons pas la retrouver pour vous en donner copie ou la supprimer. Si vous avez laissé vos coordonnées, indiquez-le-nous&nbsp;: la référence de votre envoi permet alors de retrouver et d'effacer l'ensemble.</p>
+    <p>Si vous estimez, après nous avoir contactés, que vos droits ne sont pas respectés, vous pouvez saisir la <strong>CNIL</strong>&nbsp;: 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 – <a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>.</p>
 
-   <h2>Cookies</h2>
-   <p>Le site utilise un nombre limité de cookies techniques nécessaires à son bon fonctionnement (préférence de langue, session) et, le cas échéant, des cookies de mesure d'audience anonymisée. Aucun cookie publicitaire n'est déposé sans votre consentement explicite.</p>
-   <p>Vous pouvez à tout moment configurer votre navigateur pour refuser les cookies ou être averti de leur dépôt.</p>
+    <h2 id="cookies">Cookies et stockage local</h2>
+    <p>Le site ne dépose <strong>aucun cookie de mesure d'audience, de profilage ou de publicité</strong>, et n'embarque aucun traceur tiers. Aucune bannière de consentement n'est donc affichée&nbsp;: il n'y a rien à consentir.</p>
+    <p>Seuls sont utilisés les éléments strictement nécessaires au fonctionnement&nbsp;:</p>
+    <dl class="kvs">
+    <dt>duqque_apercu</dt><dd>Ouvre le site complet pendant sa préparation, après saisie du mot de passe. 30 jours.</dd>
+    <dt>duqque_admin</dt><dd>Session d'administration, signée et inaccessible au JavaScript de la page. 30 jours.</dd>
+    <dt>duqque_admin_ui</dt><dd>Indique à l'interface d'afficher les commandes d'administration. N'ouvre aucun droit. 30 jours.</dd>
+    <dt>duqque_enq_…</dt><dd>Stockage local. Conserve vos réponses en cours sur votre appareil pour que vous puissiez reprendre un questionnaire interrompu. Effacé à l'envoi.</dd>
+    <dt>duqque_rgpd_vu</dt><dd>Stockage local. Retient que vous avez fermé le bandeau d'information.</dd>
+    </dl>
+    <p>Les éléments de stockage local restent sur votre appareil et ne sont jamais transmis au serveur. Vous pouvez les effacer à tout moment depuis les réglages de votre navigateur.</p>
 
-   <h2>Sécurité</h2>
-   <p>Duqque met en œuvre des mesures techniques et organisationnelles appropriées pour assurer la confidentialité, l'intégrité et la disponibilité de vos données (connexion HTTPS, hébergement européen, accès restreints, mots de passe sécurisés).</p>
+    <h2 id="securite">Sécurité</h2>
+    <p>L'association met en œuvre des mesures techniques et organisationnelles appropriées&nbsp;: connexion chiffrée HTTPS, hébergement européen, accès à l'administration protégé par mot de passe dérivé et jamais stocké en clair, session signée, fichiers de réponses placés hors de portée d'un téléchargement direct, et séparation physique des réponses et des coordonnées.</p>
 
-   <h2>Modifications</h2>
-   <p>La présente politique de confidentialité peut évoluer pour s'adapter aux évolutions légales, techniques ou aux services proposés. La date de dernière mise à jour figure ci-dessous. Nous vous invitons à la consulter régulièrement.</p>
+    <h2 id="modifications">Modifications</h2>
+    <p>La présente politique peut évoluer pour s'adapter aux évolutions légales, techniques ou aux activités de l'association. La date de dernière mise à jour figure ci-dessous.</p>
 
-   <p style="margin-top: 40px; font-size: 13px; color: var(--ink-muted);">Dernière mise à jour&nbsp;: juin 2026.</p>
+    <p style="margin-top: 40px; font-size: 13px; color: var(--ink-muted);">Dernière mise à jour&nbsp;: août 2026.</p>
+   </div>
+
   </div>
  </div>
 </section>
