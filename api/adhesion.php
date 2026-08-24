@@ -10,6 +10,8 @@
    consentement prouvable, ce que le RGPD demande a l'article 7.
    ========================================================= */
 require __DIR__ . '/_commun.php';
+require_once __DIR__ . '/email-adhesion.php';
+require_once __DIR__ . '/pdf-adhesion.php';
 
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') !== 'POST') {
   repondre(['ok' => false, 'erreur' => 'méthode non permise'], 405);
@@ -93,15 +95,37 @@ fflush($fp); flock($fp, LOCK_UN); fclose($fp);
 
 function sujet(string $t): string { return '=?UTF-8?B?' . base64_encode($t) . '?='; }
 
-function envoyer(string $a, string $sujet, string $corps, string $repondreA = ''): bool {
-  $entetes = [
-    'From: Duqque Sports <' . DESTINATAIRE . '>',
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=UTF-8',
-    'Content-Transfer-Encoding: 8bit',
-    'X-Mailer: duqque.fr',
-  ];
+/* Un seul message peut porter trois choses : la version texte, la version HTML,
+   et la pièce jointe. L'imbrication est imposée par la norme : mixed contient
+   alternative, alternative contient les deux corps. Un client qui ne rend pas le
+   HTML lit le texte, et les filtres anti-spam aussi. */
+function envoyer(string $a, string $sujet, string $texte, string $html = '',
+                 string $repondreA = '', array $piece = []): bool {
+  $limMix = 'mix_' . bin2hex(random_bytes(12));
+  $limAlt = 'alt_' . bin2hex(random_bytes(12));
+
+  $entetes = ['From: Duqque Sports <' . DESTINATAIRE . '>', 'MIME-Version: 1.0', 'X-Mailer: duqque.fr'];
   if ($repondreA !== '') $entetes[] = 'Reply-To: ' . $repondreA;
+
+  $corpsAlt = "--$limAlt\r\nContent-Type: text/plain; charset=UTF-8\r\n"
+            . "Content-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($texte)) . "\r\n";
+  if ($html !== '') {
+    $corpsAlt .= "--$limAlt\r\nContent-Type: text/html; charset=UTF-8\r\n"
+               . "Content-Transfer-Encoding: base64\r\n\r\n" . chunk_split(base64_encode($html)) . "\r\n";
+  }
+  $corpsAlt .= "--$limAlt--\r\n";
+
+  if (!$piece) {
+    $entetes[] = 'Content-Type: multipart/alternative; boundary="' . $limAlt . '"';
+    return @mail($a, sujet($sujet), $corpsAlt, implode("\r\n", $entetes));
+  }
+
+  $entetes[] = 'Content-Type: multipart/mixed; boundary="' . $limMix . '"';
+  $corps = "--$limMix\r\nContent-Type: multipart/alternative; boundary=\"$limAlt\"\r\n\r\n" . $corpsAlt
+         . "--$limMix\r\nContent-Type: " . $piece['type'] . "; name=\"" . $piece['nom'] . "\"\r\n"
+         . "Content-Transfer-Encoding: base64\r\n"
+         . "Content-Disposition: attachment; filename=\"" . $piece['nom'] . "\"\r\n\r\n"
+         . chunk_split(base64_encode($piece['donnees'])) . "\r\n--$limMix--\r\n";
   return @mail($a, sujet($sujet), $corps, implode("\r\n", $entetes));
 }
 
@@ -160,8 +184,22 @@ $vers_personne = "Bonjour,\n\n"
   . "Duqque Sports\n"
   . DESTINATAIRE . "\n";
 
-$a1 = envoyer(DESTINATAIRE, "Adhésion $ref — $nom" . (!empty($d['mineur']) ? ' (mineur)' : ''), $vers_asso, $email);
-$a2 = envoyer($email, "Votre demande d'adhésion à Duqque Sports ($ref)", $vers_personne);
+/* Le PDF est un bonus : s'il échoue, l'email part quand même. Une pièce jointe
+   manquante se rattrape, un accusé de réception perdu beaucoup moins. */
+$piece = [];
+$pdfErreur = '';
+try {
+  $pdf = pdfAdhesion($enr, __DIR__ . '/../assets/fonts');
+  $piece = ['nom' => 'Adhesion-' . $ref . '.pdf', 'type' => 'application/pdf', 'donnees' => $pdf];
+} catch (Throwable $e) { $pdfErreur = $e->getMessage(); }
+
+$html = emailAdhesionHtml($enr);
+$texte = emailAdhesionTexte($enr);
+
+$a1 = envoyer(DESTINATAIRE, "Adhésion $ref — $nom" . (!empty($d['mineur']) ? ' (mineur)' : ''),
+              $vers_asso, '', $email, $piece);
+$a2 = envoyer($email, "Votre demande d'adhésion à Duqque Sports ($ref)",
+              $texte, $html, '', $piece);
 
 /* Le dossier est enregistre quoi qu'il arrive : on le dit franchement plutot que
    d'annoncer un envoi qui n'a pas eu lieu. */
@@ -170,4 +208,6 @@ repondre([
   'ref'           => $ref,
   'mail_asso'     => $a1,
   'mail_personne' => $a2,
+  'piece_jointe'  => $piece ? true : false,
+  'pdf_erreur'    => $pdfErreur,
 ]);

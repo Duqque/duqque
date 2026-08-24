@@ -37,7 +37,8 @@ $v[] = ['donnees/.htaccess en place', $protege, $protege ? 'réponses non télé
 /* Analyse syntaxique reelle de chaque fichier, sans l'executer : le tokeniseur
    leve une ParseError sur une erreur de syntaxe. C'est le seul moyen de verifier
    ici un code qui n'a pas pu tourner ailleurs avant d'arriver sur ce serveur. */
-$fichiers = ['_commun.php', 'session.php', 'reponses.php', 'resultats.php', 'export.php'];
+$fichiers = ['_commun.php', 'session.php', 'reponses.php', 'resultats.php', 'export.php',
+             'adhesion.php', 'adhesions.php', 'email-adhesion.php', 'pdf.php', 'pdf-adhesion.php', 'pdf-fontes.php'];
 $fautifs = [];
 $analysable = function_exists('token_get_all') && defined('TOKEN_PARSE');
 foreach ($fichiers as $f) {
@@ -51,6 +52,18 @@ $v[] = ['Fichiers du dossier api/ valides', count($fautifs) === 0,
         count($fautifs) ? implode(' · ', $fautifs)
         : ($analysable ? count($fichiers) . ' fichiers analysés, aucune erreur de syntaxe'
                        : count($fichiers) . ' fichiers présents (analyse indisponible sur cet hébergement)')];
+
+/* Le PDF joint à l'email a besoin des fichiers TrueType : sans eux, la pièce
+   jointe est simplement omise, mais autant le savoir avant qu'un adhérent le
+   découvre. */
+$fontes = ['LTMuseum-Black.ttf', 'Gilroy-Regular.ttf', 'Gilroy-SemiBold.ttf'];
+$absentes = array_values(array_filter($fontes, fn($f) => !is_file(__DIR__ . '/../assets/fonts/' . $f)));
+$v[] = ['Fontes du PDF présentes', count($absentes) === 0,
+        $absentes ? 'manquantes : ' . implode(', ', $absentes)
+                  : count($fontes) . ' fichiers TrueType trouvés dans assets/fonts/'];
+
+$v[] = ['Compression zlib', function_exists('gzcompress'), 'flux du PDF et pièce jointe'];
+$v[] = ['Conversion iconv', function_exists('iconv'), 'encodage WinAnsi du PDF'];
 
 $tout = array_reduce($v, fn($a, $x) => $a && $x[1], true);
 ?><!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
