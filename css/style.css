@@ -300,6 +300,28 @@ body.menu-open .bottom-nav { opacity: 0; pointer-events: none; transition: opaci
 
 /* === Language switcher === */
 .nav-actions { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; padding-left: 16px; }
+
+/* Acces administrateur. Il occupe la place de WhatsApp et de la prise de
+   rendez-vous, il en reprend donc la forme exactement : meme hauteur, meme
+   arrondi, meme graisse. Seule la couleur change, le citron de la maison, pour
+   dire que ce bouton n'est pas destine aux visiteurs. */
+.nav-admin {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 18px; border-radius: 100px;
+  background: var(--lime, #d9ff3d); color: #101400; text-decoration: none;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.01em; white-space: nowrap;
+  transition: background .3s var(--ease), color .3s var(--ease), transform .3s var(--ease);
+}
+.nav-admin-ico { display: inline-flex; }
+.nav-admin-ico svg { width: 15px; height: 15px; }
+.nav-admin-arrow { display: inline-flex; transition: transform .3s var(--ease); }
+.nav-admin:hover { background: #0b0b0b; color: var(--lime, #d9ff3d); transform: translateY(-2px); }
+.nav-admin:hover .nav-admin-arrow { transform: translateX(3px); }
+@media (max-width: 620px) {
+  /* 44 px de haut : la cible tactile recommandee, meme sans le libelle. */
+  .nav-admin { padding: 0 16px; min-height: 44px; font-size: 12px; gap: 8px; }
+  .nav-admin-label { display: none; }
+}
 .lang-switch { position: relative; }
 .lang-current {
   display: inline-flex; align-items: center; gap: 6px;

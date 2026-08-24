@@ -557,8 +557,38 @@ const MENU_LINKS = [
    jeton est pose par le serveur, en HttpOnly, hors de portee de ce script :
    fabriquer ce cookie a la main ferait apparaitre le lien, la page resultats
    refuserait quand meme de servir la moindre donnee. */
+/* Un seul repere : duqque_admin_ui, pose uniquement quand la session serveur
+   s'ouvre. Surtout pas duqque_apercu, qui ne dit que « j'ai deverrouille le site
+   en preparation » : le jour ou le site s'ouvrira au public, ce cookie n'aura
+   plus aucun sens et le bouton doit malgre tout rester reserve.
+
+   Ce cookie n'ouvre rien. Le fabriquer a la main ferait apparaitre le bouton,
+   la page resultats redemanderait le mot de passe et api/resultats.php refuserait
+   de servir la moindre ligne : le jeton qui fait autorite est pose par le
+   serveur, signe et HttpOnly, hors de portee de ce script. */
 function estAdmin() {
- return document.cookie.split('; ').indexOf('duqque_admin_ui=1') !== -1;
+ return document.cookie.indexOf('duqque_admin_ui=1') !== -1;
+}
+
+/* Le cookie d'affichage vit trente jours, la session serveur peut tomber avant
+   lui : deconnexion, secret change, expiration. On le confirme donc aupres du
+   serveur, et on retire le bouton s'il ne repond plus present. La requete n'est
+   faite que si le cookie existe : un visiteur ordinaire ne la declenche jamais. */
+function verifieSessionAdmin() {
+ if (!estAdmin()) return;
+ fetch('/api/session.php', { credentials: 'same-origin', cache: 'no-store' })
+  .then((r) => r.json())
+  .then((j) => {
+   if (j && j.ok && j.connecte) return;
+   document.cookie = 'duqque_admin_ui=; Max-Age=0; Path=/';
+   const l = document.querySelector('.menu-list a[href="resultats.html"]');
+   if (l) l.closest('li').remove();
+   // Le conteneur est reconstruit plutot que rafistole : c'est le meme code qui
+   // sert au visiteur ordinaire, il n'y a donc qu'une seule version a maintenir.
+   const cta = document.querySelector('.nav-cta');
+   if (cta && cta.querySelector('.nav-admin')) { cta.remove(); construitActionsFlottantes(); }
+  })
+  .catch(function () { /* serveur injoignable : on laisse le bouton, la page resultats tranchera */ });
 }
 
 function liensMenu() {
@@ -852,13 +882,37 @@ function buildNav() {
  callBtn.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
  document.body.appendChild(callBtn);
  }
- if (!document.querySelector('.nav-cta')) {
- // WhatsApp et Prendre RDV dans un meme conteneur : la pastille WhatsApp prend
- // automatiquement la hauteur du bouton grace a align-items: stretch, quelle que soit
- // la longueur du libelle une fois traduit.
+ construitActionsFlottantes();
+}
+
+/* Le coin d'actions, en bas a droite. Deux etats, un seul endroit ou les ecrire :
+   visiteur ordinaire, WhatsApp et prise de rendez-vous ; session administrateur
+   ouverte, l'acces aux resultats des etudes a leur place. */
+function construitActionsFlottantes() {
+ if (document.querySelector('.nav-cta')) return;
+
  const cta = document.createElement('div');
  cta.className = 'nav-cta';
 
+ if (estAdmin()) {
+  const res = document.createElement('a');
+  res.href = 'resultats.html';
+  res.className = 'nav-admin';
+  // Le libelle disparait sur petit ecran : sans intitule porte par le lien
+  // lui-meme, le bouton n'aurait plus de nom pour un lecteur d'ecran.
+  res.setAttribute('aria-label', 'Résultats des études, espace administrateur');
+  res.innerHTML = `
+  <span class="nav-admin-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span>
+  <span class="nav-admin-label">Résultats des études</span>
+  <span class="nav-admin-arrow"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.6"/></svg></span>`;
+  cta.appendChild(res);
+  document.body.appendChild(cta);
+  return;
+ }
+
+ // WhatsApp et Prendre RDV dans un meme conteneur : la pastille WhatsApp prend
+ // automatiquement la hauteur du bouton grace a align-items: stretch, quelle que soit
+ // la longueur du libelle une fois traduit.
  const wa = document.createElement('a');
  wa.href = 'https://wa.me/351932011866';
  wa.className = 'nav-wa';
@@ -878,7 +932,6 @@ function buildNav() {
  cta.appendChild(wa);
  cta.appendChild(contact);
  document.body.appendChild(cta);
- }
 }
 
 function initMenu() {
@@ -1540,6 +1593,7 @@ document.addEventListener('DOMContentLoaded', () => {
  initYear();
  initColonnesArticle();
  initPartage();
+ verifieSessionAdmin();
  publieHauteurNav();
  window.addEventListener('resize', publieHauteurNav);
  if (window.ResizeObserver) {
