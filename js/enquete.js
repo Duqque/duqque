@@ -221,16 +221,38 @@
    return;
   }
 
+  // text/plain evite le prevol CORS : Apps Script ne repond pas aux requetes
+  // OPTIONS, un en-tete application/json ferait echouer l'envoi avant de partir.
   fetch(window.ENQUETE_ENDPOINT, {
    method: 'POST',
    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
    body: JSON.stringify(charge)
-  }).then(function () { fin(true); })
-    .catch(function () {
-     bouton.disabled = false;
-     msg.className = 'eq-msg ko';
-     msg.textContent = "L'envoi a échoué. Réessayez, ou écrivez-nous à contact@duqque.fr.";
-    });
+  })
+   .then(function (r) { return r.text(); })
+   .then(function (txt) {
+    // fetch se resout aussi sur une erreur applicative. Sans lire la reponse,
+    // on remercierait le participant pour une reponse jamais enregistree.
+    var rep = null;
+    try { rep = JSON.parse(txt); } catch (e) {}
+    if (!rep || rep.ok !== true) throw new Error(rep && rep.erreur ? rep.erreur : 'reponse inattendue');
+    fin(true);
+   })
+   .catch(echec);
+
+  function echec() {
+   // Les reponses restent en memoire locale : la page rechargee les retrouve.
+   bouton.disabled = false;
+   msg.className = 'eq-msg ko';
+   msg.innerHTML = "L'envoi a échoué. Vos réponses sont conservées sur cet appareil&nbsp;: " +
+    "réessayez, ou <a href=\"#\" id=\"eqSecours\">envoyez-les par email</a>.";
+   var s = document.getElementById('eqSecours');
+   if (s) s.addEventListener('click', function (ev) {
+    ev.preventDefault();
+    location.href = 'mailto:contact@duqque.fr?subject=' +
+     encodeURIComponent('Observatoire · ' + spec.titre + ' (' + spec.cible + ')') +
+     '&body=' + encodeURIComponent(corpsLisible());
+   });
+  }
  }
 
  function fin() {
