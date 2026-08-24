@@ -550,6 +550,7 @@ const MENU_LINKS = [
  { href: 'observatoire.html', label: 'Observatoire', halo: 'sport', dots: false },
  { href: 'actualites.html', label: 'Blog', halo: 'sport', dots: false },
  { href: 'cotisations.html', label: 'Cotisations', halo: 'sport', dots: false },
+ { href: 'adhesion.html', label: 'Adhérer', halo: 'sport', dots: false },
 ];
 
 /* Onglet d'administration : il n'apparait que pour une session ouverte.
@@ -840,7 +841,7 @@ function buildNav() {
  'methode.html': 'Notre approche', 'team-espoirs.html': 'Programme Espoirs',
  'success-stories.html': 'Résultats', 'media.html': 'Blog',
  'observatoire.html': 'Observatoire',
- 'resultats.html': 'Résultats',
+ 'resultats.html': 'Résultats', 'adhesion.html': 'Adhésion',
  'enquete-transferts-athletes.html': 'Questionnaire',
  'enquete-transferts-clubs.html': 'Questionnaire',
  'enquete-sponsoring-athletes.html': 'Questionnaire',
