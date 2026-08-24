@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Team Espoirs · Duqque Sports</title>
 <meta name="description" content="La Team Espoirs Duqque soutient les meilleurs talents de moins de 18 ans : sponsoring négocié, équipement, accompagnement. Sans commission. Première promotion : judo, France & Portugal." />
-<link rel="stylesheet" href="css/style.css?v=20260923" />
+<link rel="stylesheet" href="css/style.css?v=20260924" />
 <style>
  /* ===== TEAM ESPOIRS — grille standard, minimalisme illustré ===== */
 
@@ -273,7 +273,54 @@
  }
  .te-submit button:hover { background: var(--accent); transform: translateY(-2px); }
  .te-msg { font-size: 13px; color: var(--accent-ink); min-height: 18px; }
- @media (max-width: 700px){ .te-row { grid-template-columns: 1fr; } }
+ /* ---- Dossier de candidature sur telephone ----
+    Le formulaire compte 42 champs. Sur un ecran de poche, la carte flottante, les
+    espacements du bureau et un bouton d'envoi tout en bas en faisaient un tunnel. */
+ @media (max-width: 700px) {
+  .te-row, .te-row-3 { grid-template-columns: 1fr; }
+
+  /* Plein ecran. 100dvh et non 100vh : sous iOS, 100vh depasse la zone visible et
+     le bas du panneau se retrouvait sous la barre d'adresse. */
+  .te-modal-panel {
+   top: 0; left: 0; transform: none;
+   width: 100%; max-width: none;
+   height: 100dvh; max-height: 100dvh;
+   border: none; border-radius: 0;
+   padding: 16px 18px calc(94px + env(safe-area-inset-bottom));
+   box-shadow: none;
+  }
+  .te-modal-head { margin-bottom: 12px; gap: 12px; }
+  .te-modal-head h3 { font-size: 21px; }
+  .te-modal-kick { letter-spacing: 0.22em; margin-bottom: 6px; }
+  .te-progress { top: -16px; padding: 9px 0; margin-bottom: 12px; gap: 10px; }
+
+  /* Densite : chaque champ perdait une quinzaine de pixels en interlignage et en
+     marges, ce qui faisait pres de 600px sur l'ensemble du dossier. */
+  .te-form { gap: 10px; }
+  .te-form fieldset { padding: 18px 0 2px; gap: 12px; }
+  .te-form legend { letter-spacing: 0.22em; }
+  .te-row, .te-row-3 { gap: 12px; }
+  .te-field { gap: 4px; }
+  .te-field label { font-size: 9.5px; letter-spacing: 0.14em; }
+  /* 16px au minimum : en dessous, Safari iOS agrandit la page a chaque fois qu'un
+     champ prend le focus, et il faut repincer pour lire la suite. C'est la cause
+     principale de l'inconfort ressenti. */
+  .te-field input, .te-field select, .te-field textarea {
+   font-size: 16px; line-height: 1.25; padding: 8px 0;
+  }
+  .te-field textarea { min-height: 70px; }
+
+  /* Le bouton suit : sans cela il fallait traverser les 42 champs pour le retrouver. */
+  .te-submit {
+   position: fixed; left: 0; right: 0; bottom: 0; z-index: 6;
+   margin: 0; padding: 10px 18px calc(10px + env(safe-area-inset-bottom));
+   background: rgba(255,255,255,0.96);
+   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+   border-top: 1px solid rgba(0,0,0,0.1);
+  }
+  .te-submit button { width: 100%; justify-content: center; padding: 15px 24px; font-size: 14px; }
+  .te-msg { position: fixed; left: 18px; right: 18px; bottom: calc(72px + env(safe-area-inset-bottom)); z-index: 6; }
+ }
 
  /* === PARCOURS ANIMÉ : une saison dans la Team === */
  .tj { position: relative; }
@@ -1456,6 +1503,6 @@
 })();
 </script>
 
-<script src="js/main.js?v=20260923"></script>
+<script src="js/main.js?v=20260924"></script>
 </body>
 </html>
