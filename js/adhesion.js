@@ -193,7 +193,7 @@
     // celui du club, pas celui d'une structure fédérale, qui vient plus bas.
     { id: 'p_club', type: 'texte', requis: true, libelle: 'Nom complet du club',
       aide: "Le nom entier tel qu'il est déclaré, sans abréviation." },
-    { id: 'p_club_ville', type: 'texte', requis: true, libelle: 'Ville du club' },
+    { id: 'p_club_ville', type: 'ville', requis: true, libelle: 'Ville du club' },
     { id: 'p_entraineur', type: 'texte', requis: true, libelle: "Nom de l'entraîneur au club" },
     { id: 'p_entraineur_tel', type: 'telephone', requis: false, libelle: "Téléphone de l'entraîneur au club" },
 
@@ -215,7 +215,7 @@
    enStructure ? [
     { id: 'p_structure_nom', type: 'texte', requis: true, libelle: 'Nom complet de la structure',
       aide: "Par exemple : Pôle Espoirs Judo Île-de-France." },
-    { id: 'p_structure_ville', type: 'texte', requis: true, libelle: 'Ville de la structure' }
+    { id: 'p_structure_ville', type: 'ville', requis: true, libelle: 'Ville de la structure' }
    ] : [],
    [
     { id: 'p_projet', type: 'long', requis: false, libelle: "En deux ou trois phrases, votre projet sportif",
@@ -268,14 +268,11 @@
   const aide = q.aide ? '<p class="eq-aide">' + q.aide + '</p>' : '';
   let corps = '';
 
-  if (q.type === 'pays' || q.type === 'nationalite') {
-   corps = '<div class="ch-hote" id="' + q.id + '"></div>';
-
-  } else if (q.type === 'telephone') {
-   corps = '<div class="ch-hote" id="' + q.id + '"></div>';
-
-  } else if (q.type === 'adresse' || q.type === 'ville') {
-   corps = '<div class="ch-hote" id="' + q.id + '"></div>';
+  if (q.type === 'pays' || q.type === 'nationalite' || q.type === 'telephone' ||
+      q.type === 'adresse' || q.type === 'ville') {
+   // Le type voyage sur le conteneur : le montage s'y fie au lieu de deduire
+   // d'apres l'identifiant, ce qui obligeait a le modifier a chaque champ ajoute.
+   corps = '<div class="ch-hote" id="' + q.id + '" data-type="' + q.type + '"></div>';
 
   } else if (q.type === 'naissance') {
    /* Trois listes, pas un calendrier. Un selecteur de date s'ouvre sur le mois
@@ -410,7 +407,9 @@
    if (!hote) return;
    const id = hote.id;
 
-   if (id === 'a_pays' || id === 'a_nationalite') {
+   const type = hote.dataset.type;
+
+   if (type === 'pays' || type === 'nationalite') {
     const codeInitial = rep[id + '_code'] || (id === 'a_pays' ? 'FR' : '');
     window.CHAMPS.combo(hote, {
      valeur: codeInitial,
@@ -428,22 +427,25 @@
     });
     if (codeInitial) { rep[id] = window.PAYS.parCode[codeInitial].nom; rep[id + '_code'] = codeInitial; }
 
-   } else if (id === 'a_ville') {
-    champVille = window.CHAMPS.ville(hote, {
+   } else if (type === 'ville') {
+    const principale = id === 'a_ville';
+    const champ = window.CHAMPS.ville(hote, {
      valeur: rep[id] || '', pays: rep.a_pays_code || 'FR',
-     onSaisie: function (v) { rep[id] = v; rep.a_ville_insee = ''; ecrire(); },
+     onSaisie: function (v) { rep[id] = v; if (principale) rep.a_ville_insee = ''; ecrire(); },
      onChoix: function (v) {
       rep[id] = v.ville;
+      ecrire();
+      if (!principale) return;
+      // Seule la ville du domicile commande le code postal et le filtre de rue.
       rep.a_ville_insee = v.insee;
-      // Le code postal se remplit tout seul ; il reste modifiable, une grande
-      // commune en ayant plusieurs.
       if (v.cp) { rep.a_cp = v.cp; const cp = D.getElementById('a_cp'); if (cp) cp.value = v.cp; }
       ecrire();
       if (champAdresse) champAdresse.changerCommune(v.insee);
      }
     });
+    if (principale) champVille = champ;
 
-   } else if (id === 'a_adresse') {
+   } else if (type === 'adresse') {
     champAdresse = window.CHAMPS.adresse(hote, {
      valeur: rep[id] || '', pays: rep.a_pays_code || 'FR', insee: rep.a_ville_insee || '',
      onSaisie: function (v) { rep[id] = v; ecrire(); },
@@ -463,6 +465,15 @@
     telephones.push(t);
    }
   });
+ }
+
+ /* La barre de navigation est en haut sur ordinateur et en bas sur telephone :
+    dans le second cas elle ne masque rien, il ne faut donc rien compenser. */
+ function hauteurNav() {
+  if (window.matchMedia('(max-width: 768px)').matches) return 12;
+  const v = getComputedStyle(D.documentElement).getPropertyValue('--nav-bas');
+  const n = parseFloat(v);
+  return (isNaN(n) ? 76 : n) + 16;
  }
 
  function collecte() {
@@ -522,7 +533,16 @@
    return;
   }
 
-  if (etape < S.length - 1) { etape++; rendre(); window.scrollTo({ top: racine.offsetTop - 90, behavior: 'smooth' }); return; }
+  if (etape < S.length - 1) {
+   etape++; rendre();
+   /* On se cale sur l'intitulé de l'étape, pas sur le haut de la page.
+      offsetTop se mesure par rapport au parent positionné, pas au document :
+      selon la page, il renvoyait presque zéro et renvoyait tout en haut. */
+   const repere = racine.querySelector('.eq-bar') || racine;
+   const y = repere.getBoundingClientRect().top + window.scrollY - hauteurNav() - 18;
+   window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+   return;
+  }
   envoyer();
  }
 

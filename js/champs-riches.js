@@ -164,7 +164,7 @@
     '<input type="text" class="ch-saisie ch-vil" id="' + hote.id + '_saisie" autocomplete="address-level2"' +
      ' role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="' + hote.id + '_liste"' +
      ' placeholder="Commencez à taper le nom de la commune" />' +
-    '<ul class="ch-liste" id="' + hote.id + '_liste" role="listbox" hidden></ul>' +
+    '<ul class="ch-liste ch-liste--duo" id="' + hote.id + '_liste" role="listbox" hidden></ul>' +
     '<p class="ch-aide-adr" hidden>Service indisponible, saisissez librement.</p>' +
    '</div>';
 
@@ -238,7 +238,7 @@
     '<input type="text" class="ch-saisie ch-adr" id="' + hote.id + '_saisie" autocomplete="street-address"' +
      ' role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="' + hote.id + '_liste"' +
      ' placeholder="Numéro et nom de rue" />' +
-    '<ul class="ch-liste" id="' + hote.id + '_liste" role="listbox" hidden></ul>' +
+    '<ul class="ch-liste ch-liste--duo" id="' + hote.id + '_liste" role="listbox" hidden></ul>' +
     '<p class="ch-aide-adr" hidden>Service d\'adresses indisponible, saisissez librement.</p>' +
    '</div>';
 

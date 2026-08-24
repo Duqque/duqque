@@ -10,8 +10,8 @@
 <meta property="og:title" content="Adhérer à Duqque Sports" />
 <meta property="og:description" content="Le dossier complet en six étapes. Confirmation par email." />
 <meta property="og:locale" content="fr_FR" />
-<link rel="stylesheet" href="css/style.css?v=20260954" />
-<link rel="stylesheet" href="css/enquete.css?v=20260954" />
+<link rel="stylesheet" href="css/style.css?v=20260958" />
+<link rel="stylesheet" href="css/enquete.css?v=20260958" />
 <style>
  /* =========================================================
     ADHÉSION
@@ -108,8 +108,11 @@
  .ch-dr { font-size: 18px; line-height: 1; }
  .ch-nom { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
  .ch-ind, .ch-ville { font-size: 13px; color: var(--ink-muted); white-space: nowrap; }
- /* L'adresse n'a pas de drapeau : deux colonnes suffisent. */
- .ch-adr ~ .ch-liste li { grid-template-columns: minmax(0, 1fr) auto; }
+ /* Ville et adresse n'ont pas de drapeau : deux colonnes, pas trois. Sans cela
+    le nom tombait dans la colonne de 28 px prévue pour l'emblème et « Leforest »
+    s'affichait « Lef… ». Déclaré sur la liste plutôt que par un sélecteur de
+    voisinage, qui casse dès qu'un élément s'intercale. */
+ .ch-liste--duo li { grid-template-columns: minmax(0, 1fr) auto; }
  .ch-aide-adr { font-size: 13px; color: var(--ink-muted); margin: 8px 0 0; }
 
  /* Téléphone : l'indicatif à gauche, le numéro à droite, sur la même ligne de base. */
@@ -259,9 +262,9 @@
 
 <footer class="footer"></footer>
 
-<script src="js/main.js?v=20260954"></script>
-<script src="js/pays.js?v=20260954"></script>
-<script src="js/champs-riches.js?v=20260954"></script>
-<script src="js/adhesion.js?v=20260954"></script>
+<script src="js/main.js?v=20260958"></script>
+<script src="js/pays.js?v=20260958"></script>
+<script src="js/champs-riches.js?v=20260958"></script>
+<script src="js/adhesion.js?v=20260958"></script>
 </body>
 </html>
