@@ -550,7 +550,6 @@ const MENU_LINKS = [
  { href: 'observatoire.html', label: 'Observatoire', halo: 'sport', dots: false },
  { href: 'actualites.html', label: 'Blog', halo: 'sport', dots: false },
  { href: 'cotisations.html', label: 'Cotisations', halo: 'sport', dots: false },
- { href: 'contact.html', label: 'Contact', halo: 'sport', dots: false },
 ];
 
 /* Onglet d'administration : il n'apparait que pour une session ouverte.
@@ -617,10 +616,16 @@ function buildMenu() {
  `).join('')}
  </ul>
 
+ <div class="menu-ctas">
  <a href="team-espoirs.html" class="menu-espoirs">
  <span class="me-title">Jeune judoka en France ou au Portugal ? <em>Découvre le <span class="notranslate">Programme Espoirs</span>.</em></span>
  <span class="me-btn">Découvrir le programme <span class="me-arr">→</span></span>
  </a>
+ <a href="observatoire.html" class="menu-obs">
+ <span class="mo-title">Comment fonctionnent vraiment les clubs&nbsp;? <em>Deux études sont ouvertes.</em></span>
+ <span class="mo-btn">Voir l'Observatoire <span class="mo-arr">→</span></span>
+ </a>
+ </div>
 
  </div>
  `;
@@ -888,10 +893,19 @@ function initMenu() {
  if (!pill || !modal) return;
  const r = pill.getBoundingClientRect();
  if (r.width >= 360) {
- // La modale prend exactement la largeur de la barre de menu
- modal.style.width = Math.round(r.width) + 'px';
+ /* La modale epousait exactement la largeur de la barre de menu. Les trois
+    cartes de services, pictogramme a gauche du texte, ne tenaient pas sur une
+    ligne a cette largeur. Elle prend donc la place qu'il faut, sans jamais
+    depasser l'ecran, et reste centree sur la barre. */
+ const MINI = 780, MARGE = 16;
+ const dispo = window.innerWidth - MARGE * 2;
+ const largeur = Math.round(Math.min(Math.max(r.width, MINI), dispo));
+ const centre = r.left + r.width / 2;
+ let gauche = Math.round(centre - largeur / 2);
+ gauche = Math.max(MARGE, Math.min(gauche, window.innerWidth - MARGE - largeur));
+ modal.style.width = largeur + 'px';
  modal.style.maxWidth = 'none';
- modal.style.left = Math.round(r.left) + 'px';
+ modal.style.left = gauche + 'px';
  modal.style.transform = 'none';
  } else {
  // Pill mobile compacte : pleine largeur moins marges égales (CSS)
@@ -922,12 +936,12 @@ function initMenu() {
  fitModal();
  };
  // Escalade en deux temps selon la hauteur reellement disponible sur l'appareil :
- // 1) compact, 2) si ca deborde encore, on retire le CTA Espoirs plutot que de le tronquer.
+ // 1) compact, 2) si ca deborde encore, on retire les deux CTA plutot que de les tronquer.
  //
  // La decision est prise en UNE passe synchrone. Avant, elle etait etalee sur un
  // requestAnimationFrame puis un setTimeout de 520 ms : le panneau s'ouvrait complet, puis
  // une demi-seconde plus tard les liens retrecissaient et le bloc Espoirs disparaissait.
- // Le menu sautait donc sous les doigts, pile entre Contact et le CTA. Lire scrollHeight
+ // Le menu sautait donc sous les doigts, pile entre le dernier lien et le CTA. Lire scrollHeight
  // apres chaque ajout de classe force le recalcul immediat : les trois etats s'enchainent
  // dans la meme tache, le navigateur ne peint que le dernier.
  function fitModal() {
